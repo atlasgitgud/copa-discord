@@ -1,0 +1,30 @@
+LA COPA DISCORD — cómo subirlo y usar el modo admin
+===================================================
+
+1) SUBIR A GITHUB (una sola vez)
+   - Subí TODO el contenido de esta carpeta a tu repo (index.html, data.js, img/ con todo lo que tiene adentro).
+   - En el repo: Settings > Pages > "Deploy from a branch" > rama main, carpeta / (root) > Save.
+   - En 1-2 minutos la página queda online.
+
+2) CREAR EL TOKEN PARA EL MODO ADMIN (una sola vez)
+   - Entrá a https://github.com/settings/personal-access-tokens/new
+   - Repository access: "Only select repositories" y elegí el repo de la copa.
+   - Permissions > Repository permissions > Contents: "Read and write".
+   - Generá el token y copialo (empieza con github_pat_...).
+
+3) USAR EL MODO ADMIN
+   - Abrí tu página y entrá al canal 🔒admin. Te pide la contraseña (te queda recordada en ese navegador;
+     con el botón "🔒 Salir" la vuelve a pedir).
+   - Abajo de todo, en "Conexión con GitHub", completá usuario, repo, rama (main) y pegá el token.
+     Tocá "Guardar conexión" y después "Probar".
+   - Cargá partidas (tocá un jugador 1 vez = jugó, 2 veces = ganó), sumá o restá puntos, cambiá fotos.
+   - En "Juegos" agregás juegos nuevos y les subís el logo (el fondo blanco se saca solo).
+   - En "Apariencia" cambiás el logo de la copa y el banner (con la barrita elegís qué parte del banner se ve).
+   - Mientras no publiques, los cambios quedan guardados en tu navegador.
+   - Tocá "Publicar": se actualiza data.js en el repo y en 1-2 minutos lo ve todo el mundo.
+
+NOTAS
+   - El token queda guardado solo en tu navegador. No lo compartas.
+   - El canal admin pide contraseña. Igual, la protección de verdad es el token: sin él nadie puede publicar.
+   - Para cambiar la contraseña, pedile a alguien que te genere el nuevo hash (ADMIN_HASH en index.html).
+   - "Descargar data.js" te baja una copia de los datos, por si querés subirla a mano o tener backup.

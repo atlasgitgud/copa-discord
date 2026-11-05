@@ -1,0 +1,1181 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Copa Discord</title>
+<meta name="description" content="Tabla de posiciones de La Copa Discord">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rail:#1e1f22;--side:#2b2d31;--main:#313338;--card:#2b2d31;--deep:#1e1f22;
+  --hover:#2e3035;--active:#404249;--tx:#dbdee1;--hi:#f2f3f5;--mut:#949ba4;--mut2:#6d6f78;
+  --line:#3f4147;--blurple:#5865f2;--blurple2:#4752c4;--green:#23a55a;--red:#f23f43;
+  --gold:#f0b232;--silver:#c4c9ce;--bronze:#d08a4f;color-scheme:dark
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--main);color:var(--tx);font-family:"Noto Sans","gg sans","Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.35}
+button,input,select{font:inherit;color:inherit}
+[hidden]{display:none!important}
+.logo{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ---------- layout ---------- */
+.app{display:grid;grid-template-columns:72px 240px minmax(0,1fr);height:100vh}
+.rail{background:var(--rail);display:flex;flex-direction:column;align-items:center;padding:12px 0;gap:8px}
+.srv{width:48px;height:48px;border-radius:16px;overflow:hidden;background:#000;position:relative}
+.rail .sel{position:absolute;left:0;top:16px;width:4px;height:40px;border-radius:0 4px 4px 0;background:var(--hi)}
+.rail .sep{width:32px;height:2px;background:#35363c;border-radius:1px}
+.side{background:var(--side);display:flex;flex-direction:column;min-height:0}
+.side-h{height:48px;flex:none;padding:0 16px;display:flex;align-items:center;font-weight:700;color:var(--hi);box-shadow:0 1px 0 rgba(0,0,0,.25),0 2px 0 rgba(0,0,0,.05)}
+.side-b{flex:1;overflow:auto;padding:16px 8px}
+.cat{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--mut);padding:0 8px;margin:18px 0 6px}
+.cat:first-child{margin-top:0}
+.ch{display:flex;align-items:center;gap:6px;width:100%;padding:6px 8px;margin-bottom:2px;border:0;background:none;border-radius:4px;color:var(--mut);font-weight:500;cursor:pointer;text-align:left;font-size:16px}
+.ch .hash{font-size:20px;line-height:1;color:var(--mut2);width:20px;text-align:center}
+.ch:hover{background:var(--hover);color:var(--tx)}
+.ch.on{background:var(--active);color:var(--hi)}
+.ch .dot{margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--red)}
+select{background:var(--deep);border:0;border-radius:4px;padding:8px 10px;cursor:pointer;outline:none}
+.side-b select{width:100%}
+select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
+.me{flex:none;background:#232428;padding:10px 14px;font-size:12px;color:var(--mut);line-height:1.5}
+.me b{color:var(--hi)}
+.main{display:flex;flex-direction:column;min-width:0;min-height:0}
+.top{height:48px;flex:none;display:flex;align-items:center;gap:8px;padding:0 16px;box-shadow:0 1px 0 rgba(0,0,0,.25),0 2px 0 rgba(0,0,0,.05);z-index:1}
+.top .hash{font-size:24px;color:var(--mut2)}
+.top b{color:var(--hi);font-size:16px}
+.top .dv{width:1px;height:24px;background:var(--line);margin:0 6px;flex:none}
+.top .desc{color:var(--mut);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.content{flex:1;overflow:auto;padding:20px 24px 48px}
+.inner{max-width:1040px;margin:0 auto}
+
+/* ---------- banner ---------- */
+.hero{--bn:none;position:relative;height:220px;margin:-20px -24px 20px;background:#1e1f22 var(--bn) center 32%/cover no-repeat}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(30,31,34,.55) 70%,var(--main))}
+.hero-t{position:absolute;z-index:1;left:0;right:0;bottom:16px;max-width:1040px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:14px}
+.hero-ic{width:64px;height:64px;border-radius:50%;overflow:hidden;background:#000;box-shadow:0 0 0 4px var(--main);flex:none}
+.hero h1{margin:0;font-size:28px;font-weight:800;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.hero p{margin:2px 0 0;font-size:14px;color:#dbdee1;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.stat{background:var(--card);border-radius:8px;padding:14px 16px;min-width:0}
+.stat small{display:block;font-size:12px;font-weight:700;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+.stat b{font-size:22px;color:var(--hi);font-weight:800;overflow-wrap:anywhere}
+.stat b.lead{color:var(--gold)}
+
+/* ---------- avatars ---------- */
+.av{--h:220;flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;font-size:15px;background:hsl(var(--h) 55% 48%);overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover;display:block}
+.av.md{width:32px;height:32px;font-size:14px}
+.av.sm{width:22px;height:22px;font-size:10px}
+.av.xl{width:92px;height:92px;font-size:38px;border:6px solid var(--pop,#232428)}
+.avw{position:relative;flex:none;display:inline-block}
+.avw .tc{position:absolute;left:50%;top:-15px;transform:translateX(-50%) rotate(-10deg);font-size:19px;line-height:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5));pointer-events:none}
+
+/* ---------- leaderboard ---------- */
+.board{background:var(--card);border-radius:8px;overflow:hidden}
+.board-h{padding:18px 20px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.board-h h2{margin:0;font-weight:800;font-size:18px;color:var(--hi);text-transform:uppercase}
+.board-h span{font-size:13px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:72px minmax(0,1fr) 56px 56px 270px 76px;align-items:center;gap:8px;padding:0 20px}
+.thead{height:36px;font-size:11px;font-weight:700;text-transform:uppercase;color:var(--mut);border-bottom:1px solid var(--line)}
+.thead .r{text-align:right}.thead .c{text-align:center}
+.row{min-height:64px;border-bottom:1px solid #35373c;cursor:pointer;transition:background .12s}
+.row:last-child{border-bottom:0}
+.row:hover{background:var(--hover)}
+.row:focus-visible{outline:2px solid var(--blurple);outline-offset:-2px}
+.rk{display:flex;align-items:center;gap:6px;font-weight:800;font-size:20px;color:var(--hi)}
+.rk.r1{color:var(--gold)}.rk.r2{color:var(--silver)}.rk.r3{color:var(--bronze)}
+.row.t1,.row.t2,.row.t3{--c:var(--gold);background:linear-gradient(90deg,color-mix(in srgb,var(--c) 22%,transparent),color-mix(in srgb,var(--c) 4%,transparent) 65%);box-shadow:inset 4px 0 0 var(--c)}
+.row.t2{--c:var(--silver)}.row.t3{--c:var(--bronze)}
+.row.t1:hover,.row.t2:hover,.row.t3:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--c) 30%,transparent),color-mix(in srgb,var(--c) 8%,transparent) 65%)}
+.row.t1 .av,.row.t2 .av,.row.t3 .av{box-shadow:0 0 0 2px var(--c)}
+.row.t1 .nm{color:#ffe08a}
+.row.t1 .pts b{color:var(--gold)}.row.t2 .pts b{color:var(--silver)}.row.t3 .pts b{color:var(--bronze)}
+.crown{font-size:16px;cursor:help;line-height:1}
+.pl{display:flex;align-items:center;gap:12px;min-width:0}
+.nm{font-weight:700;color:var(--hi);font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.num{text-align:center;color:var(--mut);font-weight:600}
+.gbs{display:flex;gap:4px;justify-content:flex-end;flex-wrap:wrap}
+.gb{display:inline-flex;align-items:center;gap:3px;height:28px;min-width:28px;padding:0 5px;border-radius:6px;background:var(--deep);border:1px solid var(--line);font-size:14px;cursor:help}
+.gb i{font-style:normal;font-size:11px;font-weight:700;color:var(--mut)}
+.gi{width:18px;height:18px;object-fit:contain;display:block;flex:none}
+.gi.ge{font-size:14px;line-height:18px;text-align:center}
+.gi.lg{width:22px;height:22px;display:inline-block;vertical-align:-5px;margin-right:4px}
+.pts{text-align:right;font-weight:700;color:var(--mut);font-size:13px;white-space:nowrap}
+.pts b{color:var(--hi);font-size:17px}
+.empty{padding:28px 20px;text-align:center;color:var(--mut)}
+
+/* ---------- historial ---------- */
+.msg{display:flex;gap:16px;padding:10px 0}
+.bot{width:40px;height:40px;border-radius:50%;overflow:hidden;flex:none;background:#000}
+.mb{min-width:0;flex:1}
+.mh{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.mh b{color:var(--hi);font-weight:600}
+.tag{background:var(--blurple);color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:3px}
+.mh time{color:var(--mut);font-size:12px}
+.embed{--h:220;margin-top:6px;background:var(--card);border-left:4px solid hsl(var(--h) 70% 55%);border-radius:4px;padding:10px 16px 12px 12px;max-width:540px}
+.et{font-weight:700;color:var(--hi);font-size:16px}
+.ef{margin-top:10px}
+.ef .k{font-size:13px;font-weight:700;color:var(--hi);margin-bottom:4px}
+.ef .v{display:flex;flex-wrap:wrap;gap:4px}
+.efoot{margin-top:10px;font-size:12px;color:var(--mut)}
+.men{display:inline-flex;align-items:center;gap:4px;padding:0 5px;border-radius:3px;background:rgba(88,101,242,.3);color:#c9cdfb;font-weight:600;cursor:pointer;border:0;font-size:14px;line-height:24px;transition:background .1s}
+.men:hover{background:var(--blurple);color:#fff}
+.men small{font-weight:800;color:#57f287;font-size:12px}
+.men small.z{color:var(--mut)}
+.men small.neg{color:#f57376}
+.men:hover small{color:#fff}
+
+/* ---------- pickem ---------- */
+.pk{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:16px;align-items:start}
+.panel{background:var(--card);border-radius:8px;padding:16px;min-width:0}
+.panel h3{margin:0 0 10px;font-size:12px;text-transform:uppercase;color:var(--mut);font-weight:700}
+.field{width:100%;background:var(--deep);border:0;border-radius:4px;padding:10px 12px;outline:none}
+.field:focus{box-shadow:0 0 0 2px var(--blurple)}
+.pool{display:flex;flex-direction:column;gap:2px;max-height:560px;overflow:auto;margin-top:10px}
+.pi{display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:4px;border:0;background:none;cursor:pointer;text-align:left;width:100%}
+.pi:hover{background:var(--hover)}
+.pi[disabled]{opacity:.35;cursor:default;background:none}
+.pi .nm{font-size:15px}
+.pi .add{margin-left:auto;color:var(--mut);font-size:12px;font-weight:600}
+.slots{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.slot{display:flex;align-items:center;gap:10px;background:var(--deep);border-radius:6px;padding:6px 8px;min-height:48px;border:1px solid transparent}
+.slot[draggable=true]{cursor:grab}
+.slot.empty{border:1px dashed var(--line);color:var(--mut2);background:transparent}
+.slot.over{border-color:var(--blurple);background:rgba(88,101,242,.14)}
+.slot .n{width:26px;text-align:center;font-weight:800;color:var(--hi);flex:none}
+.slot:nth-child(1) .n{color:var(--gold)}.slot:nth-child(2) .n{color:var(--silver)}.slot:nth-child(3) .n{color:var(--bronze)}
+.grip{color:var(--mut2);width:12px;font-size:12px;letter-spacing:-2px;flex:none}
+.acts{margin-left:auto;display:flex;gap:2px;flex:none}
+.ib{width:28px;height:28px;border:0;border-radius:4px;background:none;color:var(--mut);cursor:pointer;font-size:12px}
+.ib:hover:not([disabled]){background:var(--active);color:var(--hi)}
+.ib[disabled]{opacity:.3;cursor:default}
+.btn{border:0;border-radius:4px;padding:10px 16px;font-weight:600;cursor:pointer;background:var(--blurple);color:#fff;transition:background .12s}
+.btn:hover:not([disabled]){background:var(--blurple2)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.sec{background:#4e5058}.btn.sec:hover:not([disabled]){background:#6d6f78}
+.btn.green{background:#248046}.btn.green:hover:not([disabled]){background:#1a6334}
+.btn.red{background:#da373c}.btn.red:hover:not([disabled]){background:#a12828}
+.btn.sm{padding:6px 10px;font-size:13px}
+.pk-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center}
+.hint{color:var(--mut);font-size:13px}
+.hint.ok{color:#57f287}
+.prev img{display:block;width:100%;border-radius:8px;margin-top:14px}
+.prev p{margin:8px 0 0;font-size:12px;color:var(--mut)}
+
+/* ---------- admin ---------- */
+.adm-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--card);border-radius:8px;padding:12px 16px;margin-bottom:16px}
+.adm-bar .st{font-weight:700;margin-right:auto}
+.st.dirty{color:var(--gold)}.st.ok{color:#57f287}
+.adm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.adm-grid .wide{grid-column:1/-1}
+.lbl2{display:block;font-size:12px;font-weight:700;text-transform:uppercase;color:var(--mut);margin:12px 0 6px}
+.lbl2:first-of-type{margin-top:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pchips{display:flex;flex-wrap:wrap;gap:6px}
+.pchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--deep);border-radius:999px;padding:3px 10px 3px 3px;cursor:pointer;font-weight:600;font-size:14px;color:var(--mut)}
+.pchip.p1{border-color:var(--blurple);background:rgba(88,101,242,.22);color:var(--hi)}
+.pchip.p2{border-color:var(--green);background:rgba(35,165,90,.25);color:var(--hi)}
+.pchip small{font-size:11px;font-weight:800}
+.pchip.p1 small{color:#c9cdfb}.pchip.p2 small{color:#57f287}
+.prev-pts{margin-top:12px;font-size:13px;color:var(--mut);line-height:1.6}
+.prev-pts b{color:var(--hi)}
+.alist{max-height:440px;overflow:auto}
+.ai{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #35373c}
+.ai:last-child{border-bottom:0}
+.ai .g{flex:1;min-width:0}
+.ai .g b{display:block;color:var(--hi);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ai .g small{color:var(--mut);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ai .bt{display:flex;gap:4px;flex:none}
+.note{font-size:13px;color:var(--mut);line-height:1.5;margin:10px 0 0}
+.note a{color:#00a8fc}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:#111214;color:var(--hi);padding:10px 16px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:120;font-weight:600;max-width:90vw}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast.err{background:#a12d2f}
+
+/* ---------- apariencia ---------- */
+.look{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:24px}
+.lk-logo{width:120px;height:120px;border-radius:50%;overflow:hidden;background:#000;box-shadow:0 0 0 4px var(--deep)}
+.lk-banner{height:150px;border-radius:8px;background:#1e1f22 center 32%/cover no-repeat;box-shadow:inset 0 0 0 1px var(--line)}
+@media (max-width:820px){.look{grid-template-columns:1fr}}
+
+/* ---------- candado ---------- */
+.lockbox{width:min(380px,100%);background:#313338;border-radius:8px;padding:24px;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lockic{width:72px;height:72px;border-radius:50%;overflow:hidden;margin:0 auto 12px;background:#000}
+.lockbox h3{margin:0 0 6px;color:var(--hi);font-size:20px}
+.lockbox p{margin:0 0 16px;color:var(--mut);font-size:14px}
+.lockerr{color:#f57376;font-size:13px;font-weight:600;margin-top:8px;text-align:left}
+.lockbox.shake{animation:shk .35s}
+@keyframes shk{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+/* ---------- perfil ---------- */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:grid;place-items:center;z-index:50;padding:16px}
+.pop{--pop:#232428;--h:220;width:min(400px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--pop);border-radius:8px;position:relative;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.banner{height:100px;background:linear-gradient(135deg,hsl(var(--h) 60% 50%),hsl(calc(var(--h) + 40) 60% 32%))}
+.pop .av.xl{position:absolute;top:54px;left:16px}
+.xlw{position:absolute;top:54px;left:16px}.xlw .av.xl{position:static}.xlw .tc{top:-24px;font-size:34px}
+.x{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;border:0;background:rgba(0,0,0,.45);color:#fff;font-size:16px;cursor:pointer}
+.x:hover{background:rgba(0,0,0,.7)}
+.pbody{padding:58px 16px 16px}
+.pbody h3{margin:0;font-size:20px;color:var(--hi);display:flex;align-items:center;gap:8px}
+.psub{color:var(--mut);font-size:13px;margin-top:2px}
+.pcard{background:#111214;border-radius:8px;padding:12px;margin-top:12px}
+.lbl{font-size:12px;font-weight:700;text-transform:uppercase;color:var(--hi);margin-bottom:6px}
+.big{font-size:34px;font-weight:800;color:var(--hi);line-height:1.1}
+.big small{font-size:15px;color:var(--mut);font-weight:700}
+.bd{font-size:13px;color:var(--mut);margin-top:2px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center}
+.kpi b{display:block;font-size:20px;color:var(--hi)}
+.kpi small{font-size:10px;color:var(--mut);text-transform:uppercase;font-weight:700}
+.bar{height:8px;background:#2e3035;border-radius:4px;overflow:hidden;margin-top:12px}
+.bar i{display:block;height:100%;background:var(--green);border-radius:4px}
+.it{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #2e3035;font-size:14px}
+.it:last-child{border-bottom:0}
+.it .g{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--hi);font-weight:600}
+.it time{color:var(--mut);font-size:12px;white-space:nowrap}
+.res{font-size:11px;font-weight:800;padding:2px 6px;border-radius:4px;flex:none}
+.res.w{background:rgba(35,165,90,.2);color:#57f287}
+.res.l{background:rgba(242,63,67,.15);color:#f57376}
+.res.n{background:#2e3035;color:var(--mut)}
+.res.b{background:rgba(240,178,50,.18);color:var(--gold)}
+.it .p{font-weight:800;color:var(--hi);width:34px;text-align:right;flex:none}
+
+/* ---------- tooltip ---------- */
+.tip{position:fixed;z-index:100;left:0;top:0;pointer-events:none;background:#111214;color:var(--hi);font-size:14px;font-weight:600;padding:6px 10px;border-radius:5px;box-shadow:0 8px 16px rgba(0,0,0,.3);opacity:0;transform:translateY(4px);transition:opacity .1s,transform .1s;max-width:260px}
+.tip.on{opacity:1;transform:none}
+.tip::after{content:"";position:absolute;left:var(--ax,50%);top:100%;margin-left:-5px;border:5px solid transparent;border-top-color:#111214}
+.tip.below::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:#111214}
+
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:#1a1b1e;border-radius:8px;border:2px solid transparent;background-clip:padding-box}
+
+@media (max-width:820px){
+  .app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;height:auto;min-height:100vh}
+  .side,.main{min-width:0}
+  .rail,.me,.top{display:none}
+  .side{position:sticky;top:0;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  .side-h{height:auto;padding:12px 16px 2px}
+  .side-b{display:flex;gap:6px;overflow-x:auto;padding:8px 12px 10px;align-items:center}
+  .side-b .cat{display:none}
+  .ch{width:auto;flex:none;font-size:15px;margin:0}
+  .side-b select{width:auto;flex:none}
+  .content{overflow:visible;padding:16px 12px 40px}
+  .hero{height:170px;margin:-16px -12px 16px}.hero-t{padding:0 14px}.hero h1{font-size:22px}.hero-ic{width:52px;height:52px}
+  .grid{grid-template-columns:48px minmax(0,1fr) 92px 60px;padding:0 12px;gap:6px}
+  .c-pj,.c-v{display:none}
+  .stats{gap:8px}.stat{padding:12px}.stat b{font-size:17px}
+  .pk,.adm-grid{grid-template-columns:1fr}
+  .pool{max-height:300px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="rail" aria-hidden="true"><span class="sel"></span><div class="srv"><img class="logo" src="img/logo.png" alt=""></div><div class="sep"></div></nav>
+
+  <aside class="side">
+    <header class="side-h">La Copa Discord</header>
+    <div class="side-b">
+      <div class="cat">Temporada</div>
+      <select id="season" aria-label="Temporada"></select>
+      <div class="cat">Canales</div>
+      <button class="ch on" data-view="tabla"><span class="hash">#</span>tabla</button>
+      <button class="ch" data-view="historial"><span class="hash">#</span>historial</button>
+      <button class="ch" data-view="pickem"><span class="hash">#</span>pickem</button>
+      <div class="cat">Organización</div>
+      <button class="ch" data-view="admin"><span class="hash">🔒</span>admin<span class="dot" id="admDot" hidden></span></button>
+    </div>
+    <footer class="me"><b>Sistema de puntos</b><br>Victoria: +2 a cada integrante<br>MVP: +1 extra</footer>
+  </aside>
+
+  <main class="main">
+    <header class="top"><span class="hash">#</span><b id="chT">tabla</b><span class="dv"></span><span class="desc" id="chD"></span></header>
+    <div class="content">
+      <div class="hero" id="hero">
+        <div class="hero-t">
+          <div class="hero-ic"><img class="logo" src="img/logo.png" alt="La Copa Discord"></div>
+          <div><h1>La Copa Discord</h1><p id="heroSub"></p></div>
+        </div>
+      </div>
+      <div class="inner">
+
+      <section class="view" id="v-tabla">
+        <div class="stats" id="stats"></div>
+        <div class="board">
+          <div class="board-h"><h2>Tabla de posiciones</h2><span id="scope"></span></div>
+          <div class="grid thead"><span>#</span><span>Participante</span><span class="c c-pj">PJ</span><span class="c c-v">V</span><span class="r">Insignias</span><span class="r">Puntos</span></div>
+          <div id="rb"></div>
+        </div>
+      </section>
+
+      <section class="view" id="v-historial" hidden><div id="hist"></div></section>
+
+      <section class="view" id="v-pickem" hidden>
+        <div class="pk">
+          <div class="panel">
+            <h3>Jugadores</h3>
+            <input class="field" id="pkq" type="text" placeholder="Buscar jugador…" autocomplete="off">
+            <div class="pool" id="pool"></div>
+          </div>
+          <div class="panel">
+            <h3>Tu predicción · del 1 al 10</h3>
+            <input class="field" id="pkname" type="text" maxlength="24" placeholder="Tu nombre (sale en la imagen)" autocomplete="off" style="margin-bottom:12px">
+            <ol class="slots" id="slots"></ol>
+            <div class="pk-actions">
+              <button class="btn" id="pkx" disabled>Exportar JPG</button>
+              <button class="btn sec" id="pkclr">Limpiar</button>
+              <span class="hint" id="pkhint"></span>
+            </div>
+            <div class="prev" id="pkprev"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="v-admin" hidden>
+        <div class="adm-bar">
+          <span class="st" id="admSt"></span>
+          <button class="btn green" id="admPub">Publicar</button>
+          <button class="btn sec" id="admDl">Descargar data.js</button>
+          <button class="btn sec" id="admUndo">Descartar cambios</button>
+          <button class="btn sec" id="admLogout" title="Cerrar sesión de admin">🔒 Salir</button>
+        </div>
+        <div class="adm-grid">
+          <div class="panel">
+            <h3>Cargar partida</h3>
+            <div class="two">
+              <div><label class="lbl2" for="mDate">Fecha</label><input class="field" type="date" id="mDate"></div>
+              <div><label class="lbl2" for="mGame">Juego</label><select class="field" id="mGame"></select></div>
+            </div>
+            <label class="lbl2">Jugadores <span style="text-transform:none;font-weight:600">· tocá 1 vez = jugó, 2 veces = ganó</span></label>
+            <div class="pchips" id="mPlayers"></div>
+            <label class="lbl2" for="mMvp">MVP</label>
+            <select class="field" id="mMvp"></select>
+            <div class="prev-pts" id="mPrev"></div>
+            <div class="pk-actions"><button class="btn" id="mAdd">Agregar partida</button></div>
+          </div>
+
+          <div class="panel">
+            <h3>Sumar o restar puntos</h3>
+            <label class="lbl2" for="bPlayer">Jugador</label>
+            <select class="field" id="bPlayer"></select>
+            <div class="two">
+              <div><label class="lbl2" for="bPts">Puntos</label><input class="field" type="number" id="bPts" value="1" step="1"></div>
+              <div><label class="lbl2" for="bDate">Fecha</label><input class="field" type="date" id="bDate"></div>
+            </div>
+            <label class="lbl2" for="bNote">Motivo (opcional)</label>
+            <input class="field" type="text" id="bNote" maxlength="60" placeholder="Ej: ganó el torneo relámpago">
+            <div class="pk-actions"><button class="btn" id="bAdd">Aplicar puntos</button></div>
+            <p class="note">Usá un número negativo para restar.</p>
+          </div>
+
+          <div class="panel">
+            <h3>Jugadores y fotos</h3>
+            <div class="alist" id="aPlayers"></div>
+            <div class="two" style="margin-top:12px;grid-template-columns:1fr auto">
+              <input class="field" type="text" id="pNew" maxlength="24" placeholder="Nombre del nuevo jugador">
+              <button class="btn" id="pAdd">Agregar</button>
+            </div>
+            <input type="file" id="pFile" accept="image/*" hidden>
+          </div>
+
+          <div class="panel">
+            <h3>Partidas y puntos cargados</h3>
+            <div class="alist" id="aMatches"></div>
+          </div>
+
+          <div class="panel wide">
+            <h3>Juegos</h3>
+            <div class="alist" id="aGames" style="max-height:380px"></div>
+            <div class="two" style="margin-top:12px;grid-template-columns:1fr auto">
+              <input class="field" type="text" id="gNew" maxlength="30" placeholder="Nombre del juego nuevo (ej: Fortnite)">
+              <button class="btn" id="gAdd">Agregar juego</button>
+            </div>
+            <p class="note">Después de agregarlo, tocá "Subir logo". Mejor si el logo tiene fondo transparente (PNG).</p>
+            <input type="file" id="gFile" accept="image/*" hidden>
+          </div>
+
+          <div class="panel wide">
+            <h3>Apariencia</h3>
+            <div class="look">
+              <div class="lk">
+                <span class="lbl2">Logo de la copa</span>
+                <div class="lk-logo"><img class="logo" src="img/logo.png" alt="Logo actual"></div>
+                <div class="pk-actions" style="margin-top:10px"><button class="btn sm" id="lkLogo">Cambiar logo</button><button class="btn sm sec" id="lkLogoReset">Volver al original</button></div>
+                <p class="note">Se recorta cuadrado. Aparece en el ícono del servidor, al lado del título, en el Copa Bot, en la pestaña y en el pick'em.</p>
+              </div>
+              <div class="lk lk-b">
+                <span class="lbl2">Banner</span>
+                <div class="lk-banner" id="lkBannerPrev"></div>
+                <label class="lbl2" for="lkPos">Posición vertical</label>
+                <input type="range" id="lkPos" min="0" max="100" step="1" style="width:100%">
+                <div class="pk-actions"><button class="btn sm" id="lkBanner">Cambiar banner</button><button class="btn sm sec" id="lkBannerReset">Volver al original</button></div>
+                <p class="note">Ideal una imagen horizontal y ancha. Con la barra elegís qué parte se ve.</p>
+              </div>
+            </div>
+            <input type="file" id="lkFile" accept="image/*" hidden>
+          </div>
+
+          <div class="panel wide">
+            <h3>Conexión con GitHub (para publicar)</h3>
+            <div class="two">
+              <div><label class="lbl2" for="gOwner">Usuario u organización</label><input class="field" id="gOwner" placeholder="tu-usuario" autocomplete="off"></div>
+              <div><label class="lbl2" for="gRepo">Repositorio</label><input class="field" id="gRepo" placeholder="COPA-DISCORD" autocomplete="off"></div>
+            </div>
+            <div class="two">
+              <div><label class="lbl2" for="gBranch">Rama</label><input class="field" id="gBranch" placeholder="main" autocomplete="off"></div>
+              <div><label class="lbl2" for="gToken">Token</label><input class="field" id="gToken" type="password" placeholder="github_pat_…" autocomplete="off"></div>
+            </div>
+            <div class="pk-actions"><button class="btn" id="gSave">Guardar conexión</button><button class="btn sec" id="gTest">Probar</button><button class="btn sec" id="gForget">Olvidar token</button></div>
+            <p class="note">El token queda guardado solo en este navegador. Creá uno en <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → Fine-grained tokens</a>, elegí solo este repositorio y dale permiso <b>Contents: Read and write</b>. Al publicar se actualiza el archivo <code>data.js</code> del repo y en 1–2 minutos lo ve todo el mundo.</p>
+          </div>
+        </div>
+      </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="tip" id="tip" role="tooltip"></div>
+<div class="toast" id="toast" role="status"></div>
+<div class="modal" id="lock" hidden>
+  <form class="lockbox" id="lockForm" autocomplete="off">
+    <div class="lockic"><img class="logo" src="img/logo.png" alt=""></div>
+    <h3>Zona de organización</h3>
+    <p>Ingresá la contraseña para entrar al modo admin.</p>
+    <input class="field" id="lockPw" type="password" placeholder="Contraseña" aria-label="Contraseña">
+    <div class="lockerr" id="lockErr" hidden>Contraseña incorrecta</div>
+    <div class="pk-actions" style="justify-content:flex-end"><button type="button" class="btn sec" id="lockCancel">Cancelar</button><button class="btn" type="submit">Entrar</button></div>
+  </form>
+</div>
+<div class="modal" id="modal" hidden>
+  <div class="pop" role="dialog" aria-modal="true" aria-labelledby="pName" id="pop"></div>
+</div>
+
+<script>document.write('<script src="data.js?v=' + Date.now() + '"><\/script>');</script>
+<script>
+/* =====================================================================
+   CONFIGURACIÓN (los datos de la tabla viven en data.js y se editan
+   desde el canal #admin, no hace falta tocar esto)
+   ===================================================================== */
+const PTS_WIN = 2; // por victoria (a cada integrante del equipo ganador)
+const PTS_MVP = 1; // extra para el MVP de la partida
+const BANNER = 'img/banner.jpg';
+const LOGO = 'img/logo.png';
+
+const GAMES = {
+  BAPBAP:     { short: 'BAPBAP',         name: 'BAPBAP',            icon: '⚔️', hue: 28,  logo: 'img/games/bapbap.png' },
+  VALO:       { short: 'VALO',           name: 'Valorant',          icon: '🎯', hue: 352, logo: 'img/games/valo.png' },
+  CS:         { short: 'CS',             name: 'Counter-Strike',    icon: '🔫', hue: 42,  logo: 'img/games/cs.png' },
+  LOL:        { short: 'LOL',            name: 'League of Legends', icon: '🧙', hue: 200, logo: 'img/games/lol.png' },
+  TFT:        { short: 'TFT',            name: 'Teamfight Tactics', icon: '♟️', hue: 280, logo: 'img/games/tft.png' },
+  AOE:        { short: 'AGE OF EMPIRES', name: 'Age of Empires',    icon: '🏰', hue: 16,  logo: 'img/games/aoe.png' },
+  AJEDREZ:    { short: 'AJEDREZ',        name: 'Ajedrez',           icon: '♞',  hue: 160, logo: 'img/games/ajedrez.png' },
+  QUAKE:      { short: 'QUAKE',          name: 'Quake',             icon: '💥', hue: 0,   logo: 'img/games/quake.png' },
+  BRAWLHALLA: { short: 'BRAWLHALLA',     name: 'Brawlhalla',        icon: '🪓', hue: 48,  logo: 'img/games/brawlhalla.png' },
+  MINECRAFT:  { short: 'MINECRAFT PVP',  name: 'Minecraft PvP',     icon: '⛏️', hue: 110, logo: 'img/games/minecraft.png' },
+  GEO:        { short: 'GEOGUESSR',      name: 'GeoGuessr',         icon: '🌎', hue: 140, logo: 'img/games/geo.png' },
+  TETRIS:     { short: 'TETRIS',         name: 'Tetris',            icon: '🧱', hue: 305, logo: 'img/games/tetris.png' },
+  ROCKET:     { short: 'ROCKET LEAGUE',  name: 'Rocket League',     icon: '🚗', hue: 215, logo: 'img/games/rocket.png' },
+  OSU:        { short: 'OSU',            name: 'osu!',              icon: '🎵', hue: 330, logo: 'img/games/osu.png' },
+};
+
+(() => {
+const $ = s => document.querySelector(s);
+const ESC = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+const esc = s => String(s).replace(/[&<>"']/g, c => ESC[c]);
+const hueOf = n => { let h = 7; for (const c of String(n)) h = (h * 31 + c.codePointAt(0)) >>> 0; return h % 360; };
+const ini = n => ([...String(n)][0] || '?').toUpperCase();
+// juegos = los de fábrica (GAMES) + los agregados o modificados desde #admin (DATA.games)
+const gameOf = k => ({ ...(GAMES[k] || { short: k, name: k, icon: '🎮' }), ...((typeof DATA !== 'undefined' && DATA.games[k]) || {}) });
+const allGames = () => [...new Set([...Object.keys(GAMES), ...Object.keys(DATA.games)])].map(k => [k, gameOf(k)]).sort((a, b) => byEs(a[1].name, b[1].name));
+const gHue = k => gameOf(k).hue != null ? gameOf(k).hue : hueOf(k);
+const gIcon = (k, cls = 'gi') => { const g = gameOf(k); return g.logo ? `<img class="${cls}" src="${esc(g.logo)}" alt="">` : `<span class="${cls} ge">${g.icon}</span>`; };
+const yearOf = d => String(d).slice(0, 4);
+const fmtDate = d => new Date(d + 'T12:00:00').toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' });
+const today = () => { const d = new Date(); return new Date(d - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); };
+const pl = (n, a, b) => n === 1 ? a : b;
+const sgn = n => (n > 0 ? '+' : '') + n;
+const byEs = (a, b) => a.localeCompare(b, 'es');
+
+/* ---------- datos ---------- */
+const norm = d => {
+  d = d || {};
+  return {
+    updatedAt: d.updatedAt || 0,
+    players: [...(d.players || [])],
+    avatars: { ...(d.avatars || {}) },
+    look: { ...(d.look || {}) },
+    games: Object.fromEntries(Object.entries(d.games || {}).map(([k, v]) => [k, { ...v }])),
+    bonus: (d.bonus || []).map(b => ({ ...b })),
+    matches: (d.matches || []).map(m => ({ ...m, players: [...(m.players || [])], winners: [...(m.winners || [])] })),
+  };
+};
+const DRAFT = 'copa-draft-v1';
+let PUBLISHED = norm(window.COPA_DATA);
+let DATA = norm(PUBLISHED), dirty = false;
+try {
+  const dr = JSON.parse(localStorage.getItem(DRAFT) || 'null');
+  if (dr && dr.base === PUBLISHED.updatedAt) { DATA = norm(dr.data); dirty = true; }
+  else localStorage.removeItem(DRAFT);
+} catch {}
+
+const avatarOf = n => DATA.avatars[n] || null;
+const av = (n, cls = '') => `<span class="av ${cls}" style="--h:${hueOf(n)}">${avatarOf(n) ? `<img src="${esc(avatarOf(n))}" alt="" loading="lazy">` : esc(ini(n))}</span>`;
+const playersOf = m => [...new Set([...(m.players || []), ...(m.winners || []), ...(m.mvp ? [m.mvp] : [])])];
+const mvpTip = k => k === 1 ? `+${PTS_MVP} por MVP` : `+${k * PTS_MVP} por MVP (${k} veces)`;
+const winTip = (g, c) => c === 1 ? `Partida ganada de ${gameOf(g).name}` : `${c} partidas ganadas de ${gameOf(g).name}`;
+const badges = s => Object.entries(s.won).map(([g, c]) =>
+  `<span class="gb" data-tip="${esc(winTip(g, c))}">${gIcon(g)}${c > 1 ? `<i>×${c}</i>` : ''}</span>`).join('');
+const crown = s => s.mvps ? `<span class="crown" data-tip="${esc(mvpTip(s.mvps))}">👑</span>` : '';
+const isTop = s => s.rank === 1 && s.pts > 0;
+
+function compute(season) {
+  const inS = d => season === 'all' || yearOf(d) === season;
+  const ms = DATA.matches.filter(m => inS(m.date)), bs = DATA.bonus.filter(b => inS(b.date));
+  const S = new Map();
+  const get = n => { if (!S.has(n)) S.set(n, { name: n, played: 0, wins: 0, mvps: 0, pts: 0, extra: 0, won: {}, log: [] }); return S.get(n); };
+  DATA.players.forEach(get);
+  for (const m of ms) {
+    const W = new Set(m.winners || []), decided = W.size > 0;
+    for (const p of playersOf(m)) {
+      const s = get(p), w = W.has(p), mvp = m.mvp === p;
+      let got = 0;
+      s.played++;
+      if (w) { s.wins++; got += PTS_WIN; s.won[m.game] = (s.won[m.game] || 0) + 1; }
+      if (mvp) { s.mvps++; got += PTS_MVP; }
+      s.pts += got;
+      s.log.push({ type: 'm', date: m.date, m, w, mvp, got, decided });
+    }
+  }
+  for (const b of bs) { const s = get(b.player); const n = Number(b.pts) || 0; s.pts += n; s.extra += n; s.log.push({ type: 'b', date: b.date, b, got: n }); }
+  const list = [...S.values()].sort((a, b) => b.pts - a.pts || b.wins - a.wins || b.mvps - a.mvps || byEs(a.name, b.name));
+  let rank = 0;
+  list.forEach((s, i) => { if (i === 0 || s.pts !== list[i - 1].pts) rank = i + 1; s.rank = rank; });
+  return { list, ms, bs };
+}
+
+/* ---------- estado ---------- */
+const state = { season: null, view: 'tabla' };
+let byName = new Map(), openName = null;
+const seasonSel = $('#season');
+function fillSeasons() {
+  const ys = [...new Set([...DATA.matches.map(m => yearOf(m.date)), ...DATA.bonus.map(b => yearOf(b.date)), String(new Date().getFullYear())])].sort().reverse();
+  if (!state.season || (state.season !== 'all' && !ys.includes(state.season))) state.season = ys[0];
+  seasonSel.innerHTML = ys.map(y => `<option value="${y}">Temporada ${y}</option>`).join('') + '<option value="all">Todas las temporadas</option>';
+  seasonSel.value = state.season;
+  return ys;
+}
+seasonSel.addEventListener('change', () => { state.season = seasonSel.value; render(); });
+const scopeLabel = () => state.season === 'all' ? 'Todas las temporadas' : 'Temporada ' + state.season;
+
+/* ---------- render público ---------- */
+function render() {
+  applyLook();
+  fillSeasons();
+  const { list, ms, bs } = compute(state.season);
+  byName = new Map(list.map(s => [s.name, s]));
+  const leaders = list.filter(isTop).map(s => s.name);
+  const lead = !leaders.length ? '—' : leaders.length <= 2 ? leaders.join(' · ') : `${leaders[0]} +${leaders.length - 1}`;
+  $('#stats').innerHTML =
+    `<div class="stat"><small>Partidas</small><b>${ms.length}</b></div>
+     <div class="stat"><small>Juegos distintos</small><b>${new Set(ms.map(m => m.game)).size}</b></div>
+     <div class="stat"><small>Líder</small><b class="lead">${esc(lead)}</b></div>`;
+  $('#scope').textContent = scopeLabel();
+  $('#heroSub').textContent = `${scopeLabel()} · ${ms.length} ${pl(ms.length, 'partida', 'partidas')}`;
+
+  $('#rb').innerHTML = list.map(s => {
+    const rc = s.pts > 0 && s.rank <= 3 ? ` r${s.rank}` : '';
+    return `<div class="grid row${rc ? ' t' + s.rank : ''}" role="button" tabindex="0" data-p="${esc(s.name)}" aria-label="Ver perfil de ${esc(s.name)}">
+      <span class="rk${rc}">${s.rank}${crown(s)}</span>
+      <span class="pl">${isTop(s) ? `<span class="avw">${av(s.name)}<span class="tc">👑</span></span>` : av(s.name)}<span class="nm">${esc(s.name)}</span></span>
+      <span class="num c-pj">${s.played}</span>
+      <span class="num c-v">${s.wins}</span>
+      <span class="gbs">${badges(s)}</span>
+      <span class="pts"><b>${s.pts}</b> pts</span>
+    </div>`;
+  }).join('') || '<div class="empty">Todavía no hay participantes.</div>';
+
+  renderHist(ms, bs);
+  $('#admDot').hidden = !dirty;
+  if (openName && !$('#modal').hidden) openProfile(openName);
+  if (state.view === 'pickem') renderPickem();
+  if (state.view === 'admin') renderAdmin();
+}
+
+const men = (p, pts, mvp) => `<button class="men" data-p="${esc(p)}">@${esc(p)}${mvp ? ` <span data-tip="+${PTS_MVP} por MVP">👑</span>` : ''}<small class="${pts > 0 ? '' : pts < 0 ? 'neg' : 'z'}">${sgn(pts) === '0' ? '+0' : sgn(pts)}</small></button>`;
+const logoSrc = () => DATA.look.logo || LOGO;
+const bannerSrc = () => DATA.look.banner || BANNER;
+const bannerPos = () => DATA.look.bannerPos ?? 32;
+function applyLook() {
+  document.querySelectorAll('img.logo').forEach(i => { if (i.getAttribute('src') !== logoSrc()) i.src = logoSrc(); });
+  $('#hero').style.setProperty('--bn', `url("${bannerSrc()}")`);
+  $('#hero').style.backgroundPosition = `center ${bannerPos()}%`;
+  const fav = document.querySelector('link[rel=icon]'); if (fav) fav.href = DATA.look.logo || 'img/favicon.png';
+}
+const botHtml = () => `<div class="bot"><img class="logo" src="${esc(logoSrc())}" alt=""></div>`;
+function renderHist(ms, bs) {
+  const items = [...ms.map(m => ({ t: 'm', d: m.date, m })), ...bs.map(b => ({ t: 'b', d: b.date, b }))].sort((a, b) => b.d.localeCompare(a.d));
+  if (!items.length) { $('#hist').innerHTML = '<div class="empty">No hay partidas en esta temporada.</div>'; return; }
+  $('#hist').innerHTML = items.map(it => {
+    if (it.t === 'b') {
+      const b = it.b, n = Number(b.pts) || 0;
+      return `<article class="msg">${botHtml()}<div class="mb">
+        <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(b.date)}</time></div>
+        <div class="embed" style="--h:45"><div class="et">${n >= 0 ? '➕ Puntos extra' : '➖ Puntos descontados'}</div>
+        <div class="ef"><div class="v">${men(b.player, n)}</div></div>
+        ${b.note ? `<div class="ef"><div class="k">Motivo</div><div class="hint">${esc(b.note)}</div></div>` : ''}
+        <div class="efoot">${fmtDate(b.date)}</div></div></div></article>`;
+    }
+    const m = it.m, G = gameOf(m.game), W = new Set(m.winners || []), ps = playersOf(m);
+    const mm = p => men(p, (W.has(p) ? PTS_WIN : 0) + (m.mvp === p ? PTS_MVP : 0), m.mvp === p);
+    const win = ps.filter(p => W.has(p)), rest = ps.filter(p => !W.has(p));
+    const fields = win.length
+      ? `<div class="ef"><div class="k">🏆 Ganadores · +${PTS_WIN} c/u</div><div class="v">${win.map(mm).join('')}</div></div>
+         ${rest.length ? `<div class="ef"><div class="k">Perdieron</div><div class="v">${rest.map(mm).join('')}</div></div>` : ''}`
+      : `<div class="ef"><div class="k">Participantes</div><div class="v">${ps.map(mm).join('')}</div></div>
+         <div class="ef"><div class="k">Resultado</div><div class="hint">Sin ganador cargado</div></div>`;
+    return `<article class="msg">${botHtml()}<div class="mb">
+        <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(m.date)}</time></div>
+        <div class="embed" style="--h:${gHue(m.game)}">
+          <div class="et">${gIcon(m.game, 'gi lg')} ${esc(G.name)}</div>
+          ${fields}
+          ${m.mvp ? `<div class="ef"><div class="k">⭐ MVP · +${PTS_MVP}</div><div class="v">${mm(m.mvp)}</div></div>` : ''}
+          <div class="efoot">${ps.length} ${pl(ps.length, 'jugador', 'jugadores')} · ${fmtDate(m.date)}</div>
+        </div></div></article>`;
+  }).join('');
+}
+
+/* ---------- perfil ---------- */
+function openProfile(name) {
+  const s = byName.get(name); if (!s) return;
+  openName = name;
+  const pct = s.played ? Math.round(s.wins / s.played * 100) : 0;
+  const log = [...s.log].sort((a, b) => b.date.localeCompare(a.date));
+  const pop = $('#pop');
+  pop.style.setProperty('--h', hueOf(name));
+  pop.innerHTML = `
+    <div class="banner"></div>
+    ${isTop(s) ? `<span class="avw xlw">${av(name, 'xl')}<span class="tc">👑</span></span>` : av(name, 'xl')}
+    <button class="x" aria-label="Cerrar">✕</button>
+    <div class="pbody">
+      <h3 id="pName">${esc(name)} ${crown(s)}</h3>
+      <div class="psub">Puesto #${s.rank} · ${esc(scopeLabel())}</div>
+      <div class="pcard">
+        <div class="lbl">Puntos ganados</div>
+        <div class="big">${s.pts} <small>pts</small></div>
+        <div class="bd">${s.wins} ${pl(s.wins, 'victoria', 'victorias')} × ${PTS_WIN} + ${s.mvps} MVP × ${PTS_MVP}${s.extra ? ` ${s.extra > 0 ? '+' : '−'} ${Math.abs(s.extra)} extra` : ''}</div>
+      </div>
+      <div class="pcard">
+        <div class="kpis">
+          <div class="kpi"><b>${s.played}</b><small>Partidas</small></div>
+          <div class="kpi"><b>${s.wins}</b><small>Victorias</small></div>
+          <div class="kpi"><b>${s.played ? pct + '%' : '—'}</b><small>% Victorias</small></div>
+          <div class="kpi"><b>${s.mvps}</b><small>MVP</small></div>
+        </div>
+        <div class="bar" title="${pct}% de victorias"><i style="width:${pct}%"></i></div>
+      </div>
+      <div class="pcard">
+        <div class="lbl">Insignias</div>
+        ${Object.keys(s.won).length ? `<div class="gbs" style="justify-content:flex-start">${badges(s)}</div>` : '<div class="hint">Todavía sin victorias.</div>'}
+      </div>
+      <div class="pcard">
+        <div class="lbl">Partidas jugadas</div>
+        ${log.length ? log.map(e => {
+          if (e.type === 'b') return `<div class="it"><span class="gi ge">${e.got >= 0 ? '➕' : '➖'}</span><span class="g">${esc(e.b.note || 'Puntos extra')}</span><time>${fmtDate(e.date)}</time><span class="res b">EXTRA</span><span class="p">${sgn(e.got)}</span></div>`;
+          const G = gameOf(e.m.game);
+          const r = !e.decided ? '<span class="res n">—</span>' : e.w ? '<span class="res w">VICTORIA</span>' : '<span class="res l">DERROTA</span>';
+          return `<div class="it">${gIcon(e.m.game)}<span class="g">${esc(G.name)}${e.mvp ? ` <span data-tip="+${PTS_MVP} por MVP">👑</span>` : ''}</span><time>${fmtDate(e.date)}</time>${r}<span class="p">+${e.got}</span></div>`;
+        }).join('') : '<div class="hint">No jugó partidas en esta temporada.</div>'}
+      </div>
+    </div>`;
+  $('#modal').hidden = false;
+  hideTip();
+}
+function closeProfile() { $('#modal').hidden = true; openName = null; hideTip(); }
+
+/* ---------- tooltip & toast ---------- */
+const tip = $('#tip');
+function showTip(el) {
+  tip.textContent = el.dataset.tip;
+  tip.classList.add('on');
+  const r = el.getBoundingClientRect(), t = tip.getBoundingClientRect();
+  let x = r.left + r.width / 2 - t.width / 2;
+  x = Math.max(8, Math.min(x, innerWidth - t.width - 8));
+  let y = r.top - t.height - 8, below = false;
+  if (y < 8) { y = r.bottom + 8; below = true; }
+  tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  tip.style.setProperty('--ax', (r.left + r.width / 2 - x) + 'px');
+  tip.classList.toggle('below', below);
+}
+function hideTip() { tip.classList.remove('on'); }
+document.addEventListener('mouseover', e => { const t = e.target.closest('[data-tip]'); t ? showTip(t) : hideTip(); });
+document.addEventListener('focusin', e => { const t = e.target.closest('[data-tip]'); t ? showTip(t) : hideTip(); });
+document.addEventListener('scroll', hideTip, true);
+let toastT;
+function toast(msg, err) { const t = $('#toast'); t.textContent = msg; t.classList.toggle('err', !!err); t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), err ? 6000 : 3200); }
+
+/* ---------- vistas ---------- */
+const VIEWS = {
+  tabla:     'Tabla de posiciones · Victoria +2 · MVP +1',
+  historial: 'Todas las partidas registradas',
+  pickem:    'Armá tu top 10 y exportalo como imagen',
+  admin:     'Cargá partidas, puntos y fotos, y publicá los cambios',
+};
+// ---- contraseña del modo admin (se guarda solo el hash SHA-256, no la contraseña) ----
+const ADMIN_HASH = '5a7e666fb566b220f10b55d5b2db4fedebe9d924a8e07683eb1bf20904f64fdf';
+const UNLOCK = 'copa-admin-ok';
+function sha256(str) {
+  const K = [0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  const b = new TextEncoder().encode(str), l = b.length, n = ((l + 9 + 63) >> 6) << 6, m = new Uint8Array(n);
+  m.set(b); m[l] = 0x80; const dv = new DataView(m.buffer); dv.setUint32(n - 4, l * 8); dv.setUint32(n - 8, Math.floor(l / 0x20000000));
+  let H = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  const r = (x, k) => (x >>> k) | (x << (32 - k)), W = new Uint32Array(64);
+  for (let o = 0; o < n; o += 64) {
+    for (let i = 0; i < 16; i++) W[i] = dv.getUint32(o + i * 4);
+    for (let i = 16; i < 64; i++) W[i] = (W[i-16] + (r(W[i-15],7) ^ r(W[i-15],18) ^ (W[i-15] >>> 3)) + W[i-7] + (r(W[i-2],17) ^ r(W[i-2],19) ^ (W[i-2] >>> 10))) >>> 0;
+    let [a, bb, c, d, e, f, g, hh] = H;
+    for (let i = 0; i < 64; i++) {
+      const t1 = (hh + (r(e,6) ^ r(e,11) ^ r(e,25)) + ((e & f) ^ (~e & g)) + K[i] + W[i]) >>> 0;
+      const t2 = ((r(a,2) ^ r(a,13) ^ r(a,22)) + ((a & bb) ^ (a & c) ^ (bb & c))) >>> 0;
+      hh = g; g = f; f = e; e = (d + t1) >>> 0; d = c; c = bb; bb = a; a = (t1 + t2) >>> 0;
+    }
+    H = H.map((v, i) => (v + [a, bb, c, d, e, f, g, hh][i]) >>> 0);
+  }
+  return H.map(v => v.toString(16).padStart(8, '0')).join('');
+}
+const isUnlocked = () => { try { return localStorage.getItem(UNLOCK) === ADMIN_HASH; } catch { return false; } };
+let lockPrev = 'tabla';
+function askPassword() {
+  $('#lockErr').hidden = true; $('#lockPw').value = ''; $('#lock').hidden = false;
+  setTimeout(() => $('#lockPw').focus(), 30);
+}
+$('#lockForm').addEventListener('submit', e => {
+  e.preventDefault();
+  if (sha256($('#lockPw').value.trim()) === ADMIN_HASH) {
+    try { localStorage.setItem(UNLOCK, ADMIN_HASH); } catch {}
+    $('#lock').hidden = true; setView('admin');
+  } else {
+    $('#lockErr').hidden = false; $('#lockPw').select();
+    const f = $('#lockForm'); f.classList.remove('shake'); void f.offsetWidth; f.classList.add('shake');
+  }
+});
+$('#lockCancel').addEventListener('click', () => { $('#lock').hidden = true; setView(lockPrev); });
+$('#lock').addEventListener('click', e => { if (e.target.id === 'lock') $('#lockCancel').click(); });
+$('#admLogout').addEventListener('click', () => { try { localStorage.removeItem(UNLOCK); } catch {} setView('tabla'); toast('Saliste del modo admin.'); });
+
+function setView(v) {
+  if (!VIEWS[v]) v = 'tabla';
+  if (v === 'admin' && !isUnlocked()) { lockPrev = state.view === 'admin' ? 'tabla' : state.view; if (location.hash === '#admin') history.replaceState(null, '', '#' + lockPrev); askPassword(); return; }
+  state.view = v;
+  closeProfile();
+  document.querySelectorAll('.ch').forEach(b => b.classList.toggle('on', b.dataset.view === v));
+  document.querySelectorAll('.view').forEach(s => s.hidden = s.id !== 'v-' + v);
+  $('#chT').textContent = v; $('#chD').textContent = VIEWS[v];
+  if (location.hash !== '#' + v) history.replaceState(null, '', '#' + v);
+  if (v === 'pickem') renderPickem();
+  if (v === 'admin') renderAdmin();
+}
+document.addEventListener('click', e => {
+  const ch = e.target.closest('.ch'); if (ch) { setView(ch.dataset.view); return; }
+  if (e.target.closest('.x') || e.target.id === 'modal') { closeProfile(); return; }
+  const t = e.target.closest('[data-tip]');
+  if (t && t.closest('.row')) { showTip(t); return; }
+  const p = e.target.closest('[data-p]'); if (p) openProfile(p.dataset.p);
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !$('#modal').hidden) closeProfile();
+  if (e.key === 'Escape' && !$('#lock').hidden) $('#lockCancel').click();
+  const r = e.target.closest && e.target.closest('.row');
+  if (r && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openProfile(r.dataset.p); }
+});
+
+/* ---------- pick'em ---------- */
+const LS = 'copa-pickem-v1';
+let picks = [], pkName = '';
+try { const d = JSON.parse(localStorage.getItem(LS) || '{}'); picks = d.picks || []; pkName = d.name || ''; } catch {}
+const savePk = () => { try { localStorage.setItem(LS, JSON.stringify({ picks, name: pkName })); } catch {} };
+const allNames = () => compute('all').list.map(s => s.name).sort(byEs);
+$('#pkname').value = pkName;
+$('#pkname').addEventListener('input', e => { pkName = e.target.value; savePk(); });
+$('#pkq').addEventListener('input', () => renderPickem());
+
+function renderPickem() {
+  const names = allNames(), n = Math.min(10, names.length);
+  picks = picks.slice(0, n).map(p => names.includes(p) ? p : null);
+  while (picks.length < n) picks.push(null);
+  const q = $('#pkq').value.trim().toLowerCase();
+  $('#pool').innerHTML = names.filter(x => x.toLowerCase().includes(q)).map(x => {
+    const used = picks.includes(x);
+    return `<button class="pi" data-add="${esc(x)}" draggable="${!used}" ${used ? 'disabled' : ''}>${av(x, 'md')}<span class="nm">${esc(x)}</span><span class="add">${used ? 'elegido' : '+ agregar'}</span></button>`;
+  }).join('') || '<div class="hint">Nadie coincide.</div>';
+  $('#slots').innerHTML = picks.map((p, i) => p
+    ? `<li class="slot" data-i="${i}" draggable="true"><span class="grip">⋮⋮</span><span class="n">${i + 1}</span>${av(p, 'md')}<span class="nm">${esc(p)}</span>
+        <span class="acts"><button class="ib" data-up="${i}" aria-label="Subir" ${i === 0 ? 'disabled' : ''}>▲</button><button class="ib" data-dn="${i}" aria-label="Bajar" ${i === n - 1 ? 'disabled' : ''}>▼</button><button class="ib" data-rm="${i}" aria-label="Quitar">✕</button></span></li>`
+    : `<li class="slot empty" data-i="${i}"><span class="grip"></span><span class="n">${i + 1}</span><span>Elegí un jugador</span></li>`).join('');
+  const missing = picks.filter(x => !x).length;
+  $('#pkx').disabled = missing > 0 || !n;
+  const h = $('#pkhint');
+  h.textContent = missing ? `Te ${pl(missing, 'falta', 'faltan')} ${missing} ${pl(missing, 'puesto', 'puestos')}` : '¡Listo para exportar!';
+  h.classList.toggle('ok', !missing);
+  savePk();
+}
+const pk = $('#v-pickem');
+pk.addEventListener('click', e => {
+  const a = e.target.closest('[data-add]');
+  if (a) { const i = picks.indexOf(null); if (i > -1) { picks[i] = a.dataset.add; renderPickem(); } return; }
+  const b = e.target.closest('[data-up],[data-dn],[data-rm]'); if (!b) return;
+  if (b.dataset.rm != null) picks[+b.dataset.rm] = null;
+  else { const i = +(b.dataset.up ?? b.dataset.dn), j = b.dataset.up != null ? i - 1 : i + 1; [picks[i], picks[j]] = [picks[j], picks[i]]; }
+  renderPickem();
+});
+let drag = null;
+pk.addEventListener('dragstart', e => {
+  const s = e.target.closest('.slot[draggable="true"]'), a = e.target.closest('[data-add]');
+  if (s) drag = { from: 'slot', i: +s.dataset.i }; else if (a) drag = { from: 'pool', name: a.dataset.add }; else return;
+  e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', 'x');
+});
+pk.addEventListener('dragover', e => {
+  const s = e.target.closest('.slot'); if (!s || !drag) return;
+  e.preventDefault();
+  document.querySelectorAll('.slot.over').forEach(x => x !== s && x.classList.remove('over'));
+  s.classList.add('over');
+});
+pk.addEventListener('dragleave', e => { const s = e.target.closest('.slot'); if (s && !s.contains(e.relatedTarget)) s.classList.remove('over'); });
+pk.addEventListener('drop', e => {
+  const s = e.target.closest('.slot'); if (!s || !drag) return;
+  e.preventDefault();
+  const j = +s.dataset.i;
+  if (drag.from === 'slot') { const [x] = picks.splice(drag.i, 1); picks.splice(j, 0, x); }
+  else picks[j] = drag.name;
+  drag = null; renderPickem();
+});
+pk.addEventListener('dragend', () => { drag = null; document.querySelectorAll('.slot.over').forEach(x => x.classList.remove('over')); });
+$('#pkclr').addEventListener('click', () => { picks = picks.map(() => null); $('#pkprev').innerHTML = ''; renderPickem(); });
+
+function rrect(c, x, y, w, h, r) {
+  c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r);
+  c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath();
+}
+function fit(c, t, max) { if (c.measureText(t).width <= max) return t; while (t.length > 1 && c.measureText(t + '…').width > max) t = t.slice(0, -1); return t + '…'; }
+// carga una imagen y comprueba que se pueda usar en el JPG (si no, se usa la inicial)
+const safeImg = src => new Promise(res => {
+  if (!src) return res(null);
+  const i = new Image();
+  i.onload = () => { try { const t = document.createElement('canvas'); t.width = t.height = 1; const x = t.getContext('2d'); x.drawImage(i, 0, 0, 1, 1); x.getImageData(0, 0, 1, 1); res(i); } catch { res(null); } };
+  i.onerror = () => res(null);
+  i.src = src;
+});
+
+$('#pkx').addEventListener('click', async () => {
+  const F = '"Noto Sans","Segoe UI",system-ui,sans-serif';
+  try { await Promise.all(['800 64px', '700 40px', '600 30px'].map(w => document.fonts.load(`${w} "Noto Sans"`))); } catch {}
+  const W = 1080, H = 1350, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  const c = cv.getContext('2d');
+  const season = state.season === 'all' ? String(new Date().getFullYear()) : state.season;
+  const who = (pkName || '').trim() || 'anónimo';
+  const date = new Date().toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' });
+  const pics = {};
+  await Promise.all(picks.map(async n => { pics[n] = await safeImg(avatarOf(n)); }));
+  const logo = await safeImg(logoSrc());
+
+  c.fillStyle = '#313338'; c.fillRect(0, 0, W, H);
+  const g = c.createLinearGradient(0, 0, W, 240); g.addColorStop(0, '#5865f2'); g.addColorStop(1, '#3b2f9e');
+  c.fillStyle = g; c.fillRect(0, 0, W, 240);
+  if (logo) { c.save(); c.beginPath(); c.arc(W - 150, 120, 84, 0, Math.PI * 2); c.closePath(); c.clip(); c.drawImage(logo, W - 234, 36, 168, 168); c.restore();
+    c.beginPath(); c.arc(W - 150, 120, 85, 0, Math.PI * 2); c.lineWidth = 4; c.strokeStyle = 'rgba(255,255,255,.35)'; c.stroke(); }
+  const tw = logo ? W - 330 : W - 128;
+  c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+  c.fillStyle = 'rgba(255,255,255,.75)'; c.font = `700 26px ${F}`; c.fillText("LA COPA DISCORD  ·  PICK'EM", 64, 82);
+  c.fillStyle = '#fff'; c.font = `800 64px ${F}`; c.fillText(fit(c, `Mi top 10 · ${season}`, tw), 64, 158);
+  c.fillStyle = 'rgba(255,255,255,.85)'; c.font = `600 30px ${F}`; c.fillText(fit(c, `por ${who} · ${date}`, tw), 64, 206);
+
+  const acc = ['#f0b232', '#c4c9ce', '#d08a4f'], rh = 92, y0 = 276;
+  picks.forEach((n, i) => {
+    const y = y0 + i * (rh + 8), cy = y + rh / 2;
+    rrect(c, 60, y, 960, rh, 14); c.fillStyle = i < 3 ? '#383a40' : '#2b2d31'; c.fill();
+    if (i < 3) { c.fillStyle = acc[i]; rrect(c, 60, y + 16, 6, rh - 32, 3); c.fill(); }
+    c.textBaseline = 'middle'; c.textAlign = 'center';
+    c.fillStyle = i < 3 ? acc[i] : '#f2f3f5'; c.font = `800 44px ${F}`; c.fillText(String(i + 1), 132, cy + 2);
+    c.beginPath(); c.arc(220, cy, 30, 0, Math.PI * 2); c.fillStyle = `hsl(${hueOf(n)},55%,48%)`; c.fill();
+    if (pics[n]) { c.save(); c.clip(); c.drawImage(pics[n], 190, cy - 30, 60, 60); c.restore(); }
+    else { c.fillStyle = '#fff'; c.font = `700 28px ${F}`; c.fillText(ini(n), 220, cy + 1); }
+    if (i < 3) { c.beginPath(); c.arc(220, cy, 31, 0, Math.PI * 2); c.lineWidth = 3; c.strokeStyle = acc[i]; c.stroke(); }
+    if (i === 0) { c.save(); c.translate(220, cy - 38); c.rotate(-0.15); c.font = `30px ${F}`; c.fillText('👑', 0, 0); c.restore(); }
+    c.textAlign = 'left'; c.fillStyle = '#f2f3f5'; c.font = `700 40px ${F}`; c.fillText(fit(c, n, 720), 272, cy + 2);
+  });
+  cv.toBlob(b => {
+    const url = URL.createObjectURL(b), a = document.createElement('a');
+    a.href = url; a.download = `pickem-${who.replace(/[^\w-]+/g, '_')}.jpg`;
+    document.body.appendChild(a); a.click(); a.remove();
+    $('#pkprev').innerHTML = `<img src="${url}" alt="Tu pick'em"><p>Si no se descargó, mantené apretada la imagen para guardarla.</p>`;
+  }, 'image/jpeg', 0.92);
+});
+
+/* =====================================================================
+   MODO ADMIN
+   ===================================================================== */
+function changed() {
+  dirty = true;
+  try { localStorage.setItem(DRAFT, JSON.stringify({ base: PUBLISHED.updatedAt, data: DATA })); }
+  catch { toast('No se pudo guardar el borrador en este navegador (¿fotos muy pesadas?). Publicá para no perderlo.', true); }
+  render();
+}
+const allPlayers = () => [...new Set([...DATA.players, ...DATA.matches.flatMap(playersOf), ...DATA.bonus.map(b => b.player)])].sort(byEs);
+
+// formulario de partida
+const mf = { sel: {}, mvp: '' };
+$('#mDate').value = today(); $('#bDate').value = today();
+function renderMatchForm() {
+  const gsel = $('#mGame'), keepG = gsel.value;
+  gsel.innerHTML = allGames().map(([k, g]) => `<option value="${esc(k)}">${esc(g.name)}</option>`).join('');
+  if (keepG && allGames().some(([k]) => k === keepG)) gsel.value = keepG;
+  const names = allPlayers();
+  Object.keys(mf.sel).forEach(n => { if (!names.includes(n)) delete mf.sel[n]; });
+  $('#mPlayers').innerHTML = names.map(n => { const v = mf.sel[n] || 0;
+    return `<button class="pchip ${v ? 'p' + v : ''}" data-mp="${esc(n)}">${av(n, 'sm')}${esc(n)}${v === 2 ? ' <small>GANÓ</small>' : v === 1 ? ' <small>JUGÓ</small>' : ''}</button>`; }).join('');
+  const playing = names.filter(n => mf.sel[n]);
+  if (!playing.includes(mf.mvp)) mf.mvp = '';
+  $('#mMvp').innerHTML = '<option value="">— Sin MVP —</option>' + playing.map(n => `<option value="${esc(n)}"${n === mf.mvp ? ' selected' : ''}>${esc(n)}</option>`).join('');
+  const pts = n => (mf.sel[n] === 2 ? PTS_WIN : 0) + (mf.mvp === n ? PTS_MVP : 0);
+  const winners = playing.filter(n => mf.sel[n] === 2);
+  $('#mPrev').innerHTML = !playing.length ? 'Elegí quiénes jugaron.' :
+    `${playing.length} ${pl(playing.length, 'jugador', 'jugadores')} · ${winners.length ? winners.length + ' ' + pl(winners.length, 'ganador', 'ganadores') : '<b style="color:var(--gold)">sin ganador marcado</b>'}<br>` +
+    playing.filter(n => pts(n)).map(n => `<b>${esc(n)}</b> +${pts(n)}`).join(' · ');
+  $('#mAdd').disabled = !playing.length;
+}
+$('#mPlayers').addEventListener('click', e => { const b = e.target.closest('[data-mp]'); if (!b) return; const n = b.dataset.mp; mf.sel[n] = ((mf.sel[n] || 0) + 1) % 3; if (!mf.sel[n]) delete mf.sel[n]; renderMatchForm(); });
+$('#mMvp').addEventListener('change', e => { mf.mvp = e.target.value; renderMatchForm(); });
+$('#mAdd').addEventListener('click', () => {
+  const players = Object.keys(mf.sel).sort(byEs); if (!players.length) return;
+  const date = $('#mDate').value || today();
+  DATA.matches.push({ date, game: $('#mGame').value, players, winners: players.filter(n => mf.sel[n] === 2), mvp: mf.mvp || null });
+  mf.sel = {}; mf.mvp = '';
+  changed(); toast(`Partida de ${gameOf($('#mGame').value).name} agregada. Acordate de publicar.`);
+});
+
+// puntos extra
+$('#bAdd').addEventListener('click', () => {
+  const player = $('#bPlayer').value, pts = parseInt($('#bPts').value, 10);
+  if (!player) return toast('Elegí un jugador.', true);
+  if (!pts) return toast('Poné una cantidad de puntos distinta de 0.', true);
+  DATA.bonus.push({ date: $('#bDate').value || today(), player, pts, note: $('#bNote').value.trim() });
+  $('#bNote').value = '';
+  changed(); toast(`${sgn(pts)} ${pl(Math.abs(pts), 'punto', 'puntos')} para ${player}.`);
+});
+
+// jugadores y fotos
+let photoFor = null;
+function renderPlayersAdmin() {
+  const used = new Set([...DATA.matches.flatMap(playersOf), ...DATA.bonus.map(b => b.player)]);
+  $('#aPlayers').innerHTML = allPlayers().map(n => `<div class="ai">${av(n, 'md')}<div class="g"><b>${esc(n)}</b><small>${avatarOf(n) ? 'Con foto' : 'Sin foto (muestra la inicial)'}</small></div>
+    <div class="bt"><button class="btn sm" data-photo="${esc(n)}">${avatarOf(n) ? 'Cambiar foto' : 'Subir foto'}</button>
+    ${avatarOf(n) ? `<button class="btn sm sec" data-nophoto="${esc(n)}" title="Quitar foto">✕</button>` : ''}
+    <button class="btn sm red" data-delp="${esc(n)}" ${used.has(n) ? 'disabled title="Tiene partidas o puntos cargados"' : 'title="Eliminar jugador"'}>🗑</button></div></div>`).join('');
+  const keep = $('#bPlayer').value;
+  $('#bPlayer').innerHTML = allPlayers().map(n => `<option value="${esc(n)}"${n === keep ? ' selected' : ''}>${esc(n)}</option>`).join('');
+}
+$('#aPlayers').addEventListener('click', e => {
+  const ph = e.target.closest('[data-photo]'), np = e.target.closest('[data-nophoto]'), dp = e.target.closest('[data-delp]');
+  if (ph) { photoFor = ph.dataset.photo; $('#pFile').value = ''; $('#pFile').click(); }
+  if (np && confirm(`¿Quitar la foto de ${np.dataset.nophoto}?`)) { delete DATA.avatars[np.dataset.nophoto]; changed(); }
+  if (dp && !dp.disabled && confirm(`¿Eliminar a ${dp.dataset.delp}?`)) { DATA.players = DATA.players.filter(x => x !== dp.dataset.delp); delete DATA.avatars[dp.dataset.delp]; changed(); }
+});
+$('#pFile').addEventListener('change', () => {
+  const f = $('#pFile').files[0]; if (!f || !photoFor) return;
+  const name = photoFor, img = new Image(), url = URL.createObjectURL(f);
+  img.onload = () => {
+    const S = 256, cv = document.createElement('canvas'); cv.width = cv.height = S;
+    const s = Math.min(img.naturalWidth, img.naturalHeight);
+    const sx = (img.naturalWidth - s) / 2, sy = (img.naturalHeight - s) * (img.naturalHeight > img.naturalWidth ? 0.25 : 0.5);
+    cv.getContext('2d').drawImage(img, sx, sy, s, s, 0, 0, S, S);
+    DATA.avatars[name] = cv.toDataURL('image/jpeg', 0.85);
+    URL.revokeObjectURL(url); changed(); toast(`Foto de ${name} actualizada.`);
+  };
+  img.onerror = () => toast('No pude leer esa imagen.', true);
+  img.src = url;
+});
+$('#pAdd').addEventListener('click', () => {
+  const n = $('#pNew').value.trim().replace(/\s+/g, ' ');
+  if (!n) return;
+  if (allPlayers().some(x => x.toLowerCase() === n.toLowerCase())) return toast('Ese jugador ya existe.', true);
+  DATA.players.push(n); $('#pNew').value = ''; changed(); toast(`${n} agregado.`);
+});
+$('#pNew').addEventListener('keydown', e => { if (e.key === 'Enter') $('#pAdd').click(); });
+
+// lista de partidas
+function renderMatchesAdmin() {
+  const items = [...DATA.matches.map((m, i) => ({ t: 'm', i, d: m.date, m })), ...DATA.bonus.map((b, i) => ({ t: 'b', i, d: b.date, b }))].sort((a, b) => b.d.localeCompare(a.d));
+  $('#aMatches').innerHTML = items.map(it => it.t === 'm'
+    ? `<div class="ai">${gIcon(it.m.game, 'gi lg')}<div class="g"><b>${esc(gameOf(it.m.game).name)} · ${fmtDate(it.d)}</b><small>${it.m.winners.length ? 'Ganaron: ' + esc(it.m.winners.join(', ')) : 'Sin ganador'}${it.m.mvp ? ' · MVP: ' + esc(it.m.mvp) : ''} · ${playersOf(it.m).length} jug.</small></div><div class="bt"><button class="btn sm red" data-delm="${it.i}" title="Borrar partida">🗑</button></div></div>`
+    : `<div class="ai"><span class="gi lg ge">${it.b.pts >= 0 ? '➕' : '➖'}</span><div class="g"><b>${esc(it.b.player)} ${sgn(it.b.pts)} · ${fmtDate(it.d)}</b><small>${esc(it.b.note || 'Puntos extra')}</small></div><div class="bt"><button class="btn sm red" data-delb="${it.i}" title="Borrar">🗑</button></div></div>`
+  ).join('') || '<div class="hint">Todavía no cargaste nada.</div>';
+}
+$('#aMatches').addEventListener('click', e => {
+  const m = e.target.closest('[data-delm]'), b = e.target.closest('[data-delb]');
+  if (m && confirm('¿Borrar esta partida?')) { DATA.matches.splice(+m.dataset.delm, 1); changed(); }
+  if (b && confirm('¿Borrar estos puntos?')) { DATA.bonus.splice(+b.dataset.delb, 1); changed(); }
+});
+
+// publicar
+const CFG = 'copa-gh-v1';
+const loadCfg = () => { try { return JSON.parse(localStorage.getItem(CFG) || '{}'); } catch { return {}; } };
+function fillCfg() { const c = loadCfg(); $('#gOwner').value = c.owner || ''; $('#gRepo').value = c.repo || ''; $('#gBranch').value = c.branch || ''; $('#gToken').value = c.token || ''; }
+const readCfg = () => ({ owner: $('#gOwner').value.trim(), repo: $('#gRepo').value.trim(), branch: $('#gBranch').value.trim() || 'main', token: $('#gToken').value.trim() });
+$('#gSave').addEventListener('click', () => { try { localStorage.setItem(CFG, JSON.stringify(readCfg())); toast('Conexión guardada en este navegador.'); } catch { toast('No se pudo guardar.', true); } });
+$('#gForget').addEventListener('click', () => { const c = readCfg(); c.token = ''; $('#gToken').value = ''; try { localStorage.setItem(CFG, JSON.stringify(c)); } catch {} toast('Token borrado de este navegador.'); });
+const api = c => `https://api.github.com/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/contents/data.js`;
+const ghHeaders = c => ({ Authorization: 'Bearer ' + c.token, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' });
+async function ghSha(c) {
+  const r = await fetch(api(c) + '?ref=' + encodeURIComponent(c.branch), { headers: ghHeaders(c), cache: 'no-store' });
+  if (r.status === 404) { const j = await r.json().catch(() => ({})); if (/branch|ref/i.test(j.message || '')) throw new Error('No existe la rama "' + c.branch + '".'); return null; }
+  if (r.status === 401) throw new Error('El token no es válido o venció.');
+  if (r.status === 403) throw new Error('El token no tiene permiso sobre este repositorio.');
+  if (!r.ok) throw new Error('GitHub respondió ' + r.status + '.');
+  return (await r.json()).sha;
+}
+$('#gTest').addEventListener('click', async () => {
+  const c = readCfg(); if (!c.owner || !c.repo || !c.token) return toast('Completá usuario, repositorio y token.', true);
+  try { const sha = await ghSha(c); toast(sha ? '¡Conexión OK! Se puede publicar.' : 'Conexión OK. Todavía no hay data.js en el repo; se crea al publicar.'); }
+  catch (e) { toast(e.message || 'No pude conectar con GitHub.', true); }
+});
+const b64 = s => { const by = new TextEncoder().encode(s); let bin = ''; for (let i = 0; i < by.length; i += 0x8000) bin += String.fromCharCode(...by.subarray(i, i + 0x8000)); return btoa(bin); };
+const dataFile = d => '// Datos de La Copa Discord. Se edita desde el canal #admin de la página.\nwindow.COPA_DATA = ' + JSON.stringify(d, null, 1) + ';\n';
+$('#admPub').addEventListener('click', async () => {
+  const c = { ...loadCfg(), ...Object.fromEntries(Object.entries(readCfg()).filter(([, v]) => v)) };
+  if (!c.owner || !c.repo || !c.token) { toast('Primero completá la conexión con GitHub (abajo de todo).', true); $('#gOwner').focus(); return; }
+  const btn = $('#admPub'); btn.disabled = true; btn.textContent = 'Publicando…';
+  try {
+    const out = { ...DATA, updatedAt: Date.now() };
+    const sha = await ghSha(c);
+    const r = await fetch(api(c), { method: 'PUT', headers: { ...ghHeaders(c), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Actualizar tabla desde el modo admin', content: b64(dataFile(out)), branch: c.branch, ...(sha ? { sha } : {}) }) });
+    if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error(r.status === 409 ? 'Hubo un cambio en el repo mientras tanto. Probá de nuevo.' : (j.message || 'GitHub respondió ' + r.status)); }
+    PUBLISHED = norm(out); DATA = norm(out); dirty = false;
+    try { localStorage.removeItem(DRAFT); localStorage.setItem(CFG, JSON.stringify(c)); } catch {}
+    render(); toast('¡Publicado! En 1–2 minutos lo ve todo el mundo.');
+  } catch (e) { toast(e.message || 'No se pudo publicar.', true); }
+  finally { btn.disabled = false; btn.textContent = 'Publicar'; }
+});
+$('#admDl').addEventListener('click', () => {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([dataFile({ ...DATA, updatedAt: Date.now() })], { type: 'text/javascript' }));
+  a.download = 'data.js'; document.body.appendChild(a); a.click(); a.remove();
+});
+$('#admUndo').addEventListener('click', () => {
+  if (!dirty || !confirm('¿Descartar todos los cambios sin publicar?')) return;
+  DATA = norm(PUBLISHED); dirty = false; try { localStorage.removeItem(DRAFT); } catch {} render(); toast('Cambios descartados.');
+});
+// ---- juegos ----
+// si el logo viene con fondo blanco, lo vuelve transparente (desde los bordes hacia adentro)
+function clearWhiteBg(x, S) {
+  const d = x.getImageData(0, 0, S, S), p = d.data, seen = new Uint8Array(S * S), st = [];
+  const white = i => p[i * 4 + 3] > 0 && p[i * 4] > 232 && p[i * 4 + 1] > 232 && p[i * 4 + 2] > 232;
+  for (let i = 0; i < S; i++) st.push(i, (S - 1) * S + i, i * S, i * S + S - 1);
+  let n = 0;
+  while (st.length) { const i = st.pop(); if (seen[i]) continue; seen[i] = 1;
+    if (!white(i)) continue; p[i * 4 + 3] = 0; n++;
+    const cx = i % S, cy = (i / S) | 0;
+    if (cx > 0) st.push(i - 1); if (cx < S - 1) st.push(i + 1); if (cy > 0) st.push(i - S); if (cy < S - 1) st.push(i + S); }
+  if (n) x.putImageData(d, 0, 0);
+}
+let gameFor = null;
+function renderGamesAdmin() {
+  const used = new Set(DATA.matches.map(m => m.game));
+  $('#aGames').innerHTML = allGames().map(([k, g]) => {
+    const custom = !GAMES[k], over = !custom && DATA.games[k];
+    return `<div class="ai"><span class="gb" style="cursor:default">${gIcon(k)}</span><div class="g"><b>${esc(g.name)}</b><small>${custom ? 'Agregado por vos' : 'De fábrica'}${used.has(k) ? ' · con partidas' : ''}</small></div>
+      <div class="bt"><button class="btn sm" data-glogo="${esc(k)}">${g.logo ? 'Cambiar logo' : 'Subir logo'}</button>
+      ${over ? `<button class="btn sm sec" data-greset="${esc(k)}" title="Volver al logo original">↺</button>` : ''}
+      ${custom ? `<button class="btn sm red" data-gdel="${esc(k)}" ${used.has(k) ? 'disabled title="Tiene partidas cargadas"' : 'title="Eliminar juego"'}>🗑</button>` : ''}</div></div>`;
+  }).join('');
+}
+$('#aGames').addEventListener('click', e => {
+  const lo = e.target.closest('[data-glogo]'), rs = e.target.closest('[data-greset]'), dl = e.target.closest('[data-gdel]');
+  if (lo) { gameFor = lo.dataset.glogo; $('#gFile').value = ''; $('#gFile').click(); }
+  if (rs) { delete DATA.games[rs.dataset.greset]; changed(); toast('Logo original restaurado.'); }
+  if (dl && !dl.disabled && confirm(`¿Eliminar ${gameOf(dl.dataset.gdel).name}?`)) { delete DATA.games[dl.dataset.gdel]; changed(); }
+});
+$('#gAdd').addEventListener('click', () => {
+  const name = $('#gNew').value.trim().replace(/\s+/g, ' '); if (!name) return;
+  if (allGames().some(([, g]) => g.name.toLowerCase() === name.toLowerCase())) return toast('Ese juego ya existe.', true);
+  let key = name.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Z0-9]+/g, '_').replace(/^_|_$/g, '') || 'JUEGO';
+  let k2 = key, i = 2; while (GAMES[k2] || DATA.games[k2]) k2 = key + '_' + i++;
+  DATA.games[k2] = { name, short: name.toUpperCase(), icon: '🎮', hue: hueOf(name) };
+  $('#gNew').value = ''; changed(); toast(`${name} agregado. Ahora subile el logo.`);
+});
+$('#gNew').addEventListener('keydown', e => { if (e.key === 'Enter') $('#gAdd').click(); });
+$('#gFile').addEventListener('change', () => {
+  const f = $('#gFile').files[0]; if (!f || !gameFor) return;
+  const k = gameFor, img = new Image(), url = URL.createObjectURL(f);
+  img.onload = () => {
+    const S = 128, cv = document.createElement('canvas'); cv.width = cv.height = S;
+    const sc = Math.min(S / img.naturalWidth, S / img.naturalHeight), w = img.naturalWidth * sc, hh = img.naturalHeight * sc;
+    const x = cv.getContext('2d'); x.drawImage(img, (S - w) / 2, (S - hh) / 2, w, hh);
+    clearWhiteBg(x, S);
+    DATA.games[k] = { ...(DATA.games[k] || {}), logo: cv.toDataURL('image/png') };
+    URL.revokeObjectURL(url); changed(); toast(`Logo de ${gameOf(k).name} actualizado.`);
+  };
+  img.onerror = () => toast('No pude leer esa imagen.', true);
+  img.src = url;
+});
+
+let lookFor = null;
+function renderLook() {
+  const b = $('#lkBannerPrev'); b.style.backgroundImage = `url("${bannerSrc()}")`; b.style.backgroundPosition = `center ${bannerPos()}%`;
+  $('#lkPos').value = bannerPos();
+  $('#lkLogoReset').disabled = !DATA.look.logo; $('#lkBannerReset').disabled = !DATA.look.banner && (DATA.look.bannerPos ?? 32) === 32;
+}
+$('#lkLogo').addEventListener('click', () => { lookFor = 'logo'; $('#lkFile').value = ''; $('#lkFile').click(); });
+$('#lkBanner').addEventListener('click', () => { lookFor = 'banner'; $('#lkFile').value = ''; $('#lkFile').click(); });
+$('#lkLogoReset').addEventListener('click', () => { delete DATA.look.logo; changed(); toast('Logo original restaurado.'); });
+$('#lkBannerReset').addEventListener('click', () => { delete DATA.look.banner; delete DATA.look.bannerPos; changed(); toast('Banner original restaurado.'); });
+$('#lkPos').addEventListener('input', e => {
+  DATA.look.bannerPos = +e.target.value;
+  $('#lkBannerPrev').style.backgroundPosition = `center ${e.target.value}%`;
+  $('#hero').style.backgroundPosition = `center ${e.target.value}%`;
+});
+$('#lkPos').addEventListener('change', () => changed());
+$('#lkFile').addEventListener('change', () => {
+  const f = $('#lkFile').files[0]; if (!f || !lookFor) return;
+  const kind = lookFor, img = new Image(), url = URL.createObjectURL(f);
+  img.onload = () => {
+    const cv = document.createElement('canvas'), w = img.naturalWidth, hh = img.naturalHeight;
+    if (kind === 'logo') {
+      const S = 384, s = Math.min(w, hh); cv.width = cv.height = S;
+      const x = cv.getContext('2d'); x.fillStyle = '#000'; x.fillRect(0, 0, S, S);
+      x.drawImage(img, (w - s) / 2, (hh - s) / 2, s, s, 0, 0, S, S);
+      DATA.look.logo = cv.toDataURL('image/jpeg', 0.9);
+    } else {
+      const k = Math.min(1, 1800 / w); cv.width = Math.round(w * k); cv.height = Math.round(hh * k);
+      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+      DATA.look.banner = cv.toDataURL('image/jpeg', 0.82); DATA.look.bannerPos = 50;
+    }
+    URL.revokeObjectURL(url); changed(); toast(kind === 'logo' ? 'Logo actualizado. Acordate de publicar.' : 'Banner actualizado. Ajustá la posición si hace falta.');
+  };
+  img.onerror = () => toast('No pude leer esa imagen.', true);
+  img.src = url;
+});
+
+function renderAdmin() {
+  const st = $('#admSt');
+  st.textContent = dirty ? '● Tenés cambios sin publicar' : '✓ Todo publicado';
+  st.className = 'st ' + (dirty ? 'dirty' : 'ok');
+  $('#admUndo').disabled = !dirty;
+  renderMatchForm(); renderPlayersAdmin(); renderMatchesAdmin(); renderLook(); renderGamesAdmin();
+}
+
+/* ---------- inicio ---------- */
+fillCfg();
+render();
+setView(location.hash.slice(1));
+addEventListener('hashchange', () => setView(location.hash.slice(1)));
+})();
+</script>
+</body>
+</html>
