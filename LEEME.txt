@@ -2,7 +2,7 @@ LA COPA DISCORD — cómo subirlo y usar el modo admin
 ===================================================
 
 1) SUBIR A GITHUB (una sola vez)
-   - Subí TODO el contenido de esta carpeta a tu repo (index.html, data.js, img/ con todo lo que tiene adentro).
+   - Subí TODOS los archivos de esta carpeta a tu repo (no hay subcarpetas: seleccioná todo y arrastralo).
    - En el repo: Settings > Pages > "Deploy from a branch" > rama main, carpeta / (root) > Save.
    - En 1-2 minutos la página queda online.
 
@@ -18,6 +18,7 @@ LA COPA DISCORD — cómo subirlo y usar el modo admin
    - Abajo de todo, en "Conexión con GitHub", completá usuario, repo, rama (main) y pegá el token.
      Tocá "Guardar conexión" y después "Probar".
    - Cargá partidas (tocá un jugador 1 vez = jugó, 2 veces = ganó), sumá o restá puntos, cambiá fotos.
+   - En "Sistema de puntos" cambiás cuánto vale jugar, ganar y ser MVP (por defecto +1, +3 y +2).
    - En "Juegos" agregás juegos nuevos y les subís el logo (el fondo blanco se saca solo).
    - En "Apariencia" cambiás el logo de la copa y el banner (con la barrita elegís qué parte del banner se ve).
    - Mientras no publiques, los cambios quedan guardados en tu navegador.
