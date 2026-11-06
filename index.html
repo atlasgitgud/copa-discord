@@ -46,17 +46,23 @@ select{background:var(--deep);border:0;border-radius:4px;padding:8px 10px;cursor
 select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .me{flex:none;background:#232428;padding:10px 14px;font-size:12px;color:var(--mut);line-height:1.5}
 .me b{color:var(--hi)}
-.main{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--main) var(--pat) 0 0/260px 260px repeat}
-.top{height:48px;flex:none;display:flex;align-items:center;gap:8px;padding:0 16px;box-shadow:0 1px 0 rgba(0,0,0,.25),0 2px 0 rgba(0,0,0,.05);z-index:1}
+.main{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--main) var(--pat) 0 0/190px 190px repeat}
+.main{position:relative}
+/* la barra de arriba flota sobre el banner; al bajar se vuelve sólida */
+.top{position:absolute;top:0;left:0;right:10px;height:48px;display:flex;align-items:center;gap:8px;padding:0 16px;z-index:3;
+  background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,0));text-shadow:0 1px 4px rgba(0,0,0,.8);transition:background .2s,box-shadow .2s}
+.top.solid{background:var(--main) var(--pat) 0 0/190px 190px repeat;box-shadow:0 1px 0 rgba(0,0,0,.25),0 2px 0 rgba(0,0,0,.05);text-shadow:none}
+.top b,.top .hash{color:#fff}.top .desc{color:#dbdee1}.top .dv{background:rgba(255,255,255,.3)}
+.top.solid b{color:var(--hi)}.top.solid .hash{color:var(--mut2)}.top.solid .desc{color:var(--mut)}.top.solid .dv{background:var(--line)}
 .top .hash{font-size:24px;color:var(--mut2)}
 .top b{color:var(--hi);font-size:16px}
 .top .dv{width:1px;height:24px;background:var(--line);margin:0 6px;flex:none}
 .top .desc{color:var(--mut);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.content{flex:1;overflow:auto;padding:20px 24px 48px}
+.content{flex:1;overflow:auto;padding:20px 24px 48px;min-height:0}
 .inner{max-width:1040px;margin:0 auto}
 
 /* ---------- banner ---------- */
-.hero{--bn:none;position:relative;height:220px;margin:-20px -24px 20px;background:#1e1f22 var(--bn) center 32%/cover no-repeat}
+.hero{--bn:none;position:relative;height:268px;margin:-20px -24px 20px;background:#1e1f22 var(--bn) center 32%/cover no-repeat}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(30,31,34,.55) 70%,var(--main))}
 .hero-t{position:absolute;z-index:1;left:0;right:0;bottom:16px;max-width:1040px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:14px}
 .hero-ic{width:64px;height:64px;border-radius:50%;overflow:hidden;background:#000;box-shadow:0 0 0 4px var(--main);flex:none}
@@ -1255,11 +1261,17 @@ function renderAdmin() {
   renderMatchForm(); renderPlayersAdmin(); renderMatchesAdmin(); renderLook(); renderGamesAdmin(); renderRules();
 }
 
+/* ---------- barra de arriba: transparente sobre el banner, sólida al bajar ---------- */
+const contentEl = $('.content');
+const syncTop = () => $('.top').classList.toggle('solid', contentEl.scrollTop > 180);
+contentEl.addEventListener('scroll', syncTop, { passive: true });
+
 /* ---------- inicio ---------- */
 fillCfg();
 render();
 setView(location.hash.slice(1));
 addEventListener('hashchange', () => setView(location.hash.slice(1)));
+syncTop();
 })();
 </script>
 </body>
