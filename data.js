@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1793846291865,
+ "updatedAt": 1793933746480,
  "players": [
   "agus",
   "alan",
@@ -15,7 +15,6 @@ window.COPA_DATA = {
   "mauro",
   "negar",
   "nico10",
-  "pani",
   "roses",
   "valenzapp",
   "zowi",
