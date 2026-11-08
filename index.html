@@ -218,6 +218,68 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .bnv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 32%;pointer-events:none}
 @media (max-width:820px){.look{grid-template-columns:1fr}}
 
+/* ---------- llaves ---------- */
+#bk>*{margin-bottom:16px}
+.lnk{border:0;background:none;padding:0;color:#00a8fc;cursor:pointer;font:inherit;text-transform:none;font-weight:600}
+.lnk:hover{text-decoration:underline}
+.bk-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bk-head .g{flex:1;min-width:200px}
+.bk-head h2{margin:0;font-size:24px;font-weight:800;color:var(--hi)}
+.bk-head p{margin:2px 0 0;color:var(--mut);font-size:14px}
+.bk-head .bt{display:flex;gap:6px}
+.bk-logo{width:56px;height:56px;border-radius:14px;background:var(--deep);display:grid;place-items:center;flex:none}
+.bk-logo .gi{width:36px;height:36px;font-size:28px;line-height:36px}
+.bk-wrap{overflow-x:auto;padding-bottom:6px}
+.bk{display:flex;gap:16px;align-items:flex-start;width:max-content}
+.bk-col{width:226px;display:flex;flex-direction:column;gap:10px}
+.bk-g{display:flex;flex-direction:column;gap:8px}
+.bk-ch{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.bk-ch h4{margin:0;font-size:13px;font-weight:800;color:var(--hi);text-transform:uppercase;letter-spacing:.03em}
+.bk-tag{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--active);color:var(--mut)}
+.bk-tag.live{background:rgba(88,101,242,.2);color:#aeb5ff}
+.bk-tag.done{background:rgba(35,165,90,.16);color:#4fd38a}
+.bk-rec{font-size:11px;font-weight:700;color:var(--mut);display:flex;align-items:center;gap:8px}
+.bk-rec::after{content:"";flex:1;height:1px;background:var(--line)}
+.bk-m{background:var(--deep);border:1px solid #1a1b1e;border-radius:8px;overflow:hidden}
+.bk-s{width:100%;display:flex;align-items:center;gap:8px;padding:7px 10px;background:none;border:0;text-align:left;min-height:40px;cursor:default;color:inherit}
+.bk-s+.bk-s{border-top:1px solid #2b2d31}
+.bk-s.can{cursor:pointer}.bk-s.can:hover{background:var(--active)}
+.bk-s .nm{flex:1;min-width:0;font-size:14px}
+.bk-s .sc{font-weight:800;color:var(--mut);min-width:12px;text-align:right}
+.bk-s.w .sc{color:#57f287}
+.bk-s.l .nm{color:var(--mut2)}.bk-s.l .av{opacity:.45}
+.bk-s.tbd .nm{color:var(--mut2);font-style:italic;font-weight:500}
+.bk-ghost{border:1px dashed var(--line);border-radius:8px;padding:12px;color:var(--mut2);font-size:13px}
+.bk-champ{width:226px;border-radius:10px;padding:16px;background:linear-gradient(160deg,rgba(240,178,50,.22),rgba(240,178,50,.04));border:1px solid rgba(240,178,50,.5);display:flex;flex-direction:column;gap:10px}
+.bk-champ .lbl{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--gold)}
+.bq{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.bq-b{border:1px dashed var(--line);background:none;color:#c9cdfb;border-radius:6px;padding:4px 10px;font-size:13px;font-weight:600;cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bq-b:hover{background:rgba(88,101,242,.18);border-color:var(--blurple)}
+.bq-b.x{color:var(--mut)}
+.bk-champ .sub{font-size:14px;font-weight:700;color:var(--tx)}
+.bk-3{margin-top:14px}
+.bk-champ .who{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;color:var(--hi)}
+.bk-tw{overflow-x:auto}
+.bk-t{width:100%;border-collapse:separate;border-spacing:0 4px;min-width:420px}
+.bk-t th{text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;color:var(--mut);padding:2px 12px}
+.bk-t td{padding:8px 12px;background:var(--deep)}
+.bk-t td:first-child{border-radius:8px 0 0 8px;width:52px;font-weight:800;color:var(--mut);border-left:3px solid transparent}
+.bk-t td:last-child{border-radius:0 8px 8px 0}
+.bk-t .n{text-align:right}
+.bk-t tr.tp td:first-child{border-left-color:var(--blurple);color:var(--hi)}
+.bk-t tr.p1 td:first-child{border-left-color:var(--gold);color:var(--gold)}
+.bk-opt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;background:var(--deep);margin-bottom:8px;cursor:pointer}
+.bk-opt input{margin-top:3px;accent-color:var(--blurple)}
+.bk-opt b{display:block;color:var(--hi)}
+.bk-opt small{color:var(--mut);font-size:13px}
+.lockbox.bi{width:min(560px,100%);text-align:left;max-height:calc(100vh - 32px);overflow:auto}
+.bi-map{display:flex;flex-direction:column;gap:6px;max-height:320px;overflow:auto}
+.bi-r{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1.3fr);gap:8px;align-items:center}
+.bi-r b{color:var(--hi);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bi-r span{color:var(--mut)}
+.bi-r .field{padding:7px 10px}
+.embed .tl{margin-top:10px}
+
 /* ---------- candado ---------- */
 .lockbox{width:min(380px,100%);background:#313338;border-radius:8px;padding:24px;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.4)}
 .lockic{width:72px;height:72px;border-radius:50%;overflow:hidden;margin:0 auto 12px;background:#000}
@@ -302,6 +364,7 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
       <button class="ch on" data-view="tabla"><span class="hash">#</span>tabla</button>
       <button class="ch" data-view="historial"><span class="hash">#</span>historial</button>
       <button class="ch" data-view="pickem"><span class="hash">#</span>pickem</button>
+      <button class="ch" data-view="llaves"><span class="hash">#</span>llaves</button>
       <div class="cat">Organización</div>
       <button class="ch" data-view="admin"><span class="hash">#</span>admin<span class="dot" id="admDot" hidden></span></button>
     </div>
@@ -330,6 +393,8 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
       </section>
 
       <section class="view" id="v-historial" hidden><div id="hist"></div></section>
+
+      <section class="view" id="v-llaves" hidden><div id="bk"></div><input type="file" id="bkFile" accept=".json,application/json" hidden></section>
 
       <section class="view" id="v-pickem" hidden>
         <div class="pk">
@@ -377,8 +442,9 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 
           <div class="panel">
             <h3>Sumar o restar puntos</h3>
-            <label class="lbl2" for="bPlayer">Jugador</label>
-            <select class="field" id="bPlayer"></select>
+            <label class="lbl2">Jugadores · <span id="bCount">0</span> elegidos</label>
+            <div class="bq" id="bQuick"></div>
+            <div class="pchips" id="bPlayers"></div>
             <div class="two">
               <div><label class="lbl2" for="bPts">Puntos</label><input class="field" type="number" id="bPts" value="1" step="1"></div>
               <div><label class="lbl2" for="bDate">Fecha</label><input class="field" type="date" id="bDate"></div>
@@ -386,7 +452,7 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
             <label class="lbl2" for="bNote">Motivo (opcional)</label>
             <input class="field" type="text" id="bNote" maxlength="60" placeholder="Ej: ganó el torneo relámpago">
             <div class="pk-actions"><button class="btn" id="bAdd">Aplicar puntos</button></div>
-            <p class="note">Usá un número negativo para restar.</p>
+            <p class="note">Elegí uno o varios jugadores (o un grupo de arriba) y los puntos se aplican a cada uno. Usá un número negativo para restar.</p>
           </div>
 
           <div class="panel">
@@ -469,6 +535,20 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 
 <div class="tip" id="tip" role="tooltip"></div>
 <div class="toast" id="toast" role="status"></div>
+<div class="modal" id="bkImp" hidden>
+  <div class="lockbox bi">
+    <h3>Importar llave</h3>
+    <p>Revisá a qué jugador de la Copa corresponde cada nombre.</p>
+    <div class="two">
+      <div><label class="lbl2" for="biName">Nombre del torneo</label><input class="field" id="biName" maxlength="40" placeholder="Ej: Torneo Brawlhalla"></div>
+      <div><label class="lbl2" for="biGame">Juego</label><select class="field" id="biGame"></select></div>
+    </div>
+    <label class="lbl2" for="biDate">Fecha</label><input class="field" type="date" id="biDate">
+    <label class="lbl2">Jugadores</label>
+    <div id="biMap" class="bi-map"></div>
+    <div class="pk-actions" style="justify-content:flex-end"><button type="button" class="btn sec" id="biCancel">Cancelar</button><button type="button" class="btn" id="biOk">Importar</button></div>
+  </div>
+</div>
 <div class="modal" id="lock" hidden>
   <form class="lockbox" id="lockForm" autocomplete="off">
     <div class="lockic"><img class="logo" src="" alt=""></div>
@@ -540,6 +620,7 @@ const norm = d => {
     avatars: { ...(d.avatars || {}) },
     look: { ...(d.look || {}) },
     rules: { ...(d.rules || {}) },
+    bracket: d.bracket ? JSON.parse(JSON.stringify(d.bracket)) : null,
     games: Object.fromEntries(Object.entries(d.games || {}).map(([k, v]) => [k, { ...v }])),
     bonus: (d.bonus || []).map(b => ({ ...b })),
     matches: (d.matches || []).map(m => ({ ...m, players: [...(m.players || [])], winners: [...(m.winners || [])] })),
@@ -637,6 +718,7 @@ function render() {
   $('#admDot').hidden = !dirty;
   if (openName && !$('#modal').hidden) openProfile(openName);
   if (state.view === 'pickem') renderPickem();
+  if (state.view === 'llaves') renderLlaves();
   if (state.view === 'admin') renderAdmin();
 }
 
@@ -671,15 +753,40 @@ function applyLook() {
 }
 const botHtml = () => `<div class="bot"><img class="logo" src="${esc(logoSrc())}" alt=""></div>`;
 function renderHist(ms, bs) {
-  const items = [...ms.map(m => ({ t: 'm', d: m.date, m })), ...bs.map(b => ({ t: 'b', d: b.date, b }))].sort((a, b) => b.d.localeCompare(a.d));
+  const tg = {}, loose = [];
+  ms.forEach(m => { if (m.tid) (tg[m.tid] = tg[m.tid] || []).push(m); else loose.push(m); });
+  const bg = {}, bl = [];
+  bs.forEach(b => { if (b.gid) (bg[b.gid] = bg[b.gid] || []).push(b); else bl.push([b]); });
+  const items = [...loose.map(m => ({ t: 'm', d: m.date, m })), ...Object.values(tg).map(g => ({ t: 't', d: g[0].date, g })), ...[...bl, ...Object.values(bg)].map(g => ({ t: 'b', d: g[0].date, g }))].sort((a, b) => b.d.localeCompare(a.d));
   if (!items.length) { $('#hist').innerHTML = '<div class="empty">No hay partidas en esta temporada.</div>'; return; }
   $('#hist').innerHTML = items.map(it => {
+    if (it.t === 't') {
+      const g = it.g, m0 = g[0], G = gameOf(m0.game), r = R();
+      const fin = g.find(m => m.stage === 'final') || g[g.length - 1], champ = (fin.winners || [])[0];
+      const fp = playersOf(fin), runner = fp.length === 2 ? fp.find(p => p !== champ) : null;
+      const tot = {}; let mvp = null;
+      g.forEach(m => { const W = new Set(m.winners || []); if (m.mvp) mvp = m.mvp; playersOf(m).forEach(p => { tot[p] = (tot[p] || 0) + r.play + (W.has(p) ? r.win : 0) + (m.mvp === p ? r.mvp : 0); }); });
+      const rank = Object.entries(tot).sort((a, b) => b[1] - a[1] || byEs(a[0], b[0]));
+      const isCur = DATA.bracket && DATA.bracket.registered && DATA.bracket.registered.tid === m0.tid;
+      return `<article class="msg">${botHtml()}<div class="mb">
+        <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(m0.date)}</time></div>
+        <div class="embed" style="--h:${gHue(m0.game)}">
+          <div class="et">${gIcon(m0.game, 'gi lg')} ${esc(m0.tname || 'Torneo de ' + G.name)}</div>
+          ${champ ? `<div class="ef"><div class="k">🏆 Campeón</div><div class="v">${men(champ, tot[champ], mvp === champ)}</div></div>` : ''}
+          ${runner ? `<div class="ef"><div class="k">🥈 Subcampeón</div><div class="v">${men(runner, tot[runner], mvp === runner)}</div></div>` : ''}
+          ${(() => { const t = g.find(m => m.stage === 'third'), w = t && (t.winners || [])[0]; return w ? `<div class="ef"><div class="k">🥉 Tercer puesto</div><div class="v">${men(w, tot[w], mvp === w)}</div></div>` : ''; })()}
+          ${mvp && mvp !== champ && mvp !== runner ? `<div class="ef"><div class="k">⭐ MVP</div><div class="v">${men(mvp, tot[mvp], true)}</div></div>` : ''}
+          <div class="ef"><div class="k">Puntos para la Copa</div><div class="v">${rank.map(([p, n]) => men(p, n, false)).join('')}</div></div>
+          ${isCur ? '<div class="tl"><a class="lnk" href="#llaves">Ver la llave completa →</a></div>' : ''}
+          <div class="efoot">${g.length} ${pl(g.length, 'partida', 'partidas')} · ${rank.length} jugadores · Sistema suizo · ${fmtDate(m0.date)}</div>
+        </div></div></article>`;
+    }
     if (it.t === 'b') {
-      const b = it.b, n = Number(b.pts) || 0;
+      const b = it.g[0], n = Number(b.pts) || 0;
       return `<article class="msg">${botHtml()}<div class="mb">
         <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(b.date)}</time></div>
-        <div class="embed" style="--h:45"><div class="et">${n >= 0 ? '➕ Puntos extra' : '➖ Puntos descontados'}</div>
-        <div class="ef"><div class="v">${men(b.player, n)}</div></div>
+        <div class="embed" style="--h:45"><div class="et">${n >= 0 ? '➕ Puntos extra' : '➖ Puntos descontados'}${it.g.length > 1 ? ` · ${it.g.length} jugadores` : ''}</div>
+        <div class="ef"><div class="v">${it.g.map(x => men(x.player, Number(x.pts) || 0)).join('')}</div></div>
         ${b.note ? `<div class="ef"><div class="k">Motivo</div><div class="hint">${esc(b.note)}</div></div>` : ''}
         <div class="efoot">${fmtDate(b.date)}</div></div></div></article>`;
     }
@@ -776,6 +883,7 @@ const VIEWS = {
   tabla:     'Tabla de posiciones',
   historial: 'Todas las partidas registradas',
   pickem:    'Armá tu top 10 y exportalo como imagen',
+  llaves:    'Torneos con sistema suizo · cruces, playoffs y campeón',
   admin:     'Cargá partidas, puntos y fotos, y publicá los cambios',
 };
 // ---- contraseña del modo admin (se guarda solo el hash SHA-256, no la contraseña) ----
@@ -830,6 +938,7 @@ function setView(v) {
   $('#chT').textContent = v; $('#chD').textContent = VIEWS[v];
   if (location.hash !== '#' + v) history.replaceState(null, '', '#' + v);
   if (v === 'pickem') renderPickem();
+  if (v === 'llaves') renderLlaves();
   if (v === 'admin') renderAdmin();
 }
 document.addEventListener('click', e => {
@@ -1011,13 +1120,42 @@ $('#mAdd').addEventListener('click', () => {
 });
 
 // puntos extra
+const bSel = new Set();
+// grupos rápidos para elegir varios jugadores de una
+function bGroups() {
+  const gs = [['Todos', allPlayers()]];
+  const B = bk(); if (B) gs.push([`Llave: ${B.name}`, B.players]);
+  const lastM = [...DATA.matches].filter(m => !m.tid).sort((a, b) => b.date.localeCompare(a.date))[0];
+  if (lastM) gs.push([`Última partida (${gameOf(lastM.game).name})`, playersOf(lastM)]);
+  if (lastM && (lastM.winners || []).length) gs.push(['Ganadores de esa partida', lastM.winners]);
+  const top = compute(state.season).list.filter(s => s.pts > 0).slice(0, 3).map(s => s.name);
+  if (top.length) gs.push(['Top 3 de la tabla', top]);
+  return gs;
+}
+function renderBonusPick() {
+  const names = allPlayers();
+  [...bSel].forEach(n => { if (!names.includes(n)) bSel.delete(n); });
+  $('#bQuick').innerHTML = bGroups().map(([lbl], i) => `<button type="button" class="bq-b" data-bg="${i}">${esc(lbl)}</button>`).join('') + (bSel.size ? '<button type="button" class="bq-b x" data-bg="none">✕ Limpiar</button>' : '');
+  $('#bPlayers').innerHTML = names.map(n => `<button type="button" class="pchip${bSel.has(n) ? ' p2' : ''}" data-bp="${esc(n)}">${av(n, 'sm')}${esc(n)}</button>`).join('');
+  $('#bCount').textContent = bSel.size;
+  $('#bAdd').textContent = bSel.size > 1 ? `Aplicar a ${bSel.size} jugadores` : 'Aplicar puntos';
+  $('#bAdd').disabled = !bSel.size;
+}
+$('#bQuick').addEventListener('click', e => {
+  const b = e.target.closest('[data-bg]'); if (!b) return;
+  if (b.dataset.bg === 'none') bSel.clear();
+  else { const g = bGroups()[+b.dataset.bg][1], allIn = g.every(n => bSel.has(n)); g.forEach(n => allIn ? bSel.delete(n) : bSel.add(n)); }
+  renderBonusPick();
+});
+$('#bPlayers').addEventListener('click', e => { const c = e.target.closest('[data-bp]'); if (!c) return; const n = c.dataset.bp; bSel.has(n) ? bSel.delete(n) : bSel.add(n); renderBonusPick(); });
 $('#bAdd').addEventListener('click', () => {
-  const player = $('#bPlayer').value, pts = parseInt($('#bPts').value, 10);
-  if (!player) return toast('Elegí un jugador.', true);
+  const pts = parseInt($('#bPts').value, 10), who = [...bSel];
+  if (!who.length) return toast('Elegí al menos un jugador.', true);
   if (!pts) return toast('Poné una cantidad de puntos distinta de 0.', true);
-  DATA.bonus.push({ date: $('#bDate').value || today(), player, pts, note: $('#bNote').value.trim() });
-  $('#bNote').value = '';
-  changed(); toast(`${sgn(pts)} ${pl(Math.abs(pts), 'punto', 'puntos')} para ${player}.`);
+  const date = $('#bDate').value || today(), note = $('#bNote').value.trim(), gid = who.length > 1 ? 'g' + Date.now() : undefined;
+  who.forEach(player => DATA.bonus.push({ date, player, pts, note, ...(gid ? { gid } : {}) }));
+  $('#bNote').value = ''; bSel.clear();
+  changed(); toast(`${sgn(pts)} ${pl(Math.abs(pts), 'punto', 'puntos')} para ${who.length === 1 ? who[0] : who.length + ' jugadores'}.`);
 });
 
 // jugadores y fotos
@@ -1028,8 +1166,7 @@ function renderPlayersAdmin() {
     <div class="bt"><button class="btn sm" data-photo="${esc(n)}">${avatarOf(n) ? 'Cambiar foto' : 'Subir foto'}</button>
     ${avatarOf(n) ? `<button class="btn sm sec" data-nophoto="${esc(n)}" title="Quitar foto">✕</button>` : ''}
     <button class="btn sm red" data-delp="${esc(n)}" ${used.has(n) ? 'disabled title="Tiene partidas o puntos cargados"' : 'title="Eliminar jugador"'}>🗑</button></div></div>`).join('');
-  const keep = $('#bPlayer').value;
-  $('#bPlayer').innerHTML = allPlayers().map(n => `<option value="${esc(n)}"${n === keep ? ' selected' : ''}>${esc(n)}</option>`).join('');
+  renderBonusPick();
 }
 $('#aPlayers').addEventListener('click', e => {
   const ph = e.target.closest('[data-photo]'), np = e.target.closest('[data-nophoto]'), dp = e.target.closest('[data-delp]');
@@ -1061,14 +1198,29 @@ $('#pNew').addEventListener('keydown', e => { if (e.key === 'Enter') $('#pAdd').
 
 // lista de partidas
 function renderMatchesAdmin() {
-  const items = [...DATA.matches.map((m, i) => ({ t: 'm', i, d: m.date, m })), ...DATA.bonus.map((b, i) => ({ t: 'b', i, d: b.date, b }))].sort((a, b) => b.d.localeCompare(a.d));
-  $('#aMatches').innerHTML = items.map(it => it.t === 'm'
+  const seenT = new Set(), seenG = new Set(), items = [];
+  DATA.matches.forEach((m, i) => {
+    if (m.tid) { if (seenT.has(m.tid)) return; seenT.add(m.tid); const g = DATA.matches.filter(x => x.tid === m.tid); items.push({ t: 't', d: m.date, m, n: g.length, champ: ((g.find(x => x.stage === 'final') || m).winners || [])[0] }); }
+    else items.push({ t: 'm', i, d: m.date, m });
+  });
+  DATA.bonus.forEach((b, i) => {
+    if (b.gid) { if (seenG.has(b.gid)) return; seenG.add(b.gid); items.push({ t: 'g', d: b.date, b, list: DATA.bonus.filter(x => x.gid === b.gid).map(x => x.player) }); }
+    else items.push({ t: 'b', i, d: b.date, b });
+  });
+  items.sort((a, b) => b.d.localeCompare(a.d));
+  $('#aMatches').innerHTML = items.map(it => it.t === 't'
+    ? `<div class="ai">${gIcon(it.m.game, 'gi lg')}<div class="g"><b>${esc(it.m.tname || 'Torneo')} · ${fmtDate(it.d)}</b><small>Llave · ${it.n} ${pl(it.n, 'partida', 'partidas')}${it.champ ? ' · Campeón: ' + esc(it.champ) : ''}</small></div><div class="bt"><button class="btn sm red" data-delt="${esc(it.m.tid)}" title="Sacar el torneo del historial">🗑</button></div></div>`
+    : it.t === 'g'
+    ? `<div class="ai"><span class="gi lg ge">${it.b.pts >= 0 ? '➕' : '➖'}</span><div class="g"><b>${it.list.length} jugadores ${sgn(it.b.pts)} c/u · ${fmtDate(it.d)}</b><small>${esc(it.b.note || 'Puntos extra')} · ${esc(it.list.join(', '))}</small></div><div class="bt"><button class="btn sm red" data-delg="${esc(it.b.gid)}" title="Borrar">🗑</button></div></div>`
+    : it.t === 'm'
     ? `<div class="ai">${gIcon(it.m.game, 'gi lg')}<div class="g"><b>${esc(gameOf(it.m.game).name)} · ${fmtDate(it.d)}</b><small>${it.m.winners.length ? 'Ganaron: ' + esc(it.m.winners.join(', ')) : 'Sin ganador'}${it.m.mvp ? ' · MVP: ' + esc(it.m.mvp) : ''} · ${playersOf(it.m).length} jug.</small></div><div class="bt"><button class="btn sm red" data-delm="${it.i}" title="Borrar partida">🗑</button></div></div>`
     : `<div class="ai"><span class="gi lg ge">${it.b.pts >= 0 ? '➕' : '➖'}</span><div class="g"><b>${esc(it.b.player)} ${sgn(it.b.pts)} · ${fmtDate(it.d)}</b><small>${esc(it.b.note || 'Puntos extra')}</small></div><div class="bt"><button class="btn sm red" data-delb="${it.i}" title="Borrar">🗑</button></div></div>`
   ).join('') || '<div class="hint">Todavía no cargaste nada.</div>';
 }
 $('#aMatches').addEventListener('click', e => {
-  const m = e.target.closest('[data-delm]'), b = e.target.closest('[data-delb]');
+  const m = e.target.closest('[data-delm]'), b = e.target.closest('[data-delb]'), t = e.target.closest('[data-delt]'), g = e.target.closest('[data-delg]');
+  if (t && confirm('¿Sacar este torneo del historial? (la llave sigue en #llaves)')) { DATA.matches = DATA.matches.filter(x => x.tid !== t.dataset.delt); if (DATA.bracket && DATA.bracket.registered && DATA.bracket.registered.tid === t.dataset.delt) DATA.bracket.registered = null; changed(); return; }
+  if (g && confirm('¿Borrar estos puntos de todos los jugadores del grupo?')) { DATA.bonus = DATA.bonus.filter(x => x.gid !== g.dataset.delg); changed(); return; }
   if (m && confirm('¿Borrar esta partida?')) { DATA.matches.splice(+m.dataset.delm, 1); changed(); }
   if (b && confirm('¿Borrar estos puntos?')) { DATA.bonus.splice(+b.dataset.delb, 1); changed(); }
 });
@@ -1260,6 +1412,339 @@ function renderAdmin() {
   $('#admUndo').disabled = !dirty;
   renderMatchForm(); renderPlayersAdmin(); renderMatchesAdmin(); renderLook(); renderGamesAdmin(); renderRules();
 }
+
+/* =====================================================================
+   LLAVES · generador de torneos con sistema suizo
+   ===================================================================== */
+const BO_OPTS = { 1: ['1-0'], 3: ['2-0', '2-1'], 5: ['3-0', '3-1', '3-2'] };
+const bk = () => DATA.bracket || null;
+const bkCan = () => isUnlocked() && !!bk() && !bk().registered;
+const bkRoundDone = r => r.every(m => m.w);
+const bkSwissDone = B => B.swiss.length >= B.rounds && B.swiss.every(bkRoundDone);
+let bkNew = false;
+
+function bkStandings(B) {
+  const map = {};
+  B.players.forEach(p => { map[p] = { id: p, w: 0, l: 0, opp: [], bye: false }; });
+  B.swiss.forEach(r => r.forEach(m => {
+    if (!m.w) return;
+    const A = map[m.a], O = m.b ? map[m.b] : null; if (!A) return;
+    if (!O) { A.w++; A.bye = true; return; }
+    A.opp.push(O.id); O.opp.push(A.id);
+    (m.w === 'a' ? A : O).w++; (m.w === 'a' ? O : A).l++;
+  }));
+  const list = Object.values(map);
+  list.forEach(p => { p.buch = p.opp.reduce((s, o) => s + (map[o] ? map[o].w : 0), 0); });
+  const h2h = new Set();
+  B.swiss.forEach(r => r.forEach(m => { if (m.w && m.b) h2h.add(m[m.w] + '|' + (m.w === 'a' ? m.b : m.a)); }));
+  list.sort((a, b) => b.w - a.w || b.buch - a.buch || (h2h.has(b.id + '|' + a.id) ? 1 : h2h.has(a.id + '|' + b.id) ? -1 : 0) || byEs(a.id, b.id));
+  return list;
+}
+function bkRecord(B, ri) {
+  const rec = {}; B.players.forEach(p => { rec[p] = [0, 0]; });
+  B.swiss.slice(0, ri).forEach(r => r.forEach(m => {
+    if (!m.w) return;
+    if (!m.b) { if (rec[m.a]) rec[m.a][0]++; return; }
+    const w = m.w === 'a' ? m.a : m.b, l = m.w === 'a' ? m.b : m.a;
+    if (rec[w]) rec[w][0]++; if (rec[l]) rec[l][1]++;
+  }));
+  return rec;
+}
+function bkShuffle(players) {
+  const ids = [...players];
+  for (let i = ids.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [ids[i], ids[j]] = [ids[j], ids[i]]; }
+  const r = [];
+  for (let i = 0; i + 1 < ids.length; i += 2) r.push({ a: ids[i], b: ids[i + 1], w: null, s: null });
+  if (ids.length % 2) r.push({ a: ids[ids.length - 1], b: null, w: 'a', s: 'bye' });
+  return r;
+}
+function bkPairNext(B) {
+  const st = bkStandings(B); let order = st.map(p => p.id); const extra = [];
+  if (order.length % 2) {
+    const pick = [...st].reverse().find(p => !p.bye) || st[st.length - 1];
+    order = order.filter(id => id !== pick.id);
+    extra.push({ a: pick.id, b: null, w: 'a', s: 'bye' });
+  }
+  const played = new Set();
+  B.swiss.forEach(r => r.forEach(m => { if (m.b) { played.add(m.a + '|' + m.b); played.add(m.b + '|' + m.a); } }));
+  const bt = list => {
+    if (!list.length) return [];
+    const p = list[0];
+    for (let i = 1; i < list.length; i++) {
+      if (played.has(p + '|' + list[i])) continue;
+      const rest = bt(list.filter((_, j) => j !== 0 && j !== i));
+      if (rest) return [[p, list[i]], ...rest];
+    }
+    return null;
+  };
+  let pairs = bt(order);
+  if (!pairs) { pairs = []; for (let i = 0; i < order.length; i += 2) pairs.push([order[i], order[i + 1]]); }
+  return pairs.map(([a, b]) => ({ a, b, w: null, s: null })).concat(extra);
+}
+function bkChamp(B) {
+  if (!B.top) return bkSwissDone(B) ? (bkStandings(B)[0] || {}).id || null : null;
+  const f = B.playoffs && B.playoffs.final; return f && f.w ? f[f.w] : null;
+}
+function bkRunner(B) {
+  if (!B.top) return bkSwissDone(B) ? (bkStandings(B)[1] || {}).id || null : null;
+  const f = B.playoffs && B.playoffs.final; return f && f.w ? f[f.w === 'a' ? 'b' : 'a'] : null;
+}
+function bkCycle(m, side, opts) {
+  if (m.w !== side) { m.w = side; m.s = opts[0]; return; }
+  const i = opts.indexOf(m.s);
+  if (i < opts.length - 1) m.s = opts[i + 1]; else { m.w = null; m.s = null; }
+}
+function bkSyncFinal(B) {
+  const po = B.playoffs; if (!po || !po.semis.length) return;
+  const wa = po.semis[0].w ? po.semis[0][po.semis[0].w] : null;
+  const wb = po.semis[1].w ? po.semis[1][po.semis[1].w] : null;
+  if (po.final.a !== wa || po.final.b !== wb) po.final = { a: wa, b: wb, w: null, s: null };
+  if (po.third) {
+    const la = po.semis[0].w ? po.semis[0][po.semis[0].w === 'a' ? 'b' : 'a'] : null;
+    const lb = po.semis[1].w ? po.semis[1][po.semis[1].w === 'a' ? 'b' : 'a'] : null;
+    if (po.third.a !== la || po.third.b !== lb) po.third = { a: la, b: lb, w: null, s: null };
+  }
+}
+const bkThird = B => { const t = B.playoffs && B.playoffs.third; return t && t.w ? t[t.w] : null; };
+// todos los cruces jugados (sin byes), en orden, con su etapa
+function bkAllMatches(B) {
+  const out = [];
+  B.swiss.forEach((r, ri) => r.forEach(m => { if (m.b && m.w) out.push({ m, stage: 'r' + (ri + 1) }); }));
+  if (B.playoffs) {
+    B.playoffs.semis.forEach(m => { if (m.a && m.b && m.w) out.push({ m, stage: 'semi' }); });
+    const t = B.playoffs.third; if (t && t.a && t.b && t.w) out.push({ m: t, stage: 'third' });
+    const f = B.playoffs.final; if (f.a && f.b && f.w) out.push({ m: f, stage: 'final' });
+  }
+  return out;
+}
+
+/* ---------- vista ---------- */
+function bkSlot(m, side, can, kind, ri, mi) {
+  const id = m[side], isW = m.w === side, isL = !!m.w && m.w !== side;
+  const name = id || (side === 'b' && m.s === 'bye' ? 'BYE · pasa directo' : 'Por definir');
+  const [x, y] = (m.s && m.s !== 'bye' ? m.s : '0-0').split('-');
+  const sc = !m.w || m.s === 'bye' ? '' : (isW ? x : y);
+  const ok = can && id && m.a && m.b;
+  return `<button type="button" class="bk-s${isW ? ' w' : ''}${isL ? ' l' : ''}${id ? '' : ' tbd'}${ok ? ' can' : ''}" ${ok ? `data-bk="${kind}" data-r="${ri}" data-m="${mi}" data-side="${side}" aria-label="Marcar ganador: ${esc(name)}"` : 'disabled'}>${id ? av(id, 'sm') : '<span class="av sm" style="background:var(--deep)"></span>'}<span class="nm">${esc(name)}</span><span class="sc">${sc}</span></button>`;
+}
+const bkMatch = (m, can, kind, ri, mi) => `<div class="bk-m">${bkSlot(m, 'a', can, kind, ri, mi)}${bkSlot(m, 'b', can, kind, ri, mi)}</div>`;
+
+function bkSetupHtml() {
+  const B = bk(), ps = allPlayers();
+  const sel = new Set(B && bkNew ? B.players : []);
+  const gopts = allGames().map(([k, g]) => `<option value="${esc(k)}"${k === 'BRAWLHALLA' ? ' selected' : ''}>${esc(g.name)}</option>`).join('');
+  return `<div class="panel">
+    <h3>Armar llave nueva</h3>
+    <div class="two">
+      <div><label class="lbl2" for="bkName">Nombre del torneo</label><input class="field" id="bkName" maxlength="40" placeholder="Ej: Torneo Brawlhalla"></div>
+      <div><label class="lbl2" for="bkGame">Juego</label><select class="field" id="bkGame">${gopts}</select></div>
+    </div>
+    <div class="two">
+      <div><label class="lbl2" for="bkDate">Fecha</label><input class="field" type="date" id="bkDate" value="${today()}"></div>
+      <div><label class="lbl2" for="bkRounds">Rondas del suizo</label><select class="field" id="bkRounds">${[2, 3, 4, 5, 6].map(n => `<option value="${n}"${n === 4 ? ' selected' : ''}>${n} rondas</option>`).join('')}</select></div>
+    </div>
+    <div class="two">
+      <div><label class="lbl2" for="bkTop">Playoffs</label><select class="field" id="bkTop"><option value="4">Top 4 (semis + final)</option><option value="2">Top 2 (final directa)</option><option value="0">Sin playoffs (gana el 1° de la tabla)</option></select></div>
+      <div><label class="lbl2" for="bkBo">Formato de la final</label><select class="field" id="bkBo"><option value="5">Bo5 (al mejor de 5)</option><option value="3">Bo3 (al mejor de 3)</option><option value="1">Bo1 (una partida)</option></select></div>
+    </div>
+    <label class="lbl2">Jugadores · <span id="bkCount">${sel.size}</span> elegidos <button type="button" class="lnk" data-bka="all">todos</button> · <button type="button" class="lnk" data-bka="none">ninguno</button></label>
+    <div class="pchips" id="bkPlayers">${ps.map(n => `<button type="button" class="pchip${sel.has(n) ? ' p2' : ''}" data-bkp="${esc(n)}">${av(n, 'sm')}${esc(n)}</button>`).join('')}</div>
+    <div class="pk-actions">
+      <button class="btn" data-bka="create" id="bkCreate"${sel.size < 2 ? ' disabled' : ''}>🎲 Sortear cruces y crear llave</button>
+      <button class="btn sec" data-bka="import">Importar llave (.json)</button>
+      ${B ? '<button class="btn sec" data-bka="cancelnew">Cancelar</button>' : ''}
+    </div>
+    <p class="note">Los cruces de la ronda 1 se sortean al azar. Desde la ronda 2 se cruzan jugadores con el mismo récord y nunca se repite un cruce. Si hay un número impar, alguien pasa directo (bye) y suma la victoria.</p>
+  </div>`;
+}
+
+function renderLlaves() {
+  const el = $('#bk'), B = bk(), adm = isUnlocked(), can = bkCan();
+  let html = '';
+  if (adm && dirty) html += `<div class="adm-bar"><span class="st dirty">● Tenés cambios sin publicar</span><button class="btn green" data-bka="pub">Publicar</button></div>`;
+  if (!B || (adm && bkNew)) {
+    html += adm ? bkSetupHtml() : '<div class="panel empty">Todavía no hay ninguna llave armada.</div>';
+    el.innerHTML = html; return;
+  }
+  const G = gameOf(B.game), champ = bkChamp(B), last = B.swiss.length - 1;
+  const stage = champ ? 'Terminado' : B.playoffs ? 'Playoffs' : `Ronda ${B.swiss.length} de ${B.rounds}`;
+  html += `<div class="panel bk-head">
+    <span class="bk-logo">${gIcon(B.game, 'gi')}</span>
+    <div class="g"><h2>${esc(B.name || 'Torneo de ' + G.name)}</h2><p>${esc(G.name)} · ${fmtDate(B.date)} · ${B.players.length} jugadores · Sistema suizo · ${stage}</p></div>
+    ${adm ? `<div class="bt"><button class="btn sm sec" data-bka="new">Nueva llave</button>${!B.registered ? '<button class="btn sm red" data-bka="delete">Borrar llave</button>' : ''}</div>` : ''}
+  </div>`;
+
+  // fase suiza
+  const cols = B.swiss.map((round, ri) => {
+    const rec = bkRecord(B, ri), groups = {};
+    round.forEach((m, mi) => { const r = rec[m.a] || [0, 0], key = r[0] + '-' + r[1]; (groups[key] = groups[key] || { w: r[0], items: [] }).items.push([m, mi]); });
+    const editR = can && ri === last && !B.playoffs, done = bkRoundDone(round);
+    const g = Object.entries(groups).sort((a, b) => b[1].w - a[1].w).map(([key, grp]) =>
+      `<div class="bk-g">${ri > 0 ? `<div class="bk-rec">Récord ${key}</div>` : ''}${grp.items.map(([m, mi]) => bkMatch(m, editR, 'swiss', ri, mi)).join('')}</div>`).join('');
+    return `<div class="bk-col"><div class="bk-ch"><h4>Ronda ${ri + 1}</h4><span class="bk-tag ${done ? 'done' : 'live'}">${done ? 'Terminada' : 'En juego'}</span></div>${g}</div>`;
+  });
+  for (let ri = B.swiss.length; ri < B.rounds; ri++) cols.push(`<div class="bk-col"><div class="bk-ch"><h4>Ronda ${ri + 1}</h4><span class="bk-tag">Pendiente</span></div><div class="bk-ghost">Se arma cuando termina la ronda ${ri}, cruzando jugadores con el mismo récord.</div></div>`);
+
+  let acts = '';
+  if (can && !B.playoffs) {
+    const cur = B.swiss[last], r1clean = B.swiss.length === 1 && cur.every(m => !m.b || !m.w);
+    if (r1clean) acts += '<button class="btn sec" data-bka="reshuffle">🎲 Volver a sortear ronda 1</button>';
+    if (B.swiss.length < B.rounds) acts += `<button class="btn" data-bka="next"${bkRoundDone(cur) ? '' : ' disabled'}>Generar ronda ${B.swiss.length + 1}</button>`;
+    else if (B.top) acts += `<button class="btn" data-bka="playoffs"${bkSwissDone(B) && B.players.length >= B.top ? '' : ' disabled'}>Generar playoffs (top ${B.top})</button>`;
+    if (B.swiss.length > 1) acts += `<button class="btn red" data-bka="undo">Borrar ronda ${B.swiss.length}</button>`;
+    acts += '<span class="hint">Tocá un jugador para marcarlo ganador. Tocalo de nuevo para borrar el resultado.</span>';
+  }
+  html += `<div class="panel"><h3>Fase suiza</h3><div class="bk-wrap"><div class="bk">${cols.join('')}</div></div>${acts ? `<div class="pk-actions">${acts}</div>` : ''}</div>`;
+
+  // playoffs
+  if (B.playoffs) {
+    const po = B.playoffs, f = po.final, opts = BO_OPTS[B.finalBo] || BO_OPTS[5];
+    const semis = po.semis.length ? `<div class="bk-col"><div class="bk-ch"><h4>Semis</h4><span class="bk-tag">Bo1</span></div>
+        <div class="bk-rec">1° vs 4°</div>${bkMatch(po.semis[0], can && !f.w, 'semi', 0, 0)}
+        <div class="bk-rec">2° vs 3°</div>${bkMatch(po.semis[1], can && !f.w, 'semi', 0, 1)}</div>` : '';
+    html += `<div class="panel"><h3>Playoffs · top ${B.top}</h3><div class="bk-wrap"><div class="bk">${semis}
+      <div class="bk-col"${po.semis.length ? ' style="padding-top:62px"' : ''}><div class="bk-ch"><h4>Final</h4><span class="bk-tag">Bo${B.finalBo}</span></div>${bkMatch(f, can, 'final', 0, 0)}
+        ${po.third ? `<div class="bk-ch bk-3"><h4>3° puesto</h4><span class="bk-tag">Bo1</span></div>${bkMatch(po.third, can, 'third', 0, 0)}` : ''}</div>
+      ${champ ? `<div class="bk-champ"${po.semis.length ? ' style="margin-top:92px"' : ''}><span class="lbl">CAMPEÓN</span><span class="who">${av(champ, 'md')}${esc(champ)}</span>
+        ${bkRunner(B) ? `<span class="sub">🥈 ${esc(bkRunner(B))}</span>` : ''}${bkThird(B) ? `<span class="sub">🥉 ${esc(bkThird(B))}</span>` : ''}</div>` : ''}
+    </div></div>${can ? `<div class="pk-actions">${po.semis.length && !po.third ? `<button class="btn" data-bka="third"${po.semis.every(m => m.w) ? '' : ' disabled title="Primero terminá las semis"'}>🥉 Generar partido por el 3° puesto</button>` : ''}${po.third ? '<button class="btn sec" data-bka="nothird">Quitar 3° puesto</button>' : ''}<button class="btn red" data-bka="clearpo">Borrar playoffs</button>${opts.length > 1 ? `<span class="hint">En la final, cada toque al ganador cambia el resultado (${opts.join(', ')}).</span>` : ''}</div>` : ''}</div>`;
+  } else if (champ) {
+    html += `<div class="panel"><div class="bk-champ" style="width:auto"><span class="lbl">CAMPEÓN · 1° DE LA TABLA</span><span class="who">${av(champ, 'md')}${esc(champ)}</span></div></div>`;
+  }
+
+  // tabla
+  const st = bkStandings(B);
+  html += `<div class="panel"><h3>Posiciones${B.top ? ` · los ${B.top} primeros pasan a playoffs` : ''}</h3><div class="bk-tw"><table class="bk-t">
+    <thead><tr><th>#</th><th>Jugador</th><th class="n">Récord</th><th class="n">Buchholz</th></tr></thead>
+    <tbody>${st.map((p, i) => `<tr class="${i === 0 && p.w ? 'p1' : i < B.top ? 'tp' : ''}"><td>${i + 1}</td><td><span class="pl">${av(p.id, 'sm')}<span class="nm">${esc(p.id)}</span></span></td><td class="n">${p.w}-${p.l}</td><td class="n">${p.buch}</td></tr>`).join('')}</tbody></table></div>
+    <p class="note">Buchholz es la suma de las victorias de tus rivales: si empatás en récord, queda arriba el que enfrentó rivales más fuertes. Si sigue el empate, decide el cruce directo.</p></div>`;
+
+  // registro
+  if (adm && champ) {
+    if (B.registered) {
+      html += `<div class="panel"><h3>Historial de la Copa</h3><p class="hint ok" style="font-size:15px;margin:0 0 12px">✓ Esta llave ya está registrada en el historial ${B.registered.mode === 'final' ? '(como una sola partida)' : '(cada cruce como partida)'}.</p>
+        <div class="pk-actions" style="margin:0"><button class="btn sec" data-bka="unregister">Deshacer registro</button><span class="hint">Si la querés corregir, deshacé el registro, cambiá lo que haga falta y volvé a registrarla.</span></div></div>`;
+    } else {
+      const all = bkAllMatches(B), r = R();
+      const cw = all.filter(x => x.m[x.m.w] === champ).length, cp = all.filter(x => x.m.a === champ || x.m.b === champ).length;
+      html += `<div class="panel"><h3>Registrar en el historial de la Copa</h3>
+        <label class="bk-opt"><input type="radio" name="bkMode" value="cruces" checked><span><b>Cada cruce cuenta como partida</b><small>${all.length} cruces. Cada jugador suma +${r.play} por cruce jugado y +${r.win} extra por cruce ganado. Ej: ${esc(champ)} sumaría ${cp * r.play + cw * r.win} pts.</small></span></label>
+        <label class="bk-opt"><input type="radio" name="bkMode" value="final"><span><b>El torneo cuenta como una sola partida</b><small>Los ${B.players.length} jugadores suman +${r.play} y ${esc(champ)} +${r.win} extra como ganador.</small></span></label>
+        <label class="lbl2" for="bkMvp">MVP del torneo (opcional · +${r.mvp})</label>
+        <select class="field" id="bkMvp"><option value="">— Sin MVP —</option>${B.players.map(p => `<option value="${esc(p)}">${esc(p)}</option>`).join('')}</select>
+        <div class="pk-actions"><button class="btn green" data-bka="register">Registrar en el historial</button></div></div>`;
+    }
+  }
+  el.innerHTML = html;
+}
+
+/* ---------- acciones ---------- */
+$('#v-llaves').addEventListener('click', e => {
+  const chip = e.target.closest('[data-bkp]');
+  if (chip) { chip.classList.toggle('p2'); const n = document.querySelectorAll('#bkPlayers .p2').length; $('#bkCount').textContent = n; $('#bkCreate').disabled = n < 2; return; }
+  const s = e.target.closest('[data-bk]');
+  if (s && bkCan()) {
+    const B = bk(), { bk: kind, r, m, side } = s.dataset;
+    if (kind === 'swiss') bkCycle(B.swiss[+r][+m], side, ['1-0']);
+    else if (kind === 'semi') { bkCycle(B.playoffs.semis[+m], side, ['1-0']); bkSyncFinal(B); }
+    else if (kind === 'final') bkCycle(B.playoffs.final, side, BO_OPTS[B.finalBo] || BO_OPTS[5]);
+    else if (kind === 'third') bkCycle(B.playoffs.third, side, ['1-0']);
+    changed(); return;
+  }
+  const b = e.target.closest('[data-bka]'); if (!b || b.disabled || !isUnlocked()) return;
+  const act = b.dataset.bka, B = bk();
+  if (act === 'all' || act === 'none') { document.querySelectorAll('#bkPlayers .pchip').forEach(c => c.classList.toggle('p2', act === 'all')); const n = act === 'all' ? document.querySelectorAll('#bkPlayers .pchip').length : 0; $('#bkCount').textContent = n; $('#bkCreate').disabled = n < 2; return; }
+  if (act === 'pub') { $('#admPub').click(); return; }
+  if (act === 'import') { $('#bkFile').value = ''; $('#bkFile').click(); return; }
+  if (act === 'new') { if (B && !B.registered && !confirm('Si armás una llave nueva se borra la actual (no está registrada en el historial). ¿Seguir?')) return; bkNew = true; renderLlaves(); return; }
+  if (act === 'cancelnew') { bkNew = false; renderLlaves(); return; }
+  if (act === 'create') {
+    const players = [...document.querySelectorAll('#bkPlayers .p2')].map(c => c.dataset.bkp);
+    if (players.length < 2) return;
+    let top = +$('#bkTop').value; if (players.length < top) top = players.length >= 2 ? 2 : 0;
+    const game = $('#bkGame').value;
+    DATA.bracket = { id: 't' + Date.now(), name: $('#bkName').value.trim() || 'Torneo de ' + gameOf(game).name, game, date: $('#bkDate').value || today(),
+      rounds: +$('#bkRounds').value, top, finalBo: +$('#bkBo').value, players, swiss: [bkShuffle(players)], playoffs: null, registered: null };
+    bkNew = false; changed(); toast('¡Llave creada! Cruces de la ronda 1 sorteados.'); return;
+  }
+  if (!B) return;
+  if (act === 'delete') { if (confirm('¿Borrar esta llave?')) { DATA.bracket = null; changed(); } return; }
+  if (act === 'unregister') {
+    if (!confirm('¿Sacar los resultados de esta llave del historial de la Copa?')) return;
+    DATA.matches = DATA.matches.filter(m => m.tid !== B.registered.tid); B.registered = null; changed(); toast('Registro deshecho.'); return;
+  }
+  if (act === 'register') {
+    const champ = bkChamp(B); if (!champ) return;
+    const mode = (document.querySelector('input[name=bkMode]:checked') || {}).value || 'cruces', mvp = $('#bkMvp').value || null;
+    const tid = B.id + '-' + Date.now(), base = { date: B.date, game: B.game, tid, tname: B.name };
+    if (mode === 'final') DATA.matches.push({ ...base, players: [...B.players], winners: [champ], mvp, stage: 'final' });
+    else {
+      const ms = bkAllMatches(B).map(({ m, stage }) => ({ ...base, players: [m.a, m.b], winners: [m[m.w]], mvp: null, stage }));
+      if (mvp) { const lastM = [...ms].reverse().find(x => x.players.includes(mvp)); if (lastM) lastM.mvp = mvp; }
+      DATA.matches.push(...ms);
+    }
+    B.registered = { tid, mode }; changed(); toast('¡Llave registrada en el historial! Acordate de publicar.'); return;
+  }
+  if (!bkCan()) return;
+  if (act === 'reshuffle') B.swiss = [bkShuffle(B.players)];
+  else if (act === 'next') B.swiss.push(bkPairNext(B));
+  else if (act === 'undo') { if (!confirm(`¿Borrar la ronda ${B.swiss.length}?`)) return; B.swiss.pop(); }
+  else if (act === 'playoffs') {
+    const t = bkStandings(B).map(p => p.id);
+    B.playoffs = B.top === 2 ? { semis: [], final: { a: t[0], b: t[1], w: null, s: null } }
+      : { semis: [{ a: t[0], b: t[3], w: null, s: null }, { a: t[1], b: t[2], w: null, s: null }], final: { a: null, b: null, w: null, s: null } };
+  }
+  else if (act === 'clearpo') { if (!confirm('¿Borrar los playoffs?')) return; B.playoffs = null; }
+  else if (act === 'third') { B.playoffs.third = { a: null, b: null, w: null, s: null }; bkSyncFinal(B); }
+  else if (act === 'nothird') { delete B.playoffs.third; }
+  changed();
+});
+
+/* ---------- importar una llave (.json) ---------- */
+let bkImp = null;
+const normName = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
+function bkAuto(name) {
+  const n = normName(name), ps = allPlayers();
+  return ps.find(p => normName(p) === n) || ps.find(p => { const q = normName(p); return n.length >= 3 && q.length >= 3 && (q.startsWith(n) || n.startsWith(q)); }) || '';
+}
+$('#bkFile').addEventListener('change', async () => {
+  const f = $('#bkFile').files[0]; if (!f) return;
+  try {
+    const o = JSON.parse(await f.text());
+    const players = (o.players || []).map(p => typeof p === 'string' ? { id: p, name: p } : { id: p.id ?? p.name, name: p.name ?? p.id });
+    if (!players.length || !Array.isArray(o.swiss)) throw 0;
+    bkImp = { o, players };
+    $('#biName').value = o.name || ''; $('#biDate').value = o.date || today();
+    $('#biGame').innerHTML = allGames().map(([k, g]) => `<option value="${esc(k)}">${esc(g.name)}</option>`).join('');
+    $('#biGame').value = o.game && allGames().some(([k]) => k === o.game) ? o.game : (allGames().some(([k]) => k === 'BRAWLHALLA') ? 'BRAWLHALLA' : allGames()[0][0]);
+    const ps = allPlayers();
+    $('#biMap').innerHTML = players.map((p, i) => { const a = bkAuto(p.name);
+      return `<div class="bi-r"><b>${esc(p.name)}</b><span>→</span><select class="field" data-imp="${i}"><option value="__new__"${a ? '' : ' selected'}>➕ Nuevo jugador: ${esc(p.name.toLowerCase())}</option>${ps.map(n => `<option value="${esc(n)}"${n === a ? ' selected' : ''}>${esc(n)}</option>`).join('')}</select></div>`; }).join('');
+    $('#bkImp').hidden = false;
+  } catch { toast('Ese archivo no parece una llave válida.', true); }
+});
+$('#biCancel').addEventListener('click', () => { $('#bkImp').hidden = true; bkImp = null; });
+$('#biOk').addEventListener('click', () => {
+  if (!bkImp) return;
+  const { o, players } = bkImp, idMap = {}, used = new Set(), news = [];
+  for (const sel of document.querySelectorAll('#biMap select')) {
+    const p = players[+sel.dataset.imp]; let v = sel.value;
+    if (v === '__new__') { v = p.name.toLowerCase().trim(); if (!allPlayers().includes(v)) news.push(v); }
+    if (used.has(v)) return toast(`"${v}" está elegido dos veces.`, true);
+    used.add(v); idMap[p.id] = v;
+  }
+  const mm = m => m ? { a: m.a ? idMap[m.a] || null : null, b: m.b ? idMap[m.b] || null : null, w: m.w || null, s: m.s || null } : null;
+  const po = o.playoffs ? { semis: (o.playoffs.semis || []).map(mm), final: mm(o.playoffs.final) || { a: null, b: null, w: null, s: null } } : null;
+  if (po && o.playoffs.third) po.third = mm(o.playoffs.third);
+  const fs = po && po.final.s ? +String(po.final.s)[0] : 0;
+  news.forEach(n => DATA.players.push(n));
+  const game = $('#biGame').value;
+  DATA.bracket = { id: 't' + Date.now(), name: $('#biName').value.trim() || 'Torneo de ' + gameOf(game).name, game, date: $('#biDate').value || today(),
+    rounds: o.rounds || o.swiss.length, top: o.top ?? (po ? (po.semis.length ? 4 : 2) : 4), finalBo: o.finalBo || (fs >= 3 ? 5 : fs === 2 ? 3 : fs === 1 ? 1 : 5),
+    players: players.map(p => idMap[p.id]), swiss: o.swiss.map(r => r.map(mm)), playoffs: po, registered: null };
+  bkNew = false; $('#bkImp').hidden = true; bkImp = null; changed();
+  toast(news.length ? `Llave importada. Jugadores nuevos: ${news.join(', ')}.` : 'Llave importada.');
+});
 
 /* ---------- barra de arriba: transparente sobre el banner, sólida al bajar ---------- */
 const contentEl = $('.content');
