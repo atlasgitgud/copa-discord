@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794107810128,
+ "updatedAt": 1794108007229,
  "players": [
   "agus",
   "alan",
@@ -287,7 +287,14 @@ window.COPA_DATA = {
   }
  },
  "games": {},
- "bonus": [],
+ "bonus": [
+  {
+   "date": "2026-11-08",
+   "player": "mauro",
+   "pts": 17,
+   "note": "puntos bapbap"
+  }
+ ],
  "matches": [
   {
    "date": "2026-11-07",
