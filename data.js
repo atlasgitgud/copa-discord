@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794108395358,
+ "updatedAt": 1794108695399,
  "players": [
   "agus",
   "alan",
@@ -294,6 +294,72 @@ window.COPA_DATA = {
    "date": "2026-11-08",
    "player": "mauro",
    "pts": 17,
+   "note": "puntos bapbap"
+  },
+  {
+   "date": "2026-11-08",
+   "player": "dozy",
+   "pts": 12,
+   "note": "puntos bapbap"
+  },
+  {
+   "date": "2026-11-08",
+   "player": "gov",
+   "pts": 9,
+   "note": "puntos bapbap"
+  },
+  {
+   "date": "2026-11-08",
+   "player": "valenzapp",
+   "pts": 11,
+   "note": "puntos bapbap"
+  },
+  {
+   "date": "2026-11-08",
+   "player": "nico10",
+   "pts": 4,
+   "note": "puntos bapbap"
+  },
+  {
+   "date": "2026-11-08",
+   "player": "negar",
+   "pts": 4,
+   "note": "puntos bapbap"
+  },
+  {
+   "date": "2026-11-08",
+   "player": "zowi",
+   "pts": 4,
+   "note": "puntos bapbap"
+  },
+  {
+   "date": "2026-11-08",
+   "player": "lucas",
+   "pts": 3,
+   "note": "puntos bapbap"
+  },
+  {
+   "date": "2026-11-08",
+   "player": "roses",
+   "pts": 10,
+   "note": "puntos bapbap"
+  },
+  {
+   "date": "2026-11-08",
+   "player": "seko",
+   "pts": 4,
+   "note": "puntos bapbap"
+  },
+  {
+   "date": "2026-11-08",
+   "player": "paloma",
+   "pts": 7,
+   "note": "puntos bapbap"
+  },
+  {
+   "date": "2026-11-08",
+   "player": "pani",
+   "pts": 11,
    "note": "puntos bapbap"
   }
  ],
