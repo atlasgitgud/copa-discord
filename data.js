@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794110490620,
+ "updatedAt": 1794174476233,
  "players": [
   "agus",
   "alan",
@@ -829,6 +829,52 @@ window.COPA_DATA = {
     "seko": 4,
     "lucas": 3,
     "cruz": 3
+   }
+  },
+  {
+   "date": "2026-11-08",
+   "game": "MINECRAFT",
+   "players": [
+    "pani",
+    "nico10",
+    "mauro",
+    "valenzapp",
+    "gov",
+    "agus",
+    "char",
+    "zowi",
+    "alan",
+    "negar"
+   ],
+   "winners": [
+    "pani"
+   ],
+   "mvp": "nico10",
+   "kind": "lb",
+   "tname": "HAXBALL",
+   "ranking": [
+    "pani",
+    "nico10",
+    "mauro",
+    "valenzapp",
+    "gov",
+    "agus",
+    "char",
+    "zowi",
+    "alan",
+    "negar"
+   ],
+   "pts": {
+    "pani": 14,
+    "nico10": 12,
+    "mauro": 13,
+    "valenzapp": 10,
+    "gov": 9,
+    "agus": 8,
+    "char": 8,
+    "zowi": 8,
+    "alan": 7,
+    "negar": 5
    }
   }
  ]
