@@ -252,6 +252,31 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .bk-ghost{border:1px dashed var(--line);border-radius:8px;padding:12px;color:var(--mut2);font-size:13px}
 .bk-champ{width:226px;border-radius:10px;padding:16px;background:linear-gradient(160deg,rgba(240,178,50,.22),rgba(240,178,50,.04));border:1px solid rgba(240,178,50,.5);display:flex;flex-direction:column;gap:10px}
 .bk-champ .lbl{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--gold)}
+.gtabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.gtabs:empty{display:none}
+.gt{border:0;border-radius:999px;padding:8px 16px;font-weight:700;background:var(--card);color:var(--mut);cursor:pointer}
+.gt:hover{color:var(--hi);background:var(--active)}
+.gt.on{background:var(--blurple);color:#fff}
+.lb-pre{display:flex;gap:8px}
+.lb-q{margin-top:6px;font-size:12px;color:var(--mut)}
+.lb-q .lnk{font-size:12px}
+.lb-list{display:flex;flex-direction:column;gap:6px}
+.lb-r{display:flex;align-items:center;gap:10px;background:var(--deep);border-radius:8px;padding:6px 10px;border:1px solid transparent;flex-wrap:wrap}
+.lb-r.mvp{border-color:rgba(240,178,50,.6)}
+.lb-r .nm{flex:1;min-width:80px}
+.lb-r .acts{margin-left:0}
+.lb-pos{width:34px;text-align:center;font-weight:800;color:var(--hi);font-size:17px;flex:none}
+.lb-pos.p1,.lbh-n.p1{color:var(--gold)}.lb-pos.p2,.lbh-n.p2{color:var(--silver)}.lb-pos.p3,.lbh-n.p3{color:var(--bronze)}
+.lb-pts{display:flex;align-items:center;gap:4px;color:var(--mut);font-weight:700;font-size:13px}
+.lb-pts input{width:64px;background:var(--card);border:0;border-radius:4px;padding:6px 8px;color:var(--hi);font-weight:800;text-align:right;outline:none}
+.lb-pts input:focus{box-shadow:0 0 0 2px var(--blurple)}
+.lb-mvp{border:1px solid var(--line);background:none;border-radius:6px;padding:5px 9px;font-size:12px;font-weight:700;color:var(--mut);cursor:pointer}
+.lb-mvp:hover{color:var(--hi)}
+.lb-mvp.on{background:rgba(240,178,50,.18);border-color:var(--gold);color:var(--gold)}
+.lb-tag{font-size:11px;font-weight:700;background:var(--active);color:var(--mut);padding:2px 7px;border-radius:999px;vertical-align:2px;margin-left:4px}
+.lbh{display:flex;flex-direction:column;gap:4px}
+.lbh-r{display:flex;align-items:center;gap:8px}
+.lbh-n{width:28px;font-weight:800;color:var(--mut);font-size:13px}
 .bq{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 .bq-b{border:1px dashed var(--line);background:none;color:#c9cdfb;border-radius:6px;padding:4px 10px;font-size:13px;font-weight:600;cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bq-b:hover{background:rgba(88,101,242,.18);border-color:var(--blurple)}
@@ -364,7 +389,7 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
       <button class="ch on" data-view="tabla"><span class="hash">#</span>tabla</button>
       <button class="ch" data-view="historial"><span class="hash">#</span>historial</button>
       <button class="ch" data-view="pickem"><span class="hash">#</span>pickem</button>
-      <button class="ch" data-view="llaves"><span class="hash">#</span>llaves</button>
+      <button class="ch" data-view="llaves"><span class="hash">#</span>generador</button>
       <div class="cat">Organización</div>
       <button class="ch" data-view="admin"><span class="hash">#</span>admin<span class="dot" id="admDot" hidden></span></button>
     </div>
@@ -394,7 +419,7 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 
       <section class="view" id="v-historial" hidden><div id="hist"></div></section>
 
-      <section class="view" id="v-llaves" hidden><div id="bk"></div><input type="file" id="bkFile" accept=".json,application/json" hidden></section>
+      <section class="view" id="v-llaves" hidden><div class="gtabs" id="genTabs"></div><div id="bk"></div><input type="file" id="bkFile" accept=".json,application/json" hidden></section>
 
       <section class="view" id="v-pickem" hidden>
         <div class="pk">
@@ -649,18 +674,19 @@ function compute(season) {
   const inS = d => season === 'all' || yearOf(d) === season;
   const ms = DATA.matches.filter(m => inS(m.date)), bs = DATA.bonus.filter(b => inS(b.date));
   const S = new Map();
-  const get = n => { if (!S.has(n)) S.set(n, { name: n, played: 0, wins: 0, mvps: 0, pts: 0, extra: 0, won: {}, log: [] }); return S.get(n); };
+  const get = n => { if (!S.has(n)) S.set(n, { name: n, played: 0, wins: 0, mvps: 0, pts: 0, extra: 0, won: {}, log: [], lbN: 0, lbPts: 0, lbWins: 0 }); return S.get(n); };
   DATA.players.forEach(get);
   for (const m of ms) {
     const W = new Set(m.winners || []), decided = W.size > 0;
     for (const p of playersOf(m)) {
       const s = get(p), w = W.has(p), mvp = m.mvp === p;
-      let got = R().play;
+      let got = m.pts ? (Number(m.pts[p]) || 0) : R().play;
+      if (m.pts) { s.lbN++; s.lbPts += got; if (w) s.lbWins++; }
       s.played++;
-      if (w) { s.wins++; got += R().win; s.won[m.game] = (s.won[m.game] || 0) + 1; }
+      if (w) { s.wins++; if (!m.pts) got += R().win; s.won[m.game] = (s.won[m.game] || 0) + 1; }
       if (mvp) { s.mvps++; got += R().mvp; }
       s.pts += got;
-      s.log.push({ type: 'm', date: m.date, m, w, mvp, got, decided });
+      s.log.push({ type: 'm', date: m.date, m, w, mvp, got, decided, pos: m.ranking ? m.ranking.indexOf(p) + 1 : 0 });
     }
   }
   for (const b of bs) { const s = get(b.player); const n = Number(b.pts) || 0; s.pts += n; s.extra += n; s.log.push({ type: 'b', date: b.date, b, got: n }); }
@@ -724,6 +750,8 @@ function render() {
 
 const men = (p, pts, mvp) => `<button class="men" data-p="${esc(p)}">@${esc(p)}${mvp ? ` <span data-tip="+${R().mvp} por MVP">👑</span>` : ''}<small class="${pts > 0 ? '' : pts < 0 ? 'neg' : 'z'}">${sgn(pts) === '0' ? '+0' : sgn(pts)}</small></button>`;
 const R = () => ({ ...DEF_RULES, ...DATA.rules });
+// puntos que suma un jugador en una partida: tabla de puntos (pts propios) o sistema normal; + MVP
+const ptsFor = (m, p) => (m.pts ? (Number(m.pts[p]) || 0) : R().play + ((m.winners || []).includes(p) ? R().win : 0)) + (m.mvp === p ? R().mvp : 0);
 const rulesText = () => `Jugar +${R().play} · Ganar +${R().win} · MVP +${R().mvp}`;
 const logoSrc = () => DATA.look.logo || LOGO;
 const bannerSrc = () => DATA.look.banner || BANNER;
@@ -765,7 +793,7 @@ function renderHist(ms, bs) {
       const fin = g.find(m => m.stage === 'final') || g[g.length - 1], champ = (fin.winners || [])[0];
       const fp = playersOf(fin), runner = fp.length === 2 ? fp.find(p => p !== champ) : null;
       const tot = {}; let mvp = null;
-      g.forEach(m => { const W = new Set(m.winners || []); if (m.mvp) mvp = m.mvp; playersOf(m).forEach(p => { tot[p] = (tot[p] || 0) + r.play + (W.has(p) ? r.win : 0) + (m.mvp === p ? r.mvp : 0); }); });
+      g.forEach(m => { const W = new Set(m.winners || []); if (m.mvp) mvp = m.mvp; playersOf(m).forEach(p => { tot[p] = (tot[p] || 0) + ptsFor(m, p); }); });
       const rank = Object.entries(tot).sort((a, b) => b[1] - a[1] || byEs(a[0], b[0]));
       const isCur = DATA.bracket && DATA.bracket.registered && DATA.bracket.registered.tid === m0.tid;
       return `<article class="msg">${botHtml()}<div class="mb">
@@ -791,7 +819,18 @@ function renderHist(ms, bs) {
         <div class="efoot">${fmtDate(b.date)}</div></div></div></article>`;
     }
     const m = it.m, G = gameOf(m.game), W = new Set(m.winners || []), ps = playersOf(m);
-    const mm = p => men(p, R().play + (W.has(p) ? R().win : 0) + (m.mvp === p ? R().mvp : 0), m.mvp === p);
+    const mm = p => men(p, ptsFor(m, p), m.mvp === p);
+    if (m.ranking) {
+      const tot = m.ranking.reduce((s, p) => s + (Number(m.pts[p]) || 0), 0);
+      return `<article class="msg">${botHtml()}<div class="mb">
+        <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(m.date)}</time></div>
+        <div class="embed" style="--h:${gHue(m.game)}">
+          <div class="et">${gIcon(m.game, 'gi lg')} ${esc(m.tname || G.name)} <span class="lb-tag">Tabla de puntos</span></div>
+          <div class="ef"><div class="k">🏆 Leaderboard</div><div class="lbh">${m.ranking.map((p, i) => `<div class="lbh-r"><span class="lbh-n p${i + 1}">${i + 1}°</span>${mm(p)}</div>`).join('')}</div></div>
+          ${m.mvp ? `<div class="ef"><div class="k">⭐ MVP · +${R().mvp}</div><div class="v">${mm(m.mvp)}</div></div>` : ''}
+          <div class="efoot">${m.ranking.length} jugadores · ${tot} pts repartidos${m.tname ? ' · ' + esc(G.name) : ''} · ${fmtDate(m.date)}</div>
+        </div></div></article>`;
+    }
     const win = ps.filter(p => W.has(p)), rest = ps.filter(p => !W.has(p));
     const fields = win.length
       ? `<div class="ef"><div class="k">🏆 Ganadores · +${R().win} extra c/u</div><div class="v">${win.map(mm).join('')}</div></div>
@@ -827,7 +866,7 @@ function openProfile(name) {
       <div class="pcard">
         <div class="lbl">Puntos ganados</div>
         <div class="big">${s.pts} <small>pts</small></div>
-        <div class="bd">${s.played} ${pl(s.played, 'partida', 'partidas')} × ${R().play} + ${s.wins} ${pl(s.wins, 'victoria', 'victorias')} × ${R().win} + ${s.mvps} MVP × ${R().mvp}${s.extra ? ` ${s.extra > 0 ? '+' : '−'} ${Math.abs(s.extra)} extra` : ''}</div>
+        <div class="bd">${[s.played - s.lbN ? `${s.played - s.lbN} ${pl(s.played - s.lbN, 'partida', 'partidas')} × ${R().play}` : '', s.wins - s.lbWins ? `${s.wins - s.lbWins} ${pl(s.wins - s.lbWins, 'victoria', 'victorias')} × ${R().win}` : '', s.mvps ? `${s.mvps} MVP × ${R().mvp}` : '', s.lbN ? `${s.lbPts} pts de ${pl(s.lbN, 'una tabla', s.lbN + ' tablas')} de puntos` : ''].filter(Boolean).join(' + ') || 'Sin puntos todavía'}${s.extra ? ` ${s.extra > 0 ? '+' : '−'} ${Math.abs(s.extra)} extra` : ''}</div>
       </div>
       <div class="pcard">
         <div class="kpis">
@@ -847,7 +886,7 @@ function openProfile(name) {
         ${log.length ? log.map(e => {
           if (e.type === 'b') return `<div class="it"><span class="gi ge">${e.got >= 0 ? '➕' : '➖'}</span><span class="g">${esc(e.b.note || 'Puntos extra')}</span><time>${fmtDate(e.date)}</time><span class="res b">EXTRA</span><span class="p">${sgn(e.got)}</span></div>`;
           const G = gameOf(e.m.game);
-          const r = !e.decided ? '<span class="res n">—</span>' : e.w ? '<span class="res w">VICTORIA</span>' : '<span class="res l">DERROTA</span>';
+          const r = e.pos ? `<span class="res ${e.pos === 1 ? 'w' : 'n'}">${e.pos}° PUESTO</span>` : !e.decided ? '<span class="res n">—</span>' : e.w ? '<span class="res w">VICTORIA</span>' : '<span class="res l">DERROTA</span>';
           return `<div class="it">${gIcon(e.m.game)}<span class="g">${esc(G.name)}${e.mvp ? ` <span data-tip="+${R().mvp} por MVP">👑</span>` : ''}</span><time>${fmtDate(e.date)}</time>${r}<span class="p">+${e.got}</span></div>`;
         }).join('') : '<div class="hint">No jugó partidas en esta temporada.</div>'}
       </div>
@@ -883,7 +922,7 @@ const VIEWS = {
   tabla:     'Tabla de posiciones',
   historial: 'Todas las partidas registradas',
   pickem:    'Armá tu top 10 y exportalo como imagen',
-  llaves:    'Torneos con sistema suizo · cruces, playoffs y campeón',
+  llaves:    'Llaves con sistema suizo y tablas de puntos',
   admin:     'Cargá partidas, puntos y fotos, y publicá los cambios',
 };
 // ---- contraseña del modo admin (se guarda solo el hash SHA-256, no la contraseña) ----
@@ -935,7 +974,7 @@ function setView(v) {
   closeProfile();
   document.querySelectorAll('.ch').forEach(b => b.classList.toggle('on', b.dataset.view === v));
   document.querySelectorAll('.view').forEach(s => s.hidden = s.id !== 'v-' + v);
-  $('#chT').textContent = v; $('#chD').textContent = VIEWS[v];
+  $('#chT').textContent = v === 'llaves' ? 'generador' : v; $('#chD').textContent = VIEWS[v];
   if (location.hash !== '#' + v) history.replaceState(null, '', '#' + v);
   if (v === 'pickem') renderPickem();
   if (v === 'llaves') renderLlaves();
@@ -1213,7 +1252,7 @@ function renderMatchesAdmin() {
     : it.t === 'g'
     ? `<div class="ai"><span class="gi lg ge">${it.b.pts >= 0 ? '➕' : '➖'}</span><div class="g"><b>${it.list.length} jugadores ${sgn(it.b.pts)} c/u · ${fmtDate(it.d)}</b><small>${esc(it.b.note || 'Puntos extra')} · ${esc(it.list.join(', '))}</small></div><div class="bt"><button class="btn sm red" data-delg="${esc(it.b.gid)}" title="Borrar">🗑</button></div></div>`
     : it.t === 'm'
-    ? `<div class="ai">${gIcon(it.m.game, 'gi lg')}<div class="g"><b>${esc(gameOf(it.m.game).name)} · ${fmtDate(it.d)}</b><small>${it.m.winners.length ? 'Ganaron: ' + esc(it.m.winners.join(', ')) : 'Sin ganador'}${it.m.mvp ? ' · MVP: ' + esc(it.m.mvp) : ''} · ${playersOf(it.m).length} jug.</small></div><div class="bt"><button class="btn sm red" data-delm="${it.i}" title="Borrar partida">🗑</button></div></div>`
+    ? `<div class="ai">${gIcon(it.m.game, 'gi lg')}<div class="g"><b>${esc(gameOf(it.m.game).name)} · ${fmtDate(it.d)}</b><small>${it.m.ranking ? 'Tabla de puntos · 1°: ' + esc(it.m.ranking[0] || '—') : it.m.winners.length ? 'Ganaron: ' + esc(it.m.winners.join(', ')) : 'Sin ganador'}${it.m.mvp ? ' · MVP: ' + esc(it.m.mvp) : ''} · ${playersOf(it.m).length} jug.</small></div><div class="bt"><button class="btn sm red" data-delm="${it.i}" title="Borrar partida">🗑</button></div></div>`
     : `<div class="ai"><span class="gi lg ge">${it.b.pts >= 0 ? '➕' : '➖'}</span><div class="g"><b>${esc(it.b.player)} ${sgn(it.b.pts)} · ${fmtDate(it.d)}</b><small>${esc(it.b.note || 'Puntos extra')}</small></div><div class="bt"><button class="btn sm red" data-delb="${it.i}" title="Borrar">🗑</button></div></div>`
   ).join('') || '<div class="hint">Todavía no cargaste nada.</div>';
 }
@@ -1559,6 +1598,12 @@ function bkSetupHtml() {
 }
 
 function renderLlaves() {
+  const adm = isUnlocked();
+  $('#genTabs').innerHTML = adm ? `<button class="gt${genMode === 'llave' ? ' on' : ''}" data-gm="llave">🏆 Llave suiza</button><button class="gt${genMode === 'tabla' ? ' on' : ''}" data-gm="tabla">📊 Tabla de puntos</button>` : '';
+  if (adm && genMode === 'tabla') return renderLB();
+  renderBracket();
+}
+function renderBracket() {
   const el = $('#bk'), B = bk(), adm = isUnlocked(), can = bkCan();
   let html = '';
   if (adm && dirty) html += `<div class="adm-bar"><span class="st dirty">● Tenés cambios sin publicar</span><button class="btn green" data-bka="pub">Publicar</button></div>`;
@@ -1640,6 +1685,7 @@ function renderLlaves() {
 
 /* ---------- acciones ---------- */
 $('#v-llaves').addEventListener('click', e => {
+  if (genMode === 'tabla' && !e.target.closest('[data-bka="pub"]')) return;
   const chip = e.target.closest('[data-bkp]');
   if (chip) { chip.classList.toggle('p2'); const n = document.querySelectorAll('#bkPlayers .p2').length; $('#bkCount').textContent = n; $('#bkCreate').disabled = n < 2; return; }
   const s = e.target.closest('[data-bk]');
@@ -1745,6 +1791,101 @@ $('#biOk').addEventListener('click', () => {
   bkNew = false; $('#bkImp').hidden = true; bkImp = null; changed();
   toast(news.length ? `Llave importada. Jugadores nuevos: ${news.join(', ')}.` : 'Llave importada.');
 });
+
+/* =====================================================================
+   TABLA DE PUNTOS (leaderboard con puntos por puesto)
+   ===================================================================== */
+const LBK = 'copa-lb-v1';
+let LB = null;
+function lbLoad() {
+  try { LB = JSON.parse(localStorage.getItem(LBK) || 'null'); } catch { LB = null; }
+  if (!LB || !Array.isArray(LB.order)) LB = { name: '', game: 'BAPBAP', date: today(), order: [], pts: [], mvp: '', preset: '10, 8, 6, 5, 4, 3, 2, 1' };
+}
+const lbSave = () => { try { localStorage.setItem(LBK, JSON.stringify(LB)); } catch {} };
+const lbPreset = () => String(LB.preset || '').split(/[\s,;]+/).map(Number).filter(n => !isNaN(n));
+const lbPresetAt = i => { const p = lbPreset(); return p.length ? (p[i] ?? p[p.length - 1]) : 0; };
+const lbCopaPreset = () => [R().play + R().win, R().play].join(', ');
+
+function renderLB() {
+  if (!LB) lbLoad();
+  const ps = allPlayers(), inT = new Set(LB.order);
+  if (!allGames().some(([k]) => k === LB.game)) LB.game = allGames()[0][0];
+  const tot = LB.order.reduce((s, _, i) => s + (Number(LB.pts[i]) || 0), 0);
+  let html = '';
+  if (dirty) html += `<div class="adm-bar"><span class="st dirty">● Tenés cambios sin publicar</span><button class="btn green" data-bka="pub">Publicar</button></div>`;
+  html += `<div class="panel">
+    <h3>Tabla de puntos</h3>
+    <p class="note" style="margin:0 0 6px">Para juegos todos contra todos (BAPBAP, osu!, Tetris…): ordená el leaderboard, poné los puntos que se lleva cada uno y elegí el MVP. Al registrarla aparece en el historial y suma en la Copa.</p>
+    <div class="two">
+      <div><label class="lbl2" for="lbName">Nombre (opcional)</label><input class="field" id="lbName" maxlength="40" placeholder="Ej: BAPBAP del viernes" value="${esc(LB.name)}"></div>
+      <div><label class="lbl2" for="lbGame">Juego</label><select class="field" id="lbGame">${allGames().map(([k, g]) => `<option value="${esc(k)}"${k === LB.game ? ' selected' : ''}>${esc(g.name)}</option>`).join('')}</select></div>
+    </div>
+    <div class="two">
+      <div><label class="lbl2" for="lbDate">Fecha</label><input class="field" type="date" id="lbDate" value="${esc(LB.date || today())}"></div>
+      <div><label class="lbl2" for="lbPreset">Puntos por puesto (1°, 2°, 3°…)</label>
+        <div class="lb-pre"><input class="field" id="lbPreset" value="${esc(LB.preset)}" placeholder="10, 8, 6, 5, 4, 3, 2, 1"><button class="btn sec" data-lb="fill">Aplicar</button></div>
+        <div class="lb-q"><button type="button" class="lnk" data-lbp="10, 8, 6, 5, 4, 3, 2, 1">10·8·6·5·4·3·2·1</button> · <button type="button" class="lnk" data-lbp="5, 3, 2, 1">5·3·2·1</button> · <button type="button" class="lnk" data-lbp="${lbCopaPreset()}">como la Copa (1° +${R().play + R().win}, resto +${R().play})</button></div>
+      </div>
+    </div>
+    <label class="lbl2">Jugadores · tocalos en el orden en que terminaron</label>
+    <div class="pchips">${ps.map(n => `<button type="button" class="pchip${inT.has(n) ? ' p2' : ''}" data-lbadd="${esc(n)}">${av(n, 'sm')}${esc(n)}${inT.has(n) ? ` <small>${LB.order.indexOf(n) + 1}°</small>` : ''}</button>`).join('')}</div>
+  </div>`;
+  html += `<div class="panel">
+    <h3>Leaderboard${LB.order.length ? ` · ${LB.order.length} jugadores` : ''}</h3>
+    ${LB.order.length ? `<div class="lb-list">${LB.order.map((n, i) => `<div class="lb-r${LB.mvp === n ? ' mvp' : ''}">
+        <span class="lb-pos p${i + 1}">${i + 1}°</span>${av(n, 'md')}<span class="nm">${esc(n)}</span>
+        <span class="acts"><button class="ib" data-lb="up" data-i="${i}" aria-label="Subir" ${i === 0 ? 'disabled' : ''}>▲</button><button class="ib" data-lb="dn" data-i="${i}" aria-label="Bajar" ${i === LB.order.length - 1 ? 'disabled' : ''}>▼</button></span>
+        <label class="lb-pts"><span>+</span><input type="number" step="1" data-lbpts="${i}" value="${Number(LB.pts[i]) || 0}" aria-label="Puntos de ${esc(n)}"><span>pts</span></label>
+        <button type="button" class="lb-mvp${LB.mvp === n ? ' on' : ''}" data-lb="mvp" data-i="${i}" title="Marcar MVP">⭐ MVP</button>
+        <button class="ib" data-lb="rm" data-i="${i}" aria-label="Quitar">✕</button>
+      </div>`).join('')}</div>
+      <div class="prev-pts"><b>${tot}</b> pts repartidos${LB.mvp ? ` · MVP: <b>${esc(LB.mvp)}</b> (+${R().mvp} extra)` : ' · sin MVP'} · el 1° cuenta como victoria (insignia de ${esc(gameOf(LB.game).name)})</div>
+      <div class="pk-actions"><button class="btn green" data-lb="reg"${LB.order.length < 2 ? ' disabled' : ''}>Registrar en el historial</button><button class="btn sec" data-lb="clear">Limpiar</button></div>`
+    : '<div class="hint">Elegí los jugadores de arriba, empezando por el que salió 1°.</div>'}
+  </div>`;
+  $('#bk').innerHTML = html;
+}
+// eventos de la tabla de puntos
+$('#v-llaves').addEventListener('click', e => {
+  if (!isUnlocked() || genMode !== 'tabla') return;
+  const p = e.target.closest('[data-lbp]'); if (p) { LB.preset = p.dataset.lbp; lbFill(); return; }
+  const add = e.target.closest('[data-lbadd]');
+  if (add) { const n = add.dataset.lbadd, i = LB.order.indexOf(n);
+    if (i > -1) { LB.order.splice(i, 1); if (LB.mvp === n) LB.mvp = ''; }
+    else { LB.order.push(n); const k = LB.order.length - 1; if (LB.pts[k] == null) LB.pts[k] = lbPresetAt(k); }
+    lbSave(); renderLB(); return; }
+  const b = e.target.closest('[data-lb]'); if (!b || b.disabled) return;
+  const act = b.dataset.lb, i = +b.dataset.i;
+  if (act === 'fill') { LB.preset = $('#lbPreset').value; lbFill(); return; }
+  if (act === 'up' || act === 'dn') { const j = act === 'up' ? i - 1 : i + 1; [LB.order[i], LB.order[j]] = [LB.order[j], LB.order[i]]; }
+  else if (act === 'rm') { if (LB.mvp === LB.order[i]) LB.mvp = ''; LB.order.splice(i, 1); }
+  else if (act === 'mvp') LB.mvp = LB.mvp === LB.order[i] ? '' : LB.order[i];
+  else if (act === 'clear') { if (!confirm('¿Vaciar la tabla?')) return; LB.order = []; LB.pts = []; LB.mvp = ''; LB.name = ''; }
+  else if (act === 'reg') {
+    if (LB.order.length < 2) return;
+    const pts = {}; LB.order.forEach((n, k) => { pts[n] = Number(LB.pts[k]) || 0; });
+    DATA.matches.push({ date: LB.date || today(), game: LB.game, players: [...LB.order], winners: [LB.order[0]], mvp: LB.mvp || null, kind: 'lb', tname: LB.name.trim(), ranking: [...LB.order], pts });
+    const g = gameOf(LB.game).name;
+    LB.order = []; LB.pts = []; LB.mvp = ''; LB.name = ''; lbSave();
+    changed(); toast(`Tabla de ${g} registrada en el historial. Acordate de publicar.`); return;
+  }
+  lbSave(); renderLB();
+});
+function lbFill() { LB.order.forEach((_, k) => { LB.pts[k] = lbPresetAt(k); }); lbSave(); renderLB(); }
+$('#v-llaves').addEventListener('input', e => {
+  if (genMode !== 'tabla' || !LB) return;
+  const t = e.target;
+  if (t.dataset.lbpts != null) { LB.pts[+t.dataset.lbpts] = t.value === '' ? 0 : Number(t.value); lbSave();
+    const tot = LB.order.reduce((s, _, i) => s + (Number(LB.pts[i]) || 0), 0), pp = document.querySelector('#bk .prev-pts b'); if (pp) pp.textContent = tot; return; }
+  if (t.id === 'lbName') { LB.name = t.value; lbSave(); }
+  if (t.id === 'lbPreset') { LB.preset = t.value; lbSave(); }
+  if (t.id === 'lbDate') { LB.date = t.value; lbSave(); }
+});
+$('#v-llaves').addEventListener('change', e => { if (e.target.id === 'lbGame' && LB) { LB.game = e.target.value; lbSave(); renderLB(); } });
+
+// pestañas del generador
+let genMode = 'llave';
+$('#genTabs').addEventListener('click', e => { const b = e.target.closest('[data-gm]'); if (!b) return; genMode = b.dataset.gm; renderLlaves(); });
 
 /* ---------- barra de arriba: transparente sobre el banner, sólida al bajar ---------- */
 const contentEl = $('.content');
