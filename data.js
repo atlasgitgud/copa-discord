@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794109667712,
+ "updatedAt": 1794110367070,
  "players": [
   "agus",
   "alan",
@@ -857,6 +857,64 @@ window.COPA_DATA = {
    ],
    "mvp": "seko",
    "stage": "final"
+  },
+  {
+   "date": "2026-11-08",
+   "game": "BAPBAP",
+   "players": [
+    "mauro",
+    "dozy",
+    "pani",
+    "valenzapp",
+    "roses",
+    "gov",
+    "paloma",
+    "mati",
+    "nico10",
+    "negar",
+    "zowi",
+    "seko",
+    "lucas",
+    "cruz"
+   ],
+   "winners": [
+    "mauro"
+   ],
+   "mvp": "paloma",
+   "kind": "lb",
+   "tname": "BAPBAP",
+   "ranking": [
+    "mauro",
+    "dozy",
+    "pani",
+    "valenzapp",
+    "roses",
+    "gov",
+    "paloma",
+    "mati",
+    "nico10",
+    "negar",
+    "zowi",
+    "seko",
+    "lucas",
+    "cruz"
+   ],
+   "pts": {
+    "mauro": 17,
+    "dozy": 12,
+    "pani": 11,
+    "valenzapp": 11,
+    "roses": 10,
+    "gov": 9,
+    "paloma": 7,
+    "mati": 5,
+    "nico10": 4,
+    "negar": 4,
+    "zowi": 4,
+    "seko": 4,
+    "lucas": 3,
+    "cruz": 3
+   }
   }
  ]
 };
