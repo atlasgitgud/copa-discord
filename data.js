@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794175170802,
+ "updatedAt": 1794182409628,
  "players": [
   "agus",
   "alan",
@@ -875,6 +875,58 @@ window.COPA_DATA = {
     "zowi": 8,
     "alan": 7,
     "negar": 5
+   }
+  },
+  {
+   "date": "2026-11-08",
+   "game": "TFT",
+   "players": [
+    "agus",
+    "dozy",
+    "valenzapp",
+    "zowi",
+    "mati",
+    "negar",
+    "seko",
+    "alan",
+    "mauro",
+    "roses",
+    "nico10",
+    "char"
+   ],
+   "winners": [
+    "agus"
+   ],
+   "mvp": "agus",
+   "kind": "lb",
+   "tname": "TFT",
+   "ranking": [
+    "agus",
+    "dozy",
+    "valenzapp",
+    "zowi",
+    "mati",
+    "negar",
+    "seko",
+    "alan",
+    "mauro",
+    "roses",
+    "nico10",
+    "char"
+   ],
+   "pts": {
+    "agus": 19,
+    "dozy": 18,
+    "valenzapp": 16,
+    "zowi": 13,
+    "mati": 13,
+    "negar": 11,
+    "seko": 9,
+    "alan": 8,
+    "mauro": 7,
+    "roses": 4,
+    "nico10": 4,
+    "char": 2
    }
   }
  ]
