@@ -113,7 +113,7 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .gb{display:inline-flex;align-items:center;gap:3px;height:28px;min-width:28px;padding:0 5px;border-radius:6px;background:var(--deep);border:1px solid var(--line);font-size:14px;cursor:help}
 .gb i{font-style:normal;font-size:11px;font-weight:700;color:var(--mut)}
 .gi{width:18px;height:18px;object-fit:contain;display:block;flex:none}
-.gi.ge{font-size:14px;line-height:18px;text-align:center}
+.gi.ge{display:inline-grid;place-items:center;color:var(--mut)}.gi.ge .mi{width:100%;height:100%}
 .gi.lg{width:22px;height:22px;display:inline-block;vertical-align:-5px;margin-right:4px}
 .pts{text-align:right;font-weight:700;color:var(--mut);font-size:13px;white-space:nowrap}
 .pts b{color:var(--hi);font-size:17px}
@@ -159,7 +159,7 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .slot.over{border-color:var(--blurple);background:rgba(88,101,242,.14)}
 .slot .n{width:26px;text-align:center;font-weight:800;color:var(--hi);flex:none}
 .slot:nth-child(1) .n{color:var(--gold)}.slot:nth-child(2) .n{color:var(--silver)}.slot:nth-child(3) .n{color:var(--bronze)}
-.grip{color:var(--mut2);width:12px;font-size:12px;letter-spacing:-2px;flex:none}
+.grip{color:var(--mut2);width:16px;flex:none;display:grid;place-items:center}.grip .mi{width:18px;height:18px}
 .acts{margin-left:auto;display:flex;gap:2px;flex:none}
 .ib{width:28px;height:28px;border:0;border-radius:4px;background:none;color:var(--mut);cursor:pointer;font-size:12px}
 .ib:hover:not([disabled]){background:var(--active);color:var(--hi)}
@@ -297,11 +297,40 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .mini-ico{border:0;background:none;color:var(--mut2);width:26px;height:26px;border-radius:5px;display:grid;place-items:center;cursor:pointer;opacity:.55;transition:opacity .15s,background .15s}
 .mini-ico:hover{opacity:1;background:var(--active);color:var(--hi)}
 .mini-ico:disabled{cursor:progress;opacity:.3}
+.mi{width:1.2em;height:1.2em;display:inline-block;vertical-align:-.25em;flex:none}
+.mi.gold{color:var(--gold)}.mi.silver{color:var(--silver)}.mi.bronze{color:var(--bronze)}.mi.red{color:#f57376}.mi.green{color:#57f287}.mi.blue{color:#949cf7}
+.k .mi,.et .mi{margin-right:2px}
+.btn .mi,.gt .mi{margin-right:4px;vertical-align:-.28em}
+.ib .mi{width:18px;height:18px;vertical-align:middle}
+.embed.pen{background:linear-gradient(90deg,rgba(242,63,67,.08),var(--card) 60%)}
+.pen-card{box-shadow:inset 3px 0 0 var(--red)}
+.pen-panel h3{color:#f57376}
+.pen-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px rgba(242,63,67,.2);cursor:help;flex:none;margin-left:2px}
 .hb.ic{width:28px;height:26px;padding:0;display:inline-grid;place-items:center}
 .hb.ic svg{pointer-events:none}
 .hb.dz:hover{color:#f57376;border-color:rgba(242,63,67,.6)}
 .hb.lk:hover{color:#c9cdfb}
 .tm-size{display:flex;align-items:center;gap:10px}
+.tm-fmt{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.tm-bo{display:flex;gap:6px}
+.tm-bo .gt{padding:6px 14px}
+.tm-sw{width:58px;flex:none;display:grid;place-items:center;font-size:22px;font-weight:900;color:var(--hi);background:var(--deep);border-radius:4px}
+.tm-ser{text-align:center;padding:10px;border-radius:4px;background:var(--deep);color:var(--mut);font-weight:700}
+.tm-ser.on{background:var(--green);color:#fff}
+.mp-list{display:flex;flex-direction:column;gap:6px}
+.mp-r{display:grid;grid-template-columns:26px minmax(0,1.2fr) minmax(0,1fr) 58px 10px 58px minmax(0,1fr);gap:8px;align-items:center}
+.mp-r.off{opacity:.35}
+.mp-n{font-weight:800;color:var(--mut);text-align:center}
+.mp-sc{text-align:center;font-weight:800;padding:8px 4px}
+.mp-x{color:var(--mut);font-weight:800;text-align:center}
+.mp-t{border:1px solid var(--line);background:var(--deep);color:var(--mut);border-radius:6px;padding:8px;font-weight:700;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mp-t:hover{color:var(--hi)}
+.mp-t.w{background:rgba(35,165,90,.22);border-color:var(--green);color:#57f287}
+.mp-h{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.mp-c{display:inline-flex;gap:6px;align-items:center;background:rgba(0,0,0,.2);border-radius:4px;padding:3px 8px;font-size:12px;color:var(--mut)}
+.mp-c b{color:var(--hi)}
+.mp-c i{font-style:normal;color:#57f287;font-weight:700}
+@media (max-width:700px){.mp-r{grid-template-columns:22px minmax(0,1fr) 10px minmax(0,1fr);row-gap:6px;margin-bottom:6px}.mp-r .mp-name{grid-column:2/-1}.mp-r .mp-t{display:none}.mp-r .mp-n{grid-row:span 2}}
 .tm-size b{font-size:22px;font-weight:800;color:var(--hi);min-width:64px;text-align:center}
 .ib.big{width:36px;height:36px;font-size:20px;background:var(--deep)}
 .tm-grid{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:stretch;margin-bottom:16px}
@@ -317,6 +346,11 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .tm-s{display:flex;align-items:center;gap:8px;background:var(--deep);border-radius:8px;padding:6px 8px;border:1px solid transparent}
 .tm-s.mvp{border-color:rgba(240,178,50,.6)}
 .tm-s.empty{background:none;border:1px dashed var(--line);color:var(--mut2)}
+.tm-pos{width:28px;text-align:center;font-weight:800;color:var(--hi);flex:none}
+.tm-pos.p1{color:var(--gold)}.tm-pos.p2{color:var(--silver)}.tm-pos.p3{color:var(--bronze)}
+.tm-s .lb-pts input{width:56px}
+.tm-s .acts{display:flex;gap:0}
+.tm-s .acts .ib{width:24px}
 .tm-s .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tm-win{width:100%}
 .tm-pp b{color:var(--hi)}
@@ -551,6 +585,19 @@ article.msg.hl{background:rgba(88,101,242,.16)}
             <p class="note">Elegí uno o varios jugadores (o un grupo de arriba) y los puntos se aplican a cada uno. Usá un número negativo para restar.</p>
           </div>
 
+          <div class="panel pen-panel">
+            <h3>Penalizar</h3>
+            <div class="two">
+              <div><label class="lbl2" for="pPlayer">Jugador</label><select class="field" id="pPlayer"></select></div>
+              <div><label class="lbl2" for="pPts">Puntos a descontar</label><input class="field" type="number" id="pPts" value="1" min="1" step="1"></div>
+            </div>
+            <label class="lbl2" for="pReason">Razón</label>
+            <input class="field" type="text" id="pReason" maxlength="80" placeholder="Ej: abandonó la partida">
+            <label class="lbl2" for="pDate">Fecha</label><input class="field" type="date" id="pDate">
+            <div class="pk-actions"><button class="btn red" id="pAddPen">Aplicar penalización</button></div>
+            <p class="note">El jugador pierde esos puntos y en la tabla aparece un puntito rojo al lado de su nombre: al pasar el mouse se ve la razón.</p>
+          </div>
+
           <div class="panel">
             <h3>Jugadores y fotos</h3>
             <div class="alist" id="aPlayers"></div>
@@ -712,7 +759,7 @@ const gameOf = k => ({ ...(GAMES[k] || { short: k, name: k, icon: '🎮' }), ...
 const allGames = () => [...new Set([...Object.keys(GAMES), ...Object.keys(DATA.games)])].map(k => [k, gameOf(k)]).sort((a, b) => byEs(a[1].name, b[1].name));
 const gHue = k => gameOf(k).hue != null ? gameOf(k).hue : hueOf(k);
 // si el logo no carga (archivo faltante), muestra el emoji del juego en su lugar
-const gIcon = (k, cls = 'gi') => { const g = gameOf(k); return g.logo ? `<img class="${cls}" src="${esc(g.logo)}" alt="" data-emo="${esc(g.icon || '🎮')}" onerror="const s=document.createElement('span');s.className=this.className+' ge';s.textContent=this.dataset.emo;this.replaceWith(s)">` : `<span class="${cls} ge">${g.icon || '🎮'}</span>`; };
+const gIcon = (k, cls = 'gi') => { const g = gameOf(k); return g.logo ? `<img class="${cls}" src="${esc(g.logo)}" alt="" onerror="this.outerHTML=PAD_ICON">` : `<span class="${cls} ge">${ic('pad')}</span>`; };
 const yearOf = d => String(d).slice(0, 4);
 const fmtDate = d => new Date(d + 'T12:00:00').toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' });
 const today = () => { const d = new Date(); return new Date(d - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); };
@@ -751,6 +798,12 @@ try {
 
 const avatarOf = n => DATA.avatars[n] || null;
 const av = (n, cls = '') => `<span class="av ${cls}" style="--h:${hueOf(n)}">${avatarOf(n) ? `<img src="${esc(avatarOf(n))}" alt="" loading="lazy">` : esc(ini(n))}</span>`;
+// íconos Material Symbols (rounded) · ic('trophy') → <svg>
+const MI = {"trophy": "M7 10.8V7H5v1q0 .95.55 1.713T7 10.8m10 0q.9-.325 1.45-1.088T19 8V7h-2zM11 19v-3.1q-1.225-.275-2.187-1.037T7.4 12.95q-1.875-.225-3.137-1.637T3 8V7q0-.825.588-1.412T5 5h2q0-.825.588-1.412T9 3h6q.825 0 1.413.588T17 5h2q.825 0 1.413.588T21 7v1q0 1.9-1.263 3.313T16.6 12.95q-.45 1.15-1.412 1.913T13 15.9V19h3q.425 0 .713.288T17 20t-.288.713T16 21H8q-.425 0-.712-.288T7 20t.288-.712T8 19z", "star": "m12 17.275l-4.15 2.5q-.275.175-.575.15t-.525-.2t-.35-.437t-.05-.588l1.1-4.725L3.775 10.8q-.25-.225-.312-.513t.037-.562t.3-.45t.55-.225l4.85-.425l1.875-4.45q.125-.3.388-.45t.537-.15t.537.15t.388.45l1.875 4.45l4.85.425q.35.05.55.225t.3.45t.038.563t-.313.512l-3.675 3.175l1.1 4.725q.075.325-.05.588t-.35.437t-.525.2t-.575-.15z", "medal": "m12 19.65l-1.85 1.4q-.3.225-.6.013t-.175-.563l.725-2.3l-1.825-1.3q-.3-.2-.175-.55t.475-.35H10.8l.7-2.3l-3.55-2.1q-.45-.275-.7-.725T7 9.85V4q0-.825.588-1.412T9 2h6q.825 0 1.413.588T17 4v5.85q0 .575-.25 1.025t-.7.725l-3.55 2.1l.7 2.3h2.225q.35 0 .475.35t-.175.55L13.9 18.2l.725 2.3q.125.35-.175.563t-.6-.013zM11 4v7.05l1 .6l1-.6V4z", "plus": "M11 13v3q0 .425.288.713T12 17t.713-.288T13 16v-3h3q.425 0 .713-.288T17 12t-.288-.712T16 11h-3V8q0-.425-.288-.712T12 7t-.712.288T11 8v3H8q-.425 0-.712.288T7 12t.288.713T8 13zm1 9q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22", "minus": "M8 13h8q.425 0 .713-.288T17 12t-.288-.712T16 11H8q-.425 0-.712.288T7 12t.288.713T8 13m4 9q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22", "pad": "M4.55 19q-1.275 0-1.975-.888T2.05 15.95l1.05-7.5q.225-1.5 1.338-2.475T7.05 5h9.9q1.5 0 2.613.975T20.9 8.45l1.05 7.5q.175 1.275-.525 2.163T19.45 19q-.525 0-.975-.187t-.825-.563L15.4 16H8.6l-2.25 2.25q-.375.375-.825.563T4.55 19m13.163-6.288Q18 12.425 18 12t-.288-.712T17 11t-.712.288T16 12t.288.713T17 13t.713-.288m-2-3Q16 9.426 16 9t-.288-.712T15 8t-.712.288T14 9t.288.713T15 10t.713-.288M7.75 11.25v1q0 .325.213.538T8.5 13t.538-.213t.212-.537v-1h1q.325 0 .538-.213T11 10.5t-.213-.537t-.537-.213h-1v-1q0-.325-.213-.537T8.5 8t-.537.213t-.213.537v1h-1q-.325 0-.537.213T6 10.5t.213.538t.537.212z", "check": "m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z", "close": "m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275t.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275z", "del": "M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-6.287 10.713Q11 16.425 11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17t.713-.288m4 0Q15 16.426 15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17t.713-.288M7 6v13z", "dice": "M8.563 17.563Q9 17.125 9 16.5t-.437-1.062T7.5 15t-1.062.438T6 16.5t.438 1.063T7.5 18t1.063-.437m0-9Q9 8.124 9 7.5t-.437-1.062T7.5 6t-1.062.438T6 7.5t.438 1.063T7.5 9t1.063-.437m4.5 4.5q.437-.438.437-1.063t-.437-1.062T12 10.5t-1.062.438T10.5 12t.438 1.063T12 13.5t1.063-.437m4.5 4.5Q18 17.125 18 16.5t-.437-1.062T16.5 15t-1.062.438T15 16.5t.438 1.063T16.5 18t1.063-.437m0-9Q18 8.124 18 7.5t-.437-1.062T16.5 6t-1.062.438T15 7.5t.438 1.063T16.5 9t1.063-.437M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21z", "hand": "M12.1 21q-.425 0-.712-.288T11.1 20q0-.175.075-.363t.225-.337l4.275-4.275q.15-.15.15-.363t-.15-.362t-.363-.138t-.362.163l-4.25 4.25q-.15.15-.325.225t-.375.075q-.425 0-.712-.288T9 17.876q0-.25.075-.413t.2-.287L13.55 12.9q.15-.15.15-.35t-.15-.35t-.35-.15t-.35.15l-4.275 4.25q-.15.15-.325.225t-.4.075q-.4 0-.7-.3t-.3-.7q0-.2.075-.375t.225-.325l4.25-4.25q.15-.15.15-.363t-.15-.362t-.35-.15t-.35.15L6.45 14.35q-.125.125-.3.2t-.425.075q-.425 0-.712-.288t-.288-.712q0-.2.075-.375t.225-.325l4.9-4.9q.275-.275.688-.25t.687.3l3.05 3.05q.275.275.65.438t.75.162q.8 0 1.4-.562t.6-1.438q0-.35-.125-.725t-.45-.7L13.75 4.875q-.275-.275-.363-.6t.088-.625q.225-.375.575-.55t.775-.175q.525 0 1.075.25t1 .7l4.225 4.25q.45.45.663 1T22 10.4q0 .5-.225 1.013t-.65.937L12.8 20.7q-.2.2-.35.25t-.35.05m-9.2-8.875q-.475-.35-.712-.837T1.95 10.25q0-.575.238-1.125t.687-1L7.1 3.875q.425-.425.938-.65T9.125 3q.625 0 1.213.225t1.012.65L16.475 9q.125.125.213.313t.087.387q0 .425-.287.713t-.713.287q-.2 0-.387-.087t-.313-.213L12 7.35q-.575-.575-1.412-.575t-1.413.575l-4.7 4.7q-.325.325-.762.338t-.813-.263", "warn": "M2.725 21q-.275 0-.5-.137t-.35-.363t-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3t.488.125t.387.375l9.25 16q.15.25.138.513t-.138.487t-.35.363t-.5.137zm9.988-3.287Q13 17.425 13 17t-.288-.712T12 16t-.712.288T11 17t.288.713T12 18t.713-.288m0-3Q13 14.425 13 14v-3q0-.425-.288-.712T12 10t-.712.288T11 11v3q0 .425.288.713T12 15t.713-.288", "edit": "M4 21q-.425 0-.712-.288T3 20v-2.425q0-.4.15-.763t.425-.637L16.2 3.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425 5q.3.275.437.65T21 6.4q0 .4-.138.763t-.437.662l-12.6 12.6q-.275.275-.638.425t-.762.15zM17.6 7.8L19 6.4L17.6 5l-1.4 1.4z", "hour": "M8 20h8v-3q0-1.65-1.175-2.825T12 13t-2.825 1.175T8 17zm-3 2q-.425 0-.712-.288T4 21t.288-.712T5 20h1v-3q0-1.525.713-2.863T8.7 12q-1.275-.8-1.987-2.137T6 7V4H5q-.425 0-.712-.288T4 3t.288-.712T5 2h14q.425 0 .713.288T20 3t-.288.713T19 4h-1v3q0 1.525-.712 2.863T15.3 12q1.275.8 1.988 2.138T18 17v3h1q.425 0 .713.288T20 21t-.288.713T19 22z", "ok": "m10.6 13.8l-2.15-2.15q-.275-.275-.7-.275t-.7.275t-.275.7t.275.7L9.9 15.9q.3.3.7.3t.7-.3l5.65-5.65q.275-.275.275-.7t-.275-.7t-.7-.275t-.7.275zM12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22", "link": "M7 17q-2.075 0-3.537-1.463T2 12t1.463-3.537T7 7h3q.425 0 .713.288T11 8t-.288.713T10 9H7q-1.25 0-2.125.875T4 12t.875 2.125T7 15h3q.425 0 .713.288T11 16t-.288.713T10 17zm2-4q-.425 0-.712-.288T8 12t.288-.712T9 11h6q.425 0 .713.288T16 12t-.288.713T15 13zm5 4q-.425 0-.712-.288T13 16t.288-.712T14 15h3q1.25 0 2.125-.875T20 12t-.875-2.125T17 9h-3q-.425 0-.712-.288T13 8t.288-.712T14 7h3q2.075 0 3.538 1.463T22 12t-1.463 3.538T17 17z", "drag": "M9 20q-.825 0-1.412-.587T7 18t.588-1.412T9 16t1.413.588T11 18t-.587 1.413T9 20m6 0q-.825 0-1.412-.587T13 18t.588-1.412T15 16t1.413.588T17 18t-.587 1.413T15 20m-6-6q-.825 0-1.412-.587T7 12t.588-1.412T9 10t1.413.588T11 12t-.587 1.413T9 14m6 0q-.825 0-1.412-.587T13 12t.588-1.412T15 10t1.413.588T17 12t-.587 1.413T15 14M9 8q-.825 0-1.412-.587T7 6t.588-1.412T9 4t1.413.588T11 6t-.587 1.413T9 8m6 0q-.825 0-1.412-.587T13 6t.588-1.412T15 4t1.413.588T17 6t-.587 1.413T15 8", "up": "m12 10.8l-3.9 3.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.6-4.6q.3-.3.7-.3t.7.3l4.6 4.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275z", "down": "M11.625 14.913q-.175-.063-.325-.213l-4.6-4.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l3.9 3.9l3.9-3.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-4.6 4.6q-.15.15-.325.213t-.375.062t-.375-.062", "swap": "M5.825 16L7.7 17.875q.275.275.275.688t-.275.712q-.3.3-.712.3t-.713-.3L2.7 15.7q-.15-.15-.213-.325T2.426 15t.063-.375t.212-.325l3.6-3.6q.3-.3.7-.287t.7.312q.275.3.288.7t-.288.7L5.825 14H12q.425 0 .713.288T13 15t-.288.713T12 16zm12.35-6H12q-.425 0-.712-.288T11 9t.288-.712T12 8h6.175L16.3 6.125q-.275-.275-.275-.687t.275-.713q.3-.3.713-.3t.712.3L21.3 8.3q.15.15.212.325t.063.375t-.063.375t-.212.325l-3.6 3.6q-.3.3-.7.288t-.7-.313q-.275-.3-.288-.7t.288-.7z", "reset": "M9.825 20.7q-2.575-.725-4.2-2.837T4 13q0-1.425.475-2.713t1.35-2.362q.275-.3.675-.313t.725.313q.275.275.288.675t-.263.75q-.6.775-.925 1.7T6 13q0 2.025 1.188 3.613t3.062 2.162q.325.1.538.375t.212.6q0 .5-.35.788t-.825.162m4.35 0q-.475.125-.825-.175t-.35-.8q0-.3.213-.575t.537-.375q1.875-.6 3.063-2.175T18 13q0-2.5-1.75-4.25T12 7h-.075l.4.4q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-2.1-2.1q-.15-.15-.212-.325T8.55 6t.063-.375t.212-.325l2.1-2.1q.275-.275.7-.275t.7.275t.275.7t-.275.7l-.4.4H12q3.35 0 5.675 2.325T20 13q0 2.725-1.625 4.85t-4.2 2.85", "board": "M3 21q-.425 0-.712-.288T2 20V10q0-.425.288-.712T3 9h3.5q.425 0 .713.288T7.5 10v10q0 .425-.288.713T6.5 21zm7.25 0q-.425 0-.712-.288T9.25 20V4q0-.425.288-.712T10.25 3h3.5q.425 0 .713.288T14.75 4v16q0 .425-.288.713T13.75 21zm7.25 0q-.425 0-.712-.288T16.5 20v-8q0-.425.288-.712T17.5 11H21q.425 0 .713.288T22 12v8q0 .425-.288.713T21 21z", "swords": "m19.05 21.6l-2.925-2.9l-1.5 1.5q-.275.275-.7.275t-.7-.275q-.575-.575-.575-1.425t.575-1.425l4.225-4.225q.575-.575 1.425-.575t1.425.575q.275.275.275.7t-.275.7l-1.5 1.5l2.9 2.925q.3.3.3.7t-.3.7l-1.25 1.25q-.3.3-.7.3t-.7-.3M21.7 6.2L10.65 17.25l.125.1q.575.575.575 1.425t-.575 1.425q-.275.275-.7.275t-.7-.275l-1.5-1.5l-2.925 2.9q-.3.3-.7.3t-.7-.3L2.3 20.35q-.3-.3-.3-.7t.3-.7l2.9-2.925l-1.5-1.5q-.275-.275-.275-.7t.275-.7q.575-.575 1.425-.575t1.425.575l.1.125L17.425 2.475q.275-.275.638-.425t.762-.15H21q.425 0 .713.288T22 2.9v2.575q0 .2-.075.388T21.7 6.2M6.225 10.125l-3.65-3.65Q2.3 6.2 2.15 5.838T2 5.075V2.9q0-.425.288-.712T3 1.9h2.175q.4 0 .763.15t.637.425l3.65 3.65q.3.3.3.713t-.3.712L7.65 10.125q-.3.3-.712.3t-.713-.3", "img": "M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21zm0-2h14V5H5zm0 0V5zm2-2h10q.3 0 .45-.275t-.05-.525l-2.75-3.675q-.15-.2-.4-.2t-.4.2L11.25 16L9.4 13.525q-.15-.2-.4-.2t-.4.2l-2 2.675q-.2.25-.05.525T7 17", "move": "M11 18.15V15q0-.425.288-.712T12 14t.713.288T13 15v3.125l1.075-1.1q.3-.3.725-.3t.725.3t.3.725t-.3.725L12.7 21.3q-.15.15-.325.213t-.375.062t-.375-.062t-.325-.213l-2.85-2.85q-.3-.3-.287-.712t.312-.713t.713-.3t.712.3zM5.875 13l1.1 1.075q.3.3.3.725t-.3.725t-.725.3t-.725-.3L2.7 12.7q-.15-.15-.213-.325T2.426 12t.063-.375t.212-.325l2.825-2.825q.3-.3.713-.3t.712.3t.3.713t-.3.712L5.85 11H9q.425 0 .713.288T10 12t-.288.713T9 13zm12.275 0H15q-.425 0-.712-.288T14 12t.288-.712T15 11h3.125l-1.1-1.075q-.3-.3-.3-.725t.3-.725t.725-.3t.725.3L21.3 11.3q.15.15.213.325t.062.375t-.062.375t-.213.325l-2.85 2.85q-.3.3-.7.288t-.7-.313t-.3-.712t.3-.713zM11 5.85L9.875 6.975q-.3.3-.7.3t-.7-.3t-.3-.712t.3-.713L11.3 2.7q.15-.15.325-.213T12 2.426t.375.063t.325.212l2.85 2.85q.3.3.3.7t-.3.7t-.713.3t-.712-.3L13 5.85V9q0 .425-.288.713T12 10t-.712-.288T11 9z", "arrow": "M16.175 13H5q-.425 0-.712-.288T4 12t.288-.712T5 11h11.175l-4.9-4.9q-.3-.3-.288-.7t.313-.7q.3-.275.7-.288t.7.288l6.6 6.6q.15.15.213.325t.062.375t-.062.375t-.213.325l-6.6 6.6q-.275.275-.687.275T11.3 19.3q-.3-.3-.3-.712t.3-.713z", "image": "M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21zm2-4h10q.3 0 .45-.275t-.05-.525l-2.75-3.675q-.15-.2-.4-.2t-.4.2L11.25 16L9.4 13.525q-.15-.2-.4-.2t-.4.2l-2 2.675q-.2.25-.05.525T7 17", "padd": "M18 11h-2q-.425 0-.712-.288T15 10t.288-.712T16 9h2V7q0-.425.288-.712T19 6t.713.288T20 7v2h2q.425 0 .713.288T23 10t-.288.713T22 11h-2v2q0 .425-.288.713T19 14t-.712-.288T18 13zm-11.825-.175Q5 9.65 5 8t1.175-2.825T9 4t2.825 1.175T13 8t-1.175 2.825T9 12t-2.825-1.175M1 18v-.8q0-.85.438-1.562T2.6 14.55q1.55-.775 3.15-1.162T9 13t3.25.388t3.15 1.162q.725.375 1.163 1.088T17 17.2v.8q0 .825-.587 1.413T15 20H3q-.825 0-1.412-.587T1 18", "tree": "M15 19v-1h-2q-.825 0-1.412-.587T11 16V8H9v1q0 .825-.587 1.413T7 11H4q-.825 0-1.412-.587T2 9V5q0-.825.588-1.412T4 3h3q.825 0 1.413.588T9 5v1h6V5q0-.825.588-1.412T17 3h3q.825 0 1.413.588T22 5v4q0 .825-.587 1.413T20 11h-3q-.825 0-1.412-.587T15 9V8h-2v8h2v-1q0-.825.588-1.412T17 13h3q.825 0 1.413.588T22 15v4q0 .825-.587 1.413T20 21h-3q-.825 0-1.412-.587T15 19", "groups": "M1 18q-.425 0-.712-.288T0 17v-.575q0-1.075 1.1-1.75T4 14q.325 0 .625.013t.575.062q-.35.525-.525 1.1t-.175 1.2V18zm6 0q-.425 0-.712-.288T6 17v-.625q0-.8.438-1.463t1.237-1.162T9.588 13T12 12.75q1.325 0 2.438.25t1.912.75t1.225 1.163t.425 1.462V17q0 .425-.287.713T17 18zm12.5 0v-1.625q0-.65-.162-1.225t-.488-1.075q.275-.05.563-.062T20 14q1.8 0 2.9.663t1.1 1.762V17q0 .425-.288.713T23 18zM4 13q-.825 0-1.412-.587T2 11q0-.85.588-1.425T4 9q.85 0 1.425.575T6 11q0 .825-.575 1.413T4 13m16 0q-.825 0-1.412-.587T18 11q0-.85.588-1.425T20 9q.85 0 1.425.575T22 11q0 .825-.575 1.413T20 13m-8-1q-1.25 0-2.125-.875T9 9q0-1.275.875-2.137T12 6q1.275 0 2.138.863T15 9q0 1.25-.862 2.125T12 12", "info": "M12.713 16.713Q13 16.425 13 16v-4q0-.425-.288-.712T12 11t-.712.288T11 12v4q0 .425.288.713T12 17t.713-.288m0-8Q13 8.425 13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9t.713-.288M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22"};
+window.PAD_ICON = '<span class="gi ge"><svg class="mi" viewBox="0 0 24 24"><path fill="currentColor" d="' + MI.pad + '"/></svg></span>';
+const ic = (n, cls = '') => `<svg class="mi${cls ? ' ' + cls : ''}" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="${MI[n]}"/></svg>`;
+// dibuja un ícono en un canvas (para las imágenes que se exportan)
+function drawIco(c, n, x, y, s, color) { c.save(); c.translate(x, y); c.scale(s / 24, s / 24); c.fillStyle = color; c.fill(new Path2D(MI[n])); c.restore(); }
 const isMvp = (m, p) => m.mvp === p || (m.mvps || []).includes(p);
 const playersOf = m => [...new Set([...(m.players || []), ...(m.winners || []), ...(m.mvp ? [m.mvp] : [])])];
 const mvpTip = k => k === 1 ? `+${R().mvp} por MVP` : `+${k * R().mvp} por MVP (${k} veces)`;
@@ -779,7 +832,7 @@ function compute(season) {
       s.log.push({ type: 'm', date: m.date, m, w, mvp, got, decided, pos: m.ranking ? m.ranking.indexOf(p) + 1 : 0 });
     }
   }
-  for (const b of bs) { const s = get(b.player); const n = Number(b.pts) || 0; s.pts += n; s.extra += n; s.log.push({ type: 'b', date: b.date, b, got: n }); }
+  for (const b of bs) { const s = get(b.player); const n = Number(b.pts) || 0; s.pts += n; s.extra += n; s.log.push({ type: 'b', date: b.date, b, got: n }); if (b.pen) (s.pens = s.pens || []).push(b); }
   const list = [...S.values()].sort((a, b) => b.pts - a.pts || b.wins - a.wins || b.mvps - a.mvps || byEs(a.name, b.name));
   let rank = 0;
   list.forEach((s, i) => { if (i === 0 || s.pts !== list[i - 1].pts) rank = i + 1; s.rank = rank; });
@@ -822,7 +875,7 @@ function render() {
     const rc = s.pts > 0 && s.rank <= 3 ? ` r${s.rank}` : '';
     return `<div class="grid row${rc ? ' t' + s.rank : ''}" role="button" tabindex="0" data-p="${esc(s.name)}" aria-label="Ver perfil de ${esc(s.name)}">
       <span class="rk${rc}">${s.rank}${crown(s)}</span>
-      <span class="pl">${isTop(s) ? `<span class="avw">${av(s.name)}<span class="tc">👑</span></span>` : av(s.name)}<span class="nm">${esc(s.name)}</span></span>
+      <span class="pl">${isTop(s) ? `<span class="avw">${av(s.name)}<span class="tc">👑</span></span>` : av(s.name)}<span class="nm">${esc(s.name)}</span>${s.pens ? `<span class="pen-dot" data-tip="${esc(s.pens.map(b => `${b.pts} pts · ${b.note || 'Penalización'}`).join('  |  '))}"></span>` : ''}</span>
       <span class="num c-pj">${s.played}</span>
       <span class="num c-v">${s.wins}</span>
       <span class="gbs">${badges(s)}</span>
@@ -902,7 +955,7 @@ const hClose = k => {
   const ed = hEdit && hEdit.k === k;
   return `</div></div><div class="eimg${ed ? ' editing' : ''}" data-ik="${esc(k)}"><img src="${esc(o.src)}" alt="" draggable="false" style="${hImgStyle(o)}">${ed ? `
     <div class="eimg-hint">Arrastrá para mover</div>
-    <div class="eimg-bar"><input type="range" min="1" max="3" step="0.01" value="${o.z}" data-hzoom aria-label="Zoom"><button class="hb ok" data-hdone>✓ Listo</button><button class="hb" data-hcancel>✕</button></div>` : ''}</div></div></div></article>`;
+    <div class="eimg-bar"><input type="range" min="1" max="3" step="0.01" value="${o.z}" data-hzoom aria-label="Zoom"><button class="hb ok" data-hdone>${ic('check')} Listo</button><button class="hb ic" data-hcancel aria-label="Cancelar">${ic('close')}</button></div>` : ''}</div></div></div></article>`;
 };
 function renderHist(ms, bs) {
   const tg = {}, loose = [];
@@ -924,12 +977,12 @@ function renderHist(ms, bs) {
         <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(m0.date)}</time>${hTools(m0.tid, isCur ? '#t' : '')}</div>
         ${hOpen(m0.tid)} style="--h:${gHue(m0.game)}"><div class="eb">
           <div class="et">${gIcon(m0.game, 'gi lg')} ${esc(m0.tname || 'Torneo de ' + G.name)}</div>
-          ${champ ? `<div class="ef"><div class="k">🏆 Campeón</div><div class="v">${men(champ, tot[champ], mvp === champ)}</div></div>` : ''}
-          ${runner ? `<div class="ef"><div class="k">🥈 Subcampeón</div><div class="v">${men(runner, tot[runner], mvp === runner)}</div></div>` : ''}
-          ${(() => { const t = g.find(m => m.stage === 'third'), w = t && (t.winners || [])[0]; return w ? `<div class="ef"><div class="k">🥉 Tercer puesto</div><div class="v">${men(w, tot[w], mvp === w)}</div></div>` : ''; })()}
-          ${mvp && mvp !== champ && mvp !== runner ? `<div class="ef"><div class="k">⭐ MVP</div><div class="v">${men(mvp, tot[mvp], true)}</div></div>` : ''}
+          ${champ ? `<div class="ef"><div class="k">${ic('trophy', 'gold')} Campeón</div><div class="v">${men(champ, tot[champ], mvp === champ)}</div></div>` : ''}
+          ${runner ? `<div class="ef"><div class="k">${ic('medal', 'silver')} Subcampeón</div><div class="v">${men(runner, tot[runner], mvp === runner)}</div></div>` : ''}
+          ${(() => { const t = g.find(m => m.stage === 'third'), w = t && (t.winners || [])[0]; return w ? `<div class="ef"><div class="k">${ic('medal', 'bronze')} Tercer puesto</div><div class="v">${men(w, tot[w], mvp === w)}</div></div>` : ''; })()}
+          ${mvp && mvp !== champ && mvp !== runner ? `<div class="ef"><div class="k">${ic('star', 'gold')} MVP</div><div class="v">${men(mvp, tot[mvp], true)}</div></div>` : ''}
           <div class="ef"><div class="k">Puntos para la Copa</div><div class="v">${rank.map(([p, n]) => men(p, n, false)).join('')}</div></div>
-          ${isCur ? '<div class="tl"><a class="lnk" href="#llaves">Ver la llave completa →</a></div>' : ''}
+          ${isCur ? `<div class="tl"><a class="lnk" href="#llaves">Ver la llave completa ${ic('arrow')}</a></div>` : ''}
           <div class="efoot">${g.length} ${pl(g.length, 'partida', 'partidas')} · ${rank.length} jugadores · Sistema suizo · ${fmtDate(m0.date)}</div>
         ${hClose(m0.tid)}`;
     }
@@ -937,7 +990,7 @@ function renderHist(ms, bs) {
       const b = it.g[0], n = Number(b.pts) || 0;
       return `<article class="msg">${botHtml()}<div class="mb">
         <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(b.date)}</time></div>
-        <div class="embed" style="--h:45"><div class="et">${n >= 0 ? '➕ Puntos extra' : '➖ Puntos descontados'}${it.g.length > 1 ? ` · ${it.g.length} jugadores` : ''}</div>
+        <div class="embed${b.pen ? ' pen' : ''}" style="--h:${b.pen ? 358 : 45}"><div class="et">${b.pen ? `${ic('warn', 'red')} Penalización` : n >= 0 ? `${ic('plus', 'green')} Puntos extra` : `${ic('minus', 'red')} Puntos descontados`}${it.g.length > 1 ? ` · ${it.g.length} jugadores` : ''}</div>
         <div class="ef"><div class="v">${it.g.map(x => men(x.player, Number(x.pts) || 0)).join('')}</div></div>
         ${b.note ? `<div class="ef"><div class="k">Motivo</div><div class="hint">${esc(b.note)}</div></div>` : ''}
         <div class="efoot">${fmtDate(b.date)}</div></div></div></article>`;
@@ -947,16 +1000,17 @@ function renderHist(ms, bs) {
     if (m.teams) {
       const n = Math.max(m.teams[0].players.length, m.teams[1].players.length), sc = m.score;
       const tcol = i => { const t = m.teams[i], won = m.win === i;
-        return `<div class="vs-t${won ? ' won' : m.win === 1 - i ? ' lost' : ''}"><div class="vs-n">${won ? '🏆 ' : ''}${esc(t.name)}</div>
-          <div class="v">${t.players.map(mm).join('')}</div>${t.mvp ? `<div class="vs-m">⭐ MVP · ${esc(t.mvp)}</div>` : ''}</div>`; };
+        return `<div class="vs-t${won ? ' won' : m.win === 1 - i ? ' lost' : ''}"><div class="vs-n">${won ? ic('trophy', 'gold') + ' ' : ''}${esc(t.name)}</div>
+          ${m.pts ? `<div class="lbh">${t.players.map((p, k) => `<div class="lbh-r"><span class="lbh-n p${k + 1}">${k + 1}°</span>${mm(p)}</div>`).join('')}</div>` : `<div class="v">${t.players.map(mm).join('')}</div>`}${t.mvp ? `<div class="vs-m">${ic('star')} MVP · ${esc(t.mvp)}</div>` : ''}</div>`; };
       return `<article class="msg">${botHtml()}<div class="mb">
         <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(m.date)}</time>${hTools(m.id, m.id)}</div>
         ${hOpen(m.id)} style="--h:${gHue(m.game)}"><div class="eb">
-          <div class="et">${gIcon(m.game, 'gi lg')} ${esc(G.name)} <span class="lb-tag">${m.teams[0].players.length}v${m.teams[1].players.length}</span></div>
+          <div class="et">${gIcon(m.game, 'gi lg')} ${esc(G.name)} <span class="lb-tag">${m.teams[0].players.length}v${m.teams[1].players.length}${m.bo > 1 ? ' · Bo' + m.bo : ''}</span></div>
           <div class="vs-line"><span class="${m.win === 0 ? 'w' : ''}">${esc(m.teams[0].name)}</span><b>${sc ? `${esc(sc[0] || '0')} : ${esc(sc[1] || '0')}` : 'vs'}</b><span class="${m.win === 1 ? 'w' : ''}">${esc(m.teams[1].name)}</span></div>
+          ${(m.maps || []).length ? `<div class="mp-h">${m.maps.map((x, i) => `<span class="mp-c ${x.w === 0 ? 'l' : 'r'}"><span>${esc(x.name || 'Mapa ' + (i + 1))}</span>${x.a !== '' || x.b !== '' ? `<b>${esc(x.a || '0')}-${esc(x.b || '0')}</b>` : ''}<i>${esc(m.teams[x.w].name)}</i></span>`).join('')}</div>` : ''}
           <div class="vs">${tcol(0)}${tcol(1)}</div>
-          ${m.win === -1 ? '<div class="ef"><div class="hint">🤝 Empate</div></div>' : m.win == null || m.win < 0 ? '' : `<div class="efoot" style="margin-top:8px">Ganadores +${R().win} extra c/u</div>`}
-          <div class="efoot">${n}v${n} · ${ps.length} jugadores · +${R().play} a cada uno por jugar · ${fmtDate(m.date)}</div>
+          ${m.win === -1 ? `<div class="ef"><div class="hint">${ic('hand')} Empate</div></div>` : m.win == null || m.win < 0 || m.pts ? '' : `<div class="efoot" style="margin-top:8px">Ganadores +${R().win} extra c/u</div>`}
+          <div class="efoot">${n}v${n} · ${ps.length} jugadores · ${m.pts ? 'puntos por puesto' : `+${R().play} a cada uno por jugar`} · ${fmtDate(m.date)}</div>
         ${hClose(m.id)}`;
     }
     if (m.ranking) {
@@ -965,14 +1019,14 @@ function renderHist(ms, bs) {
         <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(m.date)}</time>${hTools(m.id, m.id)}</div>
         ${hOpen(m.id)} style="--h:${gHue(m.game)}"><div class="eb">
           <div class="et">${gIcon(m.game, 'gi lg')} ${esc(m.tname || G.name)} <span class="lb-tag">Tabla de puntos</span></div>
-          <div class="ef"><div class="k">🏆 Leaderboard</div><div class="lbh">${m.ranking.map((p, i) => `<div class="lbh-r"><span class="lbh-n p${i + 1}">${i + 1}°</span>${mm(p)}</div>`).join('')}</div></div>
-          ${m.mvp ? `<div class="ef"><div class="k">⭐ MVP · +${R().mvp}</div><div class="v">${mm(m.mvp)}</div></div>` : ''}
+          <div class="ef"><div class="k">${ic('board', 'gold')} Leaderboard</div><div class="lbh">${m.ranking.map((p, i) => `<div class="lbh-r"><span class="lbh-n p${i + 1}">${i + 1}°</span>${mm(p)}</div>`).join('')}</div></div>
+          ${m.mvp ? `<div class="ef"><div class="k">${ic('star', 'gold')} MVP · +${R().mvp}</div><div class="v">${mm(m.mvp)}</div></div>` : ''}
           <div class="efoot">${m.ranking.length} jugadores · ${tot} pts repartidos${m.tname ? ' · ' + esc(G.name) : ''} · ${fmtDate(m.date)}</div>
         ${hClose(m.id)}`;
     }
     const win = ps.filter(p => W.has(p)), rest = ps.filter(p => !W.has(p));
     const fields = win.length
-      ? `<div class="ef"><div class="k">🏆 Ganadores · +${R().win} extra c/u</div><div class="v">${win.map(mm).join('')}</div></div>
+      ? `<div class="ef"><div class="k">${ic('trophy', 'gold')} Ganadores · +${R().win} extra c/u</div><div class="v">${win.map(mm).join('')}</div></div>
          ${rest.length ? `<div class="ef"><div class="k">Perdieron</div><div class="v">${rest.map(mm).join('')}</div></div>` : ''}`
       : `<div class="ef"><div class="k">Participantes</div><div class="v">${ps.map(mm).join('')}</div></div>
          <div class="ef"><div class="k">Resultado</div><div class="hint">Sin ganador cargado</div></div>`;
@@ -981,7 +1035,7 @@ function renderHist(ms, bs) {
         ${hOpen(m.id)} style="--h:${gHue(m.game)}"><div class="eb">
           <div class="et">${gIcon(m.game, 'gi lg')} ${esc(G.name)}</div>
           ${fields}
-          ${m.mvp ? `<div class="ef"><div class="k">⭐ MVP · +${R().mvp}</div><div class="v">${mm(m.mvp)}</div></div>` : ''}
+          ${m.mvp ? `<div class="ef"><div class="k">${ic('star', 'gold')} MVP · +${R().mvp}</div><div class="v">${mm(m.mvp)}</div></div>` : ''}
           <div class="efoot">${ps.length} ${pl(ps.length, 'jugador', 'jugadores')} · +${R().play} a cada uno por jugar · ${fmtDate(m.date)}</div>
         ${hClose(m.id)}`;
   }).join('');
@@ -998,14 +1052,14 @@ function openProfile(name) {
   pop.innerHTML = `
     <div class="banner"></div>
     ${isTop(s) ? `<span class="avw xlw">${av(name, 'xl')}<span class="tc">👑</span></span>` : av(name, 'xl')}
-    <button class="x" aria-label="Cerrar">✕</button>
+    <button class="x" aria-label="Cerrar">${ic('close')}</button>
     <div class="pbody">
       <h3 id="pName">${esc(name)} ${crown(s)}</h3>
       <div class="psub">Puesto #${s.rank} · ${esc(scopeLabel())}</div>
       <div class="pcard">
         <div class="lbl">Puntos ganados</div>
         <div class="big">${s.pts} <small>pts</small></div>
-        <div class="bd">${[s.played - s.lbN ? `${s.played - s.lbN} ${pl(s.played - s.lbN, 'partida', 'partidas')} × ${R().play}` : '', s.wins - s.lbWins ? `${s.wins - s.lbWins} ${pl(s.wins - s.lbWins, 'victoria', 'victorias')} × ${R().win}` : '', s.mvps ? `${s.mvps} MVP × ${R().mvp}` : '', s.lbN ? `${s.lbPts} pts de ${pl(s.lbN, 'una tabla', s.lbN + ' tablas')} de puntos` : ''].filter(Boolean).join(' + ') || 'Sin puntos todavía'}${s.extra ? ` ${s.extra > 0 ? '+' : '−'} ${Math.abs(s.extra)} extra` : ''}</div>
+        <div class="bd">${[s.played - s.lbN ? `${s.played - s.lbN} ${pl(s.played - s.lbN, 'partida', 'partidas')} × ${R().play}` : '', s.wins - s.lbWins ? `${s.wins - s.lbWins} ${pl(s.wins - s.lbWins, 'victoria', 'victorias')} × ${R().win}` : '', s.mvps ? `${s.mvps} MVP × ${R().mvp}` : '', s.lbN ? `${s.lbPts} pts de ${pl(s.lbN, 'una partida', s.lbN + ' partidas')} con puntos por puesto` : ''].filter(Boolean).join(' + ') || 'Sin puntos todavía'}${s.extra ? ` ${s.extra > 0 ? '+' : '−'} ${Math.abs(s.extra)} extra` : ''}</div>
       </div>
       <div class="pcard">
         <div class="kpis">
@@ -1016,6 +1070,7 @@ function openProfile(name) {
         </div>
         <div class="bar" title="${pct}% de victorias"><i style="width:${pct}%"></i></div>
       </div>
+      ${s.pens ? `<div class="pcard pen-card"><div class="lbl">${ic('warn', 'red')} Penalizaciones</div>${s.pens.map(b => `<div class="it"><span class="g">${esc(b.note || 'Penalización')}</span><time>${fmtDate(b.date)}</time><span class="p" style="color:#f57376">${b.pts}</span></div>`).join('')}</div>` : ''}
       <div class="pcard">
         <div class="lbl">Insignias</div>
         ${Object.keys(s.won).length ? `<div class="gbs" style="justify-content:flex-start">${badges(s)}</div>` : '<div class="hint">Todavía sin victorias.</div>'}
@@ -1023,7 +1078,7 @@ function openProfile(name) {
       <div class="pcard">
         <div class="lbl">Partidas jugadas</div>
         ${log.length ? log.map(e => {
-          if (e.type === 'b') return `<div class="it"><span class="gi ge">${e.got >= 0 ? '➕' : '➖'}</span><span class="g">${esc(e.b.note || 'Puntos extra')}</span><time>${fmtDate(e.date)}</time><span class="res b">EXTRA</span><span class="p">${sgn(e.got)}</span></div>`;
+          if (e.type === 'b') return `<div class="it"><span class="gi ge">${e.b.pen ? ic('warn', 'red') : e.got >= 0 ? ic('plus', 'green') : ic('minus', 'red')}</span><span class="g">${esc(e.b.note || (e.b.pen ? 'Penalización' : 'Puntos extra'))}</span><time>${fmtDate(e.date)}</time><span class="res ${e.b.pen ? 'l' : 'b'}">${e.b.pen ? 'PENALIZACIÓN' : 'EXTRA'}</span><span class="p">${sgn(e.got)}</span></div>`;
           const G = gameOf(e.m.game);
           const r = e.pos ? `<span class="res ${e.pos === 1 ? 'w' : 'n'}">${e.pos}° PUESTO</span>` : !e.decided ? '<span class="res n">—</span>' : e.w ? '<span class="res w">VICTORIA</span>' : '<span class="res l">DERROTA</span>';
           return `<div class="it">${gIcon(e.m.game)}<span class="g">${esc(G.name)}${e.mvp ? ` <span data-tip="+${R().mvp} por MVP">👑</span>` : ''}</span><time>${fmtDate(e.date)}</time>${r}<span class="p">+${e.got}</span></div>`;
@@ -1154,8 +1209,8 @@ function renderPickem() {
     return `<button class="pi" data-add="${esc(x)}" draggable="${!used}" ${used ? 'disabled' : ''}>${av(x, 'md')}<span class="nm">${esc(x)}</span><span class="add">${used ? 'elegido' : '+ agregar'}</span></button>`;
   }).join('') || '<div class="hint">Nadie coincide.</div>';
   $('#slots').innerHTML = picks.map((p, i) => p
-    ? `<li class="slot" data-i="${i}" draggable="true"><span class="grip">⋮⋮</span><span class="n">${i + 1}</span>${av(p, 'md')}<span class="nm">${esc(p)}</span>
-        <span class="acts"><button class="ib" data-up="${i}" aria-label="Subir" ${i === 0 ? 'disabled' : ''}>▲</button><button class="ib" data-dn="${i}" aria-label="Bajar" ${i === n - 1 ? 'disabled' : ''}>▼</button><button class="ib" data-rm="${i}" aria-label="Quitar">✕</button></span></li>`
+    ? `<li class="slot" data-i="${i}" draggable="true"><span class="grip">${ic('drag')}</span><span class="n">${i + 1}</span>${av(p, 'md')}<span class="nm">${esc(p)}</span>
+        <span class="acts"><button class="ib" data-up="${i}" aria-label="Subir" ${i === 0 ? 'disabled' : ''}>${ic('up')}</button><button class="ib" data-dn="${i}" aria-label="Bajar" ${i === n - 1 ? 'disabled' : ''}>${ic('down')}</button><button class="ib" data-rm="${i}" aria-label="Quitar">${ic('close')}</button></span></li>`
     : `<li class="slot empty" data-i="${i}"><span class="grip"></span><span class="n">${i + 1}</span><span>Elegí un jugador</span></li>`).join('');
   const missing = picks.filter(x => !x).length;
   $('#pkx').disabled = missing > 0 || !n;
@@ -1269,7 +1324,7 @@ const allPlayers = () => [...new Set([...DATA.players, ...DATA.matches.flatMap(p
 
 // formulario de partida
 const mf = { sel: {}, mvp: '' };
-$('#mDate').value = today(); $('#bDate').value = today();
+$('#mDate').value = today(); $('#bDate').value = today(); $('#pDate').value = today();
 function renderMatchForm() {
   const gsel = $('#mGame'), keepG = gsel.value;
   gsel.innerHTML = allGames().map(([k, g]) => `<option value="${esc(k)}">${esc(g.name)}</option>`).join('');
@@ -1284,14 +1339,14 @@ function renderMatchForm() {
   const pts = n => R().play + (mf.sel[n] === 2 ? R().win : 0) + (mf.mvp === n ? R().mvp : 0);
   const winners = playing.filter(n => mf.sel[n] === 2);
   $('#mPrev').innerHTML = !playing.length ? 'Elegí quiénes jugaron.' :
-    `${playing.length} ${pl(playing.length, 'jugador', 'jugadores')} · ${winners.length ? winners.length + ' ' + pl(winners.length, 'ganador', 'ganadores') : '<b style="color:var(--gold)">⚠ sin ganador: tocá 2 veces al que ganó para que sume puntos e insignia</b>'}<br>` +
+    `${playing.length} ${pl(playing.length, 'jugador', 'jugadores')} · ${winners.length ? winners.length + ' ' + pl(winners.length, 'ganador', 'ganadores') : '<b style="color:var(--gold)">' + ic('warn') + ' sin ganador: tocá 2 veces al que ganó para que sume puntos e insignia</b>'}<br>` +
     playing.filter(n => pts(n)).map(n => `<b>${esc(n)}</b> +${pts(n)}`).join(' · ');
   $('#mAdd').disabled = !playing.length;
   const em = editMatchId && DATA.matches.find(x => x.id === editMatchId);
   if (editMatchId && !em) editMatchId = null;
   $('#mAdd').textContent = editMatchId ? 'Guardar cambios' : 'Agregar partida';
   $('#mEdit').hidden = !editMatchId;
-  if (em) $('#mEdit').querySelector('span').textContent = `✏️ Editando la partida de ${gameOf(em.game).name} del ${fmtDate(em.date)}`;
+  if (em) $('#mEdit').querySelector('span').innerHTML = `${ic('edit')} Editando la partida de ${gameOf(em.game).name} del ${fmtDate(em.date)}`;
 }
 $('#mPlayers').addEventListener('click', e => { const b = e.target.closest('[data-mp]'); if (!b) return; const n = b.dataset.mp; mf.sel[n] = ((mf.sel[n] || 0) + 1) % 3; if (!mf.sel[n]) delete mf.sel[n]; renderMatchForm(); });
 $('#mEditCancel').addEventListener('click', () => { editMatchId = null; mf.sel = {}; mf.mvp = ''; $('#mDate').value = today(); renderMatchForm(); });
@@ -1322,7 +1377,7 @@ function bGroups() {
 function renderBonusPick() {
   const names = allPlayers();
   [...bSel].forEach(n => { if (!names.includes(n)) bSel.delete(n); });
-  $('#bQuick').innerHTML = bGroups().map(([lbl], i) => `<button type="button" class="bq-b" data-bg="${i}">${esc(lbl)}</button>`).join('') + (bSel.size ? '<button type="button" class="bq-b x" data-bg="none">✕ Limpiar</button>' : '');
+  $('#bQuick').innerHTML = bGroups().map(([lbl], i) => `<button type="button" class="bq-b" data-bg="${i}">${esc(lbl)}</button>`).join('') + (bSel.size ? `<button type="button" class="bq-b x" data-bg="none">${ic('close')} Limpiar</button>` : '');
   $('#bPlayers').innerHTML = names.map(n => `<button type="button" class="pchip${bSel.has(n) ? ' p2' : ''}" data-bp="${esc(n)}">${av(n, 'sm')}${esc(n)}</button>`).join('');
   $('#bCount').textContent = bSel.size;
   $('#bAdd').textContent = bSel.size > 1 ? `Aplicar a ${bSel.size} jugadores` : 'Aplicar puntos';
@@ -1335,6 +1390,15 @@ $('#bQuick').addEventListener('click', e => {
   renderBonusPick();
 });
 $('#bPlayers').addEventListener('click', e => { const c = e.target.closest('[data-bp]'); if (!c) return; const n = c.dataset.bp; bSel.has(n) ? bSel.delete(n) : bSel.add(n); renderBonusPick(); });
+function renderPenPick() { const kp = $('#pPlayer').value; $('#pPlayer').innerHTML = allPlayers().map(n => `<option value="${esc(n)}"${n === kp ? ' selected' : ''}>${esc(n)}</option>`).join(''); }
+$('#pAddPen').addEventListener('click', () => {
+  const player = $('#pPlayer').value, n = Math.abs(parseInt($('#pPts').value, 10) || 0), reason = $('#pReason').value.trim();
+  if (!player) return toast('Elegí un jugador.', true);
+  if (!n) return toast('Poné cuántos puntos descontar.', true);
+  if (!reason) { $('#pReason').focus(); return toast('Escribí la razón de la penalización.', true); }
+  DATA.bonus.push({ date: $('#pDate').value || today(), player, pts: -n, note: reason, pen: true });
+  $('#pReason').value = ''; changed(); toast(`Penalización aplicada: ${player} −${n}.`);
+});
 $('#bAdd').addEventListener('click', () => {
   const pts = parseInt($('#bPts').value, 10), who = [...bSel];
   if (!who.length) return toast('Elegí al menos un jugador.', true);
@@ -1351,9 +1415,9 @@ function renderPlayersAdmin() {
   const used = new Set([...DATA.matches.flatMap(playersOf), ...DATA.bonus.map(b => b.player)]);
   $('#aPlayers').innerHTML = allPlayers().map(n => `<div class="ai">${av(n, 'md')}<div class="g"><b>${esc(n)}</b><small>${avatarOf(n) ? 'Con foto' : 'Sin foto (muestra la inicial)'}</small></div>
     <div class="bt"><button class="btn sm" data-photo="${esc(n)}">${avatarOf(n) ? 'Cambiar foto' : 'Subir foto'}</button>
-    ${avatarOf(n) ? `<button class="btn sm sec" data-nophoto="${esc(n)}" title="Quitar foto">✕</button>` : ''}
-    <button class="btn sm red" data-delp="${esc(n)}" ${used.has(n) ? 'disabled title="Tiene partidas o puntos cargados"' : 'title="Eliminar jugador"'}>🗑</button></div></div>`).join('');
-  renderBonusPick();
+    ${avatarOf(n) ? `<button class="btn sm sec" data-nophoto="${esc(n)}" title="Quitar foto" aria-label="Quitar foto">${ic('close')}</button>` : ''}
+    <button class="btn sm red" data-delp="${esc(n)}" ${used.has(n) ? 'disabled title="Tiene partidas o puntos cargados"' : 'title="Eliminar jugador"'} aria-label="Eliminar">${ic('del')}</button></div></div>`).join('');
+  renderBonusPick(); renderPenPick();
 }
 $('#aPlayers').addEventListener('click', e => {
   const ph = e.target.closest('[data-photo]'), np = e.target.closest('[data-nophoto]'), dp = e.target.closest('[data-delp]');
@@ -1396,12 +1460,12 @@ function renderMatchesAdmin() {
   });
   items.sort((a, b) => b.d.localeCompare(a.d));
   $('#aMatches').innerHTML = items.map(it => it.t === 't'
-    ? `<div class="ai">${gIcon(it.m.game, 'gi lg')}<div class="g"><b>${esc(it.m.tname || 'Torneo')} · ${fmtDate(it.d)}</b><small>Llave · ${it.n} ${pl(it.n, 'partida', 'partidas')}${it.champ ? ' · Campeón: ' + esc(it.champ) : ''}</small></div><div class="bt"><button class="btn sm red" data-delt="${esc(it.m.tid)}" title="Sacar el torneo del historial">🗑</button></div></div>`
+    ? `<div class="ai">${gIcon(it.m.game, 'gi lg')}<div class="g"><b>${esc(it.m.tname || 'Torneo')} · ${fmtDate(it.d)}</b><small>Llave · ${it.n} ${pl(it.n, 'partida', 'partidas')}${it.champ ? ' · Campeón: ' + esc(it.champ) : ''}</small></div><div class="bt"><button class="btn sm red" data-delt="${esc(it.m.tid)}" title="Sacar el torneo del historial" aria-label="Borrar">${ic('del')}</button></div></div>`
     : it.t === 'g'
-    ? `<div class="ai"><span class="gi lg ge">${it.b.pts >= 0 ? '➕' : '➖'}</span><div class="g"><b>${it.list.length} jugadores ${sgn(it.b.pts)} c/u · ${fmtDate(it.d)}</b><small>${esc(it.b.note || 'Puntos extra')} · ${esc(it.list.join(', '))}</small></div><div class="bt"><button class="btn sm red" data-delg="${esc(it.b.gid)}" title="Borrar">🗑</button></div></div>`
+    ? `<div class="ai"><span class="gi lg ge">${it.b.pen ? ic('warn', 'red') : it.b.pts >= 0 ? ic('plus', 'green') : ic('minus', 'red')}</span><div class="g"><b>${it.list.length} jugadores ${sgn(it.b.pts)} c/u · ${fmtDate(it.d)}</b><small>${esc(it.b.note || 'Puntos extra')} · ${esc(it.list.join(', '))}</small></div><div class="bt"><button class="btn sm red" data-delg="${esc(it.b.gid)}" title="Borrar" aria-label="Borrar">${ic('del')}</button></div></div>`
     : it.t === 'm'
-    ? `<div class="ai">${gIcon(it.m.game, 'gi lg')}<div class="g"><b>${esc(gameOf(it.m.game).name)} · ${fmtDate(it.d)}</b><small>${it.m.teams ? `${esc(it.m.teams[0].name)} vs ${esc(it.m.teams[1].name)}${it.m.win > -1 ? ' · Ganó ' + esc(it.m.teams[it.m.win].name) : ''}` : it.m.ranking ? 'Tabla de puntos · 1°: ' + esc(it.m.ranking[0] || '—') : it.m.winners.length ? 'Ganaron: ' + esc(it.m.winners.join(', ')) : 'Sin ganador'}${it.m.mvp ? ' · MVP: ' + esc(it.m.mvp) : ''} · ${playersOf(it.m).length} jug.</small></div><div class="bt"><button class="btn sm red" data-delm="${it.i}" title="Borrar partida">🗑</button></div></div>`
-    : `<div class="ai"><span class="gi lg ge">${it.b.pts >= 0 ? '➕' : '➖'}</span><div class="g"><b>${esc(it.b.player)} ${sgn(it.b.pts)} · ${fmtDate(it.d)}</b><small>${esc(it.b.note || 'Puntos extra')}</small></div><div class="bt"><button class="btn sm red" data-delb="${it.i}" title="Borrar">🗑</button></div></div>`
+    ? `<div class="ai">${gIcon(it.m.game, 'gi lg')}<div class="g"><b>${esc(gameOf(it.m.game).name)} · ${fmtDate(it.d)}</b><small>${it.m.teams ? `${esc(it.m.teams[0].name)} vs ${esc(it.m.teams[1].name)}${it.m.win > -1 ? ' · Ganó ' + esc(it.m.teams[it.m.win].name) : ''}` : it.m.ranking ? 'Tabla de puntos · 1°: ' + esc(it.m.ranking[0] || '—') : it.m.winners.length ? 'Ganaron: ' + esc(it.m.winners.join(', ')) : 'Sin ganador'}${it.m.mvp ? ' · MVP: ' + esc(it.m.mvp) : ''} · ${playersOf(it.m).length} jug.</small></div><div class="bt"><button class="btn sm red" data-delm="${it.i}" title="Borrar partida" aria-label="Borrar">${ic('del')}</button></div></div>`
+    : `<div class="ai"><span class="gi lg ge">${it.b.pen ? ic('warn', 'red') : it.b.pts >= 0 ? ic('plus', 'green') : ic('minus', 'red')}</span><div class="g"><b>${esc(it.b.player)} ${sgn(it.b.pts)} · ${fmtDate(it.d)}</b><small>${esc(it.b.note || 'Puntos extra')}</small></div><div class="bt"><button class="btn sm red" data-delb="${it.i}" title="Borrar" aria-label="Borrar">${ic('del')}</button></div></div>`
   ).join('') || '<div class="hint">Todavía no cargaste nada.</div>';
 }
 $('#aMatches').addEventListener('click', e => {
@@ -1496,8 +1560,8 @@ function renderGamesAdmin() {
     const custom = !GAMES[k], over = !custom && DATA.games[k];
     return `<div class="ai"><span class="gb" style="cursor:default">${gIcon(k)}</span><div class="g"><b>${esc(g.name)}</b><small>${custom ? 'Agregado por vos' : 'De fábrica'}${used.has(k) ? ' · con partidas' : ''}</small></div>
       <div class="bt"><button class="btn sm" data-glogo="${esc(k)}">${g.logo ? 'Cambiar logo' : 'Subir logo'}</button>
-      ${over ? `<button class="btn sm sec" data-greset="${esc(k)}" title="Volver al logo original">↺</button>` : ''}
-      ${custom ? `<button class="btn sm red" data-gdel="${esc(k)}" ${used.has(k) ? 'disabled title="Tiene partidas cargadas"' : 'title="Eliminar juego"'}>🗑</button>` : ''}</div></div>`;
+      ${over ? `<button class="btn sm sec" data-greset="${esc(k)}" title="Volver al logo original" aria-label="Volver al logo original">${ic('reset')}</button>` : ''}
+      ${custom ? `<button class="btn sm red" data-gdel="${esc(k)}" ${used.has(k) ? 'disabled title="Tiene partidas cargadas"' : 'title="Eliminar juego"'} aria-label="Eliminar">${ic('del')}</button>` : ''}</div></div>`;
   }).join('');
 }
 $('#aGames').addEventListener('click', e => {
@@ -1511,7 +1575,7 @@ $('#gAdd').addEventListener('click', () => {
   if (allGames().some(([, g]) => g.name.toLowerCase() === name.toLowerCase())) return toast('Ese juego ya existe.', true);
   let key = name.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Z0-9]+/g, '_').replace(/^_|_$/g, '') || 'JUEGO';
   let k2 = key, i = 2; while (GAMES[k2] || DATA.games[k2]) k2 = key + '_' + i++;
-  DATA.games[k2] = { name, short: name.toUpperCase(), icon: '🎮', hue: hueOf(name) };
+  DATA.games[k2] = { name, short: name.toUpperCase(), hue: hueOf(name) };
   $('#gNew').value = ''; changed(); toast(`${name} agregado. Ahora subile el logo.`);
 });
 $('#gNew').addEventListener('keydown', e => { if (e.key === 'Enter') $('#gAdd').click(); });
@@ -1598,7 +1662,7 @@ $('#lkFile').addEventListener('change', async () => {
 
 function renderAdmin() {
   const st = $('#admSt');
-  st.textContent = dirty ? '● Tenés cambios sin publicar' : '✓ Todo publicado';
+  st.innerHTML = dirty ? '● Tenés cambios sin publicar' : ic('ok') + ' Todo publicado';
   st.className = 'st ' + (dirty ? 'dirty' : 'ok');
   $('#admUndo').disabled = !dirty;
   renderMatchForm(); renderPlayersAdmin(); renderMatchesAdmin(); renderLook(); renderGamesAdmin(); renderRules();
@@ -1741,7 +1805,7 @@ function bkSetupHtml() {
     <label class="lbl2">Jugadores · <span id="bkCount">${sel.size}</span> elegidos <button type="button" class="lnk" data-bka="all">todos</button> · <button type="button" class="lnk" data-bka="none">ninguno</button></label>
     <div class="pchips" id="bkPlayers">${ps.map(n => `<button type="button" class="pchip${sel.has(n) ? ' p2' : ''}" data-bkp="${esc(n)}">${av(n, 'sm')}${esc(n)}</button>`).join('')}</div>
     <div class="pk-actions">
-      <button class="btn" data-bka="create" id="bkCreate"${sel.size < 2 ? ' disabled' : ''}>🎲 Sortear cruces y crear llave</button>
+      <button class="btn" data-bka="create" id="bkCreate"${sel.size < 2 ? ' disabled' : ''}>${ic('dice')} Sortear cruces y crear llave</button>
       <button class="btn sec" data-bka="import">Importar llave (.json)</button>
       ${B ? '<button class="btn sec" data-bka="cancelnew">Cancelar</button>' : ''}
     </div>
@@ -1751,7 +1815,7 @@ function bkSetupHtml() {
 
 function renderLlaves() {
   const adm = isUnlocked();
-  $('#genTabs').innerHTML = adm ? `<button class="gt${genMode === 'llave' ? ' on' : ''}" data-gm="llave">🏆 Llave suiza</button><button class="gt${genMode === 'tabla' ? ' on' : ''}" data-gm="tabla">📊 Tabla de puntos</button><button class="gt${genMode === 'equipos' ? ' on' : ''}" data-gm="equipos">⚔️ Equipos</button>` : '';
+  $('#genTabs').innerHTML = adm ? `<button class="gt${genMode === 'llave' ? ' on' : ''}" data-gm="llave">${ic('tree')} Llave suiza</button><button class="gt${genMode === 'tabla' ? ' on' : ''}" data-gm="tabla">${ic('board')} Tabla de puntos</button><button class="gt${genMode === 'equipos' ? ' on' : ''}" data-gm="equipos">${ic('swords')} Equipos</button>` : '';
   if (adm && genMode === 'tabla') return renderLB();
   if (adm && genMode === 'equipos') return renderTM();
   renderBracket();
@@ -1786,7 +1850,7 @@ function renderBracket() {
   let acts = '';
   if (can && !B.playoffs) {
     const cur = B.swiss[last], r1clean = B.swiss.length === 1 && cur.every(m => !m.b || !m.w);
-    if (r1clean) acts += '<button class="btn sec" data-bka="reshuffle">🎲 Volver a sortear ronda 1</button>';
+    if (r1clean) acts += `<button class="btn sec" data-bka="reshuffle">${ic('dice')} Volver a sortear ronda 1</button>`;
     if (B.swiss.length < B.rounds) acts += `<button class="btn" data-bka="next"${bkRoundDone(cur) ? '' : ' disabled'}>Generar ronda ${B.swiss.length + 1}</button>`;
     else if (B.top) acts += `<button class="btn" data-bka="playoffs"${bkSwissDone(B) && B.players.length >= B.top ? '' : ' disabled'}>Generar playoffs (top ${B.top})</button>`;
     if (B.swiss.length > 1) acts += `<button class="btn red" data-bka="undo">Borrar ronda ${B.swiss.length}</button>`;
@@ -1804,8 +1868,8 @@ function renderBracket() {
       <div class="bk-col"${po.semis.length ? ' style="padding-top:62px"' : ''}><div class="bk-ch"><h4>Final</h4><span class="bk-tag">Bo${B.finalBo}</span></div>${bkMatch(f, can, 'final', 0, 0)}
         ${po.third ? `<div class="bk-ch bk-3"><h4>3° puesto</h4><span class="bk-tag">Bo1</span></div>${bkMatch(po.third, can, 'third', 0, 0)}` : ''}</div>
       ${champ ? `<div class="bk-champ"${po.semis.length ? ' style="margin-top:92px"' : ''}><span class="lbl">CAMPEÓN</span><span class="who">${av(champ, 'md')}${esc(champ)}</span>
-        ${bkRunner(B) ? `<span class="sub">🥈 ${esc(bkRunner(B))}</span>` : ''}${bkThird(B) ? `<span class="sub">🥉 ${esc(bkThird(B))}</span>` : ''}</div>` : ''}
-    </div></div>${can ? `<div class="pk-actions">${po.semis.length && !po.third ? `<button class="btn" data-bka="third"${po.semis.every(m => m.w) ? '' : ' disabled title="Primero terminá las semis"'}>🥉 Generar partido por el 3° puesto</button>` : ''}${po.third ? '<button class="btn sec" data-bka="nothird">Quitar 3° puesto</button>' : ''}<button class="btn red" data-bka="clearpo">Borrar playoffs</button>${opts.length > 1 ? `<span class="hint">En la final, cada toque al ganador cambia el resultado (${opts.join(', ')}).</span>` : ''}</div>` : ''}</div>`;
+        ${bkRunner(B) ? `<span class="sub">${ic('medal', 'silver')} ${esc(bkRunner(B))}</span>` : ''}${bkThird(B) ? `<span class="sub">${ic('medal', 'bronze')} ${esc(bkThird(B))}</span>` : ''}</div>` : ''}
+    </div></div>${can ? `<div class="pk-actions">${po.semis.length && !po.third ? `<button class="btn" data-bka="third"${po.semis.every(m => m.w) ? '' : ' disabled title="Primero terminá las semis"'}>${ic('medal', 'bronze')} Generar partido por el 3° puesto</button>` : ''}${po.third ? '<button class="btn sec" data-bka="nothird">Quitar 3° puesto</button>' : ''}<button class="btn red" data-bka="clearpo">Borrar playoffs</button>${opts.length > 1 ? `<span class="hint">En la final, cada toque al ganador cambia el resultado (${opts.join(', ')}).</span>` : ''}</div>` : ''}</div>`;
   } else if (champ) {
     html += `<div class="panel"><div class="bk-champ" style="width:auto"><span class="lbl">CAMPEÓN · 1° DE LA TABLA</span><span class="who">${av(champ, 'md')}${esc(champ)}</span></div></div>`;
   }
@@ -1820,7 +1884,7 @@ function renderBracket() {
   // registro
   if (adm && champ) {
     if (B.registered) {
-      html += `<div class="panel"><h3>Historial de la Copa</h3><p class="hint ok" style="font-size:15px;margin:0 0 12px">✓ Esta llave ya está registrada en el historial ${B.registered.mode === 'final' ? '(como una sola partida)' : '(cada cruce como partida)'}.</p>
+      html += `<div class="panel"><h3>Historial de la Copa</h3><p class="hint ok" style="font-size:15px;margin:0 0 12px">${ic('ok')} Esta llave ya está registrada en el historial ${B.registered.mode === 'final' ? '(como una sola partida)' : '(cada cruce como partida)'}.</p>
         <div class="pk-actions" style="margin:0"><button class="btn sec" data-bka="unregister">Deshacer registro</button><span class="hint">Si la querés corregir, deshacé el registro, cambiá lo que haga falta y volvé a registrarla.</span></div></div>`;
     } else {
       const all = bkAllMatches(B), r = R();
@@ -1918,7 +1982,7 @@ $('#bkFile').addEventListener('change', async () => {
     $('#biGame').value = o.game && allGames().some(([k]) => k === o.game) ? o.game : (allGames().some(([k]) => k === 'BRAWLHALLA') ? 'BRAWLHALLA' : allGames()[0][0]);
     const ps = allPlayers();
     $('#biMap').innerHTML = players.map((p, i) => { const a = bkAuto(p.name);
-      return `<div class="bi-r"><b>${esc(p.name)}</b><span>→</span><select class="field" data-imp="${i}"><option value="__new__"${a ? '' : ' selected'}>➕ Nuevo jugador: ${esc(p.name.toLowerCase())}</option>${ps.map(n => `<option value="${esc(n)}"${n === a ? ' selected' : ''}>${esc(n)}</option>`).join('')}</select></div>`; }).join('');
+      return `<div class="bi-r"><b>${esc(p.name)}</b><span>${ic('arrow')}</span><select class="field" data-imp="${i}"><option value="__new__"${a ? '' : ' selected'}>+ Nuevo jugador: ${esc(p.name.toLowerCase())}</option>${ps.map(n => `<option value="${esc(n)}"${n === a ? ' selected' : ''}>${esc(n)}</option>`).join('')}</select></div>`; }).join('');
     $('#bkImp').hidden = false;
   } catch { toast('Ese archivo no parece una llave válida.', true); }
 });
@@ -1967,7 +2031,7 @@ function renderLB() {
   let html = '';
   if (dirty) html += `<div class="adm-bar"><span class="st dirty">● Tenés cambios sin publicar</span><button class="btn green" data-bka="pub">Publicar</button></div>`;
   if (LB.editId && !DATA.matches.some(x => x.id === LB.editId)) delete LB.editId;
-  if (LB.editId) html += `<div class="edit-bar">✏️ Estás editando una tabla del historial<button class="btn sm sec" data-lb="canceledit">Cancelar edición</button></div>`;
+  if (LB.editId) html += `<div class="edit-bar">${ic('edit')} Estás editando una tabla del historial<button class="btn sm sec" data-lb="canceledit">Cancelar edición</button></div>`;
   html += `<div class="panel">
     <h3>Tabla de puntos</h3>
     <p class="note" style="margin:0 0 6px">Para juegos todos contra todos (BAPBAP, osu!, Tetris…): ordená el leaderboard, poné los puntos que se lleva cada uno y elegí el MVP. Al registrarla aparece en el historial y suma en la Copa.</p>
@@ -1989,10 +2053,10 @@ function renderLB() {
     <h3>Leaderboard${LB.order.length ? ` · ${LB.order.length} jugadores` : ''}</h3>
     ${LB.order.length ? `<div class="lb-list">${LB.order.map((n, i) => `<div class="lb-r${LB.mvp === n ? ' mvp' : ''}">
         <span class="lb-pos p${i + 1}">${i + 1}°</span>${av(n, 'md')}<span class="nm">${esc(n)}</span>
-        <span class="acts"><button class="ib" data-lb="up" data-i="${i}" aria-label="Subir" ${i === 0 ? 'disabled' : ''}>▲</button><button class="ib" data-lb="dn" data-i="${i}" aria-label="Bajar" ${i === LB.order.length - 1 ? 'disabled' : ''}>▼</button></span>
+        <span class="acts"><button class="ib" data-lb="up" data-i="${i}" aria-label="Subir" ${i === 0 ? 'disabled' : ''}>${ic('up')}</button><button class="ib" data-lb="dn" data-i="${i}" aria-label="Bajar" ${i === LB.order.length - 1 ? 'disabled' : ''}>${ic('down')}</button></span>
         <label class="lb-pts"><span>+</span><input type="number" step="1" data-lbpts="${i}" value="${Number(LB.pts[i]) || 0}" aria-label="Puntos de ${esc(n)}"><span>pts</span></label>
-        <button type="button" class="lb-mvp${LB.mvp === n ? ' on' : ''}" data-lb="mvp" data-i="${i}" title="Marcar MVP">⭐ MVP</button>
-        <button class="ib" data-lb="rm" data-i="${i}" aria-label="Quitar">✕</button>
+        <button type="button" class="lb-mvp${LB.mvp === n ? ' on' : ''}" data-lb="mvp" data-i="${i}" title="Marcar MVP">${ic('star')} MVP</button>
+        <button class="ib" data-lb="rm" data-i="${i}" aria-label="Quitar">${ic('close')}</button>
       </div>`).join('')}</div>
       <div class="prev-pts"><b>${tot}</b> pts repartidos${LB.mvp ? ` · MVP: <b>${esc(LB.mvp)}</b> (+${R().mvp} extra)` : ' · sin MVP'} · el 1° cuenta como victoria (insignia de ${esc(gameOf(LB.game).name)})</div>
       <div class="pk-actions"><button class="btn green" data-lb="reg"${LB.order.length < 2 ? ' disabled' : ''}>${LB.editId ? 'Guardar cambios' : 'Registrar en el historial'}</button><button class="btn sec" data-lb="clear">Limpiar</button></div>`
@@ -2049,6 +2113,16 @@ let TM = null;
 function tmLoad() {
   try { TM = JSON.parse(localStorage.getItem(TMK) || 'null'); } catch { TM = null; }
   if (!TM || !Array.isArray(TM.teams)) TM = { game: 'CS', date: today(), size: 5, names: ['Equipo 1', 'Equipo 2'], teams: [[], []], mvp: ['', ''], win: null, score: ['', ''] };
+  if (!TM.bo) TM.bo = 1; if (!Array.isArray(TM.maps)) TM.maps = [];
+  if (!TM.pts || typeof TM.pts !== 'object') TM.pts = {};
+}
+// series (Bo3, Bo5…): ganador de cada mapa por resultado (o tocando el equipo) y de la serie al llegar a la mayoría
+const tmNeed = () => Math.floor(TM.bo / 2) + 1;
+function mapW(m) { const a = parseInt(m.a, 10), b = parseInt(m.b, 10); if (!isNaN(a) && !isNaN(b) && a !== b) return a > b ? 0 : 1; return m.w === 0 || m.w === 1 ? m.w : null; }
+function tmSeries() {
+  const w = [0, 0]; let decided = null, upTo = TM.bo;
+  TM.maps.slice(0, TM.bo).forEach((m, i) => { if (decided != null) return; const x = mapW(m); if (x != null) { w[x]++; if (w[x] >= tmNeed()) { decided = x; upTo = i + 1; } } });
+  return { w, decided, upTo };
 }
 const tmSave = () => { try { localStorage.setItem(TMK, JSON.stringify(TM)); } catch {} };
 const tmAll = () => [...TM.teams[0], ...TM.teams[1]];
@@ -2063,12 +2137,17 @@ function tmPts(i, p) { const r = R(); return r.play + (TM.win === i ? r.win : 0)
 function renderTM() {
   if (!TM) tmLoad();
   tmFix();
+  let SR = null;
+  if (TM.bo > 1) {
+    while (TM.maps.length < TM.bo) TM.maps.push({ name: '', a: '', b: '', w: null });
+    SR = tmSeries(); TM.win = SR.decided; TM.score = [String(SR.w[0]), String(SR.w[1])];
+  }
   const ps = allPlayers(), used = new Set(tmAll()), r = R();
   if (!allGames().some(([k]) => k === TM.game)) TM.game = allGames()[0][0];
   if (TM.editId && !DATA.matches.some(x => x.id === TM.editId)) delete TM.editId;
   let html = '';
   if (dirty) html += `<div class="adm-bar"><span class="st dirty">● Tenés cambios sin publicar</span><button class="btn green" data-bka="pub">Publicar</button></div>`;
-  if (TM.editId) html += `<div class="edit-bar">✏️ Estás editando una partida por equipos del historial<button class="btn sm sec" data-tm="canceledit">Cancelar edición</button></div>`;
+  if (TM.editId) html += `<div class="edit-bar">${ic('edit')} Estás editando una partida por equipos del historial<button class="btn sm sec" data-tm="canceledit">Cancelar edición</button></div>`;
   html += `<div class="panel">
     <h3>Partida por equipos</h3>
     <p class="note" style="margin:0 0 6px">Para mixes tipo CS: armá los equipos (a mano o mezclando), marcá quién ganó y, si querés, el MVP de cada equipo. Cada jugador suma +${r.play} por jugar, los ganadores +${r.win} extra y cada MVP +${r.mvp}.</p>
@@ -2077,37 +2156,52 @@ function renderTM() {
       <div><label class="lbl2" for="tmDate">Fecha</label><input class="field" type="date" id="tmDate" value="${esc(TM.date || today())}"></div>
     </div>
     <label class="lbl2">Formato</label>
-    <div class="tm-size"><button class="ib big" data-tm="minus" aria-label="Menos jugadores" ${TM.size <= 1 ? 'disabled' : ''}>−</button><b>${TM.size}v${TM.size}</b><button class="ib big" data-tm="plus" aria-label="Más jugadores" ${TM.size >= 10 ? 'disabled' : ''}>+</button></div>
+    <div class="tm-fmt"><div class="tm-size"><button class="ib big" data-tm="minus" aria-label="Menos jugadores" ${TM.size <= 1 ? 'disabled' : ''}>−</button><b>${TM.size}v${TM.size}</b><button class="ib big" data-tm="plus" aria-label="Más jugadores" ${TM.size >= 10 ? 'disabled' : ''}>+</button></div>
+      <div class="tm-bo">${[1, 3, 5, 7].map(n => `<button class="gt${TM.bo === n ? ' on' : ''}" data-tm="bo" data-bo="${n}">Bo${n}</button>`).join('')}</div>
+      <div class="tm-bo"><button class="gt${TM.custom ? '' : ' on'}" data-tm="auto">Puntos automáticos</button><button class="gt${TM.custom ? ' on' : ''}" data-tm="custom">${ic('board')} Puntos por puesto</button></div></div>
     <label class="lbl2">Jugadores · tocalos para sumarlos a un equipo</label>
     <div class="pchips">${ps.map(n => { const t = TM.teams[0].includes(n) ? 0 : TM.teams[1].includes(n) ? 1 : -1;
       return `<button type="button" class="pchip${t > -1 ? ' p' + (t + 1) : ''}" data-tmadd="${esc(n)}">${av(n, 'sm')}${esc(n)}${t > -1 ? ` <small>${esc(TM.names[t] || 'Equipo ' + (t + 1))}</small>` : ''}</button>`; }).join('')}</div>
-    <div class="pk-actions"><button class="btn" data-tm="shuffle"${used.size < 2 ? ' disabled' : ''}>🎲 Mezclar equipos</button><button class="btn sec" data-tm="swapnames">⇄ Invertir equipos</button><button class="btn sec" data-tm="clear">Vaciar</button></div>
+    <div class="pk-actions"><button class="btn" data-tm="shuffle"${used.size < 2 ? ' disabled' : ''}>${ic('dice')} Mezclar equipos</button><button class="btn sec" data-tm="swapnames">${ic('swap')} Invertir equipos</button><button class="btn sec" data-tm="clear">Vaciar</button></div>
   </div>`;
   const team = i => {
     const pl0 = TM.teams[i], won = TM.win === i, lost = TM.win === 1 - i;
     const slots = [];
     for (let s = 0; s < TM.size; s++) {
       const p = pl0[s];
-      slots.push(p ? `<div class="tm-s${TM.mvp[i] === p ? ' mvp' : ''}">${av(p, 'md')}<span class="nm">${esc(p)}</span>
-        <button type="button" class="lb-mvp${TM.mvp[i] === p ? ' on' : ''}" data-tm="mvp" data-t="${i}" data-pl="${esc(p)}" title="MVP del equipo">⭐ MVP</button>
-        <button class="ib" data-tm="move" data-t="${i}" data-pl="${esc(p)}" title="Pasar al otro equipo" aria-label="Pasar al otro equipo">⇄</button>
-        <button class="ib" data-tm="rm" data-t="${i}" data-pl="${esc(p)}" aria-label="Quitar">✕</button></div>`
-        : `<div class="tm-s empty"><span class="av md" style="background:var(--deep)"></span><span class="nm">Lugar libre</span></div>`);
+      slots.push(p ? `<div class="tm-s${TM.mvp[i] === p ? ' mvp' : ''}">${TM.custom ? `<span class="tm-pos p${s + 1}">${s + 1}°</span>` : ''}${av(p, 'md')}<span class="nm">${esc(p)}</span>
+        ${TM.custom ? `<span class="acts"><button class="ib" data-tm="up" data-t="${i}" data-pl="${esc(p)}" aria-label="Subir" ${s === 0 ? 'disabled' : ''}>${ic('up')}</button><button class="ib" data-tm="dn" data-t="${i}" data-pl="${esc(p)}" aria-label="Bajar" ${s === pl0.length - 1 ? 'disabled' : ''}>${ic('down')}</button></span>
+        <label class="lb-pts"><span>+</span><input type="number" step="1" data-tmpts="${esc(p)}" value="${TM.pts[p] ?? R().play}" aria-label="Puntos de ${esc(p)}"></label>` : ''}
+        <button type="button" class="lb-mvp${TM.mvp[i] === p ? ' on' : ''}" data-tm="mvp" data-t="${i}" data-pl="${esc(p)}" title="MVP del equipo">${ic('star')} MVP</button>
+        <button class="ib" data-tm="move" data-t="${i}" data-pl="${esc(p)}" title="Pasar al otro equipo" aria-label="Pasar al otro equipo">${ic('swap')}</button>
+        <button class="ib" data-tm="rm" data-t="${i}" data-pl="${esc(p)}" aria-label="Quitar">${ic('close')}</button></div>`
+        : `<div class="tm-s empty">${TM.custom ? `<span class="tm-pos">${s + 1}°</span>` : ''}<span class="av md" style="background:var(--deep)"></span><span class="nm">Lugar libre</span></div>`);
     }
     return `<div class="panel tm-t${won ? ' won' : ''}${lost ? ' lost' : ''}">
       <div class="tm-h"><input class="field tm-name" data-tmname="${i}" maxlength="24" value="${esc(TM.names[i])}" aria-label="Nombre del equipo ${i + 1}">
-        <input class="field tm-sc" data-tmsc="${i}" maxlength="3" inputmode="numeric" placeholder="—" value="${esc(TM.score[i] || '')}" aria-label="Rondas del equipo ${i + 1}" title="Resultado (opcional)"></div>
+        ${TM.bo > 1 ? `<span class="tm-sw" title="Mapas ganados">${SR.w[i]}</span>` : `<input class="field tm-sc" data-tmsc="${i}" maxlength="3" inputmode="numeric" placeholder="—" value="${esc(TM.score[i] || '')}" aria-label="Rondas del equipo ${i + 1}" title="Resultado (opcional)">`}</div>
       <div class="tm-list">${slots.join('')}</div>
-      <button class="btn ${won ? 'green' : 'sec'} tm-win" data-tm="win" data-t="${i}"${pl0.length ? '' : ' disabled'}>${won ? '🏆 Ganó' : 'Marcar como ganador'}</button>
-      <div class="hint tm-pp">${pl0.length ? `${TM.mvp[i] ? `MVP: <b>${esc(TM.mvp[i])}</b> · ` : 'Sin MVP · '}cada uno suma +${tmPts(i, '')}${TM.mvp[i] ? `, el MVP +${tmPts(i, TM.mvp[i])}` : ''}` : 'Sumá jugadores de arriba'}</div>
+      ${TM.bo > 1 ? `<div class="tm-win tm-ser${won ? ' on' : ''}">${won ? ic('trophy') + ' Ganó la serie' : `${SR.w[i]} de ${tmNeed()} mapas`}</div>` : `<button class="btn ${won ? 'green' : 'sec'} tm-win" data-tm="win" data-t="${i}"${pl0.length ? '' : ' disabled'}>${won ? ic('trophy') + ' Ganó' : 'Marcar como ganador'}</button>`}
+      <div class="hint tm-pp">${!pl0.length ? 'Sumá jugadores de arriba' : TM.custom ? `${TM.mvp[i] ? `MVP: <b>${esc(TM.mvp[i])}</b> (+${R().mvp} extra) · ` : 'Sin MVP · '}ordenalos y poné los puntos de cada uno` : `${TM.mvp[i] ? `MVP: <b>${esc(TM.mvp[i])}</b> · ` : 'Sin MVP · '}cada uno suma +${tmPts(i, '')}${TM.mvp[i] ? `, el MVP +${tmPts(i, TM.mvp[i])}` : ''}`}</div>
     </div>`;
   };
   const ok = TM.teams[0].length && TM.teams[1].length;
-  html += `<div class="tm-grid">${team(0)}<div class="tm-vs">VS</div>${team(1)}</div>
-  <div class="panel"><div class="pk-actions" style="margin:0">
+  html += `<div class="tm-grid">${team(0)}<div class="tm-vs">VS</div>${team(1)}</div>`;
+  if (TM.bo > 1) {
+    const nm = i => esc((TM.names[i] || '').trim() || 'Equipo ' + (i + 1));
+    html += `<div class="panel"><h3>Mapas · Bo${TM.bo} · gana el primero en llegar a ${tmNeed()}</h3><div class="mp-list">${TM.maps.slice(0, TM.bo).map((m, i) => { const x = mapW(m), off = i >= SR.upTo;
+      return `<div class="mp-r${off ? ' off' : ''}"><span class="mp-n">${i + 1}</span>
+        <input class="field mp-name" data-mpn="${i}" maxlength="20" placeholder="Mapa ${i + 1} (opcional)" value="${esc(m.name || '')}">
+        <button tabindex="-1" class="mp-t${x === 0 ? ' w' : ''}" data-tm="mpw" data-m="${i}" data-t="0" title="Ganó ${nm(0)}">${nm(0)}</button>
+        <input class="field mp-sc" data-mpa="${i}" inputmode="numeric" maxlength="3" placeholder="0" value="${esc(m.a || '')}" aria-label="Rondas ${nm(0)}"><span class="mp-x">:</span>
+        <input class="field mp-sc" data-mpb="${i}" inputmode="numeric" maxlength="3" placeholder="0" value="${esc(m.b || '')}" aria-label="Rondas ${nm(1)}">
+        <button tabindex="-1" class="mp-t${x === 1 ? ' w' : ''}" data-tm="mpw" data-m="${i}" data-t="1" title="Ganó ${nm(1)}">${nm(1)}</button></div>`; }).join('')}</div>
+      <p class="note">Poné el resultado de cada mapa (o tocá el nombre del equipo que lo ganó). Cuando un equipo llega a ${tmNeed()}, gana la serie y los mapas que sobran no cuentan. La serie entera vale como una partida para los puntos.</p></div>`;
+  }
+  html += `<div class="panel"><div class="pk-actions" style="margin:0">
     <button class="btn green" data-tm="reg"${ok ? '' : ' disabled'}>${TM.editId ? 'Guardar cambios' : 'Registrar en el historial'}</button>
-    <button class="btn sec" data-tm="draw"${TM.win === -1 ? ' style="box-shadow:0 0 0 2px var(--gold)"' : ''}>${TM.win === -1 ? '🤝 Empate' : 'Marcar empate'}</button>
-    <span class="hint">${!ok ? 'Cada equipo necesita al menos un jugador.' : TM.win == null ? '⚠ Todavía no marcaste quién ganó (si lo registrás así, todos suman solo por jugar).' : TM.win === -1 ? 'Empate: todos suman solo por jugar (y los MVP, si hay).' : `Ganó <b>${esc(TM.names[TM.win])}</b>.`}</span>
+    ${TM.bo > 1 ? '' : `<button class="btn sec" data-tm="draw"${TM.win === -1 ? ' style="box-shadow:0 0 0 2px var(--gold)"' : ''}>${TM.win === -1 ? ic('hand') + ' Empate' : 'Marcar empate'}</button>`}
+    <span class="hint">${!ok ? 'Cada equipo necesita al menos un jugador.' : TM.win == null ? (TM.bo > 1 ? `${ic('warn', 'gold')} La serie todavía no tiene ganador (${SR.w[0]}-${SR.w[1]}).` : ic('warn', 'gold') + ' Todavía no marcaste quién ganó (si lo registrás así, todos suman solo por jugar).') : TM.win === -1 ? 'Empate: todos suman solo por jugar (y los MVP, si hay).' : `Ganó <b>${esc(TM.names[TM.win])}</b>.`}</span>
   </div></div>`;
   $('#bk').innerHTML = html;
 }
@@ -2135,23 +2229,32 @@ $('#v-llaves').addEventListener('click', e => {
   }
   else if (act === 'mvp') TM.mvp[i] = TM.mvp[i] === p ? '' : p;
   else if (act === 'win') TM.win = TM.win === i ? null : i;
+  else if (act === 'custom') { if (!TM.custom) { TM.custom = true; [0, 1].forEach(k => TM.teams[k].forEach(x => { if (TM.pts[x] == null) TM.pts[x] = R().play + (TM.win === k ? R().win : 0); })); } }
+  else if (act === 'auto') TM.custom = false;
+  else if (act === 'up' || act === 'dn') { const L = TM.teams[i], a = L.indexOf(p), j = act === 'up' ? a - 1 : a + 1; if (a > -1 && j >= 0 && j < L.length) [L[a], L[j]] = [L[j], L[a]]; }
+  else if (act === 'bo') { TM.bo = +b.dataset.bo; if (TM.bo === 1) { TM.maps = []; TM.win = null; TM.score = ['', '']; } }
+  else if (act === 'mpw') { const m = TM.maps[+b.dataset.m]; m.w = mapW(m) === i ? null : i; if (m.w != null && m.a !== '' && m.b !== '' && parseInt(m.a, 10) !== parseInt(m.b, 10)) { m.a = ''; m.b = ''; } }
   else if (act === 'draw') TM.win = TM.win === -1 ? null : -1;
   else if (act === 'shuffle') {
     const all = tmAll();
     for (let k = all.length - 1; k > 0; k--) { const j = Math.floor(Math.random() * (k + 1)); [all[k], all[j]] = [all[j], all[k]]; }
     const half = Math.ceil(all.length / 2); TM.teams = [all.slice(0, half), all.slice(half)];
-    TM.size = Math.max(TM.size, half); TM.mvp = ['', '']; TM.win = null; TM.score = ['', ''];
-    toast('🎲 Equipos mezclados.');
+    TM.size = Math.max(TM.size, half); TM.mvp = ['', '']; TM.win = null; TM.score = ['', '']; TM.maps = [];
+    toast('Equipos mezclados.');
   }
-  else if (act === 'swapnames') { TM.teams.reverse(); TM.mvp.reverse(); TM.score.reverse(); if (TM.win === 0 || TM.win === 1) TM.win = 1 - TM.win; }
-  else if (act === 'clear') { if (!confirm('¿Vaciar los equipos?')) return; TM.teams = [[], []]; TM.mvp = ['', '']; TM.win = null; TM.score = ['', '']; }
+  else if (act === 'swapnames') { TM.teams.reverse(); TM.mvp.reverse(); TM.score.reverse(); if (TM.win === 0 || TM.win === 1) TM.win = 1 - TM.win;
+    TM.maps.forEach(m => { [m.a, m.b] = [m.b, m.a]; if (m.w === 0 || m.w === 1) m.w = 1 - m.w; }); }
+  else if (act === 'clear') { if (!confirm('¿Vaciar los equipos?')) return; TM.teams = [[], []]; TM.mvp = ['', '']; TM.win = null; TM.score = ['', '']; TM.maps = []; }
   else if (act === 'canceledit') { tmReset(); }
   else if (act === 'reg') {
     if (!TM.teams[0].length || !TM.teams[1].length) return;
-    if (TM.win == null && !confirm('No marcaste quién ganó. ¿Registrar igual? (todos suman solo por jugar)')) return;
+    if (TM.bo > 1) { const s = tmSeries(); TM.win = s.decided; TM.score = [String(s.w[0]), String(s.w[1])]; }
+    if (TM.win == null && !confirm('No hay ganador. ¿Registrar igual? (todos suman solo por jugar)')) return;
     const teams = [0, 1].map(k => ({ name: (TM.names[k] || '').trim() || 'Equipo ' + (k + 1), players: [...TM.teams[k]], mvp: TM.mvp[k] || null }));
     const w = TM.win === 0 || TM.win === 1 ? TM.win : -1, sc = TM.score.map(s => String(s || '').trim());
-    const rec = { date: TM.date || today(), game: TM.game, kind: 'team', teams, win: w, score: sc[0] || sc[1] ? sc : null,
+    const maps = TM.bo > 1 ? TM.maps.slice(0, tmSeries().upTo).filter(m => mapW(m) != null).map(m => ({ name: (m.name || '').trim(), a: String(m.a || ''), b: String(m.b || ''), w: mapW(m) })) : null;
+    const all = [...teams[0].players, ...teams[1].players], pts = TM.custom ? Object.fromEntries(all.map(x => [x, Number(TM.pts[x] ?? R().play) || 0])) : null;
+    const rec = { date: TM.date || today(), game: TM.game, kind: 'team', teams, win: w, pts, score: sc[0] || sc[1] ? sc : null, bo: TM.bo, maps,
       players: [...teams[0].players, ...teams[1].players], winners: w > -1 ? [...teams[w].players] : [], mvp: null, mvps: teams.map(t => t.mvp).filter(Boolean) };
     const ei = TM.editId ? DATA.matches.findIndex(x => x.id === TM.editId) : -1;
     if (ei > -1) DATA.matches[ei] = { ...DATA.matches[ei], ...rec }; else DATA.matches.push({ id: newId(), ...rec });
@@ -2160,19 +2263,32 @@ $('#v-llaves').addEventListener('click', e => {
   }
   tmSave(); renderTM();
 });
-function tmReset() { const keep = { game: TM.game, size: TM.size }; localStorage.removeItem(TMK); tmLoad(); Object.assign(TM, keep); tmSave(); }
+function tmReset() { const keep = { game: TM.game, size: TM.size, bo: TM.bo, custom: TM.custom }; localStorage.removeItem(TMK); tmLoad(); Object.assign(TM, keep); tmSave(); }
 $('#v-llaves').addEventListener('input', e => {
   if (genMode !== 'equipos' || !TM) return;
   const t = e.target;
   if (t.dataset.tmname != null) { TM.names[+t.dataset.tmname] = t.value; tmSave(); }
+  if (t.dataset.tmpts != null) { TM.pts[t.dataset.tmpts] = t.value === '' ? 0 : Number(t.value); tmSave(); }
   if (t.dataset.tmsc != null) { TM.score[+t.dataset.tmsc] = t.value.replace(/[^0-9]/g, ''); t.value = TM.score[+t.dataset.tmsc]; tmSave(); }
   if (t.id === 'tmDate') { TM.date = t.value; tmSave(); }
+  const mi = t.dataset.mpn ?? t.dataset.mpa ?? t.dataset.mpb;
+  if (mi != null) { const m = TM.maps[+mi]; if (!m) return;
+    if (t.dataset.mpn != null) m.name = t.value; else { const v = t.value.replace(/[^0-9]/g, ''); t.value = v; m[t.dataset.mpa != null ? 'a' : 'b'] = v; }
+    tmSave(); }
 });
 $('#v-llaves').addEventListener('change', e => {
   if (genMode !== 'equipos' || !TM) return;
   if (e.target.id === 'tmGame') { TM.game = e.target.value; tmSave(); }
-  if (e.target.dataset.tmname != null) renderTM();
+  if (e.target.dataset.tmname != null || e.target.dataset.mpa != null || e.target.dataset.mpb != null) tmRerender();
 });
+// redibuja sin perder el casillero donde estás escribiendo
+function tmRerender() {
+  setTimeout(() => {
+    const a = document.activeElement, key = a && a.dataset && ['mpn', 'mpa', 'mpb', 'tmname', 'tmsc'].find(k => a.dataset[k] != null), val = key ? a.dataset[key] : null;
+    renderTM();
+    if (key) { const el = document.querySelector(`#bk [data-${key}="${val}"]`); if (el) { el.focus(); try { el.select(); } catch {} } }
+  }, 0);
+}
 
 // pestañas del generador
 let genMode = 'llave';
@@ -2191,7 +2307,7 @@ $('#hFile').addEventListener('change', () => {
     cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height); URL.revokeObjectURL(url);
     hEdit = { k, d: { src: cv.toDataURL('image/jpeg', 0.84), x: 50, y: 50, z: 1 }, isNew: true };
     renderHist(compute(state.season).ms, compute(state.season).bs);
-    toast('Arrastrá la imagen para acomodarla y tocá ✓ Listo.');
+    toast('Arrastrá la imagen para acomodarla y tocá Listo.');
   };
   im.onerror = () => toast('No pude leer esa imagen.', true);
   im.src = url;
@@ -2242,7 +2358,8 @@ $('#hist').addEventListener('click', e => {
   if (m.teams) {
     if (!TM) tmLoad();
     TM = { game: m.game, date: m.date, size: Math.max(m.teams[0].players.length, m.teams[1].players.length, 1), names: m.teams.map(t => t.name), teams: m.teams.map(t => [...t.players]),
-      mvp: m.teams.map(t => t.mvp || ''), win: m.win === 0 || m.win === 1 ? m.win : m.win === -1 ? -1 : null, score: m.score ? [...m.score] : ['', ''], editId: m.id };
+      mvp: m.teams.map(t => t.mvp || ''), win: m.win === 0 || m.win === 1 ? m.win : m.win === -1 ? -1 : null, score: m.score ? [...m.score] : ['', ''], editId: m.id,
+      bo: m.bo || 1, maps: (m.maps || []).map(x => ({ ...x })), custom: !!m.pts, pts: m.pts ? { ...m.pts } : {} };
     tmSave(); genMode = 'equipos'; location.hash = '#llaves'; if (state.view === 'llaves') renderLlaves(); return;
   }
   if (m.ranking) {
@@ -2289,34 +2406,34 @@ function cardModel(k) {
     const tot = {}; let mvp = null;
     tg.forEach(m => { if (m.mvp) mvp = m.mvp; playersOf(m).forEach(p => { tot[p] = (tot[p] || 0) + ptsFor(m, p); }); });
     const rank = Object.entries(tot).sort((a, b) => b[1] - a[1] || byEs(a[0], b[0]));
-    const podium = [[champ, '🏆'], [runner, '🥈'], [third, '🥉']].filter(x => x[0]).map(([n, e]) => ({ pos: e, name: n, pts: tot[n], mvp: n === mvp }));
+    const podium = [[champ, ['trophy', '#f0b232']], [runner, ['medal', '#c4c9ce']], [third, ['medal', '#d08a4f']]].filter(x => x[0]).map(([n, e]) => ({ pos: '', posIco: e, name: n, pts: tot[n], mvp: n === mvp }));
     return { k, game: m0.game, date: m0.date, title: m0.tname || 'Torneo de ' + gameOf(m0.game).name, tag: 'Torneo · sistema suizo',
-      sections: [{ label: 'Podio', kind: 'rows', items: podium }, { label: 'Puntos para la Copa', kind: 'flow', items: rank.map(([n, p]) => ({ name: n, pts: p, mvp: n === mvp })) }],
+      sections: [{ ico: 'trophy', label: 'Podio', kind: 'rows', items: podium }, { label: 'Puntos para la Copa', kind: 'flow', items: rank.map(([n, p]) => ({ name: n, pts: p, mvp: n === mvp })) }],
       mvp, footer: `${tg.length} partidas · ${rank.length} jugadores`,
-      desc: `🏆 ${champ || '—'}${runner ? ' · 🥈 ' + runner : ''}${third ? ' · 🥉 ' + third : ''} · ${rank.length} jugadores` };
+      desc: `Campeón: ${champ || '—'}${runner ? ' · 2° ' + runner : ''}${third ? ' · 3° ' + third : ''} · ${rank.length} jugadores` };
   }
   const m = DATA.matches.find(x => x.id === k); if (!m) return null;
   const G = gameOf(m.game), item = p => ({ name: p, pts: ptsFor(m, p), mvp: isMvp(m, p) });
   if (m.teams) {
     const sc = m.score, T = m.teams;
     return { k, game: m.game, date: m.date, title: `${T[0].name} vs ${T[1].name}`, tag: `${G.name} · ${T[0].players.length}v${T[1].players.length}`,
-      sections: T.map((t, i) => ({ label: `${m.win === i ? '🏆 ' : ''}${t.name}${sc ? ' · ' + (sc[i] || '0') : ''}`, kind: 'flow', items: t.players.map(item) })),
-      mvp: null, footer: `${T[0].players.length + T[1].players.length} jugadores${m.win === -1 ? ' · empate' : ''}`,
-      desc: (m.win > -1 ? `🏆 Ganó ${T[m.win].name}` : m.win === -1 ? '🤝 Empate' : `${T[0].name} vs ${T[1].name}`) + (sc ? ` ${sc[0] || 0}-${sc[1] || 0}` : '') + ((m.mvps || []).length ? ' · ⭐ MVP ' + m.mvps.join(', ') : '') };
+      sections: T.map((t, i) => ({ ico: m.win === i ? 'trophy' : '', label: `${t.name}${sc ? ' · ' + (sc[i] || '0') : ''}`, kind: m.pts ? 'rows' : 'flow', items: t.players.map((p, k) => m.pts ? { pos: (k + 1) + '°', ...item(p) } : item(p)) })),
+      mvp: null, footer: `${m.bo > 1 ? `Bo${m.bo} · ${(m.maps || []).map((x, i) => `${x.name || 'Mapa ' + (i + 1)}${x.a !== '' || x.b !== '' ? ' ' + (x.a || 0) + '-' + (x.b || 0) : ''}`).join(', ')} · ` : ''}${T[0].players.length + T[1].players.length} jugadores${m.win === -1 ? ' · empate' : ''}`,
+      desc: (m.win > -1 ? `Ganó ${T[m.win].name}` : m.win === -1 ? 'Empate' : `${T[0].name} vs ${T[1].name}`) + (sc ? ` ${sc[0] || 0}-${sc[1] || 0}${m.bo > 1 ? ' (Bo' + m.bo + ')' : ''}` : '') + ((m.mvps || []).length ? ' · MVP ' + m.mvps.join(', ') : '') };
   }
   if (m.ranking) {
     const tot = m.ranking.reduce((s, p) => s + (Number(m.pts[p]) || 0), 0);
     return { k, game: m.game, date: m.date, title: m.tname || G.name, tag: 'Tabla de puntos',
-      sections: [{ label: '🏆 Leaderboard', kind: 'rows', items: m.ranking.map((p, i) => ({ pos: (i + 1) + '°', ...item(p) })) }],
+      sections: [{ ico: 'board', label: 'Leaderboard', kind: 'rows', items: m.ranking.map((p, i) => ({ pos: (i + 1) + '°', ...item(p) })) }],
       mvp: m.mvp, footer: `${m.ranking.length} jugadores · ${tot} pts repartidos${m.tname ? ' · ' + G.name : ''}`,
-      desc: m.ranking.slice(0, 5).map((p, i) => `${i + 1}° ${p} +${ptsFor(m, p)}`).join(' · ') + (m.ranking.length > 5 ? ' …' : '') + (m.mvp ? ` · ⭐ MVP ${m.mvp}` : '') };
+      desc: m.ranking.slice(0, 5).map((p, i) => `${i + 1}° ${p} +${ptsFor(m, p)}`).join(' · ') + (m.ranking.length > 5 ? ' …' : '') + (m.mvp ? ` · MVP ${m.mvp}` : '') };
   }
   const ps = playersOf(m), W = new Set(m.winners || []), win = ps.filter(p => W.has(p)), rest = ps.filter(p => !W.has(p));
   return { k, game: m.game, date: m.date, title: G.name, tag: '',
-    sections: win.length ? [{ label: `🏆 Ganadores · +${r.win} extra c/u`, kind: 'flow', items: win.map(item) }, ...(rest.length ? [{ label: 'Perdieron', kind: 'flow', items: rest.map(item) }] : [])]
+    sections: win.length ? [{ ico: 'trophy', label: `Ganadores · +${r.win} extra c/u`, kind: 'flow', items: win.map(item) }, ...(rest.length ? [{ label: 'Perdieron', kind: 'flow', items: rest.map(item) }] : [])]
       : [{ label: 'Participantes', kind: 'flow', items: ps.map(item) }],
     mvp: m.mvp, footer: `${ps.length} jugadores`,
-    desc: win.length ? `🏆 Ganaron: ${win.join(', ')}${m.mvp ? ' · ⭐ MVP ' + m.mvp : ''}` : `${ps.length} jugadores` };
+    desc: win.length ? `Ganaron: ${win.join(', ')}${m.mvp ? ' · MVP ' + m.mvp : ''}` : `${ps.length} jugadores` };
 }
 
 // dibuja la tarjeta (estilo mensaje del Copa Bot) en un canvas
@@ -2342,7 +2459,7 @@ async function drawCard(md) {
       y = rowY + 60;
     }
   }
-  if (md.mvp) { layout.push({ t: 'label', s: { label: `⭐ MVP · +${R().mvp}` }, y }); y += 44; layout.push({ t: 'pill', it: { name: md.mvp, pts: md.sections.flatMap(s => s.items).find(i => i.name === md.mvp)?.pts ?? R().mvp, mvp: true }, x: pad + 12, y }); y += 60; }
+  if (md.mvp) { layout.push({ t: 'label', s: { ico: 'star', label: `MVP · +${R().mvp}` }, y }); y += 44; layout.push({ t: 'pill', it: { name: md.mvp, pts: md.sections.flatMap(s => s.items).find(i => i.name === md.mvp)?.pts ?? R().mvp, mvp: true }, x: pad + 12, y }); y += 60; }
   const footY = y + 14, H = Math.max(photo ? 630 : 330, footY + 50 + pad);
   const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const c = cv.getContext('2d');
   const hue = gHue(md.game);
@@ -2374,10 +2491,10 @@ async function drawCard(md) {
   };
   const posCol = ['#f0b232', '#c4c9ce', '#d08a4f'];
   for (const L of layout) {
-    if (L.t === 'label') { c.fillStyle = '#f2f3f5'; c.font = `700 26px ${F}`; c.fillText(L.s.label, pad + 12, L.y + 18); }
+    if (L.t === 'label') { let lx = pad + 12; if (L.s.ico) { drawIco(c, L.s.ico, lx, L.y + 3, 30, '#f0b232'); lx += 38; } c.fillStyle = '#f2f3f5'; c.font = `700 26px ${F}`; c.fillText(L.s.label, lx, L.y + 18); }
     else if (L.t === 'row') {
       const i = parseInt(L.it.pos, 10); c.fillStyle = isNaN(i) ? '#f2f3f5' : (posCol[i - 1] || '#b5bac1'); c.font = `800 24px ${F}`;
-      c.fillText(L.it.pos, L.x, L.y + 22); pill(L.it, L.x + 60, L.y);
+      if (L.it.posIco) drawIco(c, L.it.posIco[0], L.x, L.y + 5, 34, L.it.posIco[1]); else c.fillText(L.it.pos, L.x, L.y + 22); pill(L.it, L.x + 60, L.y);
     } else pill(L.it, L.x, L.y);
   }
   // pie
@@ -2425,13 +2542,13 @@ async function ghCommitFiles(files, message) {
 let shWatch = 0;
 async function shWait(url) {
   const my = ++shWatch, st = $('#shStatus');
-  if (!/github\.io$/.test(location.hostname)) { st.className = 'shst'; st.textContent = '⏳ GitHub tarda 1–2 minutos en publicar el link.'; return; }
-  st.className = 'shst wait'; st.textContent = '⏳ GitHub está publicando el link… (no hace falta esperar acá)';
+  if (!/github\.io$/.test(location.hostname)) { st.className = 'shst'; st.innerHTML = ic('hour') + ' GitHub tarda 1–2 minutos en publicar el link.'; return; }
+  st.className = 'shst wait'; st.innerHTML = ic('hour') + ' GitHub está publicando el link… (no hace falta esperar acá)';
   for (let i = 0; i < 60 && my === shWatch; i++) {
-    try { const r = await fetch(url.replace(/\?.*$/, '') + '?t=' + Date.now(), { method: 'HEAD', cache: 'no-store' }); if (r.ok) { st.className = 'shst ok'; st.textContent = '✅ ¡Listo! El link ya funciona.'; return; } } catch {}
+    try { const r = await fetch(url.replace(/\?.*$/, '') + '?t=' + Date.now(), { method: 'HEAD', cache: 'no-store' }); if (r.ok) { st.className = 'shst ok'; st.innerHTML = ic('ok') + ' ¡Listo! El link ya funciona.'; return; } } catch {}
     await new Promise(r => setTimeout(r, 6000));
   }
-  if (my === shWatch) { st.className = 'shst'; st.textContent = '⏳ Sigue en espera. Si publicaste muchas veces en la última hora, GitHub puede tardar más: probá el link en un rato.'; }
+  if (my === shWatch) { st.className = 'shst'; st.innerHTML = ic('hour') + ' Sigue en espera. Si publicaste muchas veces en la última hora, GitHub puede tardar más: probá el link en un rato.'; }
 }
 const escA = s => esc(s).replace(/\n/g, ' ');
 async function buildShare(k, c) {
@@ -2452,9 +2569,9 @@ async function buildShare(k, c) {
   return { files: [{ path: `p/${k}.jpg`, content: jpg.split(',')[1] }, { path: `p/${k}.html`, content: b64(page) }], v, sig: shareSig(k) };
 }
 const copyLink = l => navigator.clipboard.writeText(l).then(() => true, () => { prompt('Copiá el link:', l); return false; });
-// botón 🔗: si el link ya existe y está al día lo copia; si no (y sos admin) lo genera al toque
+// botón de link: si el link ya existe y está al día lo copia; si no (y sos admin) lo genera al toque
 async function shareMatch(k, btn) {
-  if (shareV(k) && (shareFresh(k) || !isUnlocked())) { if (await copyLink(shareLink(k))) toast('🔗 Link copiado. Pegalo en Discord o WhatsApp.'); return; }
+  if (shareV(k) && (shareFresh(k) || !isUnlocked())) { if (await copyLink(shareLink(k))) toast('Link copiado. Pegalo en Discord o WhatsApp.'); return; }
   if (!isUnlocked()) { toast('Esta partida todavía no tiene link.', true); return; }
   if (btn) { btn.disabled = true; btn.classList.add('busy'); }
   try {
@@ -2463,7 +2580,7 @@ async function shareMatch(k, btn) {
     await ghCommitFiles(s.files, 'Link de partida');
     DATA.shares[k] = { v: s.v, sig: s.sig }; changed();
     const ok = await copyLink(shareLink(k, c));
-    toast(ok ? '🔗 Link generado y copiado. Puede tardar 1–2 minutos en andar.' : 'Link generado.');
+    toast(ok ? 'Link generado y copiado. Puede tardar 1–2 minutos en andar.' : 'Link generado.');
   } catch (e) { toast(e.message || 'No se pudo generar el link.', true); }
   finally { if (btn) { btn.disabled = false; btn.classList.remove('busy'); } }
 }
