@@ -277,6 +277,21 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .lbh{display:flex;flex-direction:column;gap:4px}
 .lbh-r{display:flex;align-items:center;gap:8px}
 .lbh-n{width:28px;font-weight:800;color:var(--mut);font-size:13px}
+.mh{position:relative}
+.htools{margin-left:8px;display:flex;gap:4px;flex-wrap:wrap}
+.hb{border:1px solid var(--line);background:var(--card);color:var(--mut);border-radius:6px;padding:3px 8px;font-size:12px;font-weight:600;cursor:pointer}
+.hb:hover{color:var(--hi);border-color:var(--blurple)}
+.embed.has-img{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:16px;max-width:800px;align-items:start}
+.eb{min-width:0}
+.eimg{aspect-ratio:3/5;border-radius:4px;overflow:hidden;background:var(--deep)}
+.eimg img{display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:600px){.embed.has-img{grid-template-columns:minmax(0,1fr) 110px;gap:10px}}
+.cropbox{width:min(400px,100%);text-align:left}
+.cropf{position:relative;width:240px;height:400px;margin:4px auto 8px;overflow:hidden;border-radius:6px;background:#000;cursor:grab;touch-action:none;box-shadow:0 0 0 2px var(--blurple)}
+.cropf:active{cursor:grabbing}
+.cropf img{position:absolute;left:0;top:0;transform-origin:0 0;max-width:none;user-select:none;pointer-events:none}
+.edit-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:rgba(240,178,50,.12);border:1px solid rgba(240,178,50,.5);border-radius:8px;padding:10px 14px;margin-bottom:16px;color:var(--gold);font-weight:700}
+.edit-bar .btn{margin-left:auto}
 .bq{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
 .bq-b{border:1px dashed var(--line);background:none;color:#c9cdfb;border-radius:6px;padding:4px 10px;font-size:13px;font-weight:600;cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bq-b:hover{background:rgba(88,101,242,.18);border-color:var(--blurple)}
@@ -463,6 +478,7 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
             <select class="field" id="mMvp"></select>
             <div class="prev-pts" id="mPrev"></div>
             <div class="pk-actions"><button class="btn" id="mAdd">Agregar partida</button></div>
+            <div class="edit-bar" id="mEdit" hidden style="margin:12px 0 0"><span></span><button class="btn sm sec" id="mEditCancel">Cancelar</button></div>
           </div>
 
           <div class="panel">
@@ -560,6 +576,17 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 
 <div class="tip" id="tip" role="tooltip"></div>
 <div class="toast" id="toast" role="status"></div>
+<div class="modal" id="crop" hidden>
+  <div class="lockbox cropbox">
+    <h3>Recortar imagen</h3>
+    <p>Arrastrá la imagen para moverla y usá la barra (o la ruedita) para hacer zoom.</p>
+    <div class="cropf" id="cropF"><img id="cropImg" alt="" draggable="false"></div>
+    <label class="lbl2" for="cropZ">Zoom</label>
+    <input type="range" id="cropZ" min="1" max="4" step="0.01" value="1" style="width:100%">
+    <div class="pk-actions" style="justify-content:flex-end"><button type="button" class="btn sec" id="cropCancel">Cancelar</button><button type="button" class="btn" id="cropOk">Usar este recorte</button></div>
+  </div>
+</div>
+<input type="file" id="hFile" accept="image/*" hidden>
 <div class="modal" id="bkImp" hidden>
   <div class="lockbox bi">
     <h3>Importar llave</h3>
@@ -637,6 +664,9 @@ const sgn = n => (n > 0 ? '+' : '') + n;
 const byEs = (a, b) => a.localeCompare(b, 'es');
 
 /* ---------- datos ---------- */
+// id fijo para partidas viejas que no tienen uno (sale de su contenido, así no cambia entre recargas)
+function stableId(m, i) { let x = 7; for (const c of JSON.stringify([m.date, m.game, m.players, m.winners, m.tid, m.stage, i])) x = (x * 31 + c.charCodeAt(0)) >>> 0; return 'm' + x.toString(36); }
+const newId = () => 'm' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 const norm = d => {
   d = d || {};
   return {
@@ -648,7 +678,8 @@ const norm = d => {
     bracket: d.bracket ? JSON.parse(JSON.stringify(d.bracket)) : null,
     games: Object.fromEntries(Object.entries(d.games || {}).map(([k, v]) => [k, { ...v }])),
     bonus: (d.bonus || []).map(b => ({ ...b })),
-    matches: (d.matches || []).map(m => ({ ...m, players: [...(m.players || [])], winners: [...(m.winners || [])] })),
+    matches: (d.matches || []).map((m, i) => ({ ...m, id: m.id || stableId(m, i), players: [...(m.players || [])], winners: [...(m.winners || [])] })),
+    himg: { ...(d.himg || {}) },
   };
 };
 const DRAFT = 'copa-draft-v1';
@@ -780,6 +811,10 @@ function applyLook() {
   const fav = document.querySelector('link[rel=icon]'); if (fav) fav.href = DATA.look.logo || FAVICON;
 }
 const botHtml = () => `<div class="bot"><img class="logo" src="${esc(logoSrc())}" alt=""></div>`;
+const hImg = k => k && DATA.himg[k] ? DATA.himg[k] : '';
+const hTools = (k, edit) => !isUnlocked() || !k ? '' : `<span class="htools">${edit ? `<button class="hb" data-hedit="${esc(edit)}">✏️ Editar</button>` : ''}<button class="hb" data-himg="${esc(k)}">🖼 ${hImg(k) ? 'Cambiar imagen' : 'Imagen'}</button>${hImg(k) ? `<button class="hb" data-hnoimg="${esc(k)}">Quitar imagen</button>` : ''}</span>`;
+const hOpen = k => `<div class="embed${hImg(k) ? ' has-img' : ''}"`;
+const hClose = k => `</div>${hImg(k) ? `<div class="eimg"><img src="${esc(hImg(k))}" alt="" loading="lazy"></div>` : ''}</div></div></article>`;
 function renderHist(ms, bs) {
   const tg = {}, loose = [];
   ms.forEach(m => { if (m.tid) (tg[m.tid] = tg[m.tid] || []).push(m); else loose.push(m); });
@@ -797,8 +832,8 @@ function renderHist(ms, bs) {
       const rank = Object.entries(tot).sort((a, b) => b[1] - a[1] || byEs(a[0], b[0]));
       const isCur = DATA.bracket && DATA.bracket.registered && DATA.bracket.registered.tid === m0.tid;
       return `<article class="msg">${botHtml()}<div class="mb">
-        <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(m0.date)}</time></div>
-        <div class="embed" style="--h:${gHue(m0.game)}">
+        <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(m0.date)}</time>${hTools(m0.tid, isCur ? '#t' : '')}</div>
+        ${hOpen(m0.tid)} style="--h:${gHue(m0.game)}"><div class="eb">
           <div class="et">${gIcon(m0.game, 'gi lg')} ${esc(m0.tname || 'Torneo de ' + G.name)}</div>
           ${champ ? `<div class="ef"><div class="k">🏆 Campeón</div><div class="v">${men(champ, tot[champ], mvp === champ)}</div></div>` : ''}
           ${runner ? `<div class="ef"><div class="k">🥈 Subcampeón</div><div class="v">${men(runner, tot[runner], mvp === runner)}</div></div>` : ''}
@@ -807,7 +842,7 @@ function renderHist(ms, bs) {
           <div class="ef"><div class="k">Puntos para la Copa</div><div class="v">${rank.map(([p, n]) => men(p, n, false)).join('')}</div></div>
           ${isCur ? '<div class="tl"><a class="lnk" href="#llaves">Ver la llave completa →</a></div>' : ''}
           <div class="efoot">${g.length} ${pl(g.length, 'partida', 'partidas')} · ${rank.length} jugadores · Sistema suizo · ${fmtDate(m0.date)}</div>
-        </div></div></article>`;
+        ${hClose(m0.tid)}`;
     }
     if (it.t === 'b') {
       const b = it.g[0], n = Number(b.pts) || 0;
@@ -823,13 +858,13 @@ function renderHist(ms, bs) {
     if (m.ranking) {
       const tot = m.ranking.reduce((s, p) => s + (Number(m.pts[p]) || 0), 0);
       return `<article class="msg">${botHtml()}<div class="mb">
-        <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(m.date)}</time></div>
-        <div class="embed" style="--h:${gHue(m.game)}">
+        <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(m.date)}</time>${hTools(m.id, m.id)}</div>
+        ${hOpen(m.id)} style="--h:${gHue(m.game)}"><div class="eb">
           <div class="et">${gIcon(m.game, 'gi lg')} ${esc(m.tname || G.name)} <span class="lb-tag">Tabla de puntos</span></div>
           <div class="ef"><div class="k">🏆 Leaderboard</div><div class="lbh">${m.ranking.map((p, i) => `<div class="lbh-r"><span class="lbh-n p${i + 1}">${i + 1}°</span>${mm(p)}</div>`).join('')}</div></div>
           ${m.mvp ? `<div class="ef"><div class="k">⭐ MVP · +${R().mvp}</div><div class="v">${mm(m.mvp)}</div></div>` : ''}
           <div class="efoot">${m.ranking.length} jugadores · ${tot} pts repartidos${m.tname ? ' · ' + esc(G.name) : ''} · ${fmtDate(m.date)}</div>
-        </div></div></article>`;
+        ${hClose(m.id)}`;
     }
     const win = ps.filter(p => W.has(p)), rest = ps.filter(p => !W.has(p));
     const fields = win.length
@@ -838,13 +873,13 @@ function renderHist(ms, bs) {
       : `<div class="ef"><div class="k">Participantes</div><div class="v">${ps.map(mm).join('')}</div></div>
          <div class="ef"><div class="k">Resultado</div><div class="hint">Sin ganador cargado</div></div>`;
     return `<article class="msg">${botHtml()}<div class="mb">
-        <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(m.date)}</time></div>
-        <div class="embed" style="--h:${gHue(m.game)}">
+        <div class="mh"><b>Copa Bot</b><span class="tag">BOT</span><time>${fmtDate(m.date)}</time>${hTools(m.id, m.id)}</div>
+        ${hOpen(m.id)} style="--h:${gHue(m.game)}"><div class="eb">
           <div class="et">${gIcon(m.game, 'gi lg')} ${esc(G.name)}</div>
           ${fields}
           ${m.mvp ? `<div class="ef"><div class="k">⭐ MVP · +${R().mvp}</div><div class="v">${mm(m.mvp)}</div></div>` : ''}
           <div class="efoot">${ps.length} ${pl(ps.length, 'jugador', 'jugadores')} · +${R().play} a cada uno por jugar · ${fmtDate(m.date)}</div>
-        </div></div></article>`;
+        ${hClose(m.id)}`;
   }).join('');
 }
 
@@ -979,6 +1014,7 @@ function setView(v) {
   if (v === 'pickem') renderPickem();
   if (v === 'llaves') renderLlaves();
   if (v === 'admin') renderAdmin();
+  if (v === 'historial') render();
 }
 document.addEventListener('click', e => {
   const ch = e.target.closest('.ch'); if (ch) { setView(ch.dataset.view); return; }
@@ -1147,15 +1183,23 @@ function renderMatchForm() {
     `${playing.length} ${pl(playing.length, 'jugador', 'jugadores')} · ${winners.length ? winners.length + ' ' + pl(winners.length, 'ganador', 'ganadores') : '<b style="color:var(--gold)">⚠ sin ganador: tocá 2 veces al que ganó para que sume puntos e insignia</b>'}<br>` +
     playing.filter(n => pts(n)).map(n => `<b>${esc(n)}</b> +${pts(n)}`).join(' · ');
   $('#mAdd').disabled = !playing.length;
+  const em = editMatchId && DATA.matches.find(x => x.id === editMatchId);
+  if (editMatchId && !em) editMatchId = null;
+  $('#mAdd').textContent = editMatchId ? 'Guardar cambios' : 'Agregar partida';
+  $('#mEdit').hidden = !editMatchId;
+  if (em) $('#mEdit').querySelector('span').textContent = `✏️ Editando la partida de ${gameOf(em.game).name} del ${fmtDate(em.date)}`;
 }
 $('#mPlayers').addEventListener('click', e => { const b = e.target.closest('[data-mp]'); if (!b) return; const n = b.dataset.mp; mf.sel[n] = ((mf.sel[n] || 0) + 1) % 3; if (!mf.sel[n]) delete mf.sel[n]; renderMatchForm(); });
+$('#mEditCancel').addEventListener('click', () => { editMatchId = null; mf.sel = {}; mf.mvp = ''; $('#mDate').value = today(); renderMatchForm(); });
 $('#mMvp').addEventListener('change', e => { mf.mvp = e.target.value; renderMatchForm(); });
 $('#mAdd').addEventListener('click', () => {
   const players = Object.keys(mf.sel).sort(byEs); if (!players.length) return;
   const date = $('#mDate').value || today();
-  DATA.matches.push({ date, game: $('#mGame').value, players, winners: players.filter(n => mf.sel[n] === 2), mvp: mf.mvp || null });
-  mf.sel = {}; mf.mvp = '';
-  changed(); toast(`Partida de ${gameOf($('#mGame').value).name} agregada. Acordate de publicar.`);
+  const rec = { date, game: $('#mGame').value, players, winners: players.filter(n => mf.sel[n] === 2), mvp: mf.mvp || null };
+  const ei = editMatchId ? DATA.matches.findIndex(x => x.id === editMatchId) : -1;
+  if (ei > -1) DATA.matches[ei] = { ...DATA.matches[ei], ...rec }; else DATA.matches.push({ id: newId(), ...rec });
+  const was = ei > -1; editMatchId = null; mf.sel = {}; mf.mvp = '';
+  changed(); toast(was ? 'Partida corregida. Acordate de publicar.' : `Partida de ${gameOf(rec.game).name} agregada. Acordate de publicar.`);
 });
 
 // puntos extra
@@ -1723,9 +1767,9 @@ $('#v-llaves').addEventListener('click', e => {
     const champ = bkChamp(B); if (!champ) return;
     const mode = (document.querySelector('input[name=bkMode]:checked') || {}).value || 'cruces', mvp = $('#bkMvp').value || null;
     const tid = B.id + '-' + Date.now(), base = { date: B.date, game: B.game, tid, tname: B.name };
-    if (mode === 'final') DATA.matches.push({ ...base, players: [...B.players], winners: [champ], mvp, stage: 'final' });
+    if (mode === 'final') DATA.matches.push({ ...base, id: newId(), players: [...B.players], winners: [champ], mvp, stage: 'final' });
     else {
-      const ms = bkAllMatches(B).map(({ m, stage }) => ({ ...base, players: [m.a, m.b], winners: [m[m.w]], mvp: null, stage }));
+      const ms = bkAllMatches(B).map(({ m, stage }) => ({ ...base, id: newId(), players: [m.a, m.b], winners: [m[m.w]], mvp: null, stage }));
       if (mvp) { const lastM = [...ms].reverse().find(x => x.players.includes(mvp)); if (lastM) lastM.mvp = mvp; }
       DATA.matches.push(...ms);
     }
@@ -1813,6 +1857,8 @@ function renderLB() {
   const tot = LB.order.reduce((s, _, i) => s + (Number(LB.pts[i]) || 0), 0);
   let html = '';
   if (dirty) html += `<div class="adm-bar"><span class="st dirty">● Tenés cambios sin publicar</span><button class="btn green" data-bka="pub">Publicar</button></div>`;
+  if (LB.editId && !DATA.matches.some(x => x.id === LB.editId)) delete LB.editId;
+  if (LB.editId) html += `<div class="edit-bar">✏️ Estás editando una tabla del historial<button class="btn sm sec" data-lb="canceledit">Cancelar edición</button></div>`;
   html += `<div class="panel">
     <h3>Tabla de puntos</h3>
     <p class="note" style="margin:0 0 6px">Para juegos todos contra todos (BAPBAP, osu!, Tetris…): ordená el leaderboard, poné los puntos que se lleva cada uno y elegí el MVP. Al registrarla aparece en el historial y suma en la Copa.</p>
@@ -1840,7 +1886,7 @@ function renderLB() {
         <button class="ib" data-lb="rm" data-i="${i}" aria-label="Quitar">✕</button>
       </div>`).join('')}</div>
       <div class="prev-pts"><b>${tot}</b> pts repartidos${LB.mvp ? ` · MVP: <b>${esc(LB.mvp)}</b> (+${R().mvp} extra)` : ' · sin MVP'} · el 1° cuenta como victoria (insignia de ${esc(gameOf(LB.game).name)})</div>
-      <div class="pk-actions"><button class="btn green" data-lb="reg"${LB.order.length < 2 ? ' disabled' : ''}>Registrar en el historial</button><button class="btn sec" data-lb="clear">Limpiar</button></div>`
+      <div class="pk-actions"><button class="btn green" data-lb="reg"${LB.order.length < 2 ? ' disabled' : ''}>${LB.editId ? 'Guardar cambios' : 'Registrar en el historial'}</button><button class="btn sec" data-lb="clear">Limpiar</button></div>`
     : '<div class="hint">Elegí los jugadores de arriba, empezando por el que salió 1°.</div>'}
   </div>`;
   $('#bk').innerHTML = html;
@@ -1861,13 +1907,16 @@ $('#v-llaves').addEventListener('click', e => {
   else if (act === 'rm') { if (LB.mvp === LB.order[i]) LB.mvp = ''; LB.order.splice(i, 1); }
   else if (act === 'mvp') LB.mvp = LB.mvp === LB.order[i] ? '' : LB.order[i];
   else if (act === 'clear') { if (!confirm('¿Vaciar la tabla?')) return; LB.order = []; LB.pts = []; LB.mvp = ''; LB.name = ''; }
+  else if (act === 'canceledit') { LB.order = []; LB.pts = []; LB.mvp = ''; LB.name = ''; delete LB.editId; }
   else if (act === 'reg') {
     if (LB.order.length < 2) return;
     const pts = {}; LB.order.forEach((n, k) => { pts[n] = Number(LB.pts[k]) || 0; });
-    DATA.matches.push({ date: LB.date || today(), game: LB.game, players: [...LB.order], winners: [LB.order[0]], mvp: LB.mvp || null, kind: 'lb', tname: LB.name.trim(), ranking: [...LB.order], pts });
+    const rec = { date: LB.date || today(), game: LB.game, players: [...LB.order], winners: [LB.order[0]], mvp: LB.mvp || null, kind: 'lb', tname: LB.name.trim(), ranking: [...LB.order], pts };
+    const ei = LB.editId ? DATA.matches.findIndex(x => x.id === LB.editId) : -1;
+    if (ei > -1) DATA.matches[ei] = { ...DATA.matches[ei], ...rec }; else DATA.matches.push({ id: newId(), ...rec });
     const g = gameOf(LB.game).name;
-    LB.order = []; LB.pts = []; LB.mvp = ''; LB.name = ''; lbSave();
-    changed(); toast(`Tabla de ${g} registrada en el historial. Acordate de publicar.`); return;
+    LB.order = []; LB.pts = []; LB.mvp = ''; LB.name = ''; delete LB.editId; lbSave();
+    changed(); toast(ei > -1 ? `Tabla de ${g} corregida. Acordate de publicar.` : `Tabla de ${g} registrada en el historial. Acordate de publicar.`); return;
   }
   lbSave(); renderLB();
 });
@@ -1886,6 +1935,68 @@ $('#v-llaves').addEventListener('change', e => { if (e.target.id === 'lbGame' &&
 // pestañas del generador
 let genMode = 'llave';
 $('#genTabs').addEventListener('click', e => { const b = e.target.closest('[data-gm]'); if (!b) return; genMode = b.dataset.gm; renderLlaves(); });
+
+/* =====================================================================
+   HISTORIAL: imagen vertical con recorte + editar partidas (solo admin)
+   ===================================================================== */
+const CF = { W: 240, H: 400 }; let crop = null, cropKey = null;
+function cropApply() {
+  const c = crop, s = c.base * c.z, w = c.iw * s, hh = c.ih * s;
+  c.x = Math.min(0, Math.max(CF.W - w, c.x)); c.y = Math.min(0, Math.max(CF.H - hh, c.y));
+  $('#cropImg').style.transform = `translate(${c.x}px,${c.y}px) scale(${s})`;
+}
+function cropZoom(z, cx = CF.W / 2, cy = CF.H / 2) {
+  const c = crop, s0 = c.base * c.z; z = Math.max(1, Math.min(4, z)); const s1 = c.base * z;
+  c.x = cx - (cx - c.x) * s1 / s0; c.y = cy - (cy - c.y) * s1 / s0; c.z = z; $('#cropZ').value = z; cropApply();
+}
+$('#hFile').addEventListener('change', () => {
+  const f = $('#hFile').files[0]; if (!f) return;
+  const url = URL.createObjectURL(f), im = $('#cropImg');
+  im.onload = () => {
+    const iw = im.naturalWidth, ih = im.naturalHeight, base = Math.max(CF.W / iw, CF.H / ih);
+    crop = { iw, ih, base, z: 1, x: (CF.W - iw * base) / 2, y: (CF.H - ih * base) / 2, url };
+    $('#cropZ').value = 1; cropApply(); $('#crop').hidden = false;
+  };
+  im.onerror = () => toast('No pude leer esa imagen.', true);
+  im.src = url;
+});
+$('#cropZ').addEventListener('input', e => crop && cropZoom(+e.target.value));
+$('#cropF').addEventListener('wheel', e => { if (!crop) return; e.preventDefault(); const r = $('#cropF').getBoundingClientRect(); cropZoom(crop.z * (e.deltaY < 0 ? 1.08 : 1 / 1.08), e.clientX - r.left, e.clientY - r.top); }, { passive: false });
+let cropDrag = null;
+$('#cropF').addEventListener('pointerdown', e => { if (!crop) return; cropDrag = { px: e.clientX, py: e.clientY, x: crop.x, y: crop.y }; $('#cropF').setPointerCapture(e.pointerId); });
+$('#cropF').addEventListener('pointermove', e => { if (!cropDrag) return; crop.x = cropDrag.x + e.clientX - cropDrag.px; crop.y = cropDrag.y + e.clientY - cropDrag.py; cropApply(); });
+$('#cropF').addEventListener('pointerup', () => { cropDrag = null; });
+$('#cropF').addEventListener('pointercancel', () => { cropDrag = null; });
+const cropClose = () => { $('#crop').hidden = true; if (crop) URL.revokeObjectURL(crop.url); crop = null; cropKey = null; };
+$('#cropCancel').addEventListener('click', cropClose);
+$('#cropOk').addEventListener('click', () => {
+  if (!crop || !cropKey) return;
+  const c = crop, s = c.base * c.z, cv = document.createElement('canvas'); cv.width = 360; cv.height = 600;
+  cv.getContext('2d').drawImage($('#cropImg'), -c.x / s, -c.y / s, CF.W / s, CF.H / s, 0, 0, 360, 600);
+  DATA.himg[cropKey] = cv.toDataURL('image/jpeg', 0.85);
+  cropClose(); changed(); toast('Imagen agregada. Acordate de publicar.');
+});
+
+// edición de partidas
+let editMatchId = null;
+$('#hist').addEventListener('click', e => {
+  if (!isUnlocked()) return;
+  const im = e.target.closest('[data-himg]'), no = e.target.closest('[data-hnoimg]'), ed = e.target.closest('[data-hedit]');
+  if (im) { cropKey = im.dataset.himg; $('#hFile').value = ''; $('#hFile').click(); return; }
+  if (no) { if (confirm('¿Quitar la imagen de esta partida?')) { delete DATA.himg[no.dataset.hnoimg]; changed(); } return; }
+  if (!ed) return;
+  if (ed.dataset.hedit === '#t') { genMode = 'llave'; location.hash = '#llaves'; toast('Para corregir el torneo: deshacé el registro, cambiá la llave y volvé a registrarla.'); return; }
+  const m = DATA.matches.find(x => x.id === ed.dataset.hedit); if (!m) return;
+  if (m.ranking) {
+    if (!LB) lbLoad();
+    LB = { ...LB, name: m.tname || '', game: m.game, date: m.date, order: [...m.ranking], pts: m.ranking.map(p => Number(m.pts[p]) || 0), mvp: m.mvp || '', editId: m.id };
+    lbSave(); genMode = 'tabla'; location.hash = '#llaves';
+  } else {
+    editMatchId = m.id; mf.sel = {}; playersOf(m).forEach(p => { mf.sel[p] = (m.winners || []).includes(p) ? 2 : 1; }); mf.mvp = m.mvp || '';
+    $('#mDate').value = m.date; location.hash = '#admin';
+    setTimeout(() => { $('#mGame').value = m.game; renderMatchForm(); $('#mAdd').closest('.panel').scrollIntoView({ block: 'start', behavior: 'smooth' }); }, 50);
+  }
+});
 
 /* ---------- barra de arriba: transparente sobre el banner, sólida al bajar ---------- */
 const contentEl = $('.content');
