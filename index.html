@@ -293,6 +293,12 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .eimg-hint{position:absolute;z-index:2;top:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.65);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;pointer-events:none;white-space:nowrap}
 .eimg-bar{position:absolute;z-index:2;left:8px;right:8px;bottom:8px;display:flex;gap:6px;align-items:center;background:rgba(0,0,0,.7);padding:6px 8px;border-radius:8px}
 .eimg-bar input{flex:1;min-width:0;accent-color:var(--blurple)}
+.hb.share{color:#c9cdfb;border-color:rgba(88,101,242,.6)}
+.shbox{width:min(560px,100%);text-align:left;max-height:calc(100vh - 32px);overflow:auto}
+.shbox p,.shbox h3{text-align:left}
+.shimg{display:block;width:100%;border-radius:8px;background:#1e1f22}
+article.msg{transition:background .4s;border-radius:8px}
+article.msg.hl{background:rgba(88,101,242,.16)}
 .hb.ok{background:var(--green);border-color:var(--green);color:#fff}
 .edit-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:rgba(240,178,50,.12);border:1px solid rgba(240,178,50,.5);border-radius:8px;padding:10px 14px;margin-bottom:16px;color:var(--gold);font-weight:700}
 .edit-bar .btn{margin-left:auto}
@@ -582,6 +588,16 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 <div class="toast" id="toast" role="status"></div>
 
 <input type="file" id="hFile" accept="image/*" hidden>
+<div class="modal" id="share" hidden>
+  <div class="lockbox shbox">
+    <h3>Compartir partida</h3>
+    <p id="shMsg"></p>
+    <img id="shImg" alt="Vista previa" class="shimg">
+    <div class="lb-pre" style="margin-top:12px"><input class="field" id="shLink" readonly><button class="btn" id="shCopy">Copiar</button></div>
+    <p class="note">La vista previa puede tardar 1–2 minutos en aparecer (GitHub tiene que publicar los archivos). Si cambiás la partida, tocá Compartir de nuevo y usá el link nuevo.</p>
+    <div class="pk-actions" style="justify-content:flex-end"><button class="btn sec" id="shClose">Cerrar</button></div>
+  </div>
+</div>
 <div class="modal" id="bkImp" hidden>
   <div class="lockbox bi">
     <h3>Importar llave</h3>
@@ -675,6 +691,7 @@ const norm = d => {
     bonus: (d.bonus || []).map(b => ({ ...b })),
     matches: (d.matches || []).map((m, i) => ({ ...m, id: m.id || stableId(m, i), players: [...(m.players || [])], winners: [...(m.winners || [])] })),
     himg: { ...(d.himg || {}) },
+    shares: { ...(d.shares || {}) },
   };
 };
 const DRAFT = 'copa-draft-v1';
@@ -816,7 +833,12 @@ const hImgObj = k => {
 };
 const hImg = k => !!hImgObj(k);
 const hImgStyle = o => `object-position:${o.x}% ${o.y}%;transform-origin:${o.x}% ${o.y}%;transform:scale(${o.z})`;
-const hTools = (k, edit) => !isUnlocked() || !k ? '' : `<span class="htools">${edit ? `<button class="hb" data-hedit="${esc(edit)}">✏️ Editar</button>` : ''}<button class="hb" data-himg="${esc(k)}">🖼 ${hImg(k) ? 'Cambiar imagen' : 'Imagen'}</button>${hImg(k) ? `<button class="hb" data-hadj="${esc(k)}">✥ Ajustar</button><button class="hb" data-hnoimg="${esc(k)}">Quitar</button>` : ''}</span>`;
+const hTools = (k, edit) => {
+  if (!k) return '';
+  const tag = `<span data-hk="${esc(k)}" hidden></span>`;
+  if (!isUnlocked()) return DATA.shares[k] ? `<span class="htools">${tag}<button class="hb" data-hcopy="${esc(k)}">🔗 Copiar link</button></span>` : tag;
+  return `<span class="htools">${tag}${edit ? `<button class="hb" data-hedit="${esc(edit)}">✏️ Editar</button>` : ''}<button class="hb" data-himg="${esc(k)}">🖼 ${hImg(k) ? 'Cambiar imagen' : 'Imagen'}</button>${hImg(k) ? `<button class="hb" data-hadj="${esc(k)}">✥ Ajustar</button><button class="hb" data-hnoimg="${esc(k)}">Quitar</button>` : ''}<button class="hb share" data-hshare="${esc(k)}">🔗 Compartir</button></span>`;
+};
 // con imagen: la caja queda igual y la imagen se pega a la derecha, a sangre, con un degradé que la funde con la caja
 const hOpen = k => `${hImg(k) ? '<div class="erow">' : ''}<div class="embed"`;
 const hClose = k => {
@@ -1997,7 +2019,10 @@ $('#hist').addEventListener('wheel', e => {
 // edición de partidas
 let editMatchId = null;
 $('#hist').addEventListener('click', e => {
+  const cp = e.target.closest('[data-hcopy]');
+  if (cp) { const l = shareLink(cp.dataset.hcopy); navigator.clipboard.writeText(l).then(() => toast('Link copiado. Pegalo en Discord o WhatsApp.'), () => prompt('Copiá el link:', l)); return; }
   if (!isUnlocked()) return;
+  const sh = e.target.closest('[data-hshare]'); if (sh) { shareMatch(sh.dataset.hshare, sh); return; }
   const im = e.target.closest('[data-himg]'), no = e.target.closest('[data-hnoimg]'), ed = e.target.closest('[data-hedit]'), adj = e.target.closest('[data-hadj]');
   if (e.target.closest('[data-hdone]') && hEdit) { DATA.himg[hEdit.k] = { ...hEdit.d, x: Math.round(hEdit.d.x * 10) / 10, y: Math.round(hEdit.d.y * 10) / 10, z: Math.round(hEdit.d.z * 100) / 100 }; hEdit = null; changed(); toast('Imagen guardada. Acordate de publicar.'); return; }
   if (e.target.closest('[data-hcancel]')) { hEdit = null; render(); return; }
@@ -2018,6 +2043,180 @@ $('#hist').addEventListener('click', e => {
   }
 });
 
+/* =====================================================================
+   COMPARTIR PARTIDAS: link con vista previa (Discord, WhatsApp, etc.)
+   Sube al repo p/<id>.jpg (la tarjeta dibujada) y p/<id>.html (página con
+   las etiquetas de vista previa que redirige a la partida en el historial).
+   ===================================================================== */
+function siteBase(c) {
+  if (/^https?:$/.test(location.protocol) && !/^(localhost|127\.)/.test(location.hostname)) return location.origin + location.pathname.replace(/[^/]*$/, '');
+  if (!c || !c.owner) return '';
+  const o = c.owner.toLowerCase(), r = String(c.repo || '');
+  return `https://${o}.github.io/` + (r.toLowerCase() === o + '.github.io' ? '' : encodeURIComponent(r) + '/');
+}
+const shareLink = (k, c) => { const s = DATA.shares[k]; return s ? `${siteBase(c || loadCfg())}p/${encodeURIComponent(k)}.html?v=${s}` : ''; };
+
+// arma el contenido de la tarjeta a partir de la partida
+function cardModel(k) {
+  const r = R(), tg = DATA.matches.filter(m => m.tid === k);
+  if (tg.length) {
+    const m0 = tg[0], fin = tg.find(m => m.stage === 'final') || tg[tg.length - 1], champ = (fin.winners || [])[0];
+    const fp = playersOf(fin), runner = fp.length === 2 ? fp.find(p => p !== champ) : null;
+    const third = ((tg.find(m => m.stage === 'third') || {}).winners || [])[0];
+    const tot = {}; let mvp = null;
+    tg.forEach(m => { if (m.mvp) mvp = m.mvp; playersOf(m).forEach(p => { tot[p] = (tot[p] || 0) + ptsFor(m, p); }); });
+    const rank = Object.entries(tot).sort((a, b) => b[1] - a[1] || byEs(a[0], b[0]));
+    const podium = [[champ, '🏆'], [runner, '🥈'], [third, '🥉']].filter(x => x[0]).map(([n, e]) => ({ pos: e, name: n, pts: tot[n], mvp: n === mvp }));
+    return { k, game: m0.game, date: m0.date, title: m0.tname || 'Torneo de ' + gameOf(m0.game).name, tag: 'Torneo · sistema suizo',
+      sections: [{ label: 'Podio', kind: 'rows', items: podium }, { label: 'Puntos para la Copa', kind: 'flow', items: rank.map(([n, p]) => ({ name: n, pts: p, mvp: n === mvp })) }],
+      mvp, footer: `${tg.length} partidas · ${rank.length} jugadores`,
+      desc: `🏆 ${champ || '—'}${runner ? ' · 🥈 ' + runner : ''}${third ? ' · 🥉 ' + third : ''} · ${rank.length} jugadores` };
+  }
+  const m = DATA.matches.find(x => x.id === k); if (!m) return null;
+  const G = gameOf(m.game), item = p => ({ name: p, pts: ptsFor(m, p), mvp: m.mvp === p });
+  if (m.ranking) {
+    const tot = m.ranking.reduce((s, p) => s + (Number(m.pts[p]) || 0), 0);
+    return { k, game: m.game, date: m.date, title: m.tname || G.name, tag: 'Tabla de puntos',
+      sections: [{ label: '🏆 Leaderboard', kind: 'rows', items: m.ranking.map((p, i) => ({ pos: (i + 1) + '°', ...item(p) })) }],
+      mvp: m.mvp, footer: `${m.ranking.length} jugadores · ${tot} pts repartidos${m.tname ? ' · ' + G.name : ''}`,
+      desc: m.ranking.slice(0, 5).map((p, i) => `${i + 1}° ${p} +${ptsFor(m, p)}`).join(' · ') + (m.ranking.length > 5 ? ' …' : '') + (m.mvp ? ` · ⭐ MVP ${m.mvp}` : '') };
+  }
+  const ps = playersOf(m), W = new Set(m.winners || []), win = ps.filter(p => W.has(p)), rest = ps.filter(p => !W.has(p));
+  return { k, game: m.game, date: m.date, title: G.name, tag: '',
+    sections: win.length ? [{ label: `🏆 Ganadores · +${r.win} extra c/u`, kind: 'flow', items: win.map(item) }, ...(rest.length ? [{ label: 'Perdieron', kind: 'flow', items: rest.map(item) }] : [])]
+      : [{ label: 'Participantes', kind: 'flow', items: ps.map(item) }],
+    mvp: m.mvp, footer: `${ps.length} jugadores`,
+    desc: win.length ? `🏆 Ganaron: ${win.join(', ')}${m.mvp ? ' · ⭐ MVP ' + m.mvp : ''}` : `${ps.length} jugadores` };
+}
+
+// dibuja la tarjeta (estilo mensaje del Copa Bot) en un canvas
+async function drawCard(md) {
+  const F = '"Noto Sans","Segoe UI",system-ui,sans-serif';
+  try { await Promise.all(['800 44px', '700 26px', '600 24px'].map(w => document.fonts.load(`${w} "Noto Sans"`))); } catch {}
+  const W = 1200, pad = 48, io = hImgObj(md.k), photo = io ? await safeImg(io.src) : null, glogo = gameOf(md.game).logo ? await safeImg(gameOf(md.game).logo) : null, logo = await safeImg(logoSrc());
+  const imgW = photo ? 440 : 0, cw = W - imgW - pad * 2 - 12;
+  const t = document.createElement('canvas').getContext('2d');
+  const pillW = it => { t.font = `600 26px ${F}`; let w = t.measureText('@' + it.name).width + 24; if (it.mvp) w += 34; t.font = `800 22px ${F}`; return w + t.measureText((it.pts >= 0 ? '+' : '') + it.pts).width + 10; };
+  // medir alto
+  const layout = [];
+  let y = pad + 70;
+  for (const s of md.sections) {
+    layout.push({ t: 'label', s, y }); y += 44;
+    if (s.kind === 'rows') {
+      const cols = s.items.length > 8 ? 2 : 1, perCol = Math.ceil(s.items.length / cols), colW = cw / cols;
+      s.items.forEach((it, i) => layout.push({ t: 'row', it, x: pad + 12 + Math.floor(i / perCol) * colW, y: y + (i % perCol) * 52 }));
+      y += perCol * 52 + 10;
+    } else {
+      let x = pad + 12, rowY = y;
+      s.items.forEach(it => { const w = pillW(it); if (x + w > pad + 12 + cw) { x = pad + 12; rowY += 50; } layout.push({ t: 'pill', it, x, y: rowY }); x += w + 8; });
+      y = rowY + 60;
+    }
+  }
+  if (md.mvp) { layout.push({ t: 'label', s: { label: `⭐ MVP · +${R().mvp}` }, y }); y += 44; layout.push({ t: 'pill', it: { name: md.mvp, pts: md.sections.flatMap(s => s.items).find(i => i.name === md.mvp)?.pts ?? R().mvp, mvp: true }, x: pad + 12, y }); y += 60; }
+  const footY = y + 14, H = Math.max(photo ? 630 : 330, footY + 50 + pad);
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const c = cv.getContext('2d');
+  const hue = gHue(md.game);
+  c.fillStyle = '#2b2d31'; c.fillRect(0, 0, W, H);
+  c.fillStyle = `hsl(${hue},70%,55%)`; c.fillRect(0, 0, 10, H);
+  // imagen a la derecha, a sangre, con degradé
+  if (photo) {
+    const px = W - imgW, ph = H, iw = photo.naturalWidth, ih = photo.naturalHeight, s0 = Math.max(imgW / iw, ph / ih);
+    const l0 = (imgW - iw * s0) * io.x / 100, t0 = (ph - ih * s0) * io.y / 100, ox = imgW * io.x / 100, oy = ph * io.y / 100;
+    c.save(); c.beginPath(); c.rect(px, 0, imgW, ph); c.clip();
+    c.drawImage(photo, px + ox + (l0 - ox) * io.z, oy + (t0 - oy) * io.z, iw * s0 * io.z, ih * s0 * io.z); c.restore();
+    let g = c.createLinearGradient(px, 0, px + imgW * 0.45, 0); g.addColorStop(0, 'rgba(43,45,49,1)'); g.addColorStop(0.27, 'rgba(43,45,49,.75)'); g.addColorStop(1, 'rgba(43,45,49,0)');
+    c.fillStyle = g; c.fillRect(px, 0, imgW * 0.45, ph);
+    g = c.createLinearGradient(0, ph, 0, ph * 0.7); g.addColorStop(0, 'rgba(0,0,0,.35)'); g.addColorStop(1, 'rgba(0,0,0,0)'); c.fillStyle = g; c.fillRect(px, ph * 0.7, imgW, ph * 0.3);
+  }
+  // título
+  let x = pad + 12; const ty = pad + 22;
+  if (glogo) { c.drawImage(glogo, x, ty - 24, 48, 48); x += 62; }
+  c.textBaseline = 'middle'; c.textAlign = 'left'; c.fillStyle = '#f2f3f5'; c.font = `800 42px ${F}`;
+  const title = fit(c, md.title, cw - (x - pad) - (md.tag ? 220 : 0)); c.fillText(title, x, ty + 2); x += c.measureText(title).width + 16;
+  if (md.tag) { c.font = `700 20px ${F}`; const tw = c.measureText(md.tag).width + 24; rrect(c, x, ty - 16, tw, 32, 16); c.fillStyle = '#404249'; c.fill(); c.fillStyle = '#b5bac1'; c.fillText(md.tag, x + 12, ty + 1); }
+  const pill = (it, px0, py) => {
+    c.font = `600 26px ${F}`; const nm = '@' + it.name, nw = c.measureText(nm).width; c.font = `800 22px ${F}`;
+    const pt = (it.pts >= 0 ? '+' : '') + it.pts, w = pillW(it);
+    rrect(c, px0, py, w, 42, 7); c.fillStyle = 'rgba(88,101,242,.32)'; c.fill();
+    c.fillStyle = '#c9cdfb'; c.font = `600 26px ${F}`; c.fillText(nm, px0 + 12, py + 22);
+    let xx = px0 + 12 + nw + 8; if (it.mvp) { c.font = `24px ${F}`; c.fillText('👑', xx, py + 22); xx += 34; }
+    c.fillStyle = it.pts > 0 ? '#57f287' : it.pts < 0 ? '#f57376' : '#949ba4'; c.font = `800 22px ${F}`; c.fillText(pt, xx, py + 23);
+  };
+  const posCol = ['#f0b232', '#c4c9ce', '#d08a4f'];
+  for (const L of layout) {
+    if (L.t === 'label') { c.fillStyle = '#f2f3f5'; c.font = `700 26px ${F}`; c.fillText(L.s.label, pad + 12, L.y + 18); }
+    else if (L.t === 'row') {
+      const i = parseInt(L.it.pos, 10); c.fillStyle = isNaN(i) ? '#f2f3f5' : (posCol[i - 1] || '#b5bac1'); c.font = `800 24px ${F}`;
+      c.fillText(L.it.pos, L.x, L.y + 22); pill(L.it, L.x + 60, L.y);
+    } else pill(L.it, L.x, L.y);
+  }
+  // pie
+  c.font = `600 22px ${F}`; c.fillStyle = '#949ba4';
+  let fx = pad + 12; if (logo) { c.save(); c.beginPath(); c.arc(fx + 18, footY + 18, 18, 0, Math.PI * 2); c.clip(); c.drawImage(logo, fx, footY, 36, 36); c.restore(); fx += 48; }
+  c.fillStyle = '#f2f3f5'; c.font = `700 22px ${F}`; c.fillText('La Copa Discord', fx, footY + 19); fx += c.measureText('La Copa Discord').width + 12;
+  c.fillStyle = '#949ba4'; c.font = `500 22px ${F}`; c.fillText(fit(c, `${md.footer} · ${fmtDate(md.date)}`, pad + 12 + cw - fx), fx, footY + 19);
+  return cv;
+}
+
+// sube un archivo al repo (crea o reemplaza)
+async function ghPutFile(path, content64, message) {
+  const c = { ...loadCfg(), ...Object.fromEntries(Object.entries(readCfg()).filter(([, v]) => v)) };
+  if (!c.owner || !c.repo || !c.token) throw new Error('Para compartir primero completá la conexión con GitHub (en #admin, abajo de todo).');
+  const url = `https://api.github.com/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/contents/${path}`, br = c.branch || 'main';
+  let sha; const g = await fetch(url + '?ref=' + encodeURIComponent(br), { headers: ghHeaders(c), cache: 'no-store' });
+  if (g.status === 401) throw new Error('El token no es válido o venció.');
+  if (g.ok) sha = (await g.json()).sha;
+  const r = await fetch(url, { method: 'PUT', headers: { ...ghHeaders(c), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, content: content64, branch: br, ...(sha ? { sha } : {}) }) });
+  if (r.status === 403 || r.status === 404) throw new Error('El token no tiene permiso sobre este repositorio.');
+  if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error(j.message || 'GitHub respondió ' + r.status); }
+  return c;
+}
+const escA = s => esc(s).replace(/\n/g, ' ');
+async function shareMatch(k, btn) {
+  const md = cardModel(k); if (!md) return;
+  const old = btn && btn.textContent; if (btn) { btn.disabled = true; btn.textContent = 'Generando…'; }
+  try {
+    const cv = await drawCard(md), jpg = cv.toDataURL('image/jpeg', 0.88), v = Date.now().toString(36);
+    const c0 = { ...loadCfg(), ...Object.fromEntries(Object.entries(readCfg()).filter(([, x]) => x)) }, base = siteBase(c0);
+    if (!base) throw new Error('Para compartir primero completá la conexión con GitHub (en #admin, abajo de todo).');
+    const title = `${md.title} · La Copa Discord`, desc = md.desc + ' · ' + fmtDate(md.date), id = encodeURIComponent(k);
+    const page = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${escA(title)}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta property="og:site_name" content="La Copa Discord"><meta property="og:type" content="website">
+<meta property="og:title" content="${escA(title)}"><meta property="og:description" content="${escA(desc)}">
+<meta property="og:url" content="${base}p/${id}.html"><meta property="og:image" content="${base}p/${id}.jpg?v=${v}">
+<meta property="og:image:width" content="${cv.width}"><meta property="og:image:height" content="${cv.height}">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${base}p/${id}.jpg?v=${v}">
+<meta name="theme-color" content="hsl(${gHue(md.game)},70%,55%)">
+<meta http-equiv="refresh" content="0; url=../#p=${id}"></head>
+<body style="background:#313338;color:#dbdee1;font-family:system-ui,sans-serif"><script>location.replace('../#p=${id}')<\/script><p><a style="color:#00a8fc" href="../#p=${id}">Ver la partida en La Copa Discord</a></p></body></html>`;
+    await ghPutFile(`p/${k}.jpg`, jpg.split(',')[1], 'Compartir partida (imagen)');
+    await ghPutFile(`p/${k}.html`, b64(page), 'Compartir partida (página)');
+    DATA.shares[k] = v; changed();
+    const link = shareLink(k, c0);
+    $('#shImg').src = jpg; $('#shLink').value = link; $('#share').hidden = false;
+    try { await navigator.clipboard.writeText(link); $('#shMsg').textContent = '¡Link copiado! Pegalo en Discord o WhatsApp.'; } catch { $('#shMsg').textContent = 'Copiá el link y pegalo en Discord o WhatsApp.'; }
+  } catch (e) { toast(e.message || 'No se pudo compartir.', true); }
+  finally { if (btn) { btn.disabled = false; btn.textContent = old; } }
+}
+$('#shCopy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('#shLink').value); toast('Link copiado.'); } catch { $('#shLink').select(); } });
+$('#shClose').addEventListener('click', () => { $('#share').hidden = true; });
+$('#share').addEventListener('click', e => { if (e.target.id === 'share') $('#share').hidden = true; });
+
+// abrir una partida compartida (#p=<id>)
+function focusShared(k) {
+  setView('historial');
+  const find = () => [...document.querySelectorAll('#hist [data-hk]')].find(x => x.dataset.hk === k);
+  let el = find();
+  if (!el && state.season !== 'all') { state.season = 'all'; seasonSel.value = 'all'; render(); el = find(); }
+  if (!el) return;
+  const art = el.closest('article'); art.classList.add('hl');
+  setTimeout(() => art.scrollIntoView({ block: 'center', behavior: 'smooth' }), 80);
+  setTimeout(() => art.classList.remove('hl'), 3200);
+}
+function route() { const h = decodeURIComponent(location.hash.slice(1)); if (h.startsWith('p=')) focusShared(h.slice(2)); else setView(h); }
+
 /* ---------- barra de arriba: transparente sobre el banner, sólida al bajar ---------- */
 const contentEl = $('.content');
 const syncTop = () => $('.top').classList.toggle('solid', contentEl.scrollTop > 180);
@@ -2026,8 +2225,8 @@ contentEl.addEventListener('scroll', syncTop, { passive: true });
 /* ---------- inicio ---------- */
 fillCfg();
 render();
-setView(location.hash.slice(1));
-addEventListener('hashchange', () => setView(location.hash.slice(1)));
+route();
+addEventListener('hashchange', route);
 syncTop();
 })();
 </script>
