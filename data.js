@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794195845111,
+ "updatedAt": 1794196296324,
  "players": [
   "agus",
   "alan",
@@ -1000,8 +1000,21 @@ window.COPA_DATA = {
   }
  },
  "shares": {
-  "m17074nv": "mw8piijx",
-  "m13jcb8": "mw8pi2rc",
-  "t1794102865289-1794102964991": "mw8pt149"
+  "m17074nv": {
+   "v": "mw8q56qayg",
+   "sig": "19w5aw6"
+  },
+  "m13jcb8": {
+   "v": "mw8q5eh0i6",
+   "sig": "18rcqkt"
+  },
+  "t1794102865289-1794102964991": {
+   "v": "mw8q5eec13",
+   "sig": "1rmhk3c"
+  },
+  "m1hndvs0": {
+   "v": "mw8q4vgn6u",
+   "sig": "kh9rp8"
+  }
  }
 };
