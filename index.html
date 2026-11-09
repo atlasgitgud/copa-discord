@@ -293,9 +293,17 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .eimg-hint{position:absolute;z-index:2;top:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.65);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;pointer-events:none;white-space:nowrap}
 .eimg-bar{position:absolute;z-index:2;left:8px;right:8px;bottom:8px;display:flex;gap:6px;align-items:center;background:rgba(0,0,0,.7);padding:6px 8px;border-radius:8px}
 .eimg-bar input{flex:1;min-width:0;accent-color:var(--blurple)}
-.hb.share{color:#c9cdfb;border-color:rgba(88,101,242,.6)}
+.bh-r{display:flex;align-items:center;gap:10px}
+.mini-ico{border:0;background:none;color:var(--mut2);width:26px;height:26px;border-radius:5px;display:grid;place-items:center;cursor:pointer;opacity:.55;transition:opacity .15s,background .15s}
+.mini-ico:hover{opacity:1;background:var(--active);color:var(--hi)}
+.mini-ico:disabled{cursor:progress;opacity:.3}
+.hb.lk{padding:3px 7px;font-size:13px;line-height:1}
+.hb.busy{opacity:.5;cursor:progress;animation:pul 1s infinite alternate}
+@keyframes pul{to{opacity:.2}}
 .shbox{width:min(560px,100%);text-align:left;max-height:calc(100vh - 32px);overflow:auto}
 .shbox p,.shbox h3{text-align:left}
+.shst{font-size:14px;font-weight:700;color:var(--mut);margin:0 0 10px}
+.shst.wait{color:var(--gold)}.shst.ok{color:#57f287}
 .shimg{display:block;width:100%;border-radius:8px;background:#1e1f22}
 article.msg{transition:background .4s;border-radius:8px}
 article.msg.hl{background:rgba(88,101,242,.16)}
@@ -436,7 +444,7 @@ article.msg.hl{background:rgba(88,101,242,.16)}
       <section class="view" id="v-tabla">
         <div class="stats" id="stats"></div>
         <div class="board">
-          <div class="board-h"><h2>Tabla de posiciones</h2><span id="scope"></span></div>
+          <div class="board-h"><h2>Tabla de posiciones</h2><span class="bh-r"><span id="scope"></span><button class="mini-ico" id="top10" title="Exportar top 10 como imagen" aria-label="Exportar top 10 como imagen"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v9.6l3.3-3.3a1 1 0 0 1 1.4 0l2.8 2.8 4.3-4.3a1 1 0 0 1 1.4 0L19 11.6V6H5Zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg></button></span></div>
           <div class="grid thead"><span>#</span><span>Participante</span><span class="c c-pj">PJ</span><span class="c c-v">V</span><span class="r">Insignias</span><span class="r">Puntos</span></div>
           <div id="rb"></div>
         </div>
@@ -592,9 +600,10 @@ article.msg.hl{background:rgba(88,101,242,.16)}
   <div class="lockbox shbox">
     <h3>Compartir partida</h3>
     <p id="shMsg"></p>
+    <div id="shStatus" class="shst"></div>
     <img id="shImg" alt="Vista previa" class="shimg">
     <div class="lb-pre" style="margin-top:12px"><input class="field" id="shLink" readonly><button class="btn" id="shCopy">Copiar</button></div>
-    <p class="note">La vista previa puede tardar 1–2 minutos en aparecer (GitHub tiene que publicar los archivos). Si cambiás la partida, tocá Compartir de nuevo y usá el link nuevo.</p>
+    <p class="note">Si cambiás la partida, tocá Compartir de nuevo y usá el link nuevo. GitHub publica hasta ~10 cambios por hora: si publicás o compartís mucho seguido, los links nuevos pueden tardar más en andar.</p>
     <div class="pk-actions" style="justify-content:flex-end"><button class="btn sec" id="shClose">Cerrar</button></div>
   </div>
 </div>
@@ -836,8 +845,9 @@ const hImgStyle = o => `object-position:${o.x}% ${o.y}%;transform-origin:${o.x}%
 const hTools = (k, edit) => {
   if (!k) return '';
   const tag = `<span data-hk="${esc(k)}" hidden></span>`;
-  if (!isUnlocked()) return DATA.shares[k] ? `<span class="htools">${tag}<button class="hb" data-hcopy="${esc(k)}">🔗 Copiar link</button></span>` : tag;
-  return `<span class="htools">${tag}${edit ? `<button class="hb" data-hedit="${esc(edit)}">✏️ Editar</button>` : ''}<button class="hb" data-himg="${esc(k)}">🖼 ${hImg(k) ? 'Cambiar imagen' : 'Imagen'}</button>${hImg(k) ? `<button class="hb" data-hadj="${esc(k)}">✥ Ajustar</button><button class="hb" data-hnoimg="${esc(k)}">Quitar</button>` : ''}<button class="hb share" data-hshare="${esc(k)}">🔗 Compartir</button></span>`;
+  const lk = `<button class="hb lk" data-hshare="${esc(k)}" title="Copiar link" aria-label="Copiar link">🔗</button>`;
+  if (!isUnlocked()) return shareV(k) ? `<span class="htools">${tag}${lk}</span>` : tag;
+  return `<span class="htools">${tag}${edit ? `<button class="hb" data-hedit="${esc(edit)}">✏️ Editar</button>` : ''}<button class="hb" data-himg="${esc(k)}">🖼 ${hImg(k) ? 'Cambiar imagen' : 'Imagen'}</button>${hImg(k) ? `<button class="hb" data-hadj="${esc(k)}">✥ Ajustar</button><button class="hb" data-hnoimg="${esc(k)}">Quitar</button>` : ''}${lk}</span>`;
 };
 // con imagen: la caja queda igual y la imagen se pega a la derecha, a sangre, con un degradé que la funde con la caja
 const hOpen = k => `${hImg(k) ? '<div class="erow">' : ''}<div class="embed"`;
@@ -1370,11 +1380,15 @@ $('#admPub').addEventListener('click', async () => {
   if (!c.owner || !c.repo || !c.token) { toast('Primero completá la conexión con GitHub (abajo de todo).', true); $('#gOwner').focus(); return; }
   const btn = $('#admPub'); btn.disabled = true; btn.textContent = 'Publicando…';
   try {
+    // genera los links de las partidas nuevas o cambiadas y los sube junto con los datos
+    const files = [], todo = histKeys().filter(k => !shareFresh(k));
+    for (let i = 0; i < todo.length; i++) {
+      btn.textContent = `Armando links ${i + 1}/${todo.length}…`;
+      try { const s = await buildShare(todo[i], c); if (s) { files.push(...s.files); DATA.shares[todo[i]] = { v: s.v, sig: s.sig }; } } catch {}
+    }
+    btn.textContent = 'Publicando…';
     const out = { ...DATA, updatedAt: Date.now() };
-    const sha = await ghSha(c);
-    const r = await fetch(api(c), { method: 'PUT', headers: { ...ghHeaders(c), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: 'Actualizar tabla desde el modo admin', content: b64(dataFile(out)), branch: c.branch, ...(sha ? { sha } : {}) }) });
-    if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error(r.status === 409 ? 'Hubo un cambio en el repo mientras tanto. Probá de nuevo.' : (j.message || 'GitHub respondió ' + r.status)); }
+    await ghCommitFiles([...files, { path: 'data.js', content: b64(dataFile(out)) }], 'Actualizar tabla desde el modo admin');
     PUBLISHED = norm(out); DATA = norm(out); dirty = false;
     try { localStorage.removeItem(DRAFT); localStorage.setItem(CFG, JSON.stringify(c)); } catch {}
     render(); toast('¡Publicado! En 1–2 minutos lo ve todo el mundo.');
@@ -2019,10 +2033,8 @@ $('#hist').addEventListener('wheel', e => {
 // edición de partidas
 let editMatchId = null;
 $('#hist').addEventListener('click', e => {
-  const cp = e.target.closest('[data-hcopy]');
-  if (cp) { const l = shareLink(cp.dataset.hcopy); navigator.clipboard.writeText(l).then(() => toast('Link copiado. Pegalo en Discord o WhatsApp.'), () => prompt('Copiá el link:', l)); return; }
-  if (!isUnlocked()) return;
   const sh = e.target.closest('[data-hshare]'); if (sh) { shareMatch(sh.dataset.hshare, sh); return; }
+  if (!isUnlocked()) return;
   const im = e.target.closest('[data-himg]'), no = e.target.closest('[data-hnoimg]'), ed = e.target.closest('[data-hedit]'), adj = e.target.closest('[data-hadj]');
   if (e.target.closest('[data-hdone]') && hEdit) { DATA.himg[hEdit.k] = { ...hEdit.d, x: Math.round(hEdit.d.x * 10) / 10, y: Math.round(hEdit.d.y * 10) / 10, z: Math.round(hEdit.d.z * 100) / 100 }; hEdit = null; changed(); toast('Imagen guardada. Acordate de publicar.'); return; }
   if (e.target.closest('[data-hcancel]')) { hEdit = null; render(); return; }
@@ -2054,7 +2066,17 @@ function siteBase(c) {
   const o = c.owner.toLowerCase(), r = String(c.repo || '');
   return `https://${o}.github.io/` + (r.toLowerCase() === o + '.github.io' ? '' : encodeURIComponent(r) + '/');
 }
-const shareLink = (k, c) => { const s = DATA.shares[k]; return s ? `${siteBase(c || loadCfg())}p/${encodeURIComponent(k)}.html?v=${s}` : ''; };
+const shareV = k => { const s = DATA.shares[k]; return typeof s === 'string' ? s : s && s.v; };
+const shareLink = (k, c) => { const v = shareV(k); return v ? `${siteBase(c || loadCfg())}p/${encodeURIComponent(k)}.html?v=${v}` : ''; };
+// "firma" del contenido de la tarjeta: si cambia la partida o la imagen, el link se regenera
+function shareSig(k) {
+  const md = cardModel(k); if (!md) return '';
+  const o = hImgObj(k), s = JSON.stringify([md, R(), o ? [o.x, o.y, o.z, o.src.length] : 0, logoSrc().length]);
+  let x = 5381; for (let i = 0; i < s.length; i++) x = (x * 33 + s.charCodeAt(i)) >>> 0; return x.toString(36);
+}
+const shareFresh = k => { const s = DATA.shares[k]; return !!s && typeof s === 'object' && s.sig === shareSig(k); };
+// todas las partidas del historial que pueden tener link
+const histKeys = () => [...new Set(DATA.matches.map(m => m.tid || m.id))];
 
 // arma el contenido de la tarjeta a partir de la partida
 function cardModel(k) {
@@ -2172,16 +2194,44 @@ async function ghPutFile(path, content64, message) {
   if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error(j.message || 'GitHub respondió ' + r.status); }
   return c;
 }
+// sube varios archivos en UNA sola actualización (un commit) → GitHub Pages publica una vez sola
+async function ghCommitFiles(files, message) {
+  const c = { ...loadCfg(), ...Object.fromEntries(Object.entries(readCfg()).filter(([, v]) => v)) };
+  if (!c.owner || !c.repo || !c.token) throw new Error('Para compartir primero completá la conexión con GitHub (en #admin, abajo de todo).');
+  const R0 = `https://api.github.com/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}/git`, br = c.branch || 'main', H = { ...ghHeaders(c), 'Content-Type': 'application/json' };
+  const call = async (u, opt) => { const r = await fetch(R0 + u, { headers: H, cache: 'no-store', ...opt });
+    if (r.status === 401) throw new Error('El token no es válido o venció.');
+    if (r.status === 403 || r.status === 404) throw new Error('El token no tiene permiso sobre este repositorio (o la rama no existe).');
+    if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error(j.message || 'GitHub respondió ' + r.status); } return r.json(); };
+  for (let intento = 0; intento < 3; intento++) {
+    const ref = await call(`/ref/heads/${encodeURIComponent(br)}`), head = ref.object.sha, base = (await call(`/commits/${head}`)).tree.sha;
+    const tree = [];
+    for (const f of files) { const bl = await call('/blobs', { method: 'POST', body: JSON.stringify({ content: f.content, encoding: 'base64' }) }); tree.push({ path: f.path, mode: '100644', type: 'blob', sha: bl.sha }); }
+    const t = await call('/trees', { method: 'POST', body: JSON.stringify({ base_tree: base, tree }) });
+    const cm = await call('/commits', { method: 'POST', body: JSON.stringify({ message, tree: t.sha, parents: [head] }) });
+    try { await call(`/refs/heads/${encodeURIComponent(br)}`, { method: 'PATCH', body: JSON.stringify({ sha: cm.sha }) }); return c; }
+    catch (e) { if (intento === 2) throw e; } // alguien publicó justo al mismo tiempo: reintenta
+  }
+}
+// espera a que GitHub Pages publique el link y lo avisa en la ventana
+let shWatch = 0;
+async function shWait(url) {
+  const my = ++shWatch, st = $('#shStatus');
+  if (!/github\.io$/.test(location.hostname)) { st.className = 'shst'; st.textContent = '⏳ GitHub tarda 1–2 minutos en publicar el link.'; return; }
+  st.className = 'shst wait'; st.textContent = '⏳ GitHub está publicando el link… (no hace falta esperar acá)';
+  for (let i = 0; i < 60 && my === shWatch; i++) {
+    try { const r = await fetch(url.replace(/\?.*$/, '') + '?t=' + Date.now(), { method: 'HEAD', cache: 'no-store' }); if (r.ok) { st.className = 'shst ok'; st.textContent = '✅ ¡Listo! El link ya funciona.'; return; } } catch {}
+    await new Promise(r => setTimeout(r, 6000));
+  }
+  if (my === shWatch) { st.className = 'shst'; st.textContent = '⏳ Sigue en espera. Si publicaste muchas veces en la última hora, GitHub puede tardar más: probá el link en un rato.'; }
+}
 const escA = s => esc(s).replace(/\n/g, ' ');
-async function shareMatch(k, btn) {
-  const md = cardModel(k); if (!md) return;
-  const old = btn && btn.textContent; if (btn) { btn.disabled = true; btn.textContent = 'Generando…'; }
-  try {
-    const cv = await drawCard(md), jpg = cv.toDataURL('image/jpeg', 0.88), v = Date.now().toString(36);
-    const c0 = { ...loadCfg(), ...Object.fromEntries(Object.entries(readCfg()).filter(([, x]) => x)) }, base = siteBase(c0);
-    if (!base) throw new Error('Para compartir primero completá la conexión con GitHub (en #admin, abajo de todo).');
-    const title = `${md.title} · La Copa Discord`, desc = md.desc + ' · ' + fmtDate(md.date), id = encodeURIComponent(k);
-    const page = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${escA(title)}</title>
+async function buildShare(k, c) {
+  const md = cardModel(k); if (!md) return null;
+  const cv = await drawCard(md), jpg = cv.toDataURL('image/jpeg', 0.88), v = Date.now().toString(36) + Math.random().toString(36).slice(2, 4);
+  const base = siteBase(c); if (!base) throw new Error('Para compartir primero completá la conexión con GitHub (en #admin, abajo de todo).');
+  const title = `${md.title} · La Copa Discord`, desc = md.desc + ' · ' + fmtDate(md.date), id = encodeURIComponent(k);
+  const page = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${escA(title)}</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta property="og:site_name" content="La Copa Discord"><meta property="og:type" content="website">
 <meta property="og:title" content="${escA(title)}"><meta property="og:description" content="${escA(desc)}">
@@ -2191,17 +2241,26 @@ async function shareMatch(k, btn) {
 <meta name="theme-color" content="hsl(${gHue(md.game)},70%,55%)">
 <meta http-equiv="refresh" content="0; url=../#p=${id}"></head>
 <body style="background:#313338;color:#dbdee1;font-family:system-ui,sans-serif"><script>location.replace('../#p=${id}')<\/script><p><a style="color:#00a8fc" href="../#p=${id}">Ver la partida en La Copa Discord</a></p></body></html>`;
-    await ghPutFile(`p/${k}.jpg`, jpg.split(',')[1], 'Compartir partida (imagen)');
-    await ghPutFile(`p/${k}.html`, b64(page), 'Compartir partida (página)');
-    DATA.shares[k] = v; changed();
-    const link = shareLink(k, c0);
-    $('#shImg').src = jpg; $('#shLink').value = link; $('#share').hidden = false;
-    try { await navigator.clipboard.writeText(link); $('#shMsg').textContent = '¡Link copiado! Pegalo en Discord o WhatsApp.'; } catch { $('#shMsg').textContent = 'Copiá el link y pegalo en Discord o WhatsApp.'; }
-  } catch (e) { toast(e.message || 'No se pudo compartir.', true); }
-  finally { if (btn) { btn.disabled = false; btn.textContent = old; } }
+  return { files: [{ path: `p/${k}.jpg`, content: jpg.split(',')[1] }, { path: `p/${k}.html`, content: b64(page) }], v, sig: shareSig(k) };
+}
+const copyLink = l => navigator.clipboard.writeText(l).then(() => true, () => { prompt('Copiá el link:', l); return false; });
+// botón 🔗: si el link ya existe y está al día lo copia; si no (y sos admin) lo genera al toque
+async function shareMatch(k, btn) {
+  if (shareV(k) && (shareFresh(k) || !isUnlocked())) { if (await copyLink(shareLink(k))) toast('🔗 Link copiado. Pegalo en Discord o WhatsApp.'); return; }
+  if (!isUnlocked()) { toast('Esta partida todavía no tiene link.', true); return; }
+  if (btn) { btn.disabled = true; btn.classList.add('busy'); }
+  try {
+    const c = { ...loadCfg(), ...Object.fromEntries(Object.entries(readCfg()).filter(([, x]) => x)) };
+    const s = await buildShare(k, c); if (!s) return;
+    await ghCommitFiles(s.files, 'Link de partida');
+    DATA.shares[k] = { v: s.v, sig: s.sig }; changed();
+    const ok = await copyLink(shareLink(k, c));
+    toast(ok ? '🔗 Link generado y copiado. Puede tardar 1–2 minutos en andar.' : 'Link generado.');
+  } catch (e) { toast(e.message || 'No se pudo generar el link.', true); }
+  finally { if (btn) { btn.disabled = false; btn.classList.remove('busy'); } }
 }
 $('#shCopy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('#shLink').value); toast('Link copiado.'); } catch { $('#shLink').select(); } });
-$('#shClose').addEventListener('click', () => { $('#share').hidden = true; });
+$('#shClose').addEventListener('click', () => { $('#share').hidden = true; shWatch++; });
 $('#share').addEventListener('click', e => { if (e.target.id === 'share') $('#share').hidden = true; });
 
 // abrir una partida compartida (#p=<id>)
@@ -2216,6 +2275,48 @@ function focusShared(k) {
   setTimeout(() => art.classList.remove('hl'), 3200);
 }
 function route() { const h = decodeURIComponent(location.hash.slice(1)); if (h.startsWith('p=')) focusShared(h.slice(2)); else setView(h); }
+
+/* ---------- exportar el top 10 de la Copa como JPG ---------- */
+$('#top10').addEventListener('click', async () => {
+  const btn = $('#top10'); btn.disabled = true;
+  try {
+    const F = '"Noto Sans","Segoe UI",system-ui,sans-serif';
+    try { await Promise.all(['800 64px', '700 40px', '600 26px'].map(w => document.fonts.load(`${w} "Noto Sans"`))); } catch {}
+    const list = compute(state.season).list.slice(0, 10), W = 1080, H = 1350, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    const c = cv.getContext('2d'), pics = {}; await Promise.all(list.map(async s => { pics[s.name] = await safeImg(avatarOf(s.name)); }));
+    const logo = await safeImg(logoSrc());
+    c.fillStyle = '#313338'; c.fillRect(0, 0, W, H);
+    const g = c.createLinearGradient(0, 0, W, 240); g.addColorStop(0, '#5865f2'); g.addColorStop(1, '#3b2f9e'); c.fillStyle = g; c.fillRect(0, 0, W, 240);
+    if (logo) { c.save(); c.beginPath(); c.arc(W - 150, 120, 84, 0, Math.PI * 2); c.clip(); c.drawImage(logo, W - 234, 36, 168, 168); c.restore();
+      c.beginPath(); c.arc(W - 150, 120, 85, 0, Math.PI * 2); c.lineWidth = 4; c.strokeStyle = 'rgba(255,255,255,.35)'; c.stroke(); }
+    c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+    c.fillStyle = 'rgba(255,255,255,.75)'; c.font = `700 26px ${F}`; c.fillText('LA COPA DISCORD', 64, 82);
+    c.fillStyle = '#fff'; c.font = `800 64px ${F}`; c.fillText('Top 10', 64, 158);
+    c.fillStyle = 'rgba(255,255,255,.85)'; c.font = `600 30px ${F}`;
+    c.fillText(fit(c, `${scopeLabel()} · ${new Date().toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' })}`, W - 380), 64, 206);
+    const acc = ['#f0b232', '#c4c9ce', '#d08a4f'], rh = 92, y0 = 276;
+    list.forEach((s, i) => {
+      const y = y0 + i * (rh + 8), cy = y + rh / 2, top = s.pts > 0 && s.rank <= 3;
+      rrect(c, 60, y, 960, rh, 14); c.fillStyle = top ? '#383a40' : '#2b2d31'; c.fill();
+      if (top) { c.fillStyle = acc[s.rank - 1]; rrect(c, 60, y + 16, 6, rh - 32, 3); c.fill(); }
+      c.textBaseline = 'middle'; c.textAlign = 'center';
+      c.fillStyle = top ? acc[s.rank - 1] : '#f2f3f5'; c.font = `800 44px ${F}`; c.fillText(String(s.rank), 132, cy + 2);
+      c.beginPath(); c.arc(220, cy, 30, 0, Math.PI * 2); c.fillStyle = `hsl(${hueOf(s.name)},55%,48%)`; c.fill();
+      if (pics[s.name]) { c.save(); c.clip(); c.drawImage(pics[s.name], 190, cy - 30, 60, 60); c.restore(); }
+      else { c.fillStyle = '#fff'; c.font = `700 28px ${F}`; c.fillText(ini(s.name), 220, cy + 1); }
+      if (top) { c.beginPath(); c.arc(220, cy, 31, 0, Math.PI * 2); c.lineWidth = 3; c.strokeStyle = acc[s.rank - 1]; c.stroke(); }
+      if (isTop(s)) { c.save(); c.translate(220, cy - 38); c.rotate(-0.15); c.font = `30px ${F}`; c.fillText('👑', 0, 0); c.restore(); }
+      c.textAlign = 'right'; c.font = `800 44px ${F}`; c.fillStyle = top ? acc[s.rank - 1] : '#f2f3f5';
+      const ptsTxt = String(s.pts); c.font = `600 24px ${F}`; const pw = c.measureText(' pts').width; c.fillStyle = '#949ba4'; c.fillText(' pts', 990, cy + 6);
+      c.font = `800 44px ${F}`; c.fillStyle = top ? acc[s.rank - 1] : '#f2f3f5'; c.fillText(ptsTxt, 990 - pw, cy + 2);
+      const right = 990 - pw - c.measureText(ptsTxt).width - 24;
+      c.textAlign = 'left'; c.fillStyle = '#f2f3f5'; c.font = `700 36px ${F}`; c.fillText(fit(c, s.name, right - 272), 272, cy - 12);
+      c.fillStyle = '#949ba4'; c.font = `500 22px ${F}`;
+      c.fillText(fit(c, `${s.played} ${pl(s.played, 'partida', 'partidas')} · ${s.wins} ${pl(s.wins, 'victoria', 'victorias')}${s.mvps ? ` · ${s.mvps} MVP` : ''}`, right - 272), 272, cy + 22);
+    });
+    cv.toBlob(b => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = `top10-copa-${state.season === 'all' ? 'total' : state.season}.jpg`; document.body.appendChild(a); a.click(); a.remove(); toast('Top 10 exportado.'); }, 'image/jpeg', 0.92);
+  } finally { btn.disabled = false; }
+});
 
 /* ---------- barra de arriba: transparente sobre el banner, sólida al bajar ---------- */
 const contentEl = $('.content');
