@@ -281,11 +281,11 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .htools{margin-left:8px;display:flex;gap:4px;flex-wrap:wrap}
 .hb{border:1px solid var(--line);background:var(--card);color:var(--mut);border-radius:6px;padding:3px 8px;font-size:12px;font-weight:600;cursor:pointer}
 .hb:hover{color:var(--hi);border-color:var(--blurple)}
-.embed.has-img{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:16px;max-width:800px;align-items:start}
 .eb{min-width:0}
-.eimg{aspect-ratio:3/5;border-radius:4px;overflow:hidden;background:var(--deep)}
-.eimg img{display:block;width:100%;height:100%;object-fit:cover}
-@media (max-width:600px){.embed.has-img{grid-template-columns:minmax(0,1fr) 110px;gap:10px}}
+.erow{display:flex;align-items:stretch;margin-top:6px}
+.erow .embed{margin-top:0;flex:0 1 540px;min-width:0;border-radius:4px 0 0 4px}
+.eimg{position:relative;flex:none;width:0;max-width:45%;border-radius:0 4px 4px 0;overflow:hidden;background:var(--card)}
+.eimg img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
 .cropbox{width:min(400px,100%);text-align:left}
 .cropf{position:relative;width:240px;height:400px;margin:4px auto 8px;overflow:hidden;border-radius:6px;background:#000;cursor:grab;touch-action:none;box-shadow:0 0 0 2px var(--blurple)}
 .cropf:active{cursor:grabbing}
@@ -813,8 +813,13 @@ function applyLook() {
 const botHtml = () => `<div class="bot"><img class="logo" src="${esc(logoSrc())}" alt=""></div>`;
 const hImg = k => k && DATA.himg[k] ? DATA.himg[k] : '';
 const hTools = (k, edit) => !isUnlocked() || !k ? '' : `<span class="htools">${edit ? `<button class="hb" data-hedit="${esc(edit)}">✏️ Editar</button>` : ''}<button class="hb" data-himg="${esc(k)}">🖼 ${hImg(k) ? 'Cambiar imagen' : 'Imagen'}</button>${hImg(k) ? `<button class="hb" data-hnoimg="${esc(k)}">Quitar imagen</button>` : ''}</span>`;
-const hOpen = k => `<div class="embed${hImg(k) ? ' has-img' : ''}"`;
-const hClose = k => `</div>${hImg(k) ? `<div class="eimg"><img src="${esc(hImg(k))}" alt="" loading="lazy"></div>` : ''}</div></div></article>`;
+// con imagen: la caja queda igual y la imagen se pega a la derecha, a sangre, con el mismo alto
+const hOpen = k => `${hImg(k) ? '<div class="erow">' : ''}<div class="embed"`;
+const hClose = k => `</div></div>${hImg(k) ? `<div class="eimg"><img src="${esc(hImg(k))}" alt="" loading="lazy"></div></div>` : ''}</div></article>`;
+// la imagen mide lo mismo de alto que la caja y el ancho sale de la proporción 3:5
+function sizeImgs() { document.querySelectorAll('#hist .erow').forEach(r => { const e = r.querySelector('.embed'), i = r.querySelector('.eimg'); if (e && i) i.style.width = Math.round(e.offsetHeight * 3 / 5) + 'px'; }); }
+if (window.ResizeObserver) new ResizeObserver(() => requestAnimationFrame(sizeImgs)).observe(document.getElementById('hist'));
+addEventListener('resize', sizeImgs);
 function renderHist(ms, bs) {
   const tg = {}, loose = [];
   ms.forEach(m => { if (m.tid) (tg[m.tid] = tg[m.tid] || []).push(m); else loose.push(m); });
@@ -822,6 +827,7 @@ function renderHist(ms, bs) {
   bs.forEach(b => { if (b.gid) (bg[b.gid] = bg[b.gid] || []).push(b); else bl.push([b]); });
   const items = [...loose.map(m => ({ t: 'm', d: m.date, m })), ...Object.values(tg).map(g => ({ t: 't', d: g[0].date, g })), ...[...bl, ...Object.values(bg)].map(g => ({ t: 'b', d: g[0].date, g }))].sort((a, b) => b.d.localeCompare(a.d));
   if (!items.length) { $('#hist').innerHTML = '<div class="empty">No hay partidas en esta temporada.</div>'; return; }
+  requestAnimationFrame(sizeImgs);
   $('#hist').innerHTML = items.map(it => {
     if (it.t === 't') {
       const g = it.g, m0 = g[0], G = gameOf(m0.game), r = R();
