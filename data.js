@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794267850755,
+ "updatedAt": 1794267930314,
  "players": [
   "agus",
   "alan",
@@ -971,34 +971,6 @@ window.COPA_DATA = {
     "char": 2
    },
    "id": "m13jcb8"
-  },
-  {
-   "id": "mmw9w0fmq5r56",
-   "date": "2026-11-09",
-   "game": "CS",
-   "players": [
-    "char",
-    "dozy",
-    "lucas",
-    "mati",
-    "mauro",
-    "nico10",
-    "paloma",
-    "pani",
-    "roses",
-    "seko",
-    "valenzapp",
-    "zowi"
-   ],
-   "winners": [
-    "char",
-    "mati",
-    "nico10",
-    "pani",
-    "roses",
-    "valenzapp"
-   ],
-   "mvp": "nico10"
   }
  ],
  "himg": {
