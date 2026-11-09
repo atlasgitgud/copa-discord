@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794189462352,
+ "updatedAt": 1794190015433,
  "players": [
   "agus",
   "alan",
@@ -314,7 +314,8 @@ window.COPA_DATA = {
     "dozy"
    ],
    "mvp": null,
-   "stage": "r1"
+   "stage": "r1",
+   "id": "m1jyoplg"
   },
   {
    "date": "2026-11-07",
@@ -329,7 +330,8 @@ window.COPA_DATA = {
     "pani"
    ],
    "mvp": null,
-   "stage": "r1"
+   "stage": "r1",
+   "id": "mebk1an"
   },
   {
    "date": "2026-11-07",
@@ -344,7 +346,8 @@ window.COPA_DATA = {
     "nico10"
    ],
    "mvp": null,
-   "stage": "r1"
+   "stage": "r1",
+   "id": "m3fo0bb"
   },
   {
    "date": "2026-11-07",
@@ -359,7 +362,8 @@ window.COPA_DATA = {
     "paloma"
    ],
    "mvp": null,
-   "stage": "r1"
+   "stage": "r1",
+   "id": "mck75qc"
   },
   {
    "date": "2026-11-07",
@@ -374,7 +378,8 @@ window.COPA_DATA = {
     "seko"
    ],
    "mvp": null,
-   "stage": "r1"
+   "stage": "r1",
+   "id": "m1lhucx4"
   },
   {
    "date": "2026-11-07",
@@ -389,7 +394,8 @@ window.COPA_DATA = {
     "atlas"
    ],
    "mvp": null,
-   "stage": "r1"
+   "stage": "r1",
+   "id": "mqnneng"
   },
   {
    "date": "2026-11-07",
@@ -404,7 +410,8 @@ window.COPA_DATA = {
     "mauro"
    ],
    "mvp": null,
-   "stage": "r1"
+   "stage": "r1",
+   "id": "mcqslpx"
   },
   {
    "date": "2026-11-07",
@@ -419,7 +426,8 @@ window.COPA_DATA = {
     "dozy"
    ],
    "mvp": null,
-   "stage": "r2"
+   "stage": "r2",
+   "id": "m1wn1g07"
   },
   {
    "date": "2026-11-07",
@@ -434,7 +442,8 @@ window.COPA_DATA = {
     "paloma"
    ],
    "mvp": null,
-   "stage": "r2"
+   "stage": "r2",
+   "id": "m17pn27z"
   },
   {
    "date": "2026-11-07",
@@ -449,7 +458,8 @@ window.COPA_DATA = {
     "nico10"
    ],
    "mvp": null,
-   "stage": "r2"
+   "stage": "r2",
+   "id": "mc9xl48"
   },
   {
    "date": "2026-11-07",
@@ -464,7 +474,8 @@ window.COPA_DATA = {
     "seko"
    ],
    "mvp": null,
-   "stage": "r2"
+   "stage": "r2",
+   "id": "m1sfd4z2"
   },
   {
    "date": "2026-11-07",
@@ -479,7 +490,8 @@ window.COPA_DATA = {
     "mati"
    ],
    "mvp": null,
-   "stage": "r2"
+   "stage": "r2",
+   "id": "mwvfw7x"
   },
   {
    "date": "2026-11-07",
@@ -494,7 +506,8 @@ window.COPA_DATA = {
     "roses"
    ],
    "mvp": null,
-   "stage": "r2"
+   "stage": "r2",
+   "id": "m1cgqb2h"
   },
   {
    "date": "2026-11-07",
@@ -509,7 +522,8 @@ window.COPA_DATA = {
     "valenzapp"
    ],
    "mvp": null,
-   "stage": "r2"
+   "stage": "r2",
+   "id": "mf3q8u"
   },
   {
    "date": "2026-11-07",
@@ -524,7 +538,8 @@ window.COPA_DATA = {
     "dozy"
    ],
    "mvp": null,
-   "stage": "r3"
+   "stage": "r3",
+   "id": "msc564b"
   },
   {
    "date": "2026-11-07",
@@ -539,7 +554,8 @@ window.COPA_DATA = {
     "seko"
    ],
    "mvp": null,
-   "stage": "r3"
+   "stage": "r3",
+   "id": "mr2l7x8"
   },
   {
    "date": "2026-11-07",
@@ -554,7 +570,8 @@ window.COPA_DATA = {
     "mauro"
    ],
    "mvp": null,
-   "stage": "r3"
+   "stage": "r3",
+   "id": "mx61i1u"
   },
   {
    "date": "2026-11-07",
@@ -569,7 +586,8 @@ window.COPA_DATA = {
     "roses"
    ],
    "mvp": null,
-   "stage": "r3"
+   "stage": "r3",
+   "id": "m1ol6g7q"
   },
   {
    "date": "2026-11-07",
@@ -584,7 +602,8 @@ window.COPA_DATA = {
     "mati"
    ],
    "mvp": null,
-   "stage": "r3"
+   "stage": "r3",
+   "id": "mnw1cuy"
   },
   {
    "date": "2026-11-07",
@@ -599,7 +618,8 @@ window.COPA_DATA = {
     "alan"
    ],
    "mvp": null,
-   "stage": "r3"
+   "stage": "r3",
+   "id": "mzzzsto"
   },
   {
    "date": "2026-11-07",
@@ -614,7 +634,8 @@ window.COPA_DATA = {
     "negar"
    ],
    "mvp": null,
-   "stage": "r3"
+   "stage": "r3",
+   "id": "m10xd5oz"
   },
   {
    "date": "2026-11-07",
@@ -629,7 +650,8 @@ window.COPA_DATA = {
     "seko"
    ],
    "mvp": null,
-   "stage": "r4"
+   "stage": "r4",
+   "id": "mxk8qu2"
   },
   {
    "date": "2026-11-07",
@@ -644,7 +666,8 @@ window.COPA_DATA = {
     "paloma"
    ],
    "mvp": null,
-   "stage": "r4"
+   "stage": "r4",
+   "id": "myermu9"
   },
   {
    "date": "2026-11-07",
@@ -659,7 +682,8 @@ window.COPA_DATA = {
     "mauro"
    ],
    "mvp": null,
-   "stage": "r4"
+   "stage": "r4",
+   "id": "myc3xr2"
   },
   {
    "date": "2026-11-07",
@@ -674,7 +698,8 @@ window.COPA_DATA = {
     "mati"
    ],
    "mvp": null,
-   "stage": "r4"
+   "stage": "r4",
+   "id": "m1s4qc2"
   },
   {
    "date": "2026-11-07",
@@ -689,7 +714,8 @@ window.COPA_DATA = {
     "pani"
    ],
    "mvp": null,
-   "stage": "r4"
+   "stage": "r4",
+   "id": "m1k0v4q3"
   },
   {
    "date": "2026-11-07",
@@ -704,7 +730,8 @@ window.COPA_DATA = {
     "negar"
    ],
    "mvp": null,
-   "stage": "r4"
+   "stage": "r4",
+   "id": "mgj0mnx"
   },
   {
    "date": "2026-11-07",
@@ -719,7 +746,8 @@ window.COPA_DATA = {
     "lucas"
    ],
    "mvp": null,
-   "stage": "r4"
+   "stage": "r4",
+   "id": "mnyngc9"
   },
   {
    "date": "2026-11-07",
@@ -734,7 +762,8 @@ window.COPA_DATA = {
     "seko"
    ],
    "mvp": null,
-   "stage": "semi"
+   "stage": "semi",
+   "id": "mv5g7gn"
   },
   {
    "date": "2026-11-07",
@@ -749,7 +778,8 @@ window.COPA_DATA = {
     "mauro"
    ],
    "mvp": null,
-   "stage": "semi"
+   "stage": "semi",
+   "id": "m1ihim3c"
   },
   {
    "date": "2026-11-07",
@@ -764,7 +794,8 @@ window.COPA_DATA = {
     "dozy"
    ],
    "mvp": null,
-   "stage": "third"
+   "stage": "third",
+   "id": "m13qd2pp"
   },
   {
    "date": "2026-11-07",
@@ -779,7 +810,8 @@ window.COPA_DATA = {
     "seko"
    ],
    "mvp": "seko",
-   "stage": "final"
+   "stage": "final",
+   "id": "m1fdt5xr"
   },
   {
    "date": "2026-11-08",
@@ -837,11 +869,12 @@ window.COPA_DATA = {
     "seko": 4,
     "lucas": 3,
     "cruz": 3
-   }
+   },
+   "id": "m1hndvs0"
   },
   {
    "date": "2026-11-08",
-   "game": "MINECRAFT",
+   "game": "HAXBALL",
    "players": [
     "pani",
     "nico10",
@@ -883,7 +916,8 @@ window.COPA_DATA = {
     "zowi": 8,
     "alan": 7,
     "negar": 5
-   }
+   },
+   "id": "m17074nv"
   },
   {
    "date": "2026-11-08",
@@ -935,7 +969,9 @@ window.COPA_DATA = {
     "roses": 4,
     "nico10": 4,
     "char": 2
-   }
+   },
+   "id": "m13jcb8"
   }
- ]
+ ],
+ "himg": {}
 };
