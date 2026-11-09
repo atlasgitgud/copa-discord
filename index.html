@@ -284,12 +284,16 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .eb{min-width:0}
 .erow{display:flex;align-items:stretch;margin-top:6px}
 .erow .embed{margin-top:0;flex:0 1 540px;min-width:0;border-radius:4px 0 0 4px}
-.eimg{position:relative;flex:none;width:240px;max-width:38%;border-radius:0 4px 4px 0;overflow:hidden;background:var(--card)}
-.eimg img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
-.cropbox{width:min(400px,100%);text-align:left}
-.cropf{position:relative;width:240px;height:400px;margin:4px auto 8px;overflow:hidden;border-radius:6px;background:#000;cursor:grab;touch-action:none;box-shadow:0 0 0 2px var(--blurple)}
-.cropf:active{cursor:grabbing}
-.cropf img{position:absolute;left:0;top:0;transform-origin:0 0;max-width:none;user-select:none;pointer-events:none}
+.eimg{position:relative;flex:none;width:320px;max-width:42%;border-radius:0 4px 4px 0;overflow:hidden;background:var(--card)}
+.eimg img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;user-select:none}
+/* degradé: la imagen se funde con la caja del leaderboard */
+.eimg::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,var(--card) 0%,rgba(43,45,49,.75) 12%,rgba(43,45,49,0) 45%),linear-gradient(0deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 30%)}
+.eimg.editing{cursor:grab;touch-action:none;outline:2px solid var(--blurple);outline-offset:-2px}
+.eimg.editing:active{cursor:grabbing}
+.eimg-hint{position:absolute;z-index:2;top:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.65);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;pointer-events:none;white-space:nowrap}
+.eimg-bar{position:absolute;z-index:2;left:8px;right:8px;bottom:8px;display:flex;gap:6px;align-items:center;background:rgba(0,0,0,.7);padding:6px 8px;border-radius:8px}
+.eimg-bar input{flex:1;min-width:0;accent-color:var(--blurple)}
+.hb.ok{background:var(--green);border-color:var(--green);color:#fff}
 .edit-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:rgba(240,178,50,.12);border:1px solid rgba(240,178,50,.5);border-radius:8px;padding:10px 14px;margin-bottom:16px;color:var(--gold);font-weight:700}
 .edit-bar .btn{margin-left:auto}
 .bq{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
@@ -576,16 +580,7 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 
 <div class="tip" id="tip" role="tooltip"></div>
 <div class="toast" id="toast" role="status"></div>
-<div class="modal" id="crop" hidden>
-  <div class="lockbox cropbox">
-    <h3>Recortar imagen</h3>
-    <p>Arrastrá la imagen para moverla y usá la barra (o la ruedita) para hacer zoom.</p>
-    <div class="cropf" id="cropF"><img id="cropImg" alt="" draggable="false"></div>
-    <label class="lbl2" for="cropZ">Zoom</label>
-    <input type="range" id="cropZ" min="1" max="4" step="0.01" value="1" style="width:100%">
-    <div class="pk-actions" style="justify-content:flex-end"><button type="button" class="btn sec" id="cropCancel">Cancelar</button><button type="button" class="btn" id="cropOk">Usar este recorte</button></div>
-  </div>
-</div>
+
 <input type="file" id="hFile" accept="image/*" hidden>
 <div class="modal" id="bkImp" hidden>
   <div class="lockbox bi">
@@ -811,11 +806,26 @@ function applyLook() {
   const fav = document.querySelector('link[rel=icon]'); if (fav) fav.href = DATA.look.logo || FAVICON;
 }
 const botHtml = () => `<div class="bot"><img class="logo" src="${esc(logoSrc())}" alt=""></div>`;
-const hImg = k => k && DATA.himg[k] ? DATA.himg[k] : '';
-const hTools = (k, edit) => !isUnlocked() || !k ? '' : `<span class="htools">${edit ? `<button class="hb" data-hedit="${esc(edit)}">✏️ Editar</button>` : ''}<button class="hb" data-himg="${esc(k)}">🖼 ${hImg(k) ? 'Cambiar imagen' : 'Imagen'}</button>${hImg(k) ? `<button class="hb" data-hnoimg="${esc(k)}">Quitar imagen</button>` : ''}</span>`;
-// con imagen: la caja queda igual y la imagen se pega a la derecha, a sangre: mismo ancho siempre, mismo alto que la caja
+// imagen de cada partida: { src, x, y, z } → x/y = qué parte se ve (0-100), z = zoom
+let hEdit = null; // { k, d: {src,x,y,z} } mientras se acomoda una imagen
+const hImgObj = k => {
+  if (!k) return null;
+  if (hEdit && hEdit.k === k) return hEdit.d;
+  const v = DATA.himg[k]; if (!v) return null;
+  return typeof v === 'string' ? { src: v, x: 50, y: 50, z: 1 } : v;
+};
+const hImg = k => !!hImgObj(k);
+const hImgStyle = o => `object-position:${o.x}% ${o.y}%;transform-origin:${o.x}% ${o.y}%;transform:scale(${o.z})`;
+const hTools = (k, edit) => !isUnlocked() || !k ? '' : `<span class="htools">${edit ? `<button class="hb" data-hedit="${esc(edit)}">✏️ Editar</button>` : ''}<button class="hb" data-himg="${esc(k)}">🖼 ${hImg(k) ? 'Cambiar imagen' : 'Imagen'}</button>${hImg(k) ? `<button class="hb" data-hadj="${esc(k)}">✥ Ajustar</button><button class="hb" data-hnoimg="${esc(k)}">Quitar</button>` : ''}</span>`;
+// con imagen: la caja queda igual y la imagen se pega a la derecha, a sangre, con un degradé que la funde con la caja
 const hOpen = k => `${hImg(k) ? '<div class="erow">' : ''}<div class="embed"`;
-const hClose = k => `</div></div>${hImg(k) ? `<div class="eimg"><img src="${esc(hImg(k))}" alt="" loading="lazy"></div></div>` : ''}</div></article>`;
+const hClose = k => {
+  const o = hImgObj(k); if (!o) return `</div></div></div></article>`;
+  const ed = hEdit && hEdit.k === k;
+  return `</div></div><div class="eimg${ed ? ' editing' : ''}" data-ik="${esc(k)}"><img src="${esc(o.src)}" alt="" draggable="false" style="${hImgStyle(o)}">${ed ? `
+    <div class="eimg-hint">Arrastrá para mover</div>
+    <div class="eimg-bar"><input type="range" min="1" max="3" step="0.01" value="${o.z}" data-hzoom aria-label="Zoom"><button class="hb ok" data-hdone>✓ Listo</button><button class="hb" data-hcancel>✕</button></div>` : ''}</div></div></div></article>`;
+};
 function renderHist(ms, bs) {
   const tg = {}, loose = [];
   ms.forEach(m => { if (m.tid) (tg[m.tid] = tg[m.tid] || []).push(m); else loose.push(m); });
@@ -1940,51 +1950,60 @@ $('#genTabs').addEventListener('click', e => { const b = e.target.closest('[data
 /* =====================================================================
    HISTORIAL: imagen vertical con recorte + editar partidas (solo admin)
    ===================================================================== */
-const CF = { W: 240, H: 400 }; let crop = null, cropKey = null;
-function cropApply() {
-  const c = crop, s = c.base * c.z, w = c.iw * s, hh = c.ih * s;
-  c.x = Math.min(0, Math.max(CF.W - w, c.x)); c.y = Math.min(0, Math.max(CF.H - hh, c.y));
-  $('#cropImg').style.transform = `translate(${c.x}px,${c.y}px) scale(${s})`;
-}
-function cropZoom(z, cx = CF.W / 2, cy = CF.H / 2) {
-  const c = crop, s0 = c.base * c.z; z = Math.max(1, Math.min(4, z)); const s1 = c.base * z;
-  c.x = cx - (cx - c.x) * s1 / s0; c.y = cy - (cy - c.y) * s1 / s0; c.z = z; $('#cropZ').value = z; cropApply();
-}
+let hFileKey = null;
 $('#hFile').addEventListener('change', () => {
-  const f = $('#hFile').files[0]; if (!f) return;
-  const url = URL.createObjectURL(f), im = $('#cropImg');
+  const f = $('#hFile').files[0], k = hFileKey; if (!f || !k) return;
+  const url = URL.createObjectURL(f), im = new Image();
   im.onload = () => {
-    const iw = im.naturalWidth, ih = im.naturalHeight, base = Math.max(CF.W / iw, CF.H / ih);
-    crop = { iw, ih, base, z: 1, x: (CF.W - iw * base) / 2, y: (CF.H - ih * base) / 2, url };
-    $('#cropZ').value = 1; cropApply(); $('#crop').hidden = false;
+    const sc = Math.min(1, 1000 / Math.max(im.naturalWidth, im.naturalHeight)), cv = document.createElement('canvas');
+    cv.width = Math.round(im.naturalWidth * sc); cv.height = Math.round(im.naturalHeight * sc);
+    cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height); URL.revokeObjectURL(url);
+    hEdit = { k, d: { src: cv.toDataURL('image/jpeg', 0.84), x: 50, y: 50, z: 1 }, isNew: true };
+    renderHist(compute(state.season).ms, compute(state.season).bs);
+    toast('Arrastrá la imagen para acomodarla y tocá ✓ Listo.');
   };
   im.onerror = () => toast('No pude leer esa imagen.', true);
   im.src = url;
 });
-$('#cropZ').addEventListener('input', e => crop && cropZoom(+e.target.value));
-$('#cropF').addEventListener('wheel', e => { if (!crop) return; e.preventDefault(); const r = $('#cropF').getBoundingClientRect(); cropZoom(crop.z * (e.deltaY < 0 ? 1.08 : 1 / 1.08), e.clientX - r.left, e.clientY - r.top); }, { passive: false });
-let cropDrag = null;
-$('#cropF').addEventListener('pointerdown', e => { if (!crop) return; cropDrag = { px: e.clientX, py: e.clientY, x: crop.x, y: crop.y }; $('#cropF').setPointerCapture(e.pointerId); });
-$('#cropF').addEventListener('pointermove', e => { if (!cropDrag) return; crop.x = cropDrag.x + e.clientX - cropDrag.px; crop.y = cropDrag.y + e.clientY - cropDrag.py; cropApply(); });
-$('#cropF').addEventListener('pointerup', () => { cropDrag = null; });
-$('#cropF').addEventListener('pointercancel', () => { cropDrag = null; });
-const cropClose = () => { $('#crop').hidden = true; if (crop) URL.revokeObjectURL(crop.url); crop = null; cropKey = null; };
-$('#cropCancel').addEventListener('click', cropClose);
-$('#cropOk').addEventListener('click', () => {
-  if (!crop || !cropKey) return;
-  const c = crop, s = c.base * c.z, cv = document.createElement('canvas'); cv.width = 360; cv.height = 600;
-  cv.getContext('2d').drawImage($('#cropImg'), -c.x / s, -c.y / s, CF.W / s, CF.H / s, 0, 0, 360, 600);
-  DATA.himg[cropKey] = cv.toDataURL('image/jpeg', 0.85);
-  cropClose(); changed(); toast('Imagen agregada. Acordate de publicar.');
+// arrastrar la imagen en el mismo lugar del historial
+let hDrag = null;
+$('#hist').addEventListener('pointerdown', e => {
+  const box = e.target.closest('.eimg.editing'); if (!box || e.target.closest('.eimg-bar')) return;
+  const img = box.querySelector('img'), r = box.getBoundingClientRect(), o = hEdit.d;
+  const cov = Math.max(r.width / img.naturalWidth, r.height / img.naturalHeight) * o.z;
+  hDrag = { box, img, px: e.clientX, py: e.clientY, x: o.x, y: o.y,
+    ow: Math.max(1, img.naturalWidth * cov - r.width), oh: Math.max(1, img.naturalHeight * cov - r.height) };
+  box.setPointerCapture(e.pointerId); e.preventDefault();
 });
+$('#hist').addEventListener('pointermove', e => {
+  if (!hDrag) return; const o = hEdit.d;
+  o.x = Math.max(0, Math.min(100, hDrag.x - (e.clientX - hDrag.px) / hDrag.ow * 100));
+  o.y = Math.max(0, Math.min(100, hDrag.y - (e.clientY - hDrag.py) / hDrag.oh * 100));
+  hDrag.img.style.cssText = hImgStyle(o);
+});
+const hDragEnd = () => { hDrag = null; };
+$('#hist').addEventListener('pointerup', hDragEnd);
+$('#hist').addEventListener('pointercancel', hDragEnd);
+$('#hist').addEventListener('input', e => {
+  if (!e.target.matches('[data-hzoom]') || !hEdit) return;
+  hEdit.d.z = +e.target.value; const img = e.target.closest('.eimg').querySelector('img'); img.style.cssText = hImgStyle(hEdit.d);
+});
+$('#hist').addEventListener('wheel', e => {
+  const box = e.target.closest('.eimg.editing'); if (!box || !hEdit) return; e.preventDefault();
+  hEdit.d.z = Math.max(1, Math.min(3, hEdit.d.z * (e.deltaY < 0 ? 1.06 : 1 / 1.06)));
+  box.querySelector('img').style.cssText = hImgStyle(hEdit.d); const z = box.querySelector('[data-hzoom]'); if (z) z.value = hEdit.d.z;
+}, { passive: false });
 
 // edición de partidas
 let editMatchId = null;
 $('#hist').addEventListener('click', e => {
   if (!isUnlocked()) return;
-  const im = e.target.closest('[data-himg]'), no = e.target.closest('[data-hnoimg]'), ed = e.target.closest('[data-hedit]');
-  if (im) { cropKey = im.dataset.himg; $('#hFile').value = ''; $('#hFile').click(); return; }
-  if (no) { if (confirm('¿Quitar la imagen de esta partida?')) { delete DATA.himg[no.dataset.hnoimg]; changed(); } return; }
+  const im = e.target.closest('[data-himg]'), no = e.target.closest('[data-hnoimg]'), ed = e.target.closest('[data-hedit]'), adj = e.target.closest('[data-hadj]');
+  if (e.target.closest('[data-hdone]') && hEdit) { DATA.himg[hEdit.k] = { ...hEdit.d, x: Math.round(hEdit.d.x * 10) / 10, y: Math.round(hEdit.d.y * 10) / 10, z: Math.round(hEdit.d.z * 100) / 100 }; hEdit = null; changed(); toast('Imagen guardada. Acordate de publicar.'); return; }
+  if (e.target.closest('[data-hcancel]')) { hEdit = null; render(); return; }
+  if (im) { hFileKey = im.dataset.himg; $('#hFile').value = ''; $('#hFile').click(); return; }
+  if (adj) { const o = hImgObj(adj.dataset.hadj); hEdit = { k: adj.dataset.hadj, d: { ...o } }; render(); return; }
+  if (no) { if (confirm('¿Quitar la imagen de esta partida?')) { delete DATA.himg[no.dataset.hnoimg]; if (hEdit && hEdit.k === no.dataset.hnoimg) hEdit = null; changed(); } return; }
   if (!ed) return;
   if (ed.dataset.hedit === '#t') { genMode = 'llave'; location.hash = '#llaves'; toast('Para corregir el torneo: deshacé el registro, cambiá la llave y volvé a registrarla.'); return; }
   const m = DATA.matches.find(x => x.id === ed.dataset.hedit); if (!m) return;
