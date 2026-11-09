@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794267930314,
+ "updatedAt": 1794268062339,
  "players": [
   "agus",
   "alan",
@@ -971,6 +971,82 @@ window.COPA_DATA = {
     "char": 2
    },
    "id": "m13jcb8"
+  },
+  {
+   "id": "mmw9wvdtkvdgi",
+   "date": "2026-11-09",
+   "game": "CS",
+   "kind": "team",
+   "teams": [
+    {
+     "name": "Equipo 1",
+     "players": [
+      "nico10",
+      "pani",
+      "valenzapp",
+      "char",
+      "roses",
+      "mati"
+     ],
+     "mvp": "nico10"
+    },
+    {
+     "name": "Equipo 2",
+     "players": [
+      "lucas",
+      "mauro",
+      "zowi",
+      "paloma",
+      "seko",
+      "dozy"
+     ],
+     "mvp": null
+    }
+   ],
+   "win": 0,
+   "pts": {
+    "nico10": 4,
+    "pani": 4,
+    "valenzapp": 4,
+    "char": 4,
+    "roses": 4,
+    "mati": 4,
+    "lucas": 2,
+    "mauro": 1,
+    "zowi": 1,
+    "paloma": 1,
+    "seko": 1,
+    "dozy": 0
+   },
+   "score": null,
+   "bo": 1,
+   "maps": null,
+   "players": [
+    "nico10",
+    "pani",
+    "valenzapp",
+    "char",
+    "roses",
+    "mati",
+    "lucas",
+    "mauro",
+    "zowi",
+    "paloma",
+    "seko",
+    "dozy"
+   ],
+   "winners": [
+    "nico10",
+    "pani",
+    "valenzapp",
+    "char",
+    "roses",
+    "mati"
+   ],
+   "mvp": null,
+   "mvps": [
+    "nico10"
+   ]
   }
  ],
  "himg": {
@@ -1023,6 +1099,10 @@ window.COPA_DATA = {
   "mmw9wq75350hf": {
    "v": "mw9wq9v695",
    "sig": "1j1dzs8"
+  },
+  "mmw9wvdtkvdgi": {
+   "v": "mw9wvlhe2g",
+   "sig": "4pfn0o"
   }
  }
 };
