@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794266610688,
+ "updatedAt": 1794267814003,
  "players": [
   "agus",
   "alan",
@@ -999,6 +999,82 @@ window.COPA_DATA = {
     "valenzapp"
    ],
    "mvp": "nico10"
+  },
+  {
+   "id": "mmw9wq75350hf",
+   "date": "2026-11-09",
+   "game": "CS",
+   "kind": "team",
+   "teams": [
+    {
+     "name": "Equipo 1",
+     "players": [
+      "nico10",
+      "pani",
+      "valenzapp",
+      "char",
+      "roses",
+      "mati"
+     ],
+     "mvp": "nico10"
+    },
+    {
+     "name": "Equipo 2",
+     "players": [
+      "lucas",
+      "mauro",
+      "zowi",
+      "paloma",
+      "seko",
+      "dozy"
+     ],
+     "mvp": null
+    }
+   ],
+   "win": 0,
+   "pts": {
+    "nico10": 4,
+    "pani": 4,
+    "valenzapp": 4,
+    "char": 4,
+    "roses": 4,
+    "mati": 4,
+    "lucas": 2,
+    "mauro": 1,
+    "zowi": 1,
+    "paloma": 1,
+    "seko": 1,
+    "dozy": 0
+   },
+   "score": null,
+   "bo": 1,
+   "maps": null,
+   "players": [
+    "nico10",
+    "pani",
+    "valenzapp",
+    "char",
+    "roses",
+    "mati",
+    "lucas",
+    "mauro",
+    "zowi",
+    "paloma",
+    "seko",
+    "dozy"
+   ],
+   "winners": [
+    "nico10",
+    "pani",
+    "valenzapp",
+    "char",
+    "roses",
+    "mati"
+   ],
+   "mvp": null,
+   "mvps": [
+    "nico10"
+   ]
   }
  ],
  "himg": {
@@ -1029,24 +1105,28 @@ window.COPA_DATA = {
  },
  "shares": {
   "m17074nv": {
-   "v": "mw8q56qayg",
-   "sig": "19w5aw6"
+   "v": "mw9wq9l921",
+   "sig": "ymmtol"
   },
   "m13jcb8": {
-   "v": "mw8q5eh0i6",
-   "sig": "18rcqkt"
+   "v": "mw9wq9nww4",
+   "sig": "yrww6k"
   },
   "t1794102865289-1794102964991": {
-   "v": "mw8q5eec13",
-   "sig": "1rmhk3c"
+   "v": "mw9wq9fz6v",
+   "sig": "evt58e"
   },
   "m1hndvs0": {
-   "v": "mw8q4vgn6u",
-   "sig": "kh9rp8"
+   "v": "mw9wq9itkq",
+   "sig": "1kh26l7"
   },
   "mmw9w0fmq5r56": {
-   "v": "mw9w0hdpnd",
-   "sig": "17hkmzd"
+   "v": "mw9wq9q4jo",
+   "sig": "l4cjmc"
+  },
+  "mmw9wq75350hf": {
+   "v": "mw9wq9v695",
+   "sig": "1j1dzs8"
   }
  }
 };
