@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794269379767,
+ "updatedAt": 1794269525181,
  "players": [
   "agus",
   "alan",
@@ -996,7 +996,7 @@ window.COPA_DATA = {
   {
    "id": "mmw9wvdtkvdgi",
    "date": "2026-11-09",
-   "game": "CS",
+   "game": "CS_SOURCE",
    "kind": "team",
    "teams": [
     {
@@ -1021,22 +1021,22 @@ window.COPA_DATA = {
       "seko",
       "dozy"
      ],
-     "mvp": null
+     "mvp": "lucas"
     }
    ],
    "win": 0,
    "pts": {
-    "nico10": 4,
-    "pani": 4,
-    "valenzapp": 4,
-    "char": 4,
-    "roses": 4,
-    "mati": 4,
-    "lucas": 2,
-    "mauro": 1,
-    "zowi": 1,
-    "paloma": 1,
-    "seko": 1,
+    "nico10": 10,
+    "pani": 9,
+    "valenzapp": 8,
+    "char": 7,
+    "roses": 6,
+    "mati": 5,
+    "lucas": 7,
+    "mauro": 6,
+    "zowi": 5,
+    "paloma": 4,
+    "seko": 3,
     "dozy": 0
    },
    "score": null,
@@ -1066,7 +1066,8 @@ window.COPA_DATA = {
    ],
    "mvp": null,
    "mvps": [
-    "nico10"
+    "nico10",
+    "lucas"
    ]
   }
  ],
@@ -1128,8 +1129,8 @@ window.COPA_DATA = {
    "sig": "1j1dzs8"
   },
   "mmw9wvdtkvdgi": {
-   "v": "mw9x9578ff",
-   "sig": "1xcnutz"
+   "v": "mw9xqy7wtt",
+   "sig": "1y5ydbn"
   }
  }
 };
