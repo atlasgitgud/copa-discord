@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794284578859,
+ "updatedAt": 1794285086272,
  "players": [
   "agus",
   "alan",
@@ -53,7 +53,6 @@ window.COPA_DATA = {
   "banner": "media/banner-1793940465167.mp4",
   "bannerType": "video",
   "bannerPos": 50,
-  "bg": "#26282b",
   "pat": "none"
  },
  "rules": {},
