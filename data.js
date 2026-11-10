@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794273180884,
+ "updatedAt": 1794275548085,
  "players": [
   "agus",
   "alan",
@@ -1069,6 +1069,62 @@ window.COPA_DATA = {
     "nico10",
     "lucas"
    ]
+  },
+  {
+   "id": "mmwa1bxqojuo7",
+   "date": "2026-11-09",
+   "game": "OSU",
+   "players": [
+    "dozy",
+    "dory",
+    "seko",
+    "valenzapp",
+    "mauro",
+    "negar",
+    "pani",
+    "lucas",
+    "mati",
+    "nico10",
+    "roses",
+    "karo",
+    "beqi"
+   ],
+   "winners": [
+    "dozy"
+   ],
+   "mvp": "dozy",
+   "kind": "lb",
+   "tname": "OSU",
+   "ranking": [
+    "dozy",
+    "dory",
+    "seko",
+    "valenzapp",
+    "mauro",
+    "negar",
+    "pani",
+    "lucas",
+    "mati",
+    "nico10",
+    "roses",
+    "karo",
+    "beqi"
+   ],
+   "pts": {
+    "dozy": 18,
+    "dory": 13,
+    "seko": 12,
+    "valenzapp": 10,
+    "mauro": 8,
+    "negar": 7,
+    "pani": 6,
+    "lucas": 5,
+    "mati": 4,
+    "nico10": 3,
+    "roses": 2,
+    "karo": 1,
+    "beqi": 1
+   }
   }
  ],
  "himg": {
@@ -1131,6 +1187,10 @@ window.COPA_DATA = {
   "mmw9wvdtkvdgi": {
    "v": "mw9xqy7wtt",
    "sig": "1y5ydbn"
+  },
+  "mmwa1bxqojuo7": {
+   "v": "mwa1c1isx5",
+   "sig": "wdoli5"
   }
  }
 };
