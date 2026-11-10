@@ -62,7 +62,7 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .inner{max-width:1040px;margin:0 auto}
 
 /* ---------- banner ---------- */
-.hero{--bn:none;position:relative;height:268px;margin:-20px -24px 20px;background:#1e1f22 var(--bn) center 32%/cover no-repeat}
+.hero{--bn:none;position:relative;height:380px;margin:-20px -24px 20px;background:#1e1f22 var(--bn) center 32%/cover no-repeat}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(30,31,34,.55) 70%,var(--main))}
 .hero-t{position:absolute;z-index:1;left:0;right:0;bottom:16px;max-width:1040px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:14px}
 .hero-ic{width:64px;height:64px;border-radius:50%;overflow:hidden;background:#000;box-shadow:0 0 0 4px var(--main);flex:none}
@@ -70,7 +70,27 @@ select:focus-visible{box-shadow:0 0 0 2px var(--blurple)}
 .hero p{margin:2px 0 0;font-size:14px;color:#dbdee1;text-shadow:0 1px 6px rgba(0,0,0,.7)}
 
 /* ---------- stats ---------- */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.stats{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1.25fr) minmax(0,.75fr) minmax(0,1.1fr);gap:12px;margin-bottom:16px;grid-template-rows:190px}
+.pod23{display:grid;grid-template-rows:1fr 1fr;gap:12px;min-width:0}
+.stat.pod{--c:var(--gold);--lbg:none;position:relative;overflow:hidden;border:1px solid var(--c);box-shadow:0 0 0 1px color-mix(in srgb,var(--c) 30%,transparent),0 0 22px color-mix(in srgb,var(--c) 18%,transparent);cursor:pointer;display:flex;flex-direction:column;justify-content:center;transition:transform .15s}
+.stat.pod:hover{transform:translateY(-2px)}
+.stat.pod.p2{--c:var(--silver)}.stat.pod.p3{--c:var(--bronze)}
+.stat.pod.empty{cursor:default;opacity:.6;box-shadow:none}
+.stat.pod::before{content:"";position:absolute;top:0;bottom:0;right:0;left:30%;background:var(--lbg) center 28%/cover no-repeat;filter:saturate(1.1) contrast(1.05)}
+.stat.pod::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--card) 32%,rgba(43,45,49,.6) 52%,rgba(43,45,49,0) 80%),linear-gradient(0deg,color-mix(in srgb,var(--c) 16%,transparent),transparent 70%)}
+.stat.pod>*{position:relative;z-index:1}
+.stat.pod small{color:var(--c)}
+.stat.pod .pn{color:var(--c);font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:62%}
+.stat.pod.p1 .pn{font-size:30px}
+.stat.pod .pn .mi{width:.85em;height:.85em;vertical-align:-.08em}
+.stat.pod .pp{font-size:13px;color:var(--mut);font-weight:700}.stat.pod .pp b{font-size:15px;color:var(--hi)}
+.stat.pod.p1 .pp b{font-size:20px}
+.stat.sm{display:flex;flex-direction:column;justify-content:center}
+.stat.sm b{font-size:34px}
+.stat.games{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.gl{--gs:30px;flex:1;min-height:0;display:flex;flex-wrap:wrap;align-content:flex-start;gap:6px;overflow:hidden;margin-top:6px}
+.gli{width:var(--gs);height:var(--gs);border-radius:6px;background:var(--deep);display:grid;place-items:center;flex:none;cursor:help}
+.gli .gi{width:72%;height:72%}
 .stat{background:var(--card);border-radius:8px;padding:14px 16px;min-width:0}
 .stat small{display:block;font-size:12px;font-weight:700;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
 .stat b{font-size:22px;color:var(--hi);font-weight:800;overflow-wrap:anywhere}
@@ -482,10 +502,12 @@ article.msg.hl{background:rgba(88,101,242,.16)}
   .ch{width:auto;flex:none;font-size:15px;margin:0}
   .side-b select{width:auto;flex:none}
   .content{overflow:visible;padding:16px 12px 40px}
-  .hero{height:170px;margin:-16px -12px 16px}.hero-t{padding:0 14px}.hero h1{font-size:22px}.hero-ic{width:52px;height:52px}
+  .hero{height:230px;margin:-16px -12px 16px}.hero-t{padding:0 14px}.hero h1{font-size:22px}.hero-ic{width:52px;height:52px}
   .grid{grid-template-columns:48px minmax(0,1fr) 92px 60px;padding:0 12px;gap:6px}
   .c-pj,.c-v{display:none}
-  .stats{gap:8px}.stat{padding:12px}.stat b{font-size:17px}
+  .stats{gap:8px;grid-template-columns:1fr 1fr;min-height:0}.stat{padding:12px}.stat b{font-size:17px}
+  .stats>.pod.p1{grid-column:1/-1;min-height:110px}.pod23{grid-column:1/-1;grid-template-rows:none;grid-template-columns:1fr 1fr;gap:8px}
+  .stats{grid-template-rows:auto}.stat.pod{min-height:72px}.stats>.stat.sm,.stats>.stat.games{height:110px}.stat.sm b{font-size:26px}
   .pk,.adm-grid{grid-template-columns:1fr}
   .pool{max-height:300px}
 }
@@ -791,6 +813,12 @@ function hSort(items) {
   const pos = new Map(o.map((k, i) => [k, i]));
   return items.map((it, i) => [it, pos.has(it.key) ? pos.get(it.key) : -1, i]).sort((a, b) => a[1] - b[1] || a[2] - b[2]).map(x => x[0]);
 }
+// achica los íconos de "juegos jugados" hasta que entren en la tarjeta
+function fitGames() {
+  const el = document.getElementById('gList'); if (!el) return;
+  for (let s = 30; s >= 12; s -= 2) { el.style.setProperty('--gs', s + 'px'); if (el.scrollHeight <= el.clientHeight + 1 && el.scrollWidth <= el.clientWidth + 1) return; }
+}
+addEventListener('resize', () => requestAnimationFrame(fitGames));
 const norm = d => {
   d = d || {};
   return {
@@ -892,12 +920,21 @@ function render() {
   fillSeasons();
   const { list, ms, bs } = compute(state.season);
   byName = new Map(list.map(s => [s.name, s]));
-  const leaders = list.filter(isTop).map(s => s.name);
-  const lead = !leaders.length ? '—' : leaders.length <= 2 ? leaders.join(' · ') : `${leaders[0]} +${leaders.length - 1}`;
+  // podio: top 1 grande, top 2 y 3 apilados; después partidas y juegos jugados
+  const pod = list.filter(s => s.pts > 0).slice(0, 3);
+  const podCard = (s, k) => {
+    const cls = ['p1', 'p2', 'p3'][k], lbl = ['Líder', '2° puesto', '3° puesto'][k];
+    if (!s) return `<div class="stat pod ${cls} empty"><small>${lbl}</small><b>—</b></div>`;
+    const tie = list.filter(x => x.pts === s.pts && x.pts > 0).length > 1;
+    return `<div class="stat pod ${cls}" data-p="${esc(s.name)}" role="button" tabindex="0"${avatarOf(s.name) ? ` style="--lbg:url('${avatarOf(s.name)}')"` : ''}>
+      <small>${lbl}${tie ? ' · empate' : ''}</small><b class="pn">${k === 0 ? ic('crown1') + ' ' : ''}${esc(s.name)}</b><span class="pp"><b>${s.pts}</b> pts</span></div>`;
+  };
+  const played = [...new Set(ms.map(m => m.game))];
   $('#stats').innerHTML =
-    `<div class="stat"><small>Partidas</small><b>${ms.length}</b></div>
-     <div class="stat"><small>Juegos distintos</small><b>${new Set(ms.map(m => m.game)).size}</b></div>
-     <div class="stat lead-card"${leaders.length === 1 && avatarOf(leaders[0]) ? ` style="--lbg:url('${avatarOf(leaders[0])}')"` : ''}><small>Líder</small><b class="lead">${leaders.length ? ic('crown1') + ' ' : ''}${esc(lead)}</b></div>`;
+    `${podCard(pod[0], 0)}<div class="pod23">${podCard(pod[1], 1)}${podCard(pod[2], 2)}</div>
+     <div class="stat sm"><small>Partidas</small><b>${ms.length}</b></div>
+     <div class="stat games"><small>Juegos jugados · ${played.length}</small><div class="gl" id="gList">${played.map(g => `<span class="gli" data-tip="${esc(gameOf(g).name)} · ${ms.filter(m => m.game === g).length} ${pl(ms.filter(m => m.game === g).length, 'partida', 'partidas')}">${gIcon(g)}</span>`).join('') || '<b>—</b>'}</div></div>`;
+  requestAnimationFrame(fitGames);
   $('#scope').textContent = scopeLabel();
   $('#heroSub').textContent = `${scopeLabel()} · ${ms.length} ${pl(ms.length, 'partida', 'partidas')}`;
 
@@ -1215,7 +1252,7 @@ document.addEventListener('click', e => {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !$('#modal').hidden) closeProfile();
   if (e.key === 'Escape' && !$('#lock').hidden) $('#lockCancel').click();
-  const r = e.target.closest && e.target.closest('.row');
+  const r = e.target.closest && e.target.closest('.row, .stat.pod[data-p]');
   if (r && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openProfile(r.dataset.p); }
 });
 
