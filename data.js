@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794333193535,
+ "updatedAt": 1794351740467,
  "players": [
   "agus",
   "alan",
@@ -1143,6 +1143,50 @@ window.COPA_DATA = {
     "karo": 1,
     "beqi": 1
    }
+  },
+  {
+   "id": "mmwbap1g8za9d",
+   "date": "2026-11-09",
+   "game": "TYPERACER",
+   "players": [
+    "char",
+    "roses",
+    "mauro",
+    "seko",
+    "negar",
+    "dozy",
+    "lucas",
+    "valenzapp",
+    "agus"
+   ],
+   "winners": [
+    "char"
+   ],
+   "mvp": "char",
+   "kind": "lb",
+   "tname": "typeracer",
+   "ranking": [
+    "char",
+    "roses",
+    "mauro",
+    "seko",
+    "negar",
+    "dozy",
+    "lucas",
+    "valenzapp",
+    "agus"
+   ],
+   "pts": {
+    "char": 18,
+    "roses": 10,
+    "mauro": 6,
+    "seko": 6,
+    "negar": 3,
+    "dozy": 3,
+    "lucas": 2,
+    "valenzapp": 1,
+    "agus": 1
+   }
   }
  ],
  "himg": {
@@ -1215,6 +1259,10 @@ window.COPA_DATA = {
   "mmwa1bxqojuo7": {
    "v": "mwa56yv6g6",
    "sig": "l539ja"
+  },
+  "mmwbap1g8za9d": {
+   "v": "mwbap3xuux",
+   "sig": "jr5s0m"
   }
  }
 };
