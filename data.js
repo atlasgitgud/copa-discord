@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794437327903,
+ "updatedAt": 1794437575632,
  "players": [
   "agus",
   "alan",
@@ -326,8 +326,8 @@ window.COPA_DATA = {
   }
  ],
  "horder": [
-  "mmwbnz4fmbhv4",
   "mmwbme1ekqnq1",
+  "mmwbnz4fmbhv4",
   "mmwbap1g8za9d",
   "mmwa1bxqojuo7",
   "mmw9wvdtkvdgi",
