@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794351740467,
+ "updatedAt": 1794361591409,
  "players": [
   "agus",
   "alan",
@@ -56,203 +56,177 @@ window.COPA_DATA = {
  },
  "rules": {},
  "bracket": {
-  "id": "t1794102865289",
-  "name": "Torneo Brawlhalla",
+  "id": "t1794353998520",
+  "name": "Torneo de Brawlhalla",
   "game": "BRAWLHALLA",
-  "date": "2026-11-07",
+  "date": "2026-11-10",
   "rounds": 4,
   "top": 4,
   "finalBo": 5,
   "players": [
+   "char",
    "dozy",
    "lucas",
-   "pani",
-   "alan",
-   "nico10",
-   "valenzapp",
-   "paloma",
-   "zowi",
-   "seko",
-   "roses",
-   "atlas",
-   "negar",
    "mati",
-   "mauro"
+   "mauro",
+   "negar",
+   "nico10",
+   "paloma",
+   "pani",
+   "roses",
+   "seko",
+   "valenzapp"
   ],
   "swiss": [
    [
     {
-     "a": "dozy",
-     "b": "lucas",
-     "w": "a",
-     "s": "1-0"
-    },
-    {
-     "a": "pani",
-     "b": "alan",
-     "w": "a",
-     "s": "1-0"
-    },
-    {
-     "a": "nico10",
-     "b": "valenzapp",
-     "w": "a",
-     "s": "1-0"
-    },
-    {
-     "a": "paloma",
-     "b": "zowi",
-     "w": "a",
-     "s": "1-0"
-    },
-    {
-     "a": "seko",
-     "b": "roses",
-     "w": "a",
-     "s": "1-0"
-    },
-    {
-     "a": "atlas",
-     "b": "negar",
-     "w": "a",
-     "s": "1-0"
-    },
-    {
-     "a": "mati",
-     "b": "mauro",
-     "w": "b",
-     "s": "1-0"
-    }
-   ],
-   [
-    {
-     "a": "atlas",
-     "b": "dozy",
-     "w": "b",
-     "s": "1-0"
-    },
-    {
-     "a": "paloma",
-     "b": "mauro",
-     "w": "a",
-     "s": "1-0"
-    },
-    {
-     "a": "nico10",
-     "b": "pani",
-     "w": "a",
-     "s": "1-0"
-    },
-    {
-     "a": "seko",
-     "b": "alan",
-     "w": "a",
-     "s": "1-0"
-    },
-    {
-     "a": "lucas",
-     "b": "mati",
-     "w": "b",
-     "s": "1-0"
-    },
-    {
      "a": "negar",
-     "b": "roses",
-     "w": "b",
-     "s": "1-0"
-    },
-    {
-     "a": "valenzapp",
-     "b": "zowi",
-     "w": "a",
-     "s": "1-0"
-    }
-   ],
-   [
-    {
-     "a": "nico10",
-     "b": "dozy",
-     "w": "b",
-     "s": "1-0"
-    },
-    {
-     "a": "paloma",
      "b": "seko",
      "w": "b",
      "s": "1-0"
     },
     {
+     "a": "roses",
+     "b": "nico10",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "mati",
+     "b": "paloma",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "char",
+     "b": "valenzapp",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "pani",
+     "b": "lucas",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
      "a": "mauro",
-     "b": "atlas",
+     "b": "dozy",
      "w": "a",
+     "s": "1-0"
+    }
+   ],
+   [
+    {
+     "a": "lucas",
+     "b": "mauro",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "nico10",
+     "b": "paloma",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "seko",
+     "b": "valenzapp",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "char",
+     "b": "dozy",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "mati",
+     "b": "negar",
+     "w": "b",
      "s": "1-0"
     },
     {
      "a": "pani",
      "b": "roses",
-     "w": "b",
-     "s": "1-0"
-    },
-    {
-     "a": "valenzapp",
-     "b": "mati",
-     "w": "b",
-     "s": "1-0"
-    },
-    {
-     "a": "alan",
-     "b": "lucas",
-     "w": "a",
-     "s": "1-0"
-    },
-    {
-     "a": "zowi",
-     "b": "negar",
      "w": "b",
      "s": "1-0"
     }
    ],
    [
     {
-     "a": "seko",
-     "b": "dozy",
+     "a": "lucas",
+     "b": "paloma",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "valenzapp",
+     "b": "mauro",
      "w": "a",
      "s": "1-0"
     },
     {
-     "a": "paloma",
-     "b": "nico10",
+     "a": "nico10",
+     "b": "seko",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "dozy",
+     "b": "negar",
      "w": "a",
      "s": "1-0"
     },
     {
-     "a": "mauro",
-     "b": "roses",
+     "a": "roses",
+     "b": "char",
      "w": "a",
      "s": "1-0"
     },
     {
      "a": "mati",
-     "b": "atlas",
-     "w": "a",
+     "b": "pani",
+     "w": "b",
      "s": "1-0"
-    },
+    }
+   ],
+   [
     {
-     "a": "pani",
+     "a": "paloma",
      "b": "valenzapp",
-     "w": "a",
-     "s": "1-0"
-    },
-    {
-     "a": "alan",
-     "b": "negar",
      "w": "b",
      "s": "1-0"
     },
     {
      "a": "lucas",
-     "b": "zowi",
+     "b": "seko",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "dozy",
+     "b": "roses",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "mauro",
+     "b": "nico10",
      "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "negar",
+     "b": "pani",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "char",
+     "b": "mati",
+     "w": "b",
      "s": "1-0"
     }
    ]
@@ -260,33 +234,27 @@ window.COPA_DATA = {
   "playoffs": {
    "semis": [
     {
-     "a": "seko",
-     "b": "dozy",
+     "a": "valenzapp",
+     "b": "roses",
      "w": "a",
      "s": "1-0"
     },
     {
      "a": "paloma",
-     "b": "mauro",
-     "w": "b",
+     "b": "seko",
+     "w": "a",
      "s": "1-0"
     }
    ],
    "final": {
-    "a": "seko",
-    "b": "mauro",
-    "w": "a",
-    "s": "3-0"
-   },
-   "third": {
-    "a": "dozy",
+    "a": "valenzapp",
     "b": "paloma",
     "w": "a",
-    "s": "1-0"
+    "s": "3-0"
    }
   },
   "registered": {
-   "tid": "t1794102865289-1794102964991",
+   "tid": "t1794353998520-1794361583637",
    "mode": "cruces"
   }
  },
@@ -1187,6 +1155,438 @@ window.COPA_DATA = {
     "valenzapp": 1,
     "agus": 1
    }
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9l98c",
+   "players": [
+    "negar",
+    "seko"
+   ],
+   "winners": [
+    "seko"
+   ],
+   "mvp": null,
+   "stage": "r1"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9qc6c",
+   "players": [
+    "roses",
+    "nico10"
+   ],
+   "winners": [
+    "nico10"
+   ],
+   "mvp": null,
+   "stage": "r1"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9mv8r",
+   "players": [
+    "mati",
+    "paloma"
+   ],
+   "winners": [
+    "paloma"
+   ],
+   "mvp": null,
+   "stage": "r1"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9jpvt",
+   "players": [
+    "char",
+    "valenzapp"
+   ],
+   "winners": [
+    "valenzapp"
+   ],
+   "mvp": null,
+   "stage": "r1"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9jz1s",
+   "players": [
+    "pani",
+    "lucas"
+   ],
+   "winners": [
+    "lucas"
+   ],
+   "mvp": null,
+   "stage": "r1"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z92afj",
+   "players": [
+    "mauro",
+    "dozy"
+   ],
+   "winners": [
+    "mauro"
+   ],
+   "mvp": null,
+   "stage": "r1"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9mcgi",
+   "players": [
+    "lucas",
+    "mauro"
+   ],
+   "winners": [
+    "lucas"
+   ],
+   "mvp": null,
+   "stage": "r2"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9bqyh",
+   "players": [
+    "nico10",
+    "paloma"
+   ],
+   "winners": [
+    "paloma"
+   ],
+   "mvp": null,
+   "stage": "r2"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9bi98",
+   "players": [
+    "seko",
+    "valenzapp"
+   ],
+   "winners": [
+    "valenzapp"
+   ],
+   "mvp": null,
+   "stage": "r2"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9c8r2",
+   "players": [
+    "char",
+    "dozy"
+   ],
+   "winners": [
+    "dozy"
+   ],
+   "mvp": null,
+   "stage": "r2"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9zb0r",
+   "players": [
+    "mati",
+    "negar"
+   ],
+   "winners": [
+    "negar"
+   ],
+   "mvp": null,
+   "stage": "r2"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9aj0s",
+   "players": [
+    "pani",
+    "roses"
+   ],
+   "winners": [
+    "roses"
+   ],
+   "mvp": null,
+   "stage": "r2"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9mk1b",
+   "players": [
+    "lucas",
+    "paloma"
+   ],
+   "winners": [
+    "paloma"
+   ],
+   "mvp": null,
+   "stage": "r3"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z96lt5",
+   "players": [
+    "valenzapp",
+    "mauro"
+   ],
+   "winners": [
+    "valenzapp"
+   ],
+   "mvp": null,
+   "stage": "r3"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9njtw",
+   "players": [
+    "nico10",
+    "seko"
+   ],
+   "winners": [
+    "seko"
+   ],
+   "mvp": null,
+   "stage": "r3"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9am88",
+   "players": [
+    "dozy",
+    "negar"
+   ],
+   "winners": [
+    "dozy"
+   ],
+   "mvp": null,
+   "stage": "r3"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9s0op",
+   "players": [
+    "roses",
+    "char"
+   ],
+   "winners": [
+    "roses"
+   ],
+   "mvp": null,
+   "stage": "r3"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9i3a2",
+   "players": [
+    "mati",
+    "pani"
+   ],
+   "winners": [
+    "pani"
+   ],
+   "mvp": null,
+   "stage": "r3"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9hdip",
+   "players": [
+    "paloma",
+    "valenzapp"
+   ],
+   "winners": [
+    "valenzapp"
+   ],
+   "mvp": null,
+   "stage": "r4"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9feeo",
+   "players": [
+    "lucas",
+    "seko"
+   ],
+   "winners": [
+    "seko"
+   ],
+   "mvp": null,
+   "stage": "r4"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9u3qh",
+   "players": [
+    "dozy",
+    "roses"
+   ],
+   "winners": [
+    "roses"
+   ],
+   "mvp": null,
+   "stage": "r4"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9zogc",
+   "players": [
+    "mauro",
+    "nico10"
+   ],
+   "winners": [
+    "mauro"
+   ],
+   "mvp": null,
+   "stage": "r4"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9tl27",
+   "players": [
+    "negar",
+    "pani"
+   ],
+   "winners": [
+    "pani"
+   ],
+   "mvp": null,
+   "stage": "r4"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9fqhr",
+   "players": [
+    "char",
+    "mati"
+   ],
+   "winners": [
+    "mati"
+   ],
+   "mvp": null,
+   "stage": "r4"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z94xtq",
+   "players": [
+    "valenzapp",
+    "roses"
+   ],
+   "winners": [
+    "valenzapp"
+   ],
+   "mvp": null,
+   "stage": "semi"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9oks8",
+   "players": [
+    "paloma",
+    "seko"
+   ],
+   "winners": [
+    "paloma"
+   ],
+   "mvp": null,
+   "stage": "semi"
+  },
+  {
+   "date": "2026-11-10",
+   "game": "BRAWLHALLA",
+   "tid": "t1794353998520-1794361583637",
+   "tname": "Torneo de Brawlhalla",
+   "id": "mmwbgk2z9xqo7",
+   "players": [
+    "valenzapp",
+    "paloma"
+   ],
+   "winners": [
+    "valenzapp"
+   ],
+   "mvp": "valenzapp",
+   "stage": "final"
   }
  ],
  "himg": {
@@ -1263,6 +1663,10 @@ window.COPA_DATA = {
   "mmwbap1g8za9d": {
    "v": "mwbap3xuux",
    "sig": "jr5s0m"
+  },
+  "t1794353998520-1794361583637": {
+   "v": "mwbgk8z4x9",
+   "sig": "rc222g"
   }
  }
 };
