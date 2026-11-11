@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794371383527,
+ "updatedAt": 1794374045104,
  "players": [
   "agus",
   "alan",
@@ -1242,6 +1242,59 @@ window.COPA_DATA = {
     "negar": 10,
     "agus": 5
    }
+  },
+  {
+   "id": "mmwbnz4fmbhv4",
+   "date": "2026-11-09",
+   "game": "AJEDREZ",
+   "players": [
+    "valenzapp",
+    "paloma",
+    "roses",
+    "dozy",
+    "seko",
+    "lucas",
+    "mauro",
+    "negar",
+    "nico10",
+    "mati",
+    "char",
+    "pani"
+   ],
+   "winners": [
+    "valenzapp"
+   ],
+   "mvp": "valenzapp",
+   "kind": "lb",
+   "tname": "chess",
+   "ranking": [
+    "valenzapp",
+    "paloma",
+    "roses",
+    "dozy",
+    "seko",
+    "lucas",
+    "mauro",
+    "negar",
+    "nico10",
+    "mati",
+    "char",
+    "pani"
+   ],
+   "pts": {
+    "valenzapp": 19,
+    "paloma": 15,
+    "roses": 12,
+    "dozy": 9,
+    "seko": 9,
+    "lucas": 9,
+    "mauro": 9,
+    "negar": 7,
+    "nico10": 7,
+    "mati": 7,
+    "char": 7,
+    "pani": 7
+   }
   }
  ],
  "himg": {
@@ -1326,6 +1379,10 @@ window.COPA_DATA = {
   "mmwbme1ekqnq1": {
    "v": "mwbme4mfyt",
    "sig": "1ywhems"
+  },
+  "mmwbnz4fmbhv4": {
+   "v": "mwbnz6b4cm",
+   "sig": "kc1e4c"
   }
  }
 };
