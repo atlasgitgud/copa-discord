@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794361698780,
+ "updatedAt": 1794371383527,
  "players": [
   "agus",
   "alan",
@@ -55,7 +55,237 @@ window.COPA_DATA = {
   "bannerPos": 50
  },
  "rules": {},
- "bracket": null,
+ "bracket": {
+  "id": "t1794361875411",
+  "name": "torneo vlaorant",
+  "game": "VALO",
+  "date": "2026-11-10",
+  "rounds": 4,
+  "top": 4,
+  "finalBo": 1,
+  "players": [
+   "agus",
+   "char",
+   "dozy",
+   "karo",
+   "mati",
+   "mauro",
+   "negar",
+   "nico10",
+   "pani",
+   "roses",
+   "seko",
+   "valenzapp",
+   "zowi"
+  ],
+  "swiss": [
+   [
+    {
+     "a": "mauro",
+     "b": "roses",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "char",
+     "b": "nico10",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "dozy",
+     "b": "agus",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "seko",
+     "b": "negar",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "valenzapp",
+     "b": "mati",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "pani",
+     "b": "zowi",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "karo",
+     "b": null,
+     "w": "a",
+     "s": "bye"
+    }
+   ],
+   [
+    {
+     "a": "dozy",
+     "b": "karo",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "mauro",
+     "b": "nico10",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "pani",
+     "b": "seko",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "valenzapp",
+     "b": "agus",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "char",
+     "b": "mati",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "negar",
+     "b": "roses",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "zowi",
+     "b": null,
+     "w": "a",
+     "s": "bye"
+    }
+   ],
+   [
+    {
+     "a": "nico10",
+     "b": "pani",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "karo",
+     "b": "valenzapp",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "seko",
+     "b": "char",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "dozy",
+     "b": "mauro",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "zowi",
+     "b": "negar",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "agus",
+     "b": "mati",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "roses",
+     "b": null,
+     "w": "a",
+     "s": "bye"
+    }
+   ],
+   [
+    {
+     "a": "nico10",
+     "b": "valenzapp",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "pani",
+     "b": "karo",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "seko",
+     "b": "dozy",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "zowi",
+     "b": "char",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "mauro",
+     "b": "negar",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "mati",
+     "b": "roses",
+     "w": "b",
+     "s": "1-0"
+    },
+    {
+     "a": "agus",
+     "b": null,
+     "w": "a",
+     "s": "bye"
+    }
+   ]
+  ],
+  "playoffs": {
+   "semis": [
+    {
+     "a": "nico10",
+     "b": "dozy",
+     "w": "a",
+     "s": "1-0"
+    },
+    {
+     "a": "pani",
+     "b": "valenzapp",
+     "w": "b",
+     "s": "1-0"
+    }
+   ],
+   "final": {
+    "a": "nico10",
+    "b": "valenzapp",
+    "w": "a",
+    "s": "1-0"
+   },
+   "third": {
+    "a": "dozy",
+    "b": "pani",
+    "w": null,
+    "s": null
+   }
+  },
+  "registered": null
+ },
  "games": {
   "HAXBALL": {
    "name": "Haxball",
@@ -953,6 +1183,65 @@ window.COPA_DATA = {
     "valenzapp": 1,
     "agus": 1
    }
+  },
+  {
+   "id": "mmwbme1ekqnq1",
+   "date": "2026-11-09",
+   "game": "VALO",
+   "players": [
+    "nico10",
+    "valenzapp",
+    "pani",
+    "dozy",
+    "zowi",
+    "mauro",
+    "seko",
+    "roses",
+    "alan",
+    "karo",
+    "mati",
+    "char",
+    "negar",
+    "agus"
+   ],
+   "winners": [
+    "nico10"
+   ],
+   "mvp": "nico10",
+   "kind": "lb",
+   "tname": "VALORANT 1V1",
+   "ranking": [
+    "nico10",
+    "valenzapp",
+    "pani",
+    "dozy",
+    "zowi",
+    "mauro",
+    "seko",
+    "roses",
+    "alan",
+    "karo",
+    "mati",
+    "char",
+    "negar",
+    "agus"
+   ],
+   "pts": {
+    "nico10": 27,
+    "valenzapp": 24,
+    "pani": 20,
+    "dozy": 20,
+    "zowi": 15,
+    "mauro": 15,
+    "seko": 15,
+    "roses": 15,
+    "alan": 14,
+    "karo": 10,
+    "mati": 10,
+    "char": 10,
+    "negar": 10,
+    "agus": 5
+   }
   }
  ],
  "himg": {
@@ -1033,6 +1322,10 @@ window.COPA_DATA = {
   "t1794353998520-1794361583637": {
    "v": "mwbgk8z4x9",
    "sig": "rc222g"
+  },
+  "mmwbme1ekqnq1": {
+   "v": "mwbme4mfyt",
+   "sig": "1ywhems"
   }
  }
 };
