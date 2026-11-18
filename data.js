@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794974110570,
+ "updatedAt": 1794974415414,
  "players": [
   "agus",
   "alan",
@@ -1395,9 +1395,9 @@ window.COPA_DATA = {
      "players": [
       "mauro",
       "roses",
-      "cruz",
       "negar",
-      "nico10"
+      "nico10",
+      "seko"
      ],
      "mvp": "roses"
     },
@@ -1417,9 +1417,9 @@ window.COPA_DATA = {
    "pts": {
     "mauro": 18,
     "roses": 25,
-    "cruz": 23,
     "negar": 10,
     "nico10": 12,
+    "seko": 23,
     "mati": 2,
     "agus": 12,
     "dozy": 17,
@@ -1432,9 +1432,9 @@ window.COPA_DATA = {
    "players": [
     "mauro",
     "roses",
-    "cruz",
     "negar",
     "nico10",
+    "seko",
     "mati",
     "agus",
     "dozy",
@@ -1444,9 +1444,9 @@ window.COPA_DATA = {
    "winners": [
     "mauro",
     "roses",
-    "cruz",
     "negar",
-    "nico10"
+    "nico10",
+    "seko"
    ],
    "mvp": null,
    "mvps": [
@@ -1576,8 +1576,8 @@ window.COPA_DATA = {
    "sig": "1ja69vg"
   },
   "mmwll3j06kqyd": {
-   "v": "mwll8ns9dc",
-   "sig": "kfx7l9"
+   "v": "mwllf7051j",
+   "sig": "zttzjv"
   }
  }
 };
