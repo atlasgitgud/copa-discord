@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794456023659,
+ "updatedAt": 1794973884408,
  "players": [
   "agus",
   "alan",
@@ -1383,6 +1383,69 @@ window.COPA_DATA = {
    "mvps": [
     "roses"
    ]
+  },
+  {
+   "id": "mmwll3j06kqyd",
+   "date": "2026-11-12",
+   "game": "VALO",
+   "kind": "team",
+   "teams": [
+    {
+     "name": "Equipo 1",
+     "players": [
+      "mauro",
+      "roses",
+      "cruz",
+      "negar",
+      "nico10"
+     ],
+     "mvp": "roses"
+    },
+    {
+     "name": "Equipo 2",
+     "players": [
+      "mati",
+      "agus",
+      "dozy",
+      "valenzapp",
+      "paloma"
+     ],
+     "mvp": null
+    }
+   ],
+   "win": -1,
+   "pts": {
+    "mauro": 18,
+    "roses": 25,
+    "cruz": 23,
+    "negar": 10,
+    "nico10": 12,
+    "mati": 2,
+    "agus": 12,
+    "dozy": 17,
+    "valenzapp": 2,
+    "paloma": 2
+   },
+   "score": null,
+   "bo": 1,
+   "maps": null,
+   "players": [
+    "mauro",
+    "roses",
+    "cruz",
+    "negar",
+    "nico10",
+    "mati",
+    "agus",
+    "dozy",
+    "valenzapp",
+    "paloma"
+   ],
+   "winners": [],
+   "mvp": null,
+   "mvps": [
+    "roses"
+   ]
   }
  ],
  "himg": {
@@ -1499,6 +1562,10 @@ window.COPA_DATA = {
   "mmwd0qg4aahaf": {
    "v": "mwd0s9d6j9",
    "sig": "1ja69vg"
+  },
+  "mmwll3j06kqyd": {
+   "v": "mwll3ta0pj",
+   "sig": "lucyk9"
   }
  }
 };
