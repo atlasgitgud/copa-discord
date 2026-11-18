@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1794973884408,
+ "updatedAt": 1794973986429,
  "players": [
   "agus",
   "alan",
@@ -1387,7 +1387,7 @@ window.COPA_DATA = {
   {
    "id": "mmwll3j06kqyd",
    "date": "2026-11-12",
-   "game": "VALO",
+   "game": "LOL",
    "kind": "team",
    "teams": [
     {
@@ -1413,7 +1413,7 @@ window.COPA_DATA = {
      "mvp": null
     }
    ],
-   "win": -1,
+   "win": 0,
    "pts": {
     "mauro": 18,
     "roses": 25,
@@ -1441,7 +1441,13 @@ window.COPA_DATA = {
     "valenzapp",
     "paloma"
    ],
-   "winners": [],
+   "winners": [
+    "mauro",
+    "roses",
+    "cruz",
+    "negar",
+    "nico10"
+   ],
    "mvp": null,
    "mvps": [
     "roses"
@@ -1564,8 +1570,8 @@ window.COPA_DATA = {
    "sig": "1ja69vg"
   },
   "mmwll3j06kqyd": {
-   "v": "mwll3ta0pj",
-   "sig": "lucyk9"
+   "v": "mwll5zzwel",
+   "sig": "1h0l4ut"
   }
  }
 };
