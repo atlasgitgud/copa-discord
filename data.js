@@ -1,6 +1,6 @@
 // Datos de La Copa Discord. Se edita desde el canal #admin de la página.
 window.COPA_DATA = {
- "updatedAt": 1795602894668,
+ "updatedAt": 1795602961606,
  "players": [
   "agus",
   "alan",
@@ -325,6 +325,13 @@ window.COPA_DATA = {
    "note": "Abandonar partida",
    "pen": true,
    "id": "mzas3oe"
+  },
+  {
+   "id": "mmwvzn2hfg67u",
+   "date": "2026-11-25",
+   "player": "solsi",
+   "pts": 1000,
+   "note": "se ganó mi corazón"
   }
  ],
  "horder": [
